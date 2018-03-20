@@ -35,21 +35,29 @@
 <include src="../../utils/refreshHeaderView.wxml"/>
 <include src="../../utils/loadMoreFooterView.wxml"/>
   <!--垂直滚动，这里必须设置高度-->
+<!-- <view>
+  <navigator class="bury-wrapper  wx-li" url="../detail/detail?id={{name.id}}">  
+    <view>评19</view>  
+  </navigator>  
+</view> -->
 <scroll-view class="scroll_container" scroll-y="true" style="position:fixed;width:100%;left:0;height:{{windowHeight}}px;top:{{loadMoreHeight == 0? refreshHeight:-loadMoreHeight}}px;bottom:{{loadMoreHeight}}px;"  bindscroll="scroll" bindscrolltolower="lower" bindscrolltoupper="upper" bindtouchstart="start" bindtouchend="end" > 
-    <!-- <view class="item" wx:for="{{list}}">  
-            <image class="img" src="{{item.pic_url}}"></image>  
-            <view class="text">  
-                <text class="title">{{item.name}}</text>  
-                <text class="description">{{item.short_description}}</text>  
-            </view>  
-        </view>   -->
-
+    <view class='tar_count'>
+      <navigator class="active"  url="../detail/detail?id={{name.id}}">发现</navigator>  
+      <navigator  url="../detail/detail?id={{name.id}}">人脉</navigator> 
+      <navigator  url="../detail/detail?id={{name.id}}">消息</navigator> 
+    </view>
     <view class='banner' bindtouchmove="move">
       <image src="../../images/banner_rc.png" mode="widthFix" style="width:100%;background-color:black;"></image>
-      <!-- <view class='baCount'>
-     <image src='../../images/logo.png'></image>
-      <input type="text" class="input" placeholder-class="input-place" placeholder="收索公司/职位"/>
-  </view> -->
+
+       <view class='baCount'>
+         <image src='../../images/logo.png'></image>
+       
+      </view> 
+      <view class='baInput'>
+           <input type="text" class="input" placeholder-class="input-place" placeholder="收索公司/职位"/>
+             <image src='../../images/search.png'></image>   
+      </view>
+
     </view>
     <view class='recommend' bindtouchmove="move">
       <view class="line"></view>

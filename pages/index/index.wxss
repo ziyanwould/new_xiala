@@ -82,11 +82,39 @@ text-align: left;
 .baCount{
    position: absolute;
    z-index: 10;
-   top: 0;
-   
+   top: 15rpx;
+   width: 100%;
+   display: flex;
+   justify-content:center; 
 }
-.baCount img{
-height: 136rpx
+.baInput{
+   position: absolute;
+   z-index: 10;
+   bottom: 35rpx;
+   width: 100%;
+}
+.baInput input{
+ width: 680rpx;
+ margin: 0 auto;
+ height: 70rpx;
+ background: #FFFFFF;
+ border-radius: 35px;
+ font-size: 14px;
+ text-align: center;
+}
+.baInput image{
+  position: absolute;
+  bottom: 10rpx;
+  width: 54rpx;
+  height: 54rpx;
+  left: 30%;
+  z-index: 20;
+}
+.baCount image{
+height: 140rpx;
+width:290rpx;
+margin: 0 auto;
+
 }
 
 
@@ -172,3 +200,21 @@ scroll-view {
   text-align: center;  
   border-top: 2rpx solid #eee;  
 }  
+
+/*首页导航*/
+.tar_count{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #0544DA;
+  display: flex;
+  justify-content:center;
+}
+.tar_count navigator {
+  padding: 0 30rpx;
+  color: #96BDFD;
+  font-size: 32rpx;
+}
+.tar_count .active {
+ color: #FFFFFF;
+}
