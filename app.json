@@ -2,7 +2,13 @@
   "pages": [
     "pages/index/index",
     "pages/detail/detail",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/child/resume/resume",
+    "pages/child/deliver/deliver",
+    "pages/child/position/position",
+    "pages/child/couple/couple",
+    "pages/child/visitor/visitor"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,7 +38,7 @@
       },
       {
         "pagePath": "pages/user/user",
-        "text": "我的",
+        "text": "我",
         "iconPath": "images/icon_user.png",
         "selectedIconPath": "images/icon_user_curr.png"
       }
