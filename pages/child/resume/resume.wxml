@@ -1,2 +1,79 @@
 <!--pages/child/resume/resume.wxml-->
-<text>pages/child/resume/resume.wxml</text>
+
+
+<view class='resume_title'>
+  <view class='title_s1'>
+
+     <view class='s1_left'>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
+        <view class='title_s2'>
+          <text class="">男/广州市/大专/3年</text> 
+        </view>
+        <view class='title_s3'>
+          <text class="">集众人之力，成细节之美</text> 
+        </view>
+        <!-- 编辑触碰按钮 -->
+          <navigator class="Bj"  url="">
+            <image class='bj' src='http://www.liujiarong.top/WX/wx_redact.png'></image>
+            编辑
+          </navigator>  
+        
+     </view>
+
+     <view  bindtap="bindViewTap" class="s1_right">
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+     </view>
+
+  </view>
+
+     <view class='phone'>
+       <em><image src='http://www.liujiarong.top/WX/wx_phone.png'></image></em><text>15622102239</text>
+     </view>
+     <view class='email'>
+       <em><image src='http://www.liujiarong.top/WX/wx_post.png'></image></em><text>15622102239@qq.com</text>
+     </view>
+
+      <view class='s2'>
+         <view class='s2_all'>
+          <view class='s2_left'>
+            目前状态
+          </view>
+
+          <view class='s2_right'>
+            <text>我暂时不想找工作</text> <image src='../../../images/wx_unfold.png' ></image>
+          </view>
+        </view>
+      </view>
+</view>
+
+<view class='section2'>
+ 
+    <view class='sec2_1'>
+      <text>期望工作</text>
+        <navigator url="">
+            编辑
+        </navigator>  
+    </view>
+
+    <view class='sec2_2'>
+           设计师
+    </view>
+
+     <view class='sec2_3'>
+           广州/全职/10k-20k
+    </view>
+ 
+</view>
+
+<view class='section3'>
+   <view class='s3_title'>工作经验</view>
+   <view class='sec_child'>
+     <view class='Schild1'><image src='http://www.liujiarong.top/WX/wx_zhongzhu71.png'></image></view>
+     <view class='Schild2'>
+        <view class='text1'>UI设计师</view>
+        <view class='text2'>广东中住七一网络科技有限公司</view>
+        <view class='text3'>2017.06-至今</view>
+     </view>
+     <view class='Schild3'><navigator url="">编辑</navigator></view>     
+   </view>
+</view>
