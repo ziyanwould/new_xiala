@@ -50,7 +50,7 @@
  
     <view class='sec2_1'>
       <text>期望工作</text>
-        <navigator url="">
+        <navigator url="../../child/ExpectWork/ExpectWork">
             编辑
         </navigator>  
     </view>
@@ -67,6 +67,7 @@
 
 <view class='section3'>
    <view class='s3_title'>工作经验</view>
+
    <view class='sec_child'>
      <view class='Schild1'><image src='http://www.liujiarong.top/WX/wx_zhongzhu71.png'></image></view>
      <view class='Schild2'>
@@ -76,4 +77,68 @@
      </view>
      <view class='Schild3'><navigator url="">编辑</navigator></view>     
    </view>
+
+   <view class='add_child'>
+     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加工作经验</text>
+   </view>
 </view>
+
+<view class='section3'>
+   <view class='s3_title'>教育经验</view>
+
+   <view class='sec_child'>
+     <view class='Schild1'><image style=' width: 87rpx;height: 87rpx;' src='http://www.liujiarong.top/WX/wx_school.png'></image></view>
+     <view class='Schild2'>
+        <view class='text1'>西安大学</view>
+        <view class='text2'>大专/计算机科学与技术</view>
+        <view class='text3'>2019年毕业（预计）</view>
+     </view>
+     <view class='Schild3'><navigator url="">编辑</navigator></view>     
+   </view>
+
+   <view class='add_child'>
+     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加教育经验</text>
+   </view>
+</view>
+
+<view class='section3'>
+   <view class='s3_title'>项目经验</view>
+   <view class='experience'> 
+      <view class='exp1'>
+          <view class='exp1_left'><text>前端设计</text><image src='http://www.liujiarong.top/WX/wx_Link.png'></image> </view>
+          <view class='exp1_right'><navigator url="">编辑</navigator> </view>
+      </view>
+      <view class='exp2'>设计师</view>
+      <view class='exp3'>2016.06-至今</view>
+      <view class='content'>
+          <view class='content_title'>
+            工作内容
+          </view>
+          <view class='content_count'>
+            投递简历后，人力资源部门将对简历进行刷选，符合要求的应聘者参与企业面试，面试过程中，如果有技术经验，通过技术面试可直接上岗，薪资5000起；如果没有技术经验者，会有笔试环节，笔试内容为逻辑测试题及较为基础的技术题目。测试通过后可以参与1-4个月岗前技术培训，签订保底薪酬，薪资4000起。
+         </view>
+      </view>
+   </view>
+   <view class='add_child'>
+     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加项目经验</text>
+   </view>
+</view>
+
+<view class='sec_other'>
+    <view class='other_title'><text>自我描述</text><navigator url="">编辑</navigator></view>
+    <view class='sec_count'>
+     集众人之力，成细节之美！
+    </view>
+</view>
+
+<view class='sec_other'>
+    <view class='other_title'><text>公司</text><navigator url="">编辑</navigator></view>
+    <view class='sec_count'>
+     广东中住七一网络科技有限公司
+    </view>
+</view>
+
+<view class='notes'>
+   简历更新于2018-03-20 10:02
+</view>
+

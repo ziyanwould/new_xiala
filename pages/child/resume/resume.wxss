@@ -138,6 +138,7 @@ padding-top: 50rpx;
 .section3{
   padding: 0 30rpx;
   background: #FFFFFF;
+  margin-bottom: 20rpx;
 }
 .s3_title{
  color: #0e050b;
@@ -146,7 +147,7 @@ padding-top: 50rpx;
  padding-bottom: 36rpx;
 }
 .sec_child{
-  padding: 0 36rpx;
+  padding-left:36rpx;
 }
 .Schild1 image{
   width: 84rpx;
@@ -181,4 +182,91 @@ padding-top: 50rpx;
 }
 .Schild1{
  width: 135rpx;
+}
+.add_child{
+  border-top: 2rpx solid #F1F4F2;
+  color: #0e050b;
+  font-size: 29rpx;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  height: 100rpx;
+}
+.add_child image{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 20rpx;
+}
+.exp1{
+display: flex;
+justify-content:space-between;
+}
+.exp1_left image{
+  width: 22rpx;
+  height: 22rpx;
+  padding-left: 8rpx;
+}
+.exp1_left{
+  font-size: 32rpx;
+}
+.exp1_right navigator{
+  font-size: 26rpx;
+  padding: 10rpx;
+  border-radius: 10rpx;
+}
+.exp1{
+  color: #15ae8b;
+}
+.exp2{
+  font-size: 29rpx;
+  color: #999999;
+  padding-bottom: 10rpx;
+}
+.exp3{
+  font-size: 24rpx;
+  color: #999999;
+    padding-bottom: 20rpx;
+}
+.content_title{
+  font-size: 29rpx;
+  color: #0e050b;
+}
+.content_count{
+  font-size: 26rpx;
+  color: #999999;
+  line-height: 32rpx;
+  padding:32rpx 0;
+}
+.sec_other{
+  background: #FFFFFF;
+  margin-bottom: 20rpx;
+  padding: 0 30rpx;
+}
+.other_title{
+  display: flex;
+  justify-content:space-between;
+}
+.sec_other{
+padding-top: 20rpx;
+}
+.other_title text{
+  font-size: 29rpx;
+}
+.other_title navigator{
+  font-size: 26rpx;
+  color: #15ae8b;
+  padding: 10rpx;
+  border-radius: 10rpx;
+}
+.sec_count{
+  padding: 50rpx 0;
+  color: #999999;
+  font-size: 29rpx;
+}
+.notes{
+  color: #999999;
+  font-size: 20rpx;
+  text-align: center;
+  padding-top: 60rpx;
+  padding-bottom: 150rpx;
 }
