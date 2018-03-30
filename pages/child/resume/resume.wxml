@@ -13,7 +13,7 @@
           <text class="">集众人之力，成细节之美</text> 
         </view>
         <!-- 编辑触碰按钮 -->
-          <navigator class="Bj"  url="">
+          <navigator class="Bj"  url="../../child/ProfileEditor/ProfileEditor">
             <image class='bj' src='http://www.liujiarong.top/WX/wx_redact.png'></image>
             编辑
           </navigator>  
