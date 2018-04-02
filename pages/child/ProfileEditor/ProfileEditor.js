@@ -1,52 +1,44 @@
+var app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selectPerson: [
-      {
-        "name": "真实姓名",
-        "id": "0",
-        "count": "",
-        "input":"盼见",
-        "url": "",
-        "picUrl":""
-      },
-      {
-        "name": "性别",
-        "id": "1",
-        "count": "男",
-        "input": "",
-        "url": false,
-        "picUrl": "http://www.liujiarong.top/WX/wx_unfold.png"
-      },
-      {
-        "name": "出生年月",
-        "id": "2",
-        "count": "请选择",
-        "input": "",
-        "url": false,
-        "picUrl": "http://www.liujiarong.top/WX/wx_unfold.png"
-      },
-      {
-        "name": "职位月薪",
-        "id": "3",
-        "count": "5K - 10K",
-        "input": "",
-        "url": false,
-        "picUrl": ""
-      }
-
-    ]
-
+   name:"真实姓名",
+   edit_name:"Sunyuklong",
+   sex:"性别",
+   edit_sex: "男",
+   year:"出生年月",
+   edit_year:"请选择",
+   education: "最高学历",
+   edit_education: "请选择",
+   work: "工作年限",
+   edit_work: "请选择",
+   phone:"手机号码",
+   edit_phone:"15521000786",
+   email:"联系邮箱",
+   edit_email:"请输入",
+   city:"所在城市",
+   edit_city:"广东",
+   state:"当前状态",
+   edit_state:"我目前已离职，可快速到岗"
+   
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        userInfo: userInfo
+      })
+    })
   },
 
   /**
@@ -74,7 +66,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
@@ -102,15 +94,35 @@ Page({
     // do somthing
     wx.stopPullDownRefresh();
   },
-  jumpToCity: function (event) {
-     console.log(event);
-     var Url = event.currentTarget.dataset.url;
-     if (Url != false){
-       console.log(Url);
-         wx.navigateTo({
-           url: Url
-        })
-     }
-   
+  open: function () {
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['男', '女'],
+      success: function (res) {
+    
+      
+        if (!res.cancel) {
+          //console.log(res.tapIndex)
+          var sex = res.tapIndex;
+          if(sex==0){
+            console.log("男")
+            // edit_sex="男"
+            that.setData({
+              edit_sex: "男"
+            })
+            
+          }else{
+            // edit_sex = "女"
+            console.log("女")
+            that.setData({
+              edit_sex:"女"
+            })
+          }
+         
+        }
+      }
+    });
   }
+
 })
+

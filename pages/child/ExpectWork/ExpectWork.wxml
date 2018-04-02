@@ -1,6 +1,6 @@
 <!--pages/child/ExpectWork/ExpectWork.wxml-->
 <view class='selsect'>
-  <view class='sel_child' wx:for="{{selectList}}" wx:key="item.id"   bindtap="jumpToMyPage" data-url="{{item.url}}">
+  <view class='sel_child' wx:for="{{selectList}}" wx:key="item.id" bindtap="jumpToMyPage"   data-url="{{item.url}}">
      <view class='sel_left'>{{item.name}}</view>
      <view class='sel_right'>
          <text>{{item.count}}</text>

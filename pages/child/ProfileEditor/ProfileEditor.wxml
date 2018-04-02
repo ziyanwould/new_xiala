@@ -1,17 +1,101 @@
 <!--pages/child/ProfileEditor/ProfileEditor.wxml-->
-<view class='selsect'>
-  <view class='sel_child' wx:for="{{selectPerson}}" wx:key="item.id"   bindtap="jumpToCity" data-url="{{item.url}} ">
-     <view class='sel_left'>{{item.name}}</view>
-     <view class='sel_right'>
-          <text wx:if="{{item.count}}">{{item.count}}</text> 
-         <input wx:if="{{item.input}}" style='padding-right:51rpx;' value='{{item.input}}'></input> 
-         <image wx:if="{{item.picUrl}}" src='{{item.picUrl}}'></image>
+ <view class='selsect'>
+     <view class='sel_child' >
+        <view class='sel_left'>{{name}}</view>
+        <view class='sel_right'>
+            <!-- <text wx:if="">{{}}</text>  -->
+            <input  style='padding-right:51rpx;' value='{{userInfo.nickName}}'></input> 
+            <!-- <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> -->
+        </view>
      </view>
-  </view>
+      <view class='sel_child' bindtap="open" >
+        <view class='sel_left'>{{sex}}</view>
+        <view class='sel_right'>
+             <text>{{edit_sex}}</text>  
+             <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
+             <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+        </view>
+     </view>
+      <view class='sel_child' >
+        <view class='sel_left'>{{year}}</view>
+        <view class='sel_right'>
+             <text>{{edit_year}}</text>  
+             <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
+             <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+        </view>
+     </view>
+</view> 
+
+ <view class='selsect pull'>
+      <view class='sel_child' >
+        <view class='sel_left'>{{education}}</view>
+        <view class='sel_right'>
+             <text>{{edit_education}}</text>  
+             <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
+             <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+        </view>
+     </view>
+
+      <view class='sel_child' >
+        <view class='sel_left'>{{work}}</view>
+        <view class='sel_right'>
+             <text>{{edit_work}}</text>  
+             <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
+             <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+        </view>
+     </view>
 </view>
+
+ <view class='selsect pull'>
+      <view class='sel_child' >
+        <view class='sel_left'>{{phone}}</view>
+        <view class='sel_right'>
+             <!-- <text>{{edit_education}}</text>   -->
+              <input  style='padding-right:51rpx;' value='{{edit_phone}}'></input>  
+             <!-- <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image>  -->
+        </view>
+     </view>
+
+      <view class='sel_child' >
+        <view class='sel_left'>{{email}}</view>
+        <view class='sel_right'>
+             <!-- <text>{{edit_work}}</text>   -->
+              <input  style='padding-right:51rpx;' value='{{edit_email}}'></input>  
+             <!-- <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image>  -->
+        </view>
+     </view>
+</view>
+
+
+ <view class='selsect pull'>
+      <view class='sel_child' >
+        <view class='sel_left'>{{city}}</view>
+        <view class='sel_right'>
+              <text>{{edit_city}}</text>   
+              <!-- <input  style='padding-right:51rpx;' value='{{edit_phone}}'></input>   -->
+              <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image>  
+        </view>
+     </view>
+
+      <view class='sel_child' >
+        <view class='sel_left'>{{state}}</view>
+        <view class='sel_right'>
+              <text>{{edit_state}}</text>   
+              <!-- <input  style='padding-right:51rpx;' value='{{edit_email}}'></input>   -->
+              <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image>  
+        </view>
+     </view>
+</view>
+
 <view class='show'>
-  补充说明
+  一句话 介绍
 </view>
-<textarea placeholder='请填写补充说明...' class='text_count'>
-</textarea>
-<button class='save'>保存</button>
+<view class='see_textarea'>
+  <textarea placeholder='集众人之力，成细节之美！' class='text_count'>
+  </textarea>
+  <view class='Alert'>0/58</view>
+</view>
+
+<view class='padding'>
+   <button class='save'>保存</button>
+</view>
