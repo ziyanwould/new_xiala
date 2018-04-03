@@ -19,9 +19,13 @@
       <view class='sel_child' >
         <view class='sel_left'>{{year}}</view>
         <view class='sel_right'>
-             <text>{{edit_year}}</text>  
+            
+             <picker class="weui-btn" mode="date" value="{{date}}" start="{{date_end}}" fields="month" end="{{date}}" bindchange="bindDateChange">
+                 <text>{{edit_year}}</text> 
+              
              <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
              <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+             </picker>
         </view>
      </view>
 </view> 
@@ -30,18 +34,24 @@
       <view class='sel_child' >
         <view class='sel_left'>{{education}}</view>
         <view class='sel_right'>
-             <text>{{edit_education}}</text>  
-             <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
-             <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+              <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <text>{{edit_education}}</text>  
+              <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
+              <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+              </picker>
         </view>
      </view>
 
       <view class='sel_child' >
         <view class='sel_left'>{{work}}</view>
         <view class='sel_right'>
+
+            <picker bindchange="bindPickerwork" value="{{index}}" range="{{arrays}}">
              <text>{{edit_work}}</text>  
              <!-- <input  style='padding-right:51rpx;' value=''></input>  -->
              <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+             </picker>
+
         </view>
      </view>
 </view>
