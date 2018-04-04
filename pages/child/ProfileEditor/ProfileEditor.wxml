@@ -80,19 +80,22 @@
  <view class='selsect pull'>
       <view class='sel_child' >
         <view class='sel_left'>{{city}}</view>
-        <view class='sel_right'>
+        <view class='sel_right' bindtap="click_city">
               <text>{{edit_city}}</text>   
               <!-- <input  style='padding-right:51rpx;' value='{{edit_phone}}'></input>   -->
               <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image>  
         </view>
      </view>
 
-      <view class='sel_child' >
+      <view class='sel_child' bindtap="open_stata">
         <view class='sel_left'>{{state}}</view>
         <view class='sel_right'>
-              <text>{{edit_state}}</text>   
-              <!-- <input  style='padding-right:51rpx;' value='{{edit_email}}'></input>   -->
-              <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image>  
+               
+               <text>{{edit_state}}</text>   
+               <!-- <input  style='padding-right:51rpx;' value='{{edit_email}}'></input>   -->
+               <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+             
+
         </view>
      </view>
 </view>
@@ -101,9 +104,9 @@
   一句话 介绍
 </view>
 <view class='see_textarea'>
-  <textarea placeholder='集众人之力，成细节之美！' class='text_count'>
+  <textarea placeholder='集众人之力，成细节之美！' maxlength="{{noteMaxLen}}" bindinput="bindWordLimit"  class='text_count'>
   </textarea>
-  <view class='Alert'>0/58</view>
+  <view class='Alert'>{{currentNoteLen|0}}/{{noteMaxLen}}</view>
 </view>
 
 <view class='padding'>

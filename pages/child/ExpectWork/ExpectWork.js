@@ -53,7 +53,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+     var that = this;
+    wx.getStorage({
+      key: 'cargo',
+      success: function (res) {
+        console.log(res.data)
+
+        
+        that.setData({
+
+          'selectList[0].count': res.data.select_city,
+
+        })
+      }
+    })
   },
 
   /**

@@ -216,6 +216,19 @@
           var city = e.target.dataset.text;
           //可以跳转了
           console.log('选择了城市：', city);
+          var cargo = {
+            select_city: city,
+            
+          };
+          wx.setStorage({
+            key: "cargo",
+            data: cargo
+          });
+          wx.navigateBack({
+             delta: 1
+           })
+
+
         },
         cxgps: function cxgps(e) {
           var that = this;

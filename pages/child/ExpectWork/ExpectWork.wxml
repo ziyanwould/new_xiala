@@ -11,6 +11,8 @@
 <view class='show'>
   补充说明
 </view>
-<textarea placeholder='请填写补充说明...' class='text_count'>
-</textarea>
+<view class='text_count'>
+  <textarea placeholder='请填写补充说明...'>
+  </textarea>
+</view>
 <button class='save'>保存</button>

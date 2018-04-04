@@ -7,10 +7,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+   noteMaxLen: 58, //备注最多字数 
+   limitNoteLen:0, 
    date:"",
    date_end: "",
    array: ['高中', '大专', '本科', '硕士','博士'],
    arrays: ['应届毕业生', '1年', '2年', '3年', '4年', '5年', '6年', '7年', '8年', '9年', '10年', '10年以上'],
+   arrayd: ['我目前已离职，可快速到岗', '我目前在职，正考虑换个新环境', '我暂时不想找工作', '我是应届毕业生'],
    name:"真实姓名",
    edit_name:"Sunyuklong",
    sex:"性别",
@@ -63,7 +66,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
+    wx.getStorage({
+      key: 'cargo',
+      success: function (res) {
+        console.log(res.data)
 
+        
+        that.setData({
+
+          edit_city: res.data.select_city
+
+        })
+      }
+    })
   },
 
   /**
@@ -135,6 +151,22 @@ Page({
       }
     });
   },
+  open_stata: function () {
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['我目前已离职，可快速到岗', '我目前在职，正考虑换个新环境','我暂时不想找工作','我是应届毕业生'],
+      success: function (res) {
+       
+        that.setData({
+
+          edit_state: that.data.arrayd[res.tapIndex]
+
+        })
+        //console.log(res.tapIndex)
+        console.log(that.data.arrayd[res.tapIndex])
+      }
+    });
+  },
   //时间下拉选择器
   bindDateChange: function (e) {
     this.setData({
@@ -161,6 +193,21 @@ Page({
 
     })
   },
+  click_city:function(){
+    wx.navigateTo({
+      url: "../../child/citySelect/citySelect"
+    })
+  },
+  //字数限制  
+  bindWordLimit: function (e) {
+    var value = e.detail.value, len = parseInt(value.length);
+    if (len > this.data.noteMaxLen) return;
+
+    this.setData({
+      currentNoteLen: len, //当前字数  
+      limitNoteLen:this.data.noteMaxLen - len //剩余字数  
+    });
+  }  
 
 })
 
