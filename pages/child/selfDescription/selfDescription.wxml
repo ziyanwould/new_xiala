@@ -1,0 +1,10 @@
+
+<view class='show'>
+  自我描述
+</view>
+<view class='text_count'>
+  <textarea placeholder='详细描述一下你自己，字数控制在10-800字'>
+  </textarea>
+</view> 
+
+<button class='save'>保存</button>

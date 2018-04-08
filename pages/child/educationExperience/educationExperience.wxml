@@ -1,0 +1,56 @@
+<!--pages/child/educationExperience/educationExperience.wxml-->
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>学校名称</view>
+     <view class='sel_right'>
+         <text>{{school}}</text>
+         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+     </view>
+  </view>
+</view> 
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>所学专业</view>
+     <view class='sel_right'>
+         <text>{{specialty}}</text>
+         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+     </view>
+  </view>
+</view> 
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>毕业年份</view>
+    <picker class="weui-btn" mode="date" value="{{entrytime}}" fields="year" data-type='endDate' bindchange="bindend">
+     <view class='sel_right'>
+         <text>{{GraduationYear}}</text>
+         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+     </view>
+    </picker>
+  </view>
+</view> 
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>学历</view>
+   
+     <view class='sel_right'bindtap="open">
+         <text>{{education}}</text>
+         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+     </view>
+  
+  </view>
+</view> 
+
+<!-- <view class='show'>
+  工作内容
+</view>
+<view class='text_count'>
+  <textarea placeholder='请输入公作内容...'>
+  </textarea>
+</view> -->
+<button class='save'>保存</button>
+ <view wx:if="" class='remove_this' bindtap="openConfirm">删除此教育经历</view> 
+

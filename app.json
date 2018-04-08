@@ -10,7 +10,12 @@
     "pages/child/visitor/visitor",
     "pages/child/ExpectWork/ExpectWork",
     "pages/child/citySelect/citySelect",
-    "pages/child/ProfileEditor/ProfileEditor"
+    "pages/child/ProfileEditor/ProfileEditor",
+    "pages/child/WorkExperience/WorkExperience",
+    "pages/child/educationExperience/educationExperience",
+    "pages/child/projectExperience/projectExperience",
+    "pages/child/selfDescription/selfDescription",
+    "pages/child/customPlate/customPlate"
     
   ],
   "window": {

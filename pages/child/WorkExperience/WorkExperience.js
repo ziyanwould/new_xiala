@@ -1,34 +1,30 @@
-// pages/child/resume/resume.js
-var app = getApp()
+// pages/child/WorkExperience/WorkExperience.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+     company:"公司1",
+     position:"前端开发工程师",
+     entrytime:"2018-01",
+     endtime:"2018-03"
+    
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
-    })
+  
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+  
   },
 
   /**
@@ -49,7 +45,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-     
+  
   },
 
   /**
@@ -72,14 +68,30 @@ Page({
   onShareAppMessage: function () {
   
   },
-   onPullDownRefresh: function () {
-    // do somthing
-    wx.stopPullDownRefresh();
-  }
-  , jumpToMyPage: function (event) {
-
-    wx.navigateTo({
-      url: '../customPlate/customPlate'
+  openConfirm: function () {
+    wx.showModal({
+      title: '确定删除',
+      content: '',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else {
+          console.log('用户点击取消')
+        }
+      }
+    });
+  },
+  bindDateChange: function (e) {
+    this.setData({
+     endtime: e.detail.value
+    })
+  },
+  bindend: function (e) {
+    this.setData({
+      entrytime: e.detail.value
     })
   },
 })

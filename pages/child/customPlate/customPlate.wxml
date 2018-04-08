@@ -1,0 +1,16 @@
+<!--pages/child/customPlate/customPlate.wxml-->
+<view class='show'>
+  自定义标题
+</view>
+<view class='text_count'>
+ <input value='' placeholder='请输入自定义标题，如学校经历'> </input>
+</view> 
+<view class='show'>
+  内容
+</view>
+<view class='text_count'>
+  <textarea placeholder='请输入自定义内容'>
+  </textarea>
+</view> 
+
+<button class='save'>保存</button>

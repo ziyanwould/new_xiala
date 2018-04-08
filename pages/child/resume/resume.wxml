@@ -75,7 +75,7 @@
         <view class='text2'>广东中住七一网络科技有限公司</view>
         <view class='text3'>2017.06-至今</view>
      </view>
-     <view class='Schild3'><navigator url="">编辑</navigator></view>     
+     <view class='Schild3'><navigator url="../../child/WorkExperience/WorkExperience">编辑</navigator></view>     
    </view>
 
    <view class='add_child'>
@@ -93,7 +93,7 @@
         <view class='text2'>大专/计算机科学与技术</view>
         <view class='text3'>2019年毕业（预计）</view>
      </view>
-     <view class='Schild3'><navigator url="">编辑</navigator></view>     
+     <view class='Schild3'><navigator url="../educationExperience/educationExperience">编辑</navigator></view>     
    </view>
 
    <view class='add_child'>
@@ -106,7 +106,7 @@
    <view class='experience'> 
       <view class='exp1'>
           <view class='exp1_left'><text>前端设计</text><image src='http://www.liujiarong.top/WX/wx_Link.png'></image> </view>
-          <view class='exp1_right'><navigator url="">编辑</navigator> </view>
+          <view class='exp1_right'><navigator url="../projectExperience/projectExperience">编辑</navigator> </view>
       </view>
       <view class='exp2'>设计师</view>
       <view class='exp3'>2016.06-至今</view>
@@ -125,18 +125,20 @@
 </view>
 
 <view class='sec_other'>
-    <view class='other_title'><text>自我描述</text><navigator url="">编辑</navigator></view>
+    <view class='other_title'><text>自我描述</text><navigator url="../selfDescription/selfDescription">编辑</navigator></view>
     <view class='sec_count'>
      集众人之力，成细节之美！
     </view>
 </view>
-
-<view class='sec_other'>
+<view class='add_child' style='background:#FFFFFF;' bindtap="jumpToMyPage">
+     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加自定义板块</text>
+   </view>
+<!-- <view class='sec_other'>
     <view class='other_title'><text>公司</text><navigator url="">编辑</navigator></view>
     <view class='sec_count'>
      广东中住七一网络科技有限公司
     </view>
-</view>
+</view> -->
 
 <view class='notes'>
    简历更新于2018-03-20 10:02

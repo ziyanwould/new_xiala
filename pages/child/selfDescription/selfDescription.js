@@ -1,5 +1,4 @@
-// pages/child/resume/resume.js
-var app = getApp()
+// pages/child/selfDescription/selfDescription.js
 Page({
 
   /**
@@ -13,22 +12,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
-    })
+  
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+  
   },
 
   /**
@@ -49,7 +40,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-     
+  
   },
 
   /**
@@ -71,15 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-   onPullDownRefresh: function () {
-    // do somthing
-    wx.stopPullDownRefresh();
   }
-  , jumpToMyPage: function (event) {
-
-    wx.navigateTo({
-      url: '../customPlate/customPlate'
-    })
-  },
 })
