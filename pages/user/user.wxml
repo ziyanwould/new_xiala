@@ -5,8 +5,8 @@
   </view>
     <view class='title'>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
-        <image src='../../images/wx_men.png'class="gender" ></image>
-        <image src='../../images/wx_approve.png'class="approve" ></image>
+        <image src='http://www.liujiarong.top/WX/images/wx_men.png'class="gender" ></image>
+        <image src='http://www.liujiarong.top/WX/images/wx_approve.png'class="approve" ></image>
     </view>
      <text class="titie_h2">{{person}}</text> 
      <view class="titie_h3">影响力<text>{{influence}}</text>，高于<text>{{ influence_per}}</text>的同行</view> 
@@ -14,20 +14,20 @@
 <view class='section'>
  <view class='se1'>
        <view>
-    <view class='se_f1'><image src='../../images/pig.png'></image></view>
+    <view class='se_f1'><image src='http://www.liujiarong.top/WX/images/pig.png'></image></view>
     <view class='se_f2' bindtap="jumpToMyPage" data-url="../child/Login/Login"><text>编辑资料</text></view>
     </view>
   </view> 
  <view class='se2'>
         <view>
      <view class='se_f1'><text style='display: inline-block;margin-right: 9rpx;'>8</text>
-     <image src='../../images/wx_add.png' style='position: relative; top: 3rpx;'></image></view>
+     <image src='http://www.liujiarong.top/WX/images/wx_add.png' style='position: relative; top: 3rpx;'></image></view>
       <view class='se_f2'><text>会员加好友名额</text></view>
       </view>
  </view> 
  <view class='se3'> 
     <view>
-        <view class='se_f1'> <image src='../../images/safety.png'></image></view>
+        <view class='se_f1'> <image src='http://www.liujiarong.top/WX/images/safety.png'></image></view>
          <view class='se_f2'><text>隐私策略</text></view>
     </view>
   
@@ -37,22 +37,22 @@
 <view class='wx_feature'>
   <view class='sec1' bindtap="jumpToMyPage" data-url="../child/resume/resume">
       <view class='fun_left'>
-        <image src='../../images/wx_resume.png'></image>
+        <image src='http://www.liujiarong.top/WX/images/wx_resume.png'></image>
         <text class='xod'>简历</text>
       </view>
       
       <view class='fun_right'>
-        <text>完整程度：</text><em>75%</em><image src='../../images/wx_unfold.png' ></image>
+        <text>完整程度：</text><em>75%</em><image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
   </view>
    <view class='sec1' wx:for="{{jobList}}" wx:key="item.id"   bindtap="jumpToMyPage" data-url="{{item.url}}">
       <view class='fun_left'>
-        <image src='../../images/{{item.pic}}.png' ></image>
+        <image src='http://www.liujiarong.top/WX/images/{{item.pic}}.png' ></image>
         <text class='xod'>{{item.name}}</text>
       </view>
       
       <view class='fun_right'>
-        <image src='../../images/wx_unfold.png' ></image>
+        <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
   </view>
 </view>

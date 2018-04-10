@@ -16,14 +16,15 @@
     "pages/child/projectExperience/projectExperience",
     "pages/child/selfDescription/selfDescription",
     "pages/child/customPlate/customPlate",
-    "pages/child/Login/Login"
+    "pages/child/Login/Login",
+    "pages/child/Template/Template"
     
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0544DA",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
     
    
  

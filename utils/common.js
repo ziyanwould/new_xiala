@@ -20,9 +20,30 @@ function sjc() {
   //console.log("当前时间：" + Y + M + D + h + ":" + m + ":" + s);  
 
   return [Y - 50 + "-" + M, Y + "-" + M,Y];
+};
+//获取页面高度
+function tanchu(){
+  var height =0;
+  console.log('onLoad')
+  var that = this
+  wx.getSystemInfo({
+    success: function (res) {
+    height=res.windowHeight
+    }
+  })
+  return height;
+};
+
+function SomeThing(api){
+  wx.navigateTo({
+    url: api 
+  })
+  
 }
 
 module.exports = {
   //要引用的函数 xx:xx
-  sjc: sjc
+  sjc: sjc,
+  tanchu: tanchu,
+  SomeThing: SomeThing
 }

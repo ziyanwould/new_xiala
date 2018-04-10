@@ -21,7 +21,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
+    if (options.line_type==1){
+      this.setData({
+        title: "注册建筑猎聘",
+        titleOther: "登录",
+        inputT1: "请输入您的手机号码",
+        inputT2: "请输入收到的验证码",
+        valMess: "获取验证码",
+        valMessPan: true,
+        btnCot: "注册",
+        dealPan: true,
+        lastCot: "密码登录",
+        lastPan: false
+      })
+    } else if (options.line_type == 2){
+      this.setData({
+        title: "登录建筑猎聘",
+        titleOther: "注册",
+        inputT1: "请输入已验证的手机号或邮箱",
+        inputT2: "请输入密码",
+        valMess: "获取验证码",
+        valMessPan: false,
+        btnCot: "登录",
+        dealPan: false,
+        lastCot: "手机号登录",
+        lastPan: true
+      })
+    }
+
   },
 
   /**
