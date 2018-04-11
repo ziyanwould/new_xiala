@@ -1,1 +1,8 @@
 /* pages/child/position/position.wxss */
+/**index.wxss**/
+/*弹窗口*/
+@import "/pages/child/Template/Template.wxss";  
+/*下拉样式*/
+@import '/utils/refreshView.wxss';
+/*列表框样式*/
+@import '/pages/child/Template/List.wxss';

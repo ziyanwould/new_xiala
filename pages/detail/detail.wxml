@@ -1,1 +1,9 @@
-<view>详情</view>
+<!-- 下拉刷新版块 -->
+<!--index.wxml-->
+<include src="../../utils/refreshHeaderView.wxml"/>
+<include src="../../utils/loadMoreFooterView.wxml"/>
+
+
+
+ <!-- 引入列表样式 -->
+ <include src="../child/Template/ListCompass.wxml"/>

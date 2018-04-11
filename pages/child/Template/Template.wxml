@@ -1,4 +1,5 @@
 <!--pages/child/Template/Template.wxml-->
+<!-- 登录注册 -->
  <template name="notLogin" >
   <view class='maskLayer' style='height:{{height}}px' wx:if="{{show}}">
      <view class='masCount' >
@@ -24,3 +25,38 @@
      </view>
   </view>
 </template> 
+
+<!-- 发现组件 -->
+ <template name="tar_count" >
+    <view class='tar_count'>
+      <navigator class="active"  url="../detail/detail?id={{name.id}}">发现</navigator>  
+      <navigator  url="../detail/detail?id={{name.id}}">人脉</navigator> 
+      <navigator  url="../detail/detail?id={{name.id}}">消息</navigator> 
+    </view>
+ </template>
+
+  <!-- 背景搜索组件 -->
+  <template name="banner" >
+      <view class='banner' bindtouchmove="move">
+      <image src="http://www.liujiarong.top/WX/images/banner_rc.png" mode="widthFix" style="width:100%;background-color:black;"></image>
+
+       <view class='baCount'>
+         <image src='http://www.liujiarong.top/WX/images/logo.png'></image>
+       
+      </view> 
+      <view class='baInput'>
+           <input type="text" class="input" placeholder-class="input-place" placeholder="收索公司/职位"/>
+             <image src='http://www.liujiarong.top/WX/images/search.png'></image>   
+      </view>
+
+     </view>
+ </template>
+<!-- 推荐组件 -->
+
+ <template name="recommend">
+      <view class='recommend' bindtouchmove="move">
+      <view class="line"></view>
+      <view class='tui'>为您推荐的好职位</view>
+      <view class="line"></view>
+    </view>
+ </template>

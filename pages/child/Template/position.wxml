@@ -1,0 +1,20 @@
+<!--pages/child/Template/position.wxml-->
+  <view class="list" bindtouchmove="move" wx:for="{{list}}" wx:key="item.id">
+
+       <view class="list-item list-item-left">
+         <image style="width:100rpx;height:100rpx;" src="{{item.pic_url}}" />
+      </view> 
+
+      <view class="list-item list-item-middle">
+        <view class="f-b f-black">{{item.name}}</view>
+        <view class="f-gray">{{item.short_description}}</view>
+        <view class="f-grays">深圳 福田 5-10年 本科</view>
+      </view>
+
+      <view class="list-item list-item-right">
+         <view>24K-30K</view>
+         <view class="f-gray f30">03-09</view>
+
+      </view>
+
+  </view>

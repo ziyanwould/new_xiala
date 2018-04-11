@@ -1,3 +1,5 @@
-view {
-    padding: 20px;
-}
+/**index.wxss**/
+/*下拉样式*/
+@import '../../utils/refreshView.wxss';
+/*列表框样式*/
+@import '/pages/child/Template/List.wxss';

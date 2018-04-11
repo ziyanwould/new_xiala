@@ -16,8 +16,7 @@
     "pages/child/projectExperience/projectExperience",
     "pages/child/selfDescription/selfDescription",
     "pages/child/customPlate/customPlate",
-    "pages/child/Login/Login",
-    "pages/child/Template/Template"
+    "pages/child/Login/Login"
     
   ],
   "window": {

@@ -1,17 +1,12 @@
-<!--pages/child/position/position.wxml-->
-<!-- 下拉刷新版块 -->
-<!--index.wxml-->
-<include src="/utils/refreshHeaderView.wxml"/>
-<include src="/utils/loadMoreFooterView.wxml"/>
-
+<!--pages/child/Template/List.wxml-->
 <import src="/pages/child/Template/Template.wxml"/>
 <scroll-view class="scroll_container" scroll-y="true" style="position:fixed;width:100%;left:0;height:{{windowHeight}}px;top:{{loadMoreHeight == 0? refreshHeight:-loadMoreHeight}}px;bottom:{{loadMoreHeight}}px;"  bindscroll="scroll" bindscrolltolower="lower" bindscrolltoupper="upper" bindtouchstart="start" bindtouchend="end" > 
      
-      
+       <template is="tar_count" /> 
+
+       <template is="banner" /> 
+         
+       <template is="recommend" /> 
    
        <include src="/pages/child/Template/position.wxml"/>
   </scroll-view>
-
-  <!-- 引入登录注册和选择组件 -->
- <import src="../child/Template/Template.wxml"/>
-  <template is="notLogin" data="{{...items}}"/> 

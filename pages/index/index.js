@@ -64,7 +64,9 @@ Page({
           masTitle:"",
           show:true
         }
-   });
+     });
+   
+    
 
   },
   doLoadData(){
@@ -133,7 +135,8 @@ Page({
        }
      });
    }
-  , getPhoneNumber: function (e) {
+  , 
+  getPhoneNumber: function (e) {
     console.log(e.detail.errMsg)
     console.log(e.detail.iv)
     console.log(e.detail.encryptedData)
@@ -154,7 +157,7 @@ Page({
       })
     }
   }    
-
+  //路由跳转等end
 /** 
  * 旋转上拉加载图标 
  */

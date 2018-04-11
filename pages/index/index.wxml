@@ -32,6 +32,7 @@
 <!--index.wxml-->
 <include src="../../utils/refreshHeaderView.wxml"/>
 <include src="../../utils/loadMoreFooterView.wxml"/>
+
   <!--垂直滚动，这里必须设置高度-->
 <!-- <view>
   <navigator class="bury-wrapper  wx-li" url="../detail/detail?id={{name.id}}">  
@@ -39,48 +40,12 @@
   </navigator>  
 </view> -->
 <!-- 引入登录注册和选择组件 -->
-<import src="../child/Template/Template.wxml"/>
- <template is="notLogin" data="{{...items}}"/>
-<scroll-view class="scroll_container" scroll-y="true" style="position:fixed;width:100%;left:0;height:{{windowHeight}}px;top:{{loadMoreHeight == 0? refreshHeight:-loadMoreHeight}}px;bottom:{{loadMoreHeight}}px;"  bindscroll="scroll" bindscrolltolower="lower" bindscrolltoupper="upper" bindtouchstart="start" bindtouchend="end" > 
-    <view class='tar_count'>
-      <navigator class="active"  url="../detail/detail?id={{name.id}}">发现</navigator>  
-      <navigator  url="../detail/detail?id={{name.id}}">人脉</navigator> 
-      <navigator  url="../detail/detail?id={{name.id}}">消息</navigator> 
-    </view>
-    <view class='banner' bindtouchmove="move">
-      <image src="http://www.liujiarong.top/WX/images/banner_rc.png" mode="widthFix" style="width:100%;background-color:black;"></image>
+ <import src="../child/Template/Template.wxml"/>
+  <template is="notLogin" data="{{...items}}"/> 
 
-       <view class='baCount'>
-         <image src='http://www.liujiarong.top/WX/images/logo.png'></image>
-       
-      </view> 
-      <view class='baInput'>
-           <input type="text" class="input" placeholder-class="input-place" placeholder="收索公司/职位"/>
-             <image src='http://www.liujiarong.top/WX/images/search.png'></image>   
-      </view>
+ <!-- 引入列表样式 -->
+ <include src="../child/Template/List.wxml"/>
 
-    </view>
-    <view class='recommend' bindtouchmove="move">
-      <view class="line"></view>
-      <view class='tui'>为您推荐的好职位</view>
-      <view class="line"></view>
-    </view>
-    <view class="list" bindtouchmove="move" wx:for="{{list}}" wx:key="item.id">
-      <view class="list-item list-item-left">
-        <image style="width:100rpx;height:100rpx;" src="{{item.pic_url}}" />
-      </view>
-      <view class="list-item list-item-middle">
-        <view class="f-b f-black">{{item.name}}</view>
-        <view class="f-gray">{{item.short_description}}</view>
-        <view class="f-grays">深圳 福田 5-10年 本科</view>
-      </view>
-      <view class="list-item list-item-right">
-        <view>24K-30K</view>
-        <view class="f-gray f30">03-09</view>
-
-      </view>
-    </view>
-  </scroll-view>
   <!-- <view class="body-view">
     <loading hidden="{{hidden}}" bindchange="loadingChange">
       加载中...
