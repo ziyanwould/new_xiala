@@ -8,10 +8,9 @@
 <scroll-view class="scroll_container" scroll-y="true" style="position:fixed;width:100%;left:0;height:{{windowHeight}}px;top:{{loadMoreHeight == 0? refreshHeight:-loadMoreHeight}}px;bottom:{{loadMoreHeight}}px;"  bindscroll="scroll" bindscrolltolower="lower" bindscrolltoupper="upper" bindtouchstart="start" bindtouchend="end" > 
      
       
-   
        <include src="/pages/child/Template/position.wxml"/>
   </scroll-view>
 
   <!-- 引入登录注册和选择组件 -->
- <import src="../child/Template/Template.wxml"/>
-  <template is="notLogin" data="{{...items}}"/> 
+<import src="../child/Template/Template.wxml"/>
+<template is="notLogin" data="{{...items}}"/> 

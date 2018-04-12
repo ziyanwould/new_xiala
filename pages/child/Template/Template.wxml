@@ -29,9 +29,9 @@
 <!-- 发现组件 -->
  <template name="tar_count" >
     <view class='tar_count'>
-      <navigator class="active"  url="../detail/detail?id={{name.id}}">发现</navigator>  
-      <navigator  url="../detail/detail?id={{name.id}}">人脉</navigator> 
-      <navigator  url="../detail/detail?id={{name.id}}">消息</navigator> 
+      <navigator   url="../detail/detail?id={{name.id}}">发现</navigator>  
+      <navigator  url="/pages/child/CompanyPage/CompanyPage">人脉</navigator> 
+      <navigator class="{{active}}" url="/pages/child/Message/Message" >消息</navigator> 
     </view>
  </template>
 

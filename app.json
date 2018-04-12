@@ -16,17 +16,16 @@
     "pages/child/projectExperience/projectExperience",
     "pages/child/selfDescription/selfDescription",
     "pages/child/customPlate/customPlate",
-    "pages/child/Login/Login"
-    
+    "pages/child/Login/Login",
+    "pages/child/part-timeJob/part-timeJob",
+    "pages/child/Message/Message",
+    "pages/child/CompanyPage/CompanyPage"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0544DA",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "white"
-    
-   
- 
   },
   "tabBar": {
     "borderStyle":"white",

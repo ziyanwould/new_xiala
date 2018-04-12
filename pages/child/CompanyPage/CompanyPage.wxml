@@ -1,0 +1,71 @@
+<!--pages/child/CompanyPage/CompanyPage.wxml-->
+<view class='section1'>
+   <view class='Cfirst'>
+     <view class='fLeft'>
+       <view class='lOne'>{{company}}</view>
+       <view class='lTwo'>{{label}}</view>
+        <view class='lThird'>
+         <image style='width:104rpx;height:35rpx' src='{{attestation}}'></image>
+         <image style='width:202rpx;height:35rpx' src='{{types}}'></image>
+        </view>
+     </view>
+     <view class='fRight'>
+      <image style='width:118rpx;height:118rpx' src='{{companyPerson}}'></image>
+     </view>
+   </view>
+
+   <view class='Csecond'>
+    <view class='hisText'>历史访问<text>{{history}}</text>，今日访客：</view>
+    <view class='hisperson'>
+     <view class='personLeft'>
+       <block wx:for="{{list}}" wx:key="item.id">
+        <image src='{{item.piCurl}}'></image>
+       </block>
+     </view>
+     <view class='personRingt'>
+      <image  src='http://www.liujiarong.top/WX/heart.png'></image>
+      <text>860</text>
+     </view>
+   </view>
+ </view>
+</view>
+
+<view class='section2'>
+   <view class='Setitled'>
+      <view class='active'>公司主页</view><view>在招职位<image src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+   </view>
+   <view class='Secount'>
+     <view class='count1'> 
+       中住71（www.zhongzhu71.com）是广东中住七一网络科技有限公司创办经营的中国领先的城市建设领域服务供应平台，致力通过共享为城市建设领域提供专业化、定制化、一站式服务。
+       服务范围涵盖建筑行业各门类培训、企业资质、企业认证、知识产权、人才猎聘、项目咨询、工程咨询、管理咨询、法律服务、金融服务、财税服务等近百项服务。
+      </view>
+      <view class='countMore'>
+         <image src='{{counturl}}'></image>
+       </view>
+     </view>
+    
+ 
+   <view class='Seaddress'>
+     <view class='Setitle'>工作地址</view>
+
+     <view class='myaddress'  wx:for="{{list2}}" wx:key="item.id">
+       <view class='myLeft'>
+         <image style='width:28rpx;height:38rpx' src='http://www.liujiarong.top/WX/location.png'></image>
+       </view>
+       <view class='myMiddle'>
+         <view>{{item.address1}}</view>
+         <view>{{item.address2}}</view>
+       </view>
+       <view class='myRight'>
+           <image style='width:11rpx;height:18rpx' src='http://www.liujiarong.top/WX/Forwardarrow.png'></image>
+       </view>
+     </view>
+
+   </view>
+</view>
+
+<view class='seend'>
+  <text>Powered by human.com</text>
+  <image style='width:100rpx;height:100rpx' src='http://www.liujiarong.top/WX/CompanyShare.png'></image>
+</view>
+
