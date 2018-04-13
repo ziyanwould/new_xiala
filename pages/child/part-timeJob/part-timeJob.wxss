@@ -1,1 +1,24 @@
 /* pages/child/part-timeJob/part-timeJob.wxss */
+@import '/pages/child/CompanyPage/CompanyPage.wxss';
+@import '/pages/child/Template/List.wxss';
+.SimilarPosition{
+  background: #FFFFFF;
+  padding: 30rpx 0;
+  margin-top: 10rpx;
+}
+.titlePaing{
+  
+}
+.watchjl{
+  width: 90%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  font-size: 31rpx;
+  background: #FBFBFB;
+  border: 2rpx solid #EFEFEF;
+  margin: 0 auto;
+}
+.list:nth-of-type(4){
+ border: none!important;
+}

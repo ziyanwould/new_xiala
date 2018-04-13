@@ -1,2 +1,51 @@
 <!--pages/child/part-timeJob/part-timeJob.wxml-->
-<text>pages/child/part-timeJob/part-timeJob.wxml</text>
+<view class='section1'>
+   <view class='Cfirst'>
+     <view class='fLeft'>
+       <view class='lOne'>{{company}}</view>
+       <view class='lTwo'>{{label}}</view>
+        <view class='lThird'>
+         <image style='width:104rpx;height:35rpx' src='{{attestation}}'></image>
+         <image style='width:202rpx;height:35rpx' src='{{types}}'></image>
+        </view>
+     </view>
+     <view class='fRight'>
+      <image style='width:118rpx;height:118rpx' src='{{companyPerson}}'></image>
+     </view>
+   </view>
+
+
+</view>
+
+<view class='section2'>
+
+
+    
+ 
+   <view class='Seaddress'>
+     <view class='Setitle'>工作地址</view>
+
+     <view class='myaddress'  wx:for="{{list2}}" wx:key="item.id">
+       <view class='myLeft'>
+         <image style='width:28rpx;height:38rpx' src='http://www.liujiarong.top/WX/location.png'></image>
+       </view>
+       <view class='myMiddle'>
+         <view>{{item.address1}}</view>
+         <view>{{item.address2}}</view>
+       </view>
+       <view class='myRight'>
+           <image style='width:11rpx;height:18rpx' src='http://www.liujiarong.top/WX/Forwardarrow.png'></image>
+       </view>
+     </view>
+
+   </view>
+</view>
+
+<view class='SimilarPosition'>
+<view class='Setitle titlePaing'>相似职位</view>
+
+<include src="/pages/child/Template/position.wxml"/>
+
+ <view class='watchjl'>查看更多简历</view>
+</view>
+

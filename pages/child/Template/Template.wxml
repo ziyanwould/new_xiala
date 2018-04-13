@@ -30,7 +30,7 @@
  <template name="tar_count" >
     <view class='tar_count'>
       <navigator   url="../detail/detail?id={{name.id}}">发现</navigator>  
-      <navigator  url="/pages/child/CompanyPage/CompanyPage">人脉</navigator> 
+      <navigator  url="/pages/child/part-timeJob/part-timeJob">人脉</navigator> 
       <navigator class="{{active}}" url="/pages/child/Message/Message" >消息</navigator> 
     </view>
  </template>

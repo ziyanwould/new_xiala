@@ -102,4 +102,9 @@ Page({
   loadMore: function () {
     this.doLoadData();
   }
+  , tapCompass:function () {
+    wx.navigateTo({
+      url: '/pages/child/CompanyPage/CompanyPage'//实际路径要写全
+    })
+  } 
 })

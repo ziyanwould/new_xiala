@@ -90,6 +90,7 @@ Page( {
     });
     loadMore(this);
     console.log("lower");
-  } 
+  }
+  
 })
 
