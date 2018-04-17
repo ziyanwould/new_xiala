@@ -1,5 +1,10 @@
 <!--pages/child/part-timeJob/part-timeJob.wxml-->
 <view class='section1'>
+   <view class='JobDescription'>
+     <view class='Jtitle'>{{title}}</view>
+     <view class='job'><text class='salary'>{{salary}}</text>/年<text class='partition'>兼职</text></view>
+     <view class='soci'>社保所在地：{{socialSecurity}}</view>
+   </view>
    <view class='Cfirst'>
      <view class='fLeft'>
        <view class='lOne'>{{company}}</view>
@@ -23,6 +28,34 @@
     
  
    <view class='Seaddress'>
+     <view class='Setitle tianbai'>职位描述</view>
+     <view class='tag'>
+          <view class='child_tag'  wx:for="{{tag}}" wx:key="item.id">
+            {{item.count}}
+          </view>
+     </view>
+     <view class='positionStatement'>
+       <view>岗位职责：</view>
+       <view class='psCount'>
+        {{zzCount}}
+       </view>
+
+        <view style='margin-top:60rpx;'>任职资格：</view>
+        <view class='psCount'>
+         
+        </view>
+     </view>
+     <view class='Setitle ' style='width:520rpx'>职位发布者</view>
+     <view class='hrInformation'>
+           <image class='person' src='http://www.liujiarong.top/WX/pending.png'></image>
+           <view class='useDegin'><text>{{name}}</text>{{Ntype}}</view>
+           <view class='lastInfo'> <image src='http://www.liujiarong.top/WX/wx_lively.png'></image><text>最近活跃：{{hour}}小时前</text></view>
+            <view class='tag'>
+             <view class='child_tag'  wx:for="{{tags}}" wx:key="item.id">
+             {{item.count}}
+           </view>
+     </view>
+     </view>
      <view class='Setitle'>工作地址</view>
 
      <view class='myaddress'  wx:for="{{list2}}" wx:key="item.id">
@@ -49,3 +82,18 @@
  <view class='watchjl'>查看更多简历</view>
 </view>
 
+
+
+<view class='SubmitResume'>
+  <view class='jobShare'>
+    <image src='http://www.liujiarong.top/WX/share.png'></image>
+    <view>分享</view>
+  </view>
+
+  <view class='jobCollect'>
+     <image src='http://www.liujiarong.top/WX/collect.png'></image>
+    <view>收藏</view>
+  </view>
+
+  <view><button class="weui-btn resume" type="primary">投递简历</button></view> 
+</view>

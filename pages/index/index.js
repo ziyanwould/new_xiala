@@ -156,7 +156,12 @@ Page({
         success: function (res) { }
       })
     }
-  }    
+  }
+  , tapCompass: function () {
+    wx.navigateTo({
+      url: '/pages/child/part-timeJob/part-timeJob'//实际路径要写全
+    })
+  }     
   //路由跳转等end
 /** 
  * 旋转上拉加载图标 

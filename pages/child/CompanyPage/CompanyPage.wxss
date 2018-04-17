@@ -85,6 +85,7 @@ page{
    display: flex;
    border-bottom: 1rpx solid #f9f9f9;
    padding: 50rpx 0 40rpx 0;
+   margin-bottom: 40rpx;
   
 }
 .Setitled view{

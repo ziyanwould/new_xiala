@@ -1,5 +1,5 @@
 <!--pages/child/Template/position.wxml-->
-  <view class="list" bindtouchmove="move" wx:for="{{list}}" wx:key="item.id">
+  <view class="list" bindtouchmove="move" wx:for="{{list}}" wx:key="item.id" bindtap="tapCompass">
 
        <view class="list-item list-item-left">
          <image style="width:100rpx;height:100rpx;" src="{{item.pic_url}}" />
