@@ -71,7 +71,7 @@
   border-top: 1rpx solid  #333333;
   border-bottom: 1rpx solid  #333333;
   color: #333333;
-   border-radius: 50%; 
+   border-radius: 64rpx; 
   margin-bottom: 20rpx;
 }
 /* .child_tag::before{

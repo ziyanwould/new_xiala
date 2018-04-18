@@ -1,10 +1,21 @@
 // pages/child/CompanyPage/CompanyPage.js
+var url = "http://www.imooc.com/course/ajaxlist";
+var page = 0;
+var page_size = 5;
+var sort = "last";
+var is_easy = 0;
+var lange_id = 0;
+var pos_id = 0;
+var unlearn = 0;
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    listd:[],
     list:[
       { piCurl:"http://www.liujiarong.top/WX/pending.png"},
       { piCurl: "http://www.liujiarong.top/WX/otherPeople.png" },
@@ -16,6 +27,15 @@ Page({
     list2:[
       { address1: "广州市海珠区", address2:"中山大学科技园B座1818"},
       { address1: "佛山市禅城区", address2: "佛山市信息科技创业园"},
+    ],
+    list3: [
+     {name:"全部",nunber:10},
+     { name: "全部" },
+     { name: "技术"},
+     { name: "建筑师"},
+     { name: "工程师" },
+     { name: "五大员" },
+     { name: "电工" },
     ],
     company:"中住71",
     label:"50-150人/移动互联网/建筑/设计/教育",
@@ -32,7 +52,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+        wx.showLoading({
+      title: 'loading...',
+    });
+    var that = this;
+    wx.request({
+      url: url,
+      data: {
+        page: page,
+        page_size: page_size,
+        sort: sort,
+        is_easy: is_easy,
+        lange_id: lange_id,
+        pos_id: pos_id,
+        unlearn: unlearn
+      },
+      success: function (res) {
+        //console.info(that.data.list);  
+        var listd = that.data.listd;
+        for (var i = 0; i < 6; i++) {
+          listd.push(res.data.list[i]);
+        }
+        that.setData({
+          listd: listd
+        });
+        page++;
+        wx.hideLoading();
+
+      }
+    });
   },
 
   /**
@@ -61,6 +109,7 @@ Page({
    */
   onUnload: function () {
   
+
   },
 
   /**

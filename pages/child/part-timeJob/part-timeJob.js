@@ -9,38 +9,6 @@ var pos_id = 0;
 var unlearn = 0;
 
 
-// 请求数据  
-var loadMore = function (that) {
-  that.setData({
-    hidden: false
-  });
-  wx.request({
-    url: url,
-    data: {
-      page: page,
-      page_size: page_size,
-      sort: sort,
-      is_easy: is_easy,
-      lange_id: lange_id,
-      pos_id: pos_id,
-      unlearn: unlearn
-    },
-    success: function (res) {
-      //console.info(that.data.list);  
-      var list = that.data.list;
-      for (var i = 0; i < res.data.list.length; i++) {
-        list.push(res.data.list[i]);
-      }
-      that.setData({
-        list: list
-      });
-      page++;
-      that.setData({
-        hidden: true
-      });
-    }
-  });
-}  
 
 Page({
 

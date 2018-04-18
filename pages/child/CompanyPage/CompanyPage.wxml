@@ -30,10 +30,15 @@
  </view>
 </view>
 
-<view class='section2'>
-   <view class='Setitled'>
+ <view class='Setitled'>
       <view class='active'>公司主页</view><view>在招职位<image src='http://www.liujiarong.top/WX/Comup.png'></image></view>
-   </view>
+</view>
+
+
+
+<block wx:if="">
+   <view class='section2'>
+  
    <view class='Secount'>
      <view class='count1'> 
        中住71（www.zhongzhu71.com）是广东中住七一网络科技有限公司创办经营的中国领先的城市建设领域服务供应平台，致力通过共享为城市建设领域提供专业化、定制化、一站式服务。
@@ -69,3 +74,29 @@
   <image style='width:100rpx;height:100rpx' src='http://www.liujiarong.top/WX/CompanyShare.png'></image>
 </view>
 
+</block>
+
+<block>
+
+ <view class='tags'>
+    <view class="tagsChild {{item.nunber==10 ? 'active' : ''}}" wx:for="{{list3}}" wx:key="item.id">
+     {{item.name}}
+    </view>
+ </view>
+
+ <view class='ListTable'>
+    <view class='lte' wx:for="{{listd}}" wx:key="item.id" >
+      <view class='lte1'><text class='Etitle'>运营专员</text><text class='Epay'>8K-10K</text></view>
+      <view class='lte2'>
+        <view class='ltb_left'>
+          <text>广州</text> <text>客村</text> <text>设计类</text> <text>{{item.easy_name}}</text>
+        </view>
+         <view class='ltb_right'>
+            {{item.chapter_media}}
+        </view>
+      </view>
+    </view>
+ </view>
+
+ <view class='nomore'>没有更多了</view>
+</block>
