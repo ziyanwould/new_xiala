@@ -43,8 +43,9 @@ Page({
     types:"http://www.liujiarong.top/WX/popCompass.png",
     companyPerson:"http://www.liujiarong.top/WX/pending.png",
     history:"85664",
-    counturl:"http://www.liujiarong.top/WX/Comup.png"
-
+    counturl:"http://www.liujiarong.top/WX/Comup.png",
+    unfold:true,
+    
     
   },
 
@@ -131,5 +132,15 @@ Page({
    */
   onShareAppMessage: function () {
   
+  }
+  , change1:function(){
+    this.setData({//this.setdata很重要
+      "unfold": true,
+    })
+  },
+  change2: function () {
+    this.setData({//this.setdata很重要
+      "unfold": false,
+    })
   }
 })

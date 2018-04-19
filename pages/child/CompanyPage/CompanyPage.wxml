@@ -31,12 +31,13 @@
 </view>
 
  <view class='Setitled'>
-      <view class='active'>公司主页</view><view>在招职位<image src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+      <view class="{{unfold ? 'active' : ''}}" bindtap='change1'>公司主页</view>
+      <view class="{{!unfold ? 'active' : ''}}" bindtap='change2'>在招职位<image src='http://www.liujiarong.top/WX/Comup.png'></image></view>
 </view>
 
 
 
-<block wx:if="">
+<block wx:if="{{unfold}}">
    <view class='section2'>
   
    <view class='Secount'>
@@ -76,7 +77,7 @@
 
 </block>
 
-<block>
+<block wx:if="{{!unfold}}">
 
  <view class='tags'>
     <view class="tagsChild {{item.nunber==10 ? 'active' : ''}}" wx:for="{{list3}}" wx:key="item.id">
