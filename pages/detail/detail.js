@@ -107,4 +107,10 @@ Page({
       url: '/pages/child/CompanyPage/CompanyPage'//实际路径要写全
     })
   } 
+  //搜索页路由跳转
+  , seek: function () {
+    wx.navigateTo({
+      url: '/pages/child/grabble/grabble'//实际路径要写全
+    })
+  }
 })

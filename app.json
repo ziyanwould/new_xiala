@@ -19,7 +19,8 @@
     "pages/child/Login/Login",
     "pages/child/part-timeJob/part-timeJob",
     "pages/child/Message/Message",
-    "pages/child/CompanyPage/CompanyPage"
+    "pages/child/CompanyPage/CompanyPage",
+    "pages/child/grabble/grabble"
   ],
   "window": {
     "backgroundTextStyle": "light",

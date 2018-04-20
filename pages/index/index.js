@@ -163,6 +163,12 @@ Page({
     })
   }     
   //路由跳转等end
+  //搜索页路由跳转
+  ,seek:function(){
+    wx.navigateTo({
+      url: '/pages/child/grabble/grabble'//实际路径要写全
+    })
+  }
 /** 
  * 旋转上拉加载图标 
  */

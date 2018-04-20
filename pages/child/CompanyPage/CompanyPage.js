@@ -45,6 +45,7 @@ Page({
     history:"85664",
     counturl:"http://www.liujiarong.top/WX/Comup.png",
     unfold:true,
+    hisText:true,
     
     
   },

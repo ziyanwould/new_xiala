@@ -1,0 +1,55 @@
+<!--pages/child/grabble/grabble.wxml-->
+<view class='pageAll'>
+  <!-- 头部搜索页 -->
+  <view class='psection1'>
+    <view class='tcount1'>{{city}}广州 <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+    <view class='Pinput'><input></input> <image style='width:52rpx; height:52rpx;' src='http://www.liujiarong.top/WX/images/search.png'></image></view>
+    <view class='tcount2'>取消</view>
+  </view>
+  <!-- 搜索内容呈现页 -->
+   <view class='psection2'>
+     <!-- 默认未搜索前页面 -->
+      <view class='seachBefore' wx:if="{{}}">
+         <view class='se1'>
+           <view class='se1Title'>
+            <text>历史搜索</text> <image style='width:27rpx; height:31rpx;' src='http://www.liujiarong.top/WX/WXdelect.png'></image>
+           </view>
+          <view class='se1Count'>
+             <text wx:for="{{history}}" wx:key="item.id">{{item.name}}</text>  
+          </view>
+         </view>
+
+           <view class='se2'>
+         
+           <view class='se2Title'>
+            <text>猜你想搜</text>
+           </view>
+           <view class='se2Count'>
+              <text wx:for="{{enjoy}}" wx:key="item.id">{{item.name}}</text>  
+           </view> 
+
+         </view>
+      </view>
+
+      <!-- 需要可置顶，可固定的职位筛选栏 -->
+      <view class='gps'>
+         <view>位置 <image style='width:18rpx; height:11rpx' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+         <view>职位 <image style='width:18rpx; height:11rpx' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+         <view>排序 <image style='width:18rpx; height:11rpx' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+      </view>
+      <!-- 搜索出来的公司板块 -->
+      <view class='seachCompay'>
+        <include src="/pages/child/Template/companyMode.wxml"/>
+          <view class='otherCompany'>
+             <text>查看全部13个相关公司</text>
+             <image style='width:11rpx; height:18rpx' src='http://www.liujiarong.top/WX/Forwardarrow.png'></image>
+          </view>
+      </view>
+      <!-- 引路所搜索出来的 -->
+      <view class='Wxlist' wx:if='true'>
+         <include src="/pages/child/Template/position.wxml"/>
+      </view>
+      
+  </view>
+ 
+</view>

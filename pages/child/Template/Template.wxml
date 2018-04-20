@@ -44,7 +44,7 @@
          <image src='http://www.liujiarong.top/WX/images/logo.png'></image>
        
       </view> 
-      <view class='baInput'>
+      <view class='baInput' bindtap="seek">
            <input type="text" class="input" placeholder-class="input-place" placeholder="收索公司/职位"/>
              <image src='http://www.liujiarong.top/WX/images/search.png'></image>   
       </view>
