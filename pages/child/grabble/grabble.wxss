@@ -121,3 +121,6 @@ page{
   padding: 15rpx 35rpx 0 35rpx;
   margin: 10rpx 0 10rpx 0;
 }
+.gps .active{
+ color: #00b289;
+}

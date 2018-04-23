@@ -17,13 +17,13 @@ Page({
     list: [
 
     ],
-    history:[
-      {name:"建造师"},
-      { name: "一级建造师" },
-      { name: "五大员" },
-      { name: "建筑师" },
-      { name: "设计师" },
-      { name: "中住七一网络科技有限公司" },
+    historys: [
+      { count:"建造师"},
+      { count: "一级建造师" },
+      { count: "五大员" },
+      { count: "建筑师" },
+      { count: "设计师" },
+      { count: "中住七一网络科技有限公司" },
     ],
     enjoy: [
       { name: "建造师" },
@@ -33,6 +33,12 @@ Page({
       { name: "SEO工程师" },
       { name: "开发产品经理" },
     ],
+    activeIndex: -1,
+    used_list: [
+      { title: "分类01", name: "位置" },
+      { title: "分类02", name: "职位" },
+      { title: "分类03", name: "排序" },
+    ],
     company: "中住71",
     label: "50-150人/移动互联网/建筑/设计/教育",
     attestation: "http://www.liujiarong.top/WX/certified.png",
@@ -40,6 +46,9 @@ Page({
     companyPerson: "http://www.liujiarong.top/WX/pending.png",
     history: "85664",
     counturl: "http://www.liujiarong.top/WX/Comup.png",
+    city:"广州",
+    pageShow:true,
+    Fbutton:"取消"
   },
 
   /**
@@ -90,7 +99,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this;
+    wx.getStorage({
+      key: 'cargo',
+      success: function (res) {
+        console.log(res.data)
+
+
+        that.setData({
+
+          city: res.data.select_city,
+
+        })
+      }
+    })
   },
 
   /**
@@ -126,5 +148,47 @@ Page({
    */
   onShareAppMessage: function () {
   
+  }
+  ,
+  jumpCity: function (event) {
+
+    wx.navigateTo({
+      url: "/pages/child/citySelect/citySelect"
+    })
+  },
+  active: function (e) {
+    this.setData({
+      activeIndex: e.currentTarget.id
+    })
+  
+  },
+  watchPassWord: function (event) {
+    var that = this;
+    var changdu =event.detail.value.length;
+    if(changdu>0){
+        that.setData({
+        Fbutton: '完成'
+    })
+    }else{
+      that.setData({
+        Fbutton: '取消'
+      })
+    }
+    // that.setData({
+    //   city: res.data.select_city,
+    // })
+    console.log(event.detail.value);
+   
+  }, 
+  urlTime:function(event){
+    var that = this;
+    var flage =that.data.Fbutton;
+    if (flage=="完成"){
+      that.setData({
+        pageShow: false,
+      })
+    }else{
+      wx.navigateBack({ changed: true });//返回上一页  
+    }
   }
 })
