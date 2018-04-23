@@ -48,7 +48,8 @@ Page({
     counturl: "http://www.liujiarong.top/WX/Comup.png",
     city:"广州",
     pageShow:true,
-    Fbutton:"取消"
+    Fbutton:"取消",
+    count:"",
   },
 
   /**
@@ -190,5 +191,16 @@ Page({
     }else{
       wx.navigateBack({ changed: true });//返回上一页  
     }
+  }, 
+  remove:function(){
+    this.setData({
+      historys: []
+    })
   }
-})
+  , gitval:function(event){
+    console.log(event.currentTarget.dataset.val)
+    this.setData({
+      count: event.currentTarget.dataset.val
+    })
+  }
+})  

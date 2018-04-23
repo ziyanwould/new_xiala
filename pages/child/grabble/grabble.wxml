@@ -3,7 +3,7 @@
   <!-- 头部搜索页 -->
   <view class='psection1'>
     <view class='tcount1' bindtap="jumpCity">{{city}} <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
-    <view class='Pinput' ><input auto-focus="true" bindinput='watchPassWord'></input> <image style='width:52rpx; height:52rpx;' src='http://www.liujiarong.top/WX/images/search.png'></image></view>
+    <view class='Pinput' ><input value='{{count}}' auto-focus="true" bindinput='watchPassWord'></input> <image style='width:52rpx; height:52rpx;' src='http://www.liujiarong.top/WX/images/search.png'></image></view>
     <view class='tcount2' bindtap="urlTime">{{Fbutton}}</view>
   </view>
   <!-- 搜索内容呈现页 -->
@@ -12,11 +12,11 @@
       <view class='seachBefore' wx:if="{{pageShow}}">
          <view class='se1'>
            <view class='se1Title'>
-            <text>历史搜索</text> <image style='width:27rpx; height:31rpx;' src='http://www.liujiarong.top/WX/WXdelect.png'></image>
+            <text>历史搜索</text> <image bindtap='remove' style='width:27rpx; height:31rpx;' src='http://www.liujiarong.top/WX/WXdelect.png'></image>
            </view>
           <view class='se1Count'>
              <!-- <text wx:for="{{history}}" wx:key="item.id">{{item.count}}</text>   -->
-               <text wx:for="{{historys}}" wx:key="item.id">{{item.count}}</text>  
+               <text wx:for="{{historys}}" bindtap='gitval' data-val='{{item.count}}' wx:key="item.id">{{item.count}}</text>  
           </view>
          </view>
 
@@ -26,7 +26,7 @@
             <text>猜你想搜</text>
            </view>
            <view class='se2Count'>
-              <text wx:for="{{enjoy}}" wx:key="item.id">{{item.name}}</text>  
+              <text wx:for="{{enjoy}}" bindtap='gitval' data-val='{{item.name}}' wx:key="item.id">{{item.name}}</text>  
            </view> 
 
          </view>
