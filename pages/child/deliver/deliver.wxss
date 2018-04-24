@@ -40,3 +40,6 @@ page{
   line-height: 76rpx;
   color: #bfbfbf
 }
+.searchResult{
+  background: #FFFFFF;
+}

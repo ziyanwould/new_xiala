@@ -39,6 +39,13 @@ Page({
       { title: "分类02", name: "职位" },
       { title: "分类03", name: "排序" },
     ],
+    searchList:[
+      { name: "造价师" },
+      { name: "广东省独资公司" },
+      { name: "价格" },
+      { name: "其他" },
+      { name: "其他2" },
+    ],
     company: "中住71",
     label: "50-150人/移动互联网/建筑/设计/教育",
     attestation: "http://www.liujiarong.top/WX/certified.png",
@@ -50,6 +57,9 @@ Page({
     pageShow:true,
     Fbutton:"取消",
     count:"",
+    selectD:true ,
+    gps:true,
+    changeJob:"兼职"
   },
 
   /**
@@ -168,18 +178,28 @@ Page({
     var changdu =event.detail.value.length;
     if(changdu>0){
         that.setData({
-        Fbutton: '完成'
+        Fbutton: '完成',
+         selectD: false,
+         pageShow: true,
+         gps: true
     })
     }else{
       that.setData({
-        Fbutton: '取消'
+        Fbutton: '取消',
+        selectD: true ,
+        gps: true
+       
       })
     }
     // that.setData({
     //   city: res.data.select_city,
     // })
     console.log(event.detail.value);
-   
+    this.setData({
+      count: event.detail.value
+     
+
+    })
   }, 
   urlTime:function(event){
     var that = this;
@@ -187,6 +207,8 @@ Page({
     if (flage=="完成"){
       that.setData({
         pageShow: false,
+        gps:false
+
       })
     }else{
       wx.navigateBack({ changed: true });//返回上一页  
@@ -200,7 +222,31 @@ Page({
   , gitval:function(event){
     console.log(event.currentTarget.dataset.val)
     this.setData({
-      count: event.currentTarget.dataset.val
+       count: event.currentTarget.dataset.val,
+       Fbutton: '完成',
+       pageShow: false,
+       gps: false
+    
     })
+  }, 
+  open: function () {
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['兼职', '全职'],
+      success: function (res) {
+        if (!res.cancel) {
+         
+          if (res.tapIndex==0){
+          that.setData({
+            changeJob: "兼职"
+            })
+          }else{
+            that.setData({
+              changeJob: "全职"
+            })
+          }
+        }
+      }
+    });
   }
 })  

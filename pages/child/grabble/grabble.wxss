@@ -41,6 +41,11 @@ page{
 .tcount2,.tcount1{
   line-height: 62rpx;
 }
+.Pinput input.active{
+ width: 620rpx;
+ transition: all .3s ease-in-out;
+
+}
 /*搜索前默认页*/
 .se1Title,.se2Title{
   padding: 40rpx 30rpx;
@@ -123,4 +128,25 @@ page{
 }
 .gps .active{
  color: #00b289;
+}
+/***/
+.searchResult{
+  background: #FFFFFF;
+  padding: 0 30rpx ;
+  margin-top: 1rpx;
+}
+.seacChild{
+  height: 95rpx;
+  line-height: 95rpx;
+  border-bottom: 1rpx solid #F2F2F2;
+  color: #686868;
+  font-size: 28rpx;
+}
+.seacChild image{
+  position: relative;
+  top:3rpx;
+  margin-right: 30rpx;
+}
+.seacChild:nth-last-child(1){
+   border-bottom:none;
 }

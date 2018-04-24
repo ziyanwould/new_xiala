@@ -2,14 +2,17 @@
 <view class='pageAll'>
   <!-- 头部搜索页 -->
   <view class='psection1'>
-    <view class='tcount1' bindtap="jumpCity">{{city}} <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
-    <view class='Pinput' ><input value='{{count}}' auto-focus="true" bindinput='watchPassWord'></input> <image style='width:52rpx; height:52rpx;' src='http://www.liujiarong.top/WX/images/search.png'></image></view>
-    <view class='tcount2' bindtap="urlTime">{{Fbutton}}</view>
+    <!-- <view class='tcount1' wx:if="{{gps}}" bindtap="jumpCity">{{city}} <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'></image></view> -->
+
+      <view class='tcount1' wx:if="{{gps}}" bindtap="open" >{{changeJob}} <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+
+    <view class="Pinput" ><input class=" {{!gps ? 'active' : ''}}" value='{{count}}' auto-focus="true" bindinput='watchPassWord'></input> <image style='width:52rpx; height:52rpx;' src='http://www.liujiarong.top/WX/images/search.png'></image></view>
+    <view class='tcount2'  wx:if="{{gps}}" bindtap="urlTime">{{Fbutton}}</view>
   </view>
   <!-- 搜索内容呈现页 -->
    <view class='psection2'>
      <!-- 默认未搜索前页面 -->
-      <view class='seachBefore' wx:if="{{pageShow}}">
+      <view class='seachBefore' wx:if="{{pageShow && selectD}}">
          <view class='se1'>
            <view class='se1Title'>
             <text>历史搜索</text> <image bindtap='remove' style='width:27rpx; height:31rpx;' src='http://www.liujiarong.top/WX/WXdelect.png'></image>
@@ -52,6 +55,13 @@
           <include src="/pages/child/Template/position.wxml"/>
         </view>
       </block>
+      <!-- 搜索提示框 -->
+      <view class='searchResult' wx:if="{{!selectD}}">
+        <view class='seacChild' bindtap='gitval' data-val='{{item.name}}{{count}}' wx:for="{{searchList}}" wx:key="0">
+          <image style='width:30rpx; height:33rpx;' src='http://www.liujiarong.top/WX/searchResult.png'></image>
+          {{item.name}}{{count}}
+        </view>
+      </view>
   </view>
  
 </view>
