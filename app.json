@@ -20,7 +20,9 @@
     "pages/child/part-timeJob/part-timeJob",
     "pages/child/Message/Message",
     "pages/child/CompanyPage/CompanyPage",
-    "pages/child/grabble/grabble"
+    "pages/child/grabble/grabble",
+    "pages/child/map/map",
+    "pages/AboutCompany/AboutCompany"
   ],
   "window": {
     "backgroundTextStyle": "light",

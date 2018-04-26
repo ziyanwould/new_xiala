@@ -249,4 +249,9 @@ Page({
       }
     });
   }
+  , clickMCity:function(){
+    wx.navigateTo({
+      url: "/pages/AboutCompany/AboutCompany"
+    }) 
+  }
 })  

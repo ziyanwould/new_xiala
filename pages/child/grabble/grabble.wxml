@@ -45,7 +45,7 @@
         <!-- 搜索出来的公司板块 -->
         <view class='seachCompay'>
           <include src="/pages/child/Template/companyMode.wxml"/>
-            <view class='otherCompany'>
+            <view class='otherCompany' bindtap="clickMCity">
               <text>查看全部13个相关公司</text>
               <image style='width:11rpx; height:18rpx' src='http://www.liujiarong.top/WX/Forwardarrow.png'></image>
             </view>

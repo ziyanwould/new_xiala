@@ -20,8 +20,8 @@ Page({
    
     ],
     list2: [
-      { address1: "广州市海珠区", address2: "中山大学科技园B座1818" },
-      { address1: "佛山市禅城区", address2: "佛山市信息科技创业园" },
+      { address1: "广州市海珠区", address2: "中山大学科技园B座1818", lat: "23.092900", lon:"113.291230"},
+      { address1: "佛山市禅城区", address2: "佛山市信息科技创业园", lat: "23.004224", lon: "113.124161" },
     ],
     tag:[
         { id:0, count: "设计师" },
@@ -143,5 +143,27 @@ Page({
    */
   onShareAppMessage: function () {
 
+  }
+  ,
+  map:function (event){
+  //   wx.getLocation({
+  //     type: 'gcj02', //返回可以用于wx.openLocation的经纬度  
+  //     success: function (res) {
+  //       var latitude = res.latitude
+  //       var longitude = res.longitude
+  //       wx.openLocation({
+  //         latitude: latitude,
+  //         longitude: longitude,
+  //         name: "花园桥肯德基",
+  //         scale: 28
+  //       })
+  //     }
+  //   })  
+    wx.openLocation({
+      latitude: parseFloat(event.currentTarget.dataset.lat),
+      longitude: parseFloat(event.currentTarget.dataset.lon),
+      name: event.currentTarget.dataset.area,
+      scale: 28
+    })
   }
 })
