@@ -270,3 +270,11 @@ padding-top: 20rpx;
   padding-top: 60rpx;
   padding-bottom: 150rpx;
 }
+
+/**/
+.avatar{
+    width: 5rem;
+    height: 5rem;
+    background-color: #e5e5e5;
+    border-radius: 50%;
+}

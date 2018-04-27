@@ -22,7 +22,10 @@
     "pages/child/CompanyPage/CompanyPage",
     "pages/child/grabble/grabble",
     "pages/child/map/map",
-    "pages/AboutCompany/AboutCompany"
+    "pages/AboutCompany/AboutCompany",
+    "avatarUpload/index/index",
+    "avatarUpload/upload/upload"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

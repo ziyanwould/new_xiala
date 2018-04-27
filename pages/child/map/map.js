@@ -57,5 +57,10 @@ Page({
         longitude: 113.3345211,
       }]
     })
-  }
+  },
+  getPhoneNumber: function (e) {
+    console.log("errMsg值：", e.detail.errMsg)
+    console.log("iv值：", e.detail.iv)
+    console.log("encryptedData值：", e.detail.encryptedData)
+  } 
 })

@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    src: '',
+    bfsrc:''
   },
 
   /**
@@ -19,9 +20,12 @@ Page({
     app.getUserInfo(function (userInfo) {
       //更新数据
       that.setData({
-        userInfo: userInfo
+        userInfo: userInfo,
+        src: userInfo.avatarUrl,
+        bfsrc: userInfo.avatarUrl
       })
     })
+  
   },
 
   /**
@@ -82,4 +86,60 @@ Page({
       url: '../customPlate/customPlate'
     })
   },
+  /*头像功能*/ 
+  // changeAvatar: function () {
+  //   var that = this;
+  //   // var childId = wx.getStorageSync("child_id");
+  //   // var token = wx.getStorageSync('token');
+  //   wx.chooseImage({
+  //     count: 1, // 最多可以选择的图片张数，默认9
+  //     sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+  //     sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+  //     success: function (res) {
+  //       console.log(res.tempFilePaths + "修改页面")
+  //       var avatar = res.tempFilePaths;
+  //       that.setData({
+  //         avatar: avatar,
+  //         upAvatar: true
+  //       })
+
+  //     },
+  //     fail: function () {
+  //       // fail
+  //     },
+  //     complete: function () {
+  //       // complete
+  //     }
+  //   })
+  // },
+ // 这是是调用上传头像uploadFile方法
+// 上传头像
+  upload() {
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success(res) {
+        const src = res.tempFilePaths[0]
+
+        wx.redirectTo({
+          url: `/avatarUpload/upload/upload?src=${src}`
+        })
+      }
+    })
+  },
+   onLoad (option) {
+     console.log("列表",option)
+    // let { avatar } = option
+    // if (avatar) {
+    //   console.log("内容",avatar)
+    //   this.setData({
+    //     src: avatar
+    //   })
+    // }else{
+    //   this.setData({
+    //     src: this.data.bfsrc
+    //   })
+    // }
+  }
 })

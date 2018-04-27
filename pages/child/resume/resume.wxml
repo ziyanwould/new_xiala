@@ -20,8 +20,8 @@
         
      </view>
 
-     <view  bindtap="bindViewTap" class="s1_right">
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+     <view   class="s1_right">
+      <image class="userinfo-avatar avatar" src="{{src}}"  bindtap="upload"   background-size="cover"></image>
      </view>
 
   </view>

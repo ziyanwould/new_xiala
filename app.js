@@ -10,7 +10,7 @@ App({
       success: function (res) {
         if (res.code) {
           //发起网络请求    
-          console.log(res.code)
+          console.log("发起网络请求",res.code)
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }
