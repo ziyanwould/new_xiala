@@ -1,3 +1,4 @@
+var app = getApp()
 Page({
   data: {
     latitude: 23.014030,
@@ -8,6 +9,7 @@ Page({
       longitude: 113.290865,
       name: 'T.I.T 创意园'
     }],
+    cods:''
     // covers: [{
     //   latitude: 23.099994,
     //   longitude: 113.344520,
@@ -62,5 +64,53 @@ Page({
     console.log("errMsg值：", e.detail.errMsg)
     console.log("iv值：", e.detail.iv)
     console.log("encryptedData值：", e.detail.encryptedData)
+
+
   } 
+  , gitopenID:function(e){
+    var that = this
+    console.log("code", app.globalData.thecode)
+    wx.request({
+      url: 'http://120.27.100.219:54231/common/get_wx_openid',
+      header: {
+        'content-type': 'application/json',
+        'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+
+      },
+      method: 'POST',
+      data: {
+        code: app.globalData.thecode
+      },
+
+
+      success: function (res) {
+        console.log(res.data)
+        //这样赋值现在是不能将数据传走的，必须使用setData()方法
+        //that.data.items = res.data ;
+        //官方文档指出必须使用setData()方法才能将数据传走
+        // that.setData({
+        //   items: res.data
+        // })
+      }
+
+    })
+
+    // wx.request({
+    //   url: 'http://www.liujiarong.top/WX/api/give.php', //仅为示例，并非真实的接口地址
+    //   data: {
+    //     code: app.globalData.thecode
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success: function (res) {
+    //     console.log(res)
+    //   }
+    // })
+
+   
+   
+   
+  }
 })
+var Util = require('../../../utils/util.js')

@@ -1,7 +1,9 @@
 //app.js
 App({
   onLaunch: function () {
+
     //调用API从本地缓存中获取数据
+    var that = this
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -11,6 +13,8 @@ App({
         if (res.code) {
           //发起网络请求    
           console.log("发起网络请求",res.code)
+          that.globalData.thecode = res.code
+
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }

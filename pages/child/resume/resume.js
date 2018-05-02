@@ -130,16 +130,16 @@ Page({
   },
    onLoad (option) {
      console.log("列表",option)
-    // let { avatar } = option
-    // if (avatar) {
-    //   console.log("内容",avatar)
-    //   this.setData({
-    //     src: avatar
-    //   })
-    // }else{
-    //   this.setData({
-    //     src: this.data.bfsrc
-    //   })
-    // }
+    let { avatar } = option
+    if (avatar) {
+      console.log("内容",avatar)
+      this.setData({
+        src: avatar
+      })
+    }else{
+      this.setData({
+        src: this.data.bfsrc
+      })
+    }
   }
 })
