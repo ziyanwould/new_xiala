@@ -67,7 +67,8 @@ Page({
 
 
   } 
-  , gitopenID:function(e){
+  ,
+   gitopenID:function(e){
     var that = this
     console.log("code", app.globalData.thecode)
     wx.request({

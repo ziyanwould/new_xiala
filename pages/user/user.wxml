@@ -1,4 +1,9 @@
 <!--index.wxml-->
+  <!-- 引入登录注册和选择组件 -->
+<import src="../child/Template/Template.wxml"/>
+<template is="notLogin" data="{{...items}}" /> 
+<!-- end -->
+
 <view class="container">
   <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
@@ -55,8 +60,22 @@
         <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
   </view>
-</view>
 
+   <button class='sec1 buttonx'  open-type="contact" session-from="weapp">
+      <view class='fun_left'>
+        <image src='http://www.liujiarong.top/WX/images/wx_retroaction.png' ></image>
+        <text class='xod'>反馈</text>
+      </view>
+      
+      <view class='fun_right'>
+        <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
+      </view>
+  </button>
+</view>
+  
  <view class='end_num'>
       <navigator class="active"  url="../detail/detail?id={{name.id}}">退出当前账号</navigator>  
 </view> 
+
+
+

@@ -11,6 +11,4 @@
        <include src="/pages/child/Template/position.wxml"/>
   </scroll-view>
 
-  <!-- 引入登录注册和选择组件 -->
-<import src="../child/Template/Template.wxml"/>
-<template is="notLogin" data="{{...items}}"/> 
+

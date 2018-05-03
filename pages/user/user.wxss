@@ -1,4 +1,7 @@
 /**app.wxss**/
+/*弹窗口*/
+@import "/pages/child/Template/Template.wxss";   
+/**/
 .container {
   height: 10%;
   display: flex;
@@ -149,4 +152,17 @@ page{
 }
 .end_num{
   padding-bottom: 100rpx;
+}
+
+.buttonx{
+  background-color:#FFFFFF!important;
+
+
+  font-size:26rpx;
+  line-height:normal;
+  border:none;
+  outline:none;
+  list-style: none;
+  border-radius: none;
+
 }

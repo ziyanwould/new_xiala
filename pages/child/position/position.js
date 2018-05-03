@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-var common = require('../../../utils/common.js');
+// var common = require('../../../utils/common.js');
 var app = getApp();
 // 下拉刷新内容
 var url = "http://www.imooc.com/course/ajaxlist";
@@ -57,14 +57,14 @@ Page({
     register.register(this);
     //获取words  
     this.doLoadData(0, 20);
-    var self = common.tanchu()
-    _this.setData({
-      items: {
-        height: self,
-        masTitle: "",
-        show: true
-      }
-    });
+    // var self = common.tanchu()
+    // _this.setData({
+    //   items: {
+    //     height: self,
+    //     masTitle: "",
+    //     show: true
+    //   }
+    // });
 
 
 
@@ -115,47 +115,6 @@ Page({
   //模拟加载更多数据
   loadMore: function () {
     this.doLoadData();
-  },
-  //路由跳转等
-  urlTo: function () {
-    var url = '/pages/child/Login/Login?line_type=1';
-    common.SomeThing(url);
-
-  },
-  urlTo2: function () {
-    var url = '/pages/child/Login/Login?line_type=2';
-    common.SomeThing(url);
-
-  },
-  urlclose: function () {
-    this.setData({
-      items: {
-
-        show: false
-      }
-    });
-  }
-  ,
-  getPhoneNumber: function (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
-    //
-    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '未授权',
-        success: function (res) { }
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '同意授权',
-        success: function (res) { }
-      })
-    }
   }
   //路由跳转等end
   /** 

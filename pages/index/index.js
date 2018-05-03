@@ -51,9 +51,42 @@ Page({
     words: [],
     list: [],
     items: {},
+   
+  },
+  onShow: function () {
+    /*是否登录  更新状态*/
+    var _this = this;
+    wx.getStorage({
+      key: 'login',
+      success: function (res) {
+
+        if (res.data) {
+          _this.setData({
+            items: {
+              show: false
+            }
+          })
+        }
+      }
+    })
   },
   onLoad: function () {
     var _this = this;
+
+    /*是否登录*/ 
+    wx.getStorage({
+      key: 'login',
+      success: function (res) {
+     
+        if (res.data){
+          _this.setData({
+            items: {
+              show: false
+            }})
+       }
+      }
+    })
+
     register.register(this);   
     //获取words  
     this.doLoadData(0,20);
@@ -136,24 +169,72 @@ Page({
      });
    }
   , 
+  //获取手机号
   getPhoneNumber: function (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
+    let that = this;
+    console.log("errMsg",e.detail.errMsg)
+    console.log("vi",e.detail.iv)
+    console.log("encryptedData",e.detail.encryptedData)
+    var child_iv = e.detail.iv
+    var child_encryptedData = e.detail.encryptedData
     //
     if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
       wx.showModal({
         title: '提示',
         showCancel: false,
         content: '未授权',
-        success: function (res) { }
+        success: function (res) {
+         
+
+         }
       })
     } else {
       wx.showModal({
         title: '提示',
         showCancel: false,
         content: '同意授权',
-        success: function (res) { }
+        success: function (res) {
+          that.setData({
+            items: {
+
+              show: false
+            }
+          });
+
+         }
+      })
+      //获取openId
+      wx.getStorage({
+        key: 'openId',
+        success: function (res) {
+          console.log(res.data)
+
+          //解析手机号
+          wx.request({
+            url: 'http://120.27.100.219:54231/common/wx_login_phone',
+            header: {
+              'content-type': 'application/json',
+              'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+
+            },
+            method: 'POST',
+            data: {
+              openid: res.data,
+              encryptedData: child_encryptedData,
+              iv:child_iv
+            },
+
+
+            success: function (res) {
+              console.log("登录凭证",res.data)
+              wx.setStorage({
+                key: "login",
+                data: res.data.data.login_token
+              })
+            }
+
+          })
+        }
       })
     }
   }
