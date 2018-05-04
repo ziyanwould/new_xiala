@@ -87,6 +87,8 @@ Page({
       }
     })
 
+
+
     register.register(this);   
     //获取words  
     this.doLoadData(0,20);

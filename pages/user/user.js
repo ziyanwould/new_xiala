@@ -35,6 +35,7 @@ Page({
         "url": "../child/visitor/visitor"
       }
     ],
+    userInfo:"",
     key:false
   },
   //事件处理函数
@@ -54,7 +55,17 @@ Page({
           _this.setData({
             items: {
               show: false
-            }
+            }, 
+            key: true
+
+          })
+        }else{
+          _this.setData({
+            items: {
+              show: false
+            },
+            key: false
+
           })
         }
       }
@@ -76,15 +87,37 @@ Page({
         }
       }
     })
+    /** */
+    wx.getStorage({
+      key: 'user',
+      success: function (res) {
 
-
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
-      })
+        console.log("user", res.data.nickName)
+        that.setData({
+          userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl}
+        })
+      }
+      , fail: function () {
+        wx.showModal({
+          title: '警告',
+          content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            }
+          }
+        })
+      }
     })
+
+    // //调用应用实例的方法获取全局数据
+    // app.getUserInfo(function(userInfo){
+    //   //更新数据
+    //   that.setData({
+    //     userInfo:userInfo
+    //   })
+      
+    // })
   },
    onPullDownRefresh: function () {
     // do somthing
@@ -197,5 +230,47 @@ Page({
       })
      
     }
+  }
+  ,
+  /**点击登录 */
+  loging:function(){
+    var self = common.tanchu()
+    this.setData({
+      items: {
+        height: self,
+        masTitle: "",
+        show: true
+      }
+    });
+  },
+  /**退出 */
+  exit:function(){
+    var that = this
+    wx.showModal({
+      title: '确认退出账号',
+      content: '',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          //console.log('用户点击主操作')
+          wx.removeStorage({
+            key: 'login',
+            success: function (res) {
+            console.log(res.data)
+            that.setData({          
+              key: false
+
+            })
+
+            }
+          })
+     
+        } else {
+          //console.log('用户点击辅助操作')
+        }
+      }
+    });
   }
 })

@@ -3,16 +3,29 @@
 <import src="../child/Template/Template.wxml"/>
 <template is="notLogin" data="{{...items}}" /> 
 <!-- end -->
+ <!-- 未登陆的页面 -->
+  <view class='notLogin' wx:if="{{!key}}"  bindtap="loging">
+     <view class='logLeft'>
+      <view>点击登录</view>
+      <view>登录后查看更多信息</view>
+     </view>
+     <view class='logRight'>
+        <image src='http://www.liujiarong.top/WX/notLogin.png' ></image>
+     </view>
+  </view>
+ <!-- end -->
 
-<view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
+<!-- 登陆后出现的页面 -->
+<block wx:if="{{key}}">
+  <view class="container">
+    <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
   </view>
-    <view class='title'>
+  <view class='title'>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
         <image src='http://www.liujiarong.top/WX/images/wx_men.png'class="gender" ></image>
         <image src='http://www.liujiarong.top/WX/images/wx_approve.png'class="approve" ></image>
-    </view>
+  </view>
      <text class="titie_h2">{{person}}</text> 
      <view class="titie_h3">影响力<text>{{influence}}</text>，高于<text>{{ influence_per}}</text>的同行</view> 
 </view>
@@ -37,8 +50,11 @@
     </view>
   
  </view>
-</view>
+ </view>
+</block>
 
+<!-- end -->
+<!-- 跳转版块 -->
 <view class='wx_feature'>
   <view class='sec1' bindtap="jumpToMyPage" data-url="../child/resume/resume">
       <view class='fun_left'>
@@ -47,7 +63,7 @@
       </view>
       
       <view class='fun_right'>
-        <text>完整程度：</text><em>75%</em><image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
+        <block wx:if="{{key}}"><text>完整程度：</text><em>75%</em></block><image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
   </view>
    <view class='sec1' wx:for="{{jobList}}" wx:key="item.id"   bindtap="jumpToMyPage" data-url="{{item.url}}">
@@ -72,10 +88,12 @@
       </view>
   </button>
 </view>
-  
- <view class='end_num'>
+  <!-- end -->
+
+  <!-- 登陆后出现的页面2 -->
+ <view class='end_num' wx:if="{{key}}" bindtap='exit'>
       <navigator class="active"  url="../detail/detail?id={{name.id}}">退出当前账号</navigator>  
 </view> 
-
+<!-- end -->
 
 

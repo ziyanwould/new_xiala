@@ -153,7 +153,7 @@ page{
 .end_num{
   padding-bottom: 100rpx;
 }
-
+/* 按钮的去除样式操作 */
 .buttonx{
   background-color:#FFFFFF!important;
 
@@ -164,5 +164,28 @@ page{
   outline:none;
   list-style: none;
   border-radius: none;
+
+}
+.buttonx::after{
+  border: 0px;
+}
+/* 未登录状态的样式 */
+.notLogin .logRight image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.notLogin{
+  background: #FFFFFF;
+  padding: 40rpx 30rpx 50rpx 30rpx;
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logLeft view:nth-of-type(1){
+  font-size: 42rpx;
+  font-weight: 500;
+}
+.logLeft view:nth-of-type(2){
+  font-size: 30rpx;
 
 }

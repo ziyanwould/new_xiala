@@ -1,5 +1,5 @@
 // pages/child/resume/resume.js
-var app = getApp()
+
 Page({
 
   /**
@@ -7,26 +7,14 @@ Page({
    */
   data: {
     src: '',
-    bfsrc:''
+    bfsrc:'',
+    userInfo:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo,
-        src: userInfo.avatarUrl,
-        bfsrc: userInfo.avatarUrl
-      })
-    })
-  
-  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -129,6 +117,31 @@ Page({
     })
   },
    onLoad (option) {
+
+     console.log('onLoad')
+     var that = this
+     /** */
+     wx.getStorage({
+       key: 'user',
+       success: function (res) {
+
+         console.log("user", res.data.nickName)
+         that.setData({
+           userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl }
+         })
+       }
+       , fail: function () {
+         wx.showModal({
+           title: '警告',
+           content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
+           success: function (res) {
+             if (res.confirm) {
+               console.log('用户点击确定')
+             }
+           }
+         })
+       }
+     })
      console.log("列表",option)
     let { avatar } = option
     if (avatar) {
