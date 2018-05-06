@@ -5,7 +5,7 @@
   <view class='title_s1'>
 
      <view class='s1_left'>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
+        <text class="userinfo-nickname">{{userInfo.nickName}}{{useName}}</text> 
         <view class='title_s2'>
           <text class="">男/广州市/大专/3年</text> 
         </view>

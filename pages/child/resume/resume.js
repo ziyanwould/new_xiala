@@ -27,7 +27,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
@@ -121,38 +121,55 @@ Page({
      console.log('onLoad')
      var that = this
      /** */
-     wx.getStorage({
-       key: 'user',
-       success: function (res) {
+    
 
-         console.log("user", res.data.nickName)
-         that.setData({
-           userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl }
+     
+       console.log("列表", option)
+       let { avatar } = option
+       if (avatar) {
+         console.log("内容", avatar)
+         this.setData({
+           src: avatar
          })
-       }
-       , fail: function () {
-         wx.showModal({
-           title: '警告',
-           content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
+         wx.getStorage({
+           key: 'useName',
            success: function (res) {
-             if (res.confirm) {
-               console.log('用户点击确定')
-             }
+            
+             that.setData({
+               useName: res.data
+             })
            }
          })
+    
+      
+    
+       }else{
+          wx.getStorage({
+         key: 'user',
+         success: function (res) {
+
+           console.log("user", res.data.nickName)
+           that.setData({
+             userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl },
+             src: res.data.avatarUrl
+           })
+           wx.setStorage({
+             key: "useName",
+             data: res.data.nickName
+           })
+         }
+         , fail: function () {
+           wx.showModal({
+             title: '警告',
+             content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
+             success: function (res) {
+               if (res.confirm) {
+                 console.log('用户点击确定')
+               }
+             }
+           })
+         }
+       })
        }
-     })
-     console.log("列表",option)
-    let { avatar } = option
-    if (avatar) {
-      console.log("内容",avatar)
-      this.setData({
-        src: avatar
-      })
-    }else{
-      this.setData({
-        src: this.data.bfsrc
-      })
-    }
   }
 })
