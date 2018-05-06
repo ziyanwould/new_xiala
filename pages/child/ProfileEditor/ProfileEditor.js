@@ -38,14 +38,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
-    })
+    
+    
     var arrc = common.sjc();
    this.setData({
      date: arrc[1],
@@ -70,15 +64,24 @@ Page({
       key: 'cargo',
       success: function (res) {
         console.log(res.data)
-
-        
         that.setData({
 
           edit_city: res.data.select_city
 
         })
       }
-    })
+    });
+    wx.getStorage({
+      key: 'useName',
+      success: function (res) {
+       
+        that.setData({
+
+          useName: res.data
+
+        })
+      }
+    });
   },
 
   /**

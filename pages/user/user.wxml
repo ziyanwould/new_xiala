@@ -31,9 +31,9 @@
 </view>
 <view class='section'>
  <view class='se1'>
-       <view>
+       <view bindtap="jumpToMyPage" data-url="/pages/child/ProfileEditor/ProfileEditor">
     <view class='se_f1'><image src='http://www.liujiarong.top/WX/images/pig.png'></image></view>
-    <view class='se_f2' bindtap="jumpToMyPage" data-url="../child/Login/Login"><text>编辑资料</text></view>
+    <view class='se_f2' ><text>编辑资料</text></view>
     </view>
   </view> 
  <view class='se2'>
