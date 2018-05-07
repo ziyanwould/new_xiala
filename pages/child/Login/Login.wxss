@@ -72,3 +72,22 @@ page{
   font-size: 28rpx;
   bottom: 60rpx;
 }
+.time{
+  background-color:#FFFFFF!important;
+  display: inline-block;
+  line-height:normal;
+  border:none;
+  outline:none;
+  list-style: none;
+  border-radius: none;
+  position: absolute;
+  font-size: 28rpx;
+  color: #000000;
+  right: 0;
+  top: 24rpx;
+  z-index: 99;
+
+}
+.time::after{
+  border: none;
+}

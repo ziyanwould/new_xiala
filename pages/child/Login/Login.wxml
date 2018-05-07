@@ -5,11 +5,12 @@
   </view>
   <view class='se2'>
     <view class='input'>
-     <input placeholder='{{inputT1}}'></input>
+     <input placeholder='{{inputT1}}' bindinput='sendverifcode'></input>
     </view> 
     <view class='input'>
      <input placeholder='{{inputT2}}'></input>
-     <view wx:if="{{valMessPan}}" >{{valMess}}</view>
+     <!-- <view wx:if="{{valMessPan}}" >{{valMess}}</view> -->
+       <button bindtap='getVerificationCode' disabled='{{disabled}}' class='time' wx:if="{{valMessPan}}" >{{time}}</button> 
     </view>   
 
   </view>

@@ -1,4 +1,6 @@
 // pages/child/Login/Login.js
+
+var interval = null;
 Page({
 
   /**
@@ -14,7 +16,9 @@ Page({
     btnCot:"登录",
     dealPan:true,
     lastCot:"密码登录",
-    lastPan:true
+    lastPan:true,
+    time:"获取验证码",
+    currentTime:61
   },
 
   /**
@@ -165,6 +169,77 @@ Page({
         lastPan: true
       })
     }
-  }
+  },
+   getCode: function (options) {
+     var that = this;
+     var currentTime = that.data.currentTime
+     interval = setInterval(function () {
+       currentTime--;
+       that.setData({
+         time: currentTime + '秒'
+       })
+       if (currentTime <= 0) {
+         clearInterval(interval)
+         that.setData({
+           time: '重新发送',
+           currentTime: 61,
+           disabled: false
+         })
+       }
+     }, 1000)
+   },
+   sendverifcode:function(e){
+     this.setData({
+       mobile: e.detail.value
+     })
+   },
+  //  getVerificationCode() { 没有传值写法
+   getVerificationCode:function(e){
+   
+    //  发送验证码
+     let mobile = this.data.mobile;
+     let regMobile = /^1\d{10}$/;
+     if (!regMobile.test(mobile)) {
+       wx.showModal({
+         content: '您的手机号输入有误',
+         showCancel: false,
+         success: function (res) {
+           if (res.confirm) {
+             //console.log('用户点击确定')
+           }
+         }
+       });
+       return false;
+     }
+     //启动计数器
+     this.getCode();
+     var that = this
+     that.setData({
+       disabled: true
+     })
+     wx.request({
+       url: 'http://120.27.100.219:54231/common/send_smscode',
+       header: {
+         'content-type': 'application/json',
+          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+
+       },
+       method: 'POST',
+       data: {
+         mobile: that.data.mobile,
+         action_type: "手机注册",
+         content: "登录/注册建筑猎聘"
+
+       },
+
+
+       success: function (res) {
+         console.log("接口返回", res.data)
+       
+
+       }
+
+     })
+   },
 
 })
