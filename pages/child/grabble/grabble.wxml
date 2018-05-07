@@ -37,23 +37,42 @@
        <block wx:if="{{!pageShow}}"> 
         <!-- 需要可置顶，可固定的职位筛选栏 -->
         <view class='gps'>
-          <view wx:for="{{used_list}}" wx:key="*this" class="{{activeIndex==index?'active':''}}" id="{{index}}" bindtap="active">{{item.name}} 
-          <image style='width:18rpx; height:11rpx' src="{{activeIndex==index?'http://www.liujiarong.top/WX/Comup2.png':'http://www.liujiarong.top/WX/Comup.png'}}"></image></view>
+          <view wx:for="{{changeJob=='兼职'?used_list:used_lists}}"  wx:key="*this" class="{{activeIndex==index?'active':''}}" id="{{index}}" bindtap="active">{{item.name}} 
+          <image style='width:18rpx; height:11rpx' src="{{activeIndex==index?'http://www.liujiarong.top/WX/Comup2.png':'http://www.liujiarong.top/WX/Comup.png'}}"></image>
+          </view>
           <!-- <view>职位 <image style='width:18rpx; height:11rpx' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
           <view>排序 <image style='width:18rpx; height:11rpx' src='http://www.liujiarong.top/WX/Comup.png'></image></view> -->
         </view>
-        <!-- 搜索出来的公司板块 -->
-        <view class='seachCompay'>
-          <include src="/pages/child/Template/companyMode.wxml"/>
-            <view class='otherCompany' bindtap="clickMCity">
+          <block wx:if="{{selected}}">
+          <!-- 搜索出来的公司板块 -->
+          <view class='seachCompay'>
+            <include src="/pages/child/Template/companyMode.wxml"/>
+             <view class='otherCompany' bindtap="clickMCity">
               <text>查看全部13个相关公司</text>
               <image style='width:11rpx; height:18rpx' src='http://www.liujiarong.top/WX/Forwardarrow.png'></image>
+             </view>
             </view>
-        </view>
-        <!-- 搜索出来的列表 -->
-        <view class='Wxlist' wx:if='true'>
-          <include src="/pages/child/Template/position.wxml"/>
-        </view>
+           <!-- 搜索出来的列表 -->
+           <view class='Wxlist' wx:if='true'>
+           <include src="/pages/child/Template/position.wxml"/>
+           </view>
+          </block>
+           <!-- 二级赛选内容  与搜索出来的公司板块，搜索出来的列表两者只显示一个-->
+           <block wx:if="{{!selected}}">
+              <view class='preparation'>
+                 <!-- <text class='preTitle'>一级建造师</text>
+                 <text class='preCount active'> 房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text>
+                    <text class='preTitle'>二级建造师</text>
+                 <text class='preCount'> 房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text> -->
+
+                  <view wx:for="{{changeJob=='兼职'?positions:Position}}"  wx:key="*this"  class="{{item.types?'preCount':'preTitle'}} {{activesIndex==index?'active':''}}"  id="{{index}}"  bindtap="actives" data-value="{{item.types?item.count:''}}" >
+                    {{item.count}} 
+                  </view>    
+
+                  <button class="weui-btn surse" bindtap="selectClick">确定</button>
+              </view>
+                
+           </block>
       </block>
       <!-- 搜索提示框 -->
       <view class='searchResult' wx:if="{{!selectD}}">
