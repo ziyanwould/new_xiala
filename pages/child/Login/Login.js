@@ -193,6 +193,12 @@ Page({
        mobile: e.detail.value
      })
    },
+   numbercode:function(e){
+     this.setData({
+       numbers: e.detail.value
+     })
+     
+   },
   //  getVerificationCode() { 没有传值写法
    getVerificationCode:function(e){
    
@@ -235,11 +241,77 @@ Page({
 
        success: function (res) {
          console.log("接口返回", res.data)
-       
+         wx.showToast({
+           title: res.data.message,
+           icon: 'success',
+           duration: 2000
+         });
 
+        //  存储验证码是否发送成功
+         that.setData({
+           note: res.data.success
+         })
        }
 
      })
-   },
+   },//登录注册确定按钮
+   oginRegistration(){
+    var that = this
+    if (that.data.note!=true){
+      wx.showModal({
+        content: '您的' + that.data.btnCot+'有误,请重新输入',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            //console.log('用户点击确定')
+          }
+        }
+      });
+      return false;
+    }else{
+      wx.request({
+        url: 'http://120.27.100.219:54231/common/verify_smscode',
+        header: {
+          'content-type': 'application/json',
+          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+
+        },
+        method: 'POST',
+        data: {
+          mobile: that.data.mobile,
+          action_type: "手机注册",
+          code: that.data.numbers
+
+        },
+
+
+        success: function (res) {
+          console.log("接口2返回", res.data)
+          if(!res.data.success){
+            wx.showToast({
+              title: res.data.message,
+              icon: 'loading',
+              duration: 2000
+            });
+
+            return false;
+          }else{
+            wx.showToast({
+              title: res.data.message,
+              icon: 'success',
+              duration: 2000
+            });
+
+          }
+         
+
+
+        }
+
+      })
+
+    }
+
+   }
 
 })
