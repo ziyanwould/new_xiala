@@ -73,6 +73,27 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad')
+
+    
+    //测试
+    //common.getuses();
+    //写入参数  
+        // var datax = new Object();
+        // datax.phone ="18776007488"
+        // datax.password = "lbx930511"
+        // //发起请求  
+        // common.request('phone_login_code_pwd',
+        //   {
+        //     params: datax,
+        //     success: function (res) {
+        //     console.log("测试8",res)
+        //     },
+        //     fail: function () {
+        //       //失败后的逻辑  
+        //     },  
+            
+        //     },null)
+    //测试end
     var that = this
 
     /*是否登录*/
