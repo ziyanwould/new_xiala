@@ -4,7 +4,7 @@
      
        <template is="tar_count" /> 
 
-       <template is="banner" /> 
+       <template is="banner" data="{{...mydata}}"/> 
          
        <include src="/pages/child/Template/positionCompass.wxml"/>
 

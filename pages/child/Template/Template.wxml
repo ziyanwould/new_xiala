@@ -46,7 +46,7 @@
        
       </view> 
       <view class='baInput' bindtap="seek">
-           <input type="text" class="input" placeholder-class="input-place" placeholder="收索公司/职位"/>
+           <input type="text" class="input" disabled='disabled' placeholder-class="input-place" placeholder="{{seektype}}"/>
              <image src='http://www.liujiarong.top/WX/images/search.png'></image>   
       </view>
 

@@ -4,9 +4,9 @@
      
        <template is="tar_count" /> 
 
-       <template is="banner" /> 
+       <template is="banner"  data="{{...mydata}}"  /> 
          
-       <template is="recommend" /> 
+       <template is="recommend"  /> 
    
        <include src="/pages/child/Template/position.wxml"/>
   </scroll-view>

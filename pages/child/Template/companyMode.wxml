@@ -1,7 +1,7 @@
 <view class='section1'>
-   <view class='Cfirst'>
+   <view class='Cfirst' >
      <view class='fLeft'>
-       <view class='lOne'>{{company}}</view>
+       <view class='lOne'>{{companys}}</view>
        <view class='lTwo'>{{label}}</view>
         <view class='lThird'>
          <image style='width:104rpx;height:35rpx' src='{{attestation}}'></image>

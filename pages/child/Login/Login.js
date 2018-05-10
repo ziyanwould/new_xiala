@@ -18,7 +18,11 @@ Page({
     lastCot:"密码登录",
     lastPan:true,
     time:"获取验证码",
-    currentTime:61
+    currentTime:61,
+    leibie: 1,
+    note: false
+   
+    
   },
 
   /**
@@ -37,7 +41,9 @@ Page({
         btnCot: "注册",
         dealPan: true,
         lastCot: "密码登录",
-        lastPan: false
+        lastPan: false,
+        leibie: 0,
+        note: false
       })
     } else if (options.line_type == 2){
       this.setData({
@@ -50,7 +56,9 @@ Page({
         btnCot: "登录",
         dealPan: false,
         lastCot: "手机号登录",
-        lastPan: true
+        lastPan: true,
+        leibie: 2,
+        note: true
       })
     }
 
@@ -119,7 +127,9 @@ Page({
         btnCot: "注册",
         dealPan: true,
         lastCot: "密码登录",
-        lastPan: false
+        lastPan: false,
+        leibie: 0,
+        note: false
       })
 
     } else if (Pan=="登录"){
@@ -133,7 +143,9 @@ Page({
         btnCot: "登录",
         dealPan: true,
         lastCot: "密码登录",
-        lastPan: true
+        lastPan: true,
+        leibie: 1,
+        note: false
       })
     }
   },
@@ -152,7 +164,9 @@ Page({
         btnCot: "登录",
         dealPan: false,
         lastCot: "手机号登录",
-        lastPan: true
+        lastPan: true,
+        leibie: 2,
+        note: true
       })
 
     } else if (PanS=="手机号登录") {
@@ -166,7 +180,9 @@ Page({
         btnCot: "登录",
         dealPan: true,
         lastCot: "密码登录",
-        lastPan: true
+        lastPan: true,
+        leibie: 1,
+        note: false
       })
     }
   },
@@ -201,7 +217,7 @@ Page({
    },
   //  getVerificationCode() { 没有传值写法
    getVerificationCode:function(e){
-   
+     
     //  发送验证码
      let mobile = this.data.mobile;
      let regMobile = /^1\d{10}$/;
@@ -223,6 +239,13 @@ Page({
      that.setData({
        disabled: true
      })
+     if (that.data.leibie==0){
+       var tmoble = "手机注册"
+     }else{
+       var tmoble = "手机登录"
+       
+     };
+
      wx.request({
        url: 'http://120.27.100.219:54231/common/send_smscode',
        header: {
@@ -233,7 +256,7 @@ Page({
        method: 'POST',
        data: {
          mobile: that.data.mobile,
-         action_type: "手机注册",
+         action_type: tmoble,
          content: "登录/注册建筑猎聘"
 
        },
@@ -257,7 +280,8 @@ Page({
    },//登录注册确定按钮
    oginRegistration(){
     var that = this
-    if (that.data.note!=true){
+    if (that.data.note != true && (that.data.leibie!=2)){
+      console.log("note", that.data.note)
       wx.showModal({
         content: '您的' + that.data.btnCot+'有误,请重新输入',
         showCancel: false,
@@ -269,20 +293,42 @@ Page({
       });
       return false;
     }else{
+      console.log("note",that.data.note)
+      if (that.data.leibie == 0) {
+        var typenuber = {
+            'phone': that.data.mobile,
+            'code': that.data.numbers
+          }
+        var url = 'register'
+      } else if (that.data.leibie == 1){
+        var typenuber = {        
+          "phone": that.data.mobile ,
+          "action_type": "手机登录",
+          "code": that.data.numbers,
+         
+         }
+        var url = 'phone_login_code_pwd'
+      }else{
+        var typenuber = {
+          "phone": that.data.mobile,
+          "action_type": "手机登录",
+          "password": that.data.numbers,
+        }
+        var url = 'phone_login_code_pwd'
+        
+      };
+       
+
+     
       wx.request({
-        url: 'http://120.27.100.219:54231/common/verify_smscode',
+        url: 'http://120.27.100.219:54231/common/'+url,
         header: {
           'content-type': 'application/json',
           'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
 
         },
         method: 'POST',
-        data: {
-          mobile: that.data.mobile,
-          action_type: "手机注册",
-          code: that.data.numbers
-
-        },
+        data: typenuber,
 
 
         success: function (res) {
@@ -301,6 +347,18 @@ Page({
               icon: 'success',
               duration: 2000
             });
+            console.log("登录凭证", res.data)
+            wx.setStorage({
+              key: "login",
+              data: res.data.data.login_token
+            })
+            setTimeout(function () {
+              //要延时执行的代码  
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1500) //延迟时间 这里是1秒
+           
 
           }
          

@@ -406,7 +406,7 @@ Page({
       { count: "售前/售后客服", types: true, other: "注册城市规划师" },
 
     ],
-    company: "中住71",
+    companys: "中住71",
     label: "50-150人/移动互联网/建筑/设计/教育",
     attestation: "http://www.liujiarong.top/WX/certified.png",
     types: "http://www.liujiarong.top/WX/popCompass.png",
@@ -421,18 +421,26 @@ Page({
     gps:true,
     selected:true,
     selectType:'',
-    changeJob:"兼职"
+    changeJob:"兼职",
+    company: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    if(options.permanent==1){
+      that.setData({
+      company:false,
+      changeJob:"公司"
+      })
+    }
+ 
     wx.showLoading({
       title: 'loading...',
     });
-    var that = this;
+   
     wx.request({
       url: url,
       data: {
@@ -636,23 +644,28 @@ Page({
   }, 
   open: function () {
     var that = this;
-    wx.showActionSheet({
-      itemList: ['兼职', '全职'],
-      success: function (res) {
-        if (!res.cancel) {
-         
-          if (res.tapIndex==0){
-          that.setData({
-            changeJob: "兼职"
-            })
-          }else{
-            that.setData({
-              changeJob: "全职"
-            })
+    if (that.data.company){
+      wx.showActionSheet({
+        itemList: ['兼职', '全职'],
+        success: function (res) {
+          if (!res.cancel) {
+
+            if (res.tapIndex == 0) {
+              that.setData({
+                changeJob: "兼职"
+              })
+            } else {
+              that.setData({
+                changeJob: "全职"
+              })
+            }
           }
         }
-      }
-    });
+      });
+    }else{
+     
+    }
+  
   }
   , clickMCity:function(){
     wx.navigateTo({

@@ -46,6 +46,9 @@ Page({
     currentSize: 0,
     words: [],
     list: [],
+    mydata: {
+      seektype: "搜索公司"
+    }
    
   },
   onLoad: function () {
@@ -110,7 +113,7 @@ Page({
   //搜索页路由跳转
   , seek: function () {
     wx.navigateTo({
-      url: '/pages/child/grabble/grabble'//实际路径要写全
+      url: '/pages/child/grabble/grabble?permanent=1'//实际路径要写全
     })
   }
 })

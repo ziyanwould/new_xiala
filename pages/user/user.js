@@ -254,19 +254,48 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
-          //console.log('用户点击主操作')
-          wx.removeStorage({
+          console.log('用户点击主操作')
+        
+          wx.getStorage({
             key: 'login',
             success: function (res) {
-            console.log(res.data)
-            that.setData({          
-              key: false
+              var fage = res.data
+              wx.request({
+                url: 'http://120.27.100.219:54231/common/login_out',
+                header: {
+                  'content-type': 'application/json',
+                  'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
+                  'login_token': fage
 
-            })
+                },
+                data:{
+                  login_token: fage
+                },
+                method: 'POST',
+                success: function (res) {
 
+                  wx.showToast({
+                    title: res.data.message,
+                    icon: 'success',
+                    duration: 2000
+                  });
+                  wx.removeStorage({
+                    key: 'login',
+                    success: function (res) {
+                      console.log(res.data)
+                      that.setData({
+                        key: false
+
+                      })
+
+                    }
+                  })
+                }
+
+              })
             }
           })
-     
+        
         } else {
           //console.log('用户点击辅助操作')
         }

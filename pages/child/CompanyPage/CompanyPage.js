@@ -16,6 +16,7 @@ Page({
    */
   data: {
     listd:[],
+    searchList:[{}],
     list:[
       { piCurl:"http://www.liujiarong.top/WX/pending.png"},
       { piCurl: "http://www.liujiarong.top/WX/otherPeople.png" },

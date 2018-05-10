@@ -120,7 +120,7 @@ page{
   justify-content:space-between;
   align-items:center; 
   padding: 30rpx 0;
-  border-top:1rpx solid #E1E1E1; 
+  /*border-top:1rpx solid #E1E1E1; */
 }
 .section1{
   padding: 15rpx 35rpx 0 35rpx;
@@ -191,4 +191,8 @@ page{
   color:#FFFFFF;
   margin: 50rpx 0rpx;
   bottom: 0;
+}
+.section1{
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #E1E1E1
 }

@@ -4,7 +4,7 @@
   <view class='psection1'>
     <!-- <view class='tcount1' wx:if="{{gps}}" bindtap="jumpCity">{{city}} <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'></image></view> -->
 
-      <view class='tcount1' wx:if="{{gps}}" bindtap="open" >{{changeJob}} <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
+      <view class='tcount1' wx:if="{{gps}}" bindtap="open" >{{changeJob}} <image style='width:18rpx; height:11rpx;' src='http://www.liujiarong.top/WX/Comup.png'  wx:if="{{company}}"></image></view>
 
     <view class="Pinput" ><input class=" {{!gps ? 'active' : ''}}" value='{{count}}' auto-focus="true" bindinput='watchPassWord'></input> <image style='width:52rpx; height:52rpx;' src='http://www.liujiarong.top/WX/images/search.png'></image></view>
     <view class='tcount2'  wx:if="{{gps}}" bindtap="urlTime">{{Fbutton}}</view>
@@ -36,7 +36,7 @@
       </view>
        <block wx:if="{{!pageShow}}"> 
         <!-- 需要可置顶，可固定的职位筛选栏 -->
-        <view class='gps'>
+        <view class='gps'  wx:if='{{company}}'>
           <view wx:for="{{changeJob=='兼职'?used_list:used_lists}}"  wx:key="*this" class="{{activeIndex==index?'active':''}}" id="{{index}}" bindtap="active">{{item.name}} 
           <image style='width:18rpx; height:11rpx' src="{{activeIndex==index?'http://www.liujiarong.top/WX/Comup2.png':'http://www.liujiarong.top/WX/Comup.png'}}"></image>
           </view>
@@ -45,26 +45,38 @@
         </view>
           <block wx:if="{{selected}}">
           <!-- 搜索出来的公司板块 -->
-          <view class='seachCompay'>
-            <include src="/pages/child/Template/companyMode.wxml"/>
+          <view class='seachCompay'  wx:if='{{!company}}'>
+             <!-- <include src="/pages/child/Template/companyMode.wxml"/> -->
+
+             <view class='section1' wx:for="{{searchList}}" wx:key="*this">
+                <view class='Cfirst' >
+                  <view class='fLeft'>
+                    <view class='lOne'>{{companys}}</view>
+                    <view class='lTwo'>{{label}}</view>
+                      <view class='lThird'>
+                      <image style='width:104rpx;height:35rpx' src='{{attestation}}'></image>
+                      <image style='width:202rpx;height:35rpx' src='{{types}}'></image>
+                      </view>
+                  </view>
+                  <view class='fRight'>
+                    <image style='width:118rpx;height:118rpx' src='{{companyPerson}}'></image>
+                  </view>
+                </view>
+              </view>
+
              <view class='otherCompany' bindtap="clickMCity">
               <text>查看全部13个相关公司</text>
               <image style='width:11rpx; height:18rpx' src='http://www.liujiarong.top/WX/Forwardarrow.png'></image>
              </view>
             </view>
            <!-- 搜索出来的列表 -->
-           <view class='Wxlist' wx:if='true'>
+           <view class='Wxlist' wx:if='{{company}}'>
            <include src="/pages/child/Template/position.wxml"/>
            </view>
           </block>
            <!-- 二级赛选内容  与搜索出来的公司板块，搜索出来的列表两者只显示一个-->
            <block wx:if="{{!selected}}">
               <view class='preparation'>
-                 <!-- <text class='preTitle'>一级建造师</text>
-                 <text class='preCount active'> 房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text>
-                    <text class='preTitle'>二级建造师</text>
-                 <text class='preCount'> 房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text><text class='preCount'>房建专业</text> -->
-
                   <view wx:for="{{changeJob=='兼职'?positions:Position}}"  wx:key="*this"  class="{{item.types?'preCount':'preTitle'}} {{activesIndex==index?'active':''}}"  id="{{index}}"  bindtap="actives" data-value="{{item.types?item.count:''}}" >
                     {{item.count}} 
                   </view>    
