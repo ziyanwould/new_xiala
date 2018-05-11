@@ -19,10 +19,12 @@
 <block wx:if="{{key}}">
   <view class="container">
     <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <image class="userinfo-avatar" wx:if="{{userInfo.avatarUrl}}"  src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <open-data wx:if="{{!userInfo.avatarUrl}}"  class="userinfo-avatar" type="userAvatarUrl"></open-data>
   </view>
   <view class='title'>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
+        <text class="userinfo-nickname" wx:if="{{userInfo.nickName}}">{{userInfo.nickName}} </text> 
+        <open-data wx:if="{{!userInfo.nickName}}" class="userinfo-nickname" class="userinfo-nickname" type="userNickName" open-gid="xxxxxx"></open-data>
         <image src='http://www.liujiarong.top/WX/images/wx_men.png'class="gender" ></image>
         <image src='http://www.liujiarong.top/WX/images/wx_approve.png'class="approve" ></image>
   </view>
@@ -87,8 +89,37 @@
         <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
   </button>
+
+     <button class='sec1 buttonx'  wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >
+      <view class='fun_left'>
+        <image src='http://www.liujiarong.top/WX/wxSq1.png' ></image>
+        <text class='xod'>未授权</text>
+      </view>
+      
+      <view class='fun_right'>
+        <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
+      </view>
+  </button>
+
+    <button class='sec1 buttonx'  wx:if="{{!canIUse}}" disabled='disabled' >
+      <view class='fun_left'>
+        <image src='http://www.liujiarong.top/WX/wxSq2.png' ></image>
+        <text class='xod'>已授权</text>
+      </view>
+      
+      <view class='fun_right'>
+        <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
+      </view>
+  </button>
+
+
 </view>
   <!-- end -->
+<!--获取信息另一种方式-->
+<!-- <open-data type="userNickName" open-gid="xxxxxx"></open-data>
+<open-data type="userAvatarUrl"></open-data>
+<open-data type="userGender" lang="zh_CN"></open-data> -->
+<!--获取信息另一种方式end-->
 
   <!-- 登陆后出现的页面2 -->
  <view class='end_num' wx:if="{{key}}" bindtap='exit'>

@@ -10,6 +10,8 @@ App({
     
     /*是否登录  更新状态*/
     var _this = this;
+
+    /**20180511 因微信接口更改进行技术重构 */
     wx.getStorage({
       key: 'login',
       success: function (res) {
@@ -48,29 +50,30 @@ App({
                     key: "openId",
                     data: event.data.data.wx_openid
                   });
-             
-                  wx.getUserInfo({
-                    success: function (resuser) {
-                      //let user = [resuser.data.nickName, resuser.data.avatarUrl]
-                      wx.setStorage({
-                        key: "user",
-                        data: resuser.userInfo
-                      })
-                      console.log(resuser.userInfo)
-                    },
-                    fail: function () {
-                      // 调用微信弹窗接口
-                      wx.showModal({
-                        title: '警告',
-                        content: '您点击了拒绝授权，将无法正常使用******的功能体验。请10分钟后再次点击授权，或者删除小程序重新进入。',
-                        success: function (res) {
-                          if (res.confirm) {
-                            console.log('用户点击确定')
-                          }
-                        }
-                      })
-                    }
-                  })
+                  
+                  //20180511重构2暂时 取消基本信息
+                  // wx.getUserInfo({
+                  //   success: function (resuser) {
+                  //     //let user = [resuser.data.nickName, resuser.data.avatarUrl]
+                  //     wx.setStorage({
+                  //       key: "user",
+                  //       data: resuser.userInfo
+                  //     })
+                  //     console.log(resuser.userInfo)
+                  //   },
+                  //   fail: function () {
+                  //     // 调用微信弹窗接口
+                  //     wx.showModal({
+                  //       title: '警告',
+                  //       content: '您点击了拒绝授权，将无法正常使用******的功能体验。请10分钟后再次点击授权，或者删除小程序重新进入。',
+                  //       success: function (res) {
+                  //         if (res.confirm) {
+                  //           console.log('用户点击确定')
+                  //         }
+                  //       }
+                  //     })
+                  //   }
+                  // })
                 }
 
               })

@@ -9,6 +9,7 @@ Page({
     person:"集众人之力，成细节之美！",
     influence:"17",
     influence_per:"20.6%",
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     jobList:[
       {
        "name":"投递记录",
@@ -73,7 +74,19 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad')
-
+    // 查看是否授权
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称  再次获取用户消息
+          wx.getUserInfo({
+            success: function (res) {
+              console.log("获取用户消息",res.userInfo)
+            }
+          })
+        }
+      }
+    })
     
     //测试
     //common.getuses();
@@ -108,28 +121,30 @@ Page({
         }
       }
     })
-    /** */
-    wx.getStorage({
-      key: 'user',
-      success: function (res) {
+    /**20180511 因微信更改 进行技术重构 */
+    // wx.getStorage({
+    //   key: 'user',
+    //   success: function (res) {
 
-        console.log("user", res.data.nickName)
-        that.setData({
-          userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl}
-        })
-      }
-      , fail: function () {
-        wx.showModal({
-          title: '警告',
-          content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-            }
-          }
-        })
-      }
-    })
+    //     console.log("user", res.data.nickName)
+    //     that.setData({
+    //       userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl}
+    //     })
+    //   }
+    //   , fail: function () {
+    //     wx.showModal({
+    //       title: '警告',
+    //       content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
+    //       success: function (res) {
+    //         if (res.confirm) {
+    //           console.log('用户点击确定')
+    //         }
+    //       }
+    //     })
+    //   }
+    // })
+     /**20180511 因微信更改 进行技术重构end */
+
 
     // //调用应用实例的方法获取全局数据
     // app.getUserInfo(function(userInfo){
@@ -322,5 +337,13 @@ Page({
         }
       }
     });
+  },
+  /**授权 */
+  bindGetUserInfo: function (e) {
+    console.log(e.detail.userInfo)
+    wx.setStorage({
+      key: "user",
+      data: e.detail.userInfo
+    })
   }
 })
