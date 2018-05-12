@@ -57,26 +57,188 @@ var requestHandler = {
 function request(url, requestHandler,token) {
   //注意：可以对params加密等处理  
   var params = requestHandler.params;
+  //获取登录钥匙
+  var mysey = '';
 
-  wx.request({
-    url: 'http://120.27.100.219:54231/common/'+url,
-    data: params,
-    method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
-    // header: {}, // 设置请求的 header 
-    header: {
-      'content-type': 'application/json',
-      'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
-      'login_token':token
-    },
+
+  if(!token){
+    wx.getStorage({
+      key: 'login',
+      success: function (res) {
+        mysey = res.data
+        console.log("login成功",res.data)
+
+        wx.request({
+          url: 'http://120.27.100.219:54231/' + url,
+          data: params,
+          method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+          // header: {}, // 设置请求的 header 
+          header: {
+            'content-type': 'application/json',
+            'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
+            'login_token': mysey
+          },
+          success: function (res) {
+            //注意：可以对参数解密等处理  
+            requestHandler.success(res)
+          },
+          fail: function () {
+            requestHandler.fail()
+          },
+          complete: function () {
+            // complete  
+          }
+        })
+      }
+      , fail: function (res) {
+        mysey = null,
+        console.log("login失败", res.data)
+      }
+    })
+  }else{
+    mysey = token
+    console.log("使用原来的token")
+  }
+
+
+  //无奈之举，应该用promise处理异步
+  // setTimeout(function(){
+  //   wx.request({
+  //     url: 'http://120.27.100.219:54231/' + url,
+  //     data: params,
+  //     method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+  //     // header: {}, // 设置请求的 header 
+  //     header: {
+  //       'content-type': 'application/json',
+  //       'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
+  //       'login_token': mysey
+  //     },
+  //     success: function (res) {
+  //       //注意：可以对参数解密等处理  
+  //       requestHandler.success(res)
+  //     },
+  //     fail: function () {
+  //       requestHandler.fail()
+  //     },
+  //     complete: function () {
+  //       // complete  
+  //     }
+  //   })
+  // },50)
+};
+
+/**获取基本信息及更新初始化 */
+function getinst()  {
+  request('usercenter/get_userinfo',
+    {
+      success: function (res) {
+        console.log("获取基本信息及更新初始化", res)
+        if (res.data.message=="未登录"){
+          return false;
+        }
+        setintuse(res)
+      },
+      fail: function () {
+        //失败后的逻辑  
+      },
+    }, false)
+}
+
+//更新信息
+function setintuse(datas){
+  let info = datas.data.data.userinfo;
+  console.log(info)
+  if (info.real_name!=''){
+    var infos = new Object();
+    infos.nickName = info.real_name;
+    infos.gender = info.sex;
+    infos.city = info.city;
+    infos.province = info.province;
+    infos.birth = info.birth;
+    infos.county = info.county;
+    infos.education = info.education;
+    infos.email = info.email;
+    infos.job_status = info.job_status;
+    infos.job_years = info.job_years;
+    infos.phone = info.phone;
+    infos.province = info.province;
+    infos.reg_time = info.reg_time;
+    infos.remark = info.remark;
+    infos.verify_status = info.verify_status;
+    wx.setStorage({
+      key: "user",
+      data: infos
+    })
+  }else{
+    wx.getStorage({
+      key: 'user',
+      success: function (res) {
+        var datas = {
+          "real_name": res.data.nickName,
+          "sex": res.data.gender,
+          "birth": "",
+          "education": "",
+          "job_years": "",
+          "phone": "",
+          "email": "",
+          "province": res.data.province,
+          "city": res.data.city,
+          "county": "",
+          "job_status":0,
+          "remark": "寄君一曲，不论曲终人离散"
+        }
+
+        request('usercenter/update_userinfo',
+          {
+              params: datas,
+              success: function (res) {
+              console.log("测试初始化设置用户信息", res)
+
+            },
+            fail: function () {
+              //失败后的逻辑  
+            },
+          }, false)
+     
+      }
+      , fail: function () {
+        wx.showModal({
+          title: '警告',
+          content: '您点击了拒绝授权，你可以在本页面授权按钮继续授权，否则将用默认信息代替你的个人信息,可编辑修改。',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            }
+          }
+        })
+      }
+    })
+ 
+
+  }
+  
+
+}
+
+//设置渲染用户信息界面
+function setStronguser (myevent){
+  wx.getStorage({
+    key: 'user',
     success: function (res) {
-      //注意：可以对参数解密等处理  
-      requestHandler.success(res)
-    },
-    fail: function () {
-      requestHandler.fail()
-    },
-    complete: function () {
-      // complete  
+      myevent.success(res)
+      console.log("渲染用户信息this.data里", res)
+  
+    }
+    , fail: function () {
+      wx.showModal({
+        title: '警告',
+        content: '您点击了拒绝授权，你可以在本页面授权按钮继续授权，否则将用默认信息代替你的个人信息,可编辑修改。',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          }
+        }
+      })
     }
   })
 }
@@ -85,7 +247,9 @@ module.exports = {
   sjc: sjc,
   tanchu: tanchu,
   SomeThing: SomeThing,
-  request: request
+  request: request,
+  getinst: getinst,
+  setStronguser: setStronguser
   
  
 }

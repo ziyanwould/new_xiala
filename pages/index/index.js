@@ -239,6 +239,7 @@ Page({
                 key: "login",
                 data: res.data.data.login_token
               })
+              common.getinst()
             }
 
           })

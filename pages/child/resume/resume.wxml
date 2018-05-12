@@ -5,12 +5,12 @@
   <view class='title_s1'>
 
      <view class='s1_left'>
-        <text class="userinfo-nickname">{{userInfo.nickName}}{{useName}}</text> 
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
         <view class='title_s2'>
-          <text class="">男/广州市/大专/3年</text> 
+          <text class="">{{userInfo.gender}}/{{userInfo.city}}市/{{userInfo.job_years}}年</text> 
         </view>
         <view class='title_s3'>
-          <text class="">集众人之力，成细节之美</text> 
+          <text class="">{{userInfo.remark}}</text> 
         </view>
         <!-- 编辑触碰按钮 -->
           <navigator class="Bj"  url="../../child/ProfileEditor/ProfileEditor">
@@ -21,16 +21,17 @@
      </view>
 
      <view   class="s1_right">
-      <image class="userinfo-avatar avatar" src="{{src}}"  bindtap="upload"   background-size="cover"></image>
+      <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image>
+
      </view>
 
   </view>
 
      <view class='phone'>
-       <em><image src='http://www.liujiarong.top/WX/wx_phone.png'></image></em><text>15622102239</text>
+       <em><image src='http://www.liujiarong.top/WX/wx_phone.png'></image></em><text>{{userInfo.phone}}</text>
      </view>
      <view class='email'>
-       <em><image src='http://www.liujiarong.top/WX/wx_post.png'></image></em><text>15622102239@qq.com</text>
+       <em><image src='http://www.liujiarong.top/WX/wx_post.png'></image></em><text>{{userInfo.email}}</text>
      </view>
 
       <view class='s2'>
@@ -40,7 +41,11 @@
           </view>
 
           <view class='s2_right'>
-            <text>我暂时不想找工作</text> <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
+            <text wx:if="{{userInfo.job_status=='0'}}">我目前离职，可快速到岗</text>
+             <text wx:if="{{userInfo.job_status=='1'}}">我目前在职，正考虑换个新环境</text>
+              <text wx:if="{{userInfo.job_status=='2'}}">我暂时不想找工作</text>
+               <text wx:if="{{userInfo.job_status=='3'}}">我是应届毕业生</text>
+             <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
           </view>
         </view>
       </view>

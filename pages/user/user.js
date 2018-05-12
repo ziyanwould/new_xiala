@@ -39,76 +39,9 @@ Page({
     userInfo:"",
     key:false
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../detail/detail'
-    })
-  },
-  onShow: function () {
-    /*是否登录  更新状态*/
-    var _this = this;
-    wx.getStorage({
-      key: 'login',
-      success: function (res) {
-
-        if (res.data) {
-          _this.setData({
-            items: {
-              show: false
-            }, 
-            key: true
-
-          })
-        }else{
-          _this.setData({
-            items: {
-              show: false
-            },
-            key: false
-
-          })
-        }
-      }
-    })
-  },
   onLoad: function () {
-    console.log('onLoad')
-    // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称  再次获取用户消息
-          wx.getUserInfo({
-            success: function (res) {
-              console.log("获取用户消息",res.userInfo)
-            }
-          })
-        }
-      }
-    })
-    
-    //测试
-    //common.getuses();
-    //写入参数  
-        // var datax = new Object();
-        // datax.phone ="18776007488"
-        // datax.password = "lbx930511"
-        // //发起请求  
-        // common.request('phone_login_code_pwd',
-        //   {
-        //     params: datax,
-        //     success: function (res) {
-        //     console.log("测试8",res)
-        //     },
-        //     fail: function () {
-        //       //失败后的逻辑  
-        //     },  
-            
-        //     },null)
-    //测试end
+    console.log('我的onLoad')
     var that = this
-
     /*是否登录*/
     wx.getStorage({
       key: 'login',
@@ -121,39 +54,39 @@ Page({
         }
       }
     })
-    /**20180511 因微信更改 进行技术重构 */
-    // wx.getStorage({
-    //   key: 'user',
-    //   success: function (res) {
+    //应该用promise处理异步
+    this.getuseinfomation();
 
-    //     console.log("user", res.data.nickName)
-    //     that.setData({
-    //       userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl}
-    //     })
-    //   }
-    //   , fail: function () {
-    //     wx.showModal({
-    //       title: '警告',
-    //       content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
-    //       success: function (res) {
-    //         if (res.confirm) {
-    //           console.log('用户点击确定')
-    //         }
-    //       }
-    //     })
-    //   }
-    // })
-     /**20180511 因微信更改 进行技术重构end */
+  },
+  onShow: function () {
+    /*是否登录  更新状态*/
+    var _this = this;
+    wx.getStorage({
+      key: 'login',
+      success: function (res) {
 
+        if (res.data) {
+          _this.setData({
+            items: {
+              show: false
+            },
+            key: true
 
-    // //调用应用实例的方法获取全局数据
-    // app.getUserInfo(function(userInfo){
-    //   //更新数据
-    //   that.setData({
-    //     userInfo:userInfo
-    //   })
-      
-    // })
+          })
+        } else {
+          _this.setData({
+            items: {
+              show: false
+            },
+            key: false
+
+          })
+        }
+      }
+    })
+    //应该用promise处理异步
+    this.getuseinfomation();
+   
   },
    onPullDownRefresh: function () {
     // do somthing
@@ -198,7 +131,7 @@ Page({
   ,
   //获取手机号
   getPhoneNumber: function (e) {
-    let that = this;
+    var that = this;
     console.log("errMsg", e.detail.errMsg)
     console.log("vi", e.detail.iv)
     console.log("encryptedData", e.detail.encryptedData)
@@ -256,6 +189,24 @@ Page({
                     key: "login",
                     data: res.data.data.login_token
                   })
+                  // that.getuseinfomation();
+                  common.getinst()
+
+                  setTimeout(function(){
+                    common.setStronguser({
+                      success: function (res) {
+                        console.log("成功判断本地存储", res.data)
+                        that.setData({
+                          userInfo: res.data
+                        })
+                      }
+
+                    })
+                  }, 150)
+                    
+                 
+                  
+                 
 
                 }
 
@@ -268,6 +219,12 @@ Page({
     }
   }
   ,
+  //事件处理函数
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: '../detail/detail'
+    })
+  },
   /**点击登录 */
   loging:function(){
     var self = common.tanchu()
@@ -340,10 +297,36 @@ Page({
   },
   /**授权 */
   bindGetUserInfo: function (e) {
-    console.log(e.detail.userInfo)
+    console.log("授权",e.detail.userInfo)
     wx.setStorage({
       key: "user",
       data: e.detail.userInfo
     })
+    this.setData({
+      userInfo: { "nickName": e.detail.userInfo.nickName, "avatarUrl": e.detail.userInfo.avatarUrl },
+      bingetinfo:true
+    });
+  },
+  //是否拥有本地存储判断
+  getuseinfomation:function(){
+    var that = this;
+    setTimeout(function(){
+      if (that.data.key) {
+        common.setStronguser({
+          success: function (res) {
+            console.log("成功判断本地存储", res.data)
+            that.setData({
+              userInfo: res.data
+            })
+          }
+
+        })
+
+      } else {
+        return false;
+
+      }
+
+    },50)
   }
 })

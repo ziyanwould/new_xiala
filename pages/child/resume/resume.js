@@ -1,5 +1,5 @@
 // pages/child/resume/resume.js
-
+var common = require('../../../utils/common.js');
 Page({
 
   /**
@@ -144,32 +144,15 @@ Page({
       
     
        }else{
-          wx.getStorage({
-         key: 'user',
-         success: function (res) {
+         common.setStronguser({
+           success: function (res) {
+             console.log("成功判断本地存储", res.data)
+             that.setData({
+               userInfo: res.data
+             })
+           }
 
-           console.log("user", res.data.nickName)
-           that.setData({
-             userInfo: { "nickName": res.data.nickName, "avatarUrl": res.data.avatarUrl },
-             src: res.data.avatarUrl
-           })
-           wx.setStorage({
-             key: "useName",
-             data: res.data.nickName
-           })
-         }
-         , fail: function () {
-           wx.showModal({
-             title: '警告',
-             content: '您点击了拒绝授权，将用默认信息代替你的个人信息，您可自行修改',
-             success: function (res) {
-               if (res.confirm) {
-                 console.log('用户点击确定')
-               }
-             }
-           })
-         }
-       })
+         })
        }
   }
 })

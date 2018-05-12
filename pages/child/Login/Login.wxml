@@ -15,7 +15,7 @@
 
   </view>
   <view class='se3'>
-      <button class="weui-btn" bindtap='oginRegistration' type="primary">{{btnCot}}</button>
+      <button class="weui-btn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" type="primary">{{btnCot}}</button>
       <view wx:if="{{dealPan}}">{{btnCot}}代表你已同意<text>《建筑猎聘用户协议》</text></view>
      
   </view>

@@ -28,7 +28,7 @@
         <image src='http://www.liujiarong.top/WX/images/wx_men.png'class="gender" ></image>
         <image src='http://www.liujiarong.top/WX/images/wx_approve.png'class="approve" ></image>
   </view>
-     <text class="titie_h2">{{person}}</text> 
+     <text class="titie_h2">{{userInfo.remark}}</text> 
      <view class="titie_h3">影响力<text>{{influence}}</text>，高于<text>{{ influence_per}}</text>的同行</view> 
 </view>
 <view class='section'>
@@ -90,7 +90,7 @@
       </view>
   </button>
 
-     <button class='sec1 buttonx'  wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >
+     <button class='sec1 buttonx'  wx:if="{{!bingetinfo}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >
       <view class='fun_left'>
         <image src='http://www.liujiarong.top/WX/wxSq1.png' ></image>
         <text class='xod'>未授权</text>
@@ -101,7 +101,7 @@
       </view>
   </button>
 
-    <button class='sec1 buttonx'  wx:if="{{!canIUse}}" disabled='disabled' >
+    <button class='sec1 buttonx'  wx:if="{{bingetinfo}}" disabled='disabled' >
       <view class='fun_left'>
         <image src='http://www.liujiarong.top/WX/wxSq2.png' ></image>
         <text class='xod'>已授权</text>
@@ -116,9 +116,9 @@
 </view>
   <!-- end -->
 <!--获取信息另一种方式-->
-<!-- <open-data type="userNickName" open-gid="xxxxxx"></open-data>
+ <!-- <open-data type="userNickName" open-gid="xxxxxx"></open-data>
 <open-data type="userAvatarUrl"></open-data>
-<open-data type="userGender" lang="zh_CN"></open-data> -->
+<open-data type="userGender" lang="zh_CN"></open-data>  -->
 <!--获取信息另一种方式end-->
 
   <!-- 登陆后出现的页面2 -->

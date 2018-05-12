@@ -1,5 +1,5 @@
 // pages/child/Login/Login.js
-
+var common = require('../../../utils/common.js');
 var interval = null;
 Page({
 
@@ -337,7 +337,7 @@ Page({
             wx.showToast({
               title: res.data.message,
               icon: 'loading',
-              duration: 2000
+              duration: 1500
             });
 
             return false;
@@ -345,19 +345,23 @@ Page({
             wx.showToast({
               title: res.data.message,
               icon: 'success',
-              duration: 2000
+              duration: 1500
             });
             console.log("登录凭证", res.data)
             wx.setStorage({
               key: "login",
               data: res.data.data.login_token
             })
+            that.setData({
+              uersKey: res.data.data.login_token
+            })
+            common.getinst()
             setTimeout(function () {
               //要延时执行的代码  
               wx.navigateBack({
                 delta: 1
               })
-            }, 1500) //延迟时间 这里是1秒
+            }, 2000) //延迟时间 这里是1秒
            
 
           }
@@ -370,6 +374,23 @@ Page({
 
     }
 
-   }
+   },
+     /**授权 */
+  bindGetUserInfo: function (e) {
+     console.log("授权", e.detail.userInfo)
+     if (e.detail.userInfo){
+       wx.setStorage({
+         key: "user",
+         data: e.detail.userInfo
+       })
+      
+     }
+
+     this.oginRegistration()
+
+    
+  
+  }
+
 
 })
