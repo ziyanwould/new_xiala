@@ -145,6 +145,25 @@ Page({
       }
     });
   },
+  bindname:function(e){
+    var value = e.detail.value
+    this.setData({
+      edit_name: e.detail.value
+    })
+  },
+  bindphone: function (e) {
+    var value = e.detail.value
+    this.setData({
+      edit_phone: e.detail.value
+    })
+  },
+  bindemail: function (e) {
+    var value = e.detail.value
+    this.setData({
+      edit_email: e.detail.value
+    })
+  },
+
   open_stata: function () {
     var that = this;
     wx.showActionSheet({
