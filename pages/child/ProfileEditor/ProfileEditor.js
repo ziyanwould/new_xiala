@@ -30,7 +30,8 @@ Page({
    city:"所在城市",
    edit_city:"广东",
    state:"当前状态",
-   edit_state:"我目前已离职，可快速到岗"
+   edit_state:"我目前已离职，可快速到岗",
+   edit_textarea:"集众人之力，成细节之美！"
    
   },
 
@@ -38,9 +39,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getnewlist()
     
-    
-    var arrc = common.sjc();
+  var arrc = common.sjc();
    this.setData({
      date: arrc[1],
      date_end: arrc[0],
@@ -70,18 +71,9 @@ Page({
 
         })
       }
-    });
-    wx.getStorage({
-      key: 'useName',
-      success: function (res) {
-       
-        that.setData({
-
-          useName: res.data
-
-        })
-      }
-    });
+    })
+    this.getnewlist()
+   
   },
 
   /**
@@ -203,13 +195,157 @@ Page({
   //字数限制  
   bindWordLimit: function (e) {
     var value = e.detail.value, len = parseInt(value.length);
+    
     if (len > this.data.noteMaxLen) return;
 
     this.setData({
+      edit_textarea: value,
       currentNoteLen: len, //当前字数  
       limitNoteLen:this.data.noteMaxLen - len //剩余字数  
     });
-  }  
+  }, 
+  /*更新最新数据*/ 
+  getnewlist:function(){
+    var that = this
+    common.setStronguser({
+      success: function (res) {
+        console.log("成功判断本地存储", res.data)
+        var satatwork=''
+        switch (res.data.job_status) {
+          case 0:
+             satatwork = '我目前已离职，可快速到岗'
+            break;
+          case 1:
+             satatwork = '我目前在职，正考虑换个新环境'
+            break;
+          case 2:
+             satatwork =  '我暂时不想找工作'
+            break;
+          case 3:
+             satatwork =  '我是应届毕业生'
+            break;
+          default:
+           
+        }
+        that.setData({
+          //userInfo: res.data
+         
+          edit_name: res.data.nickName,
+          edit_sex: res.data.gender,
+          edit_year: res.data.birth.slice(0,7),
+          edit_education: res.data.education,
+          edit_work: res.data.job_years,
+          edit_phone: res.data.phone,
+          edit_email: res.data.email,
+          edit_city: res.data.city,
+          edit_state: satatwork,
+          edit_textarea: res.data.remark,
+          edit_province: res.data.province,
+          edit_county: res.data.county
+         
+        })
+      }
+
+    })
+
+  },
+  //上传修改的数据并更新本地数据
+  updateneslist:function(){
+    var that = this;
+    var satatwork = 0
+    switch (that.data.satatwork) {
+      case '我目前已离职，可快速到岗':
+         satatwork = 0
+        break;
+      case '我目前在职，正考虑换个新环境':
+         satatwork = 1
+        break;
+      case '我暂时不想找工作':
+         satatwork = 2
+        break;
+      case '我是应届毕业生':
+         satatwork = 3
+        break;
+      default:
+
+    }
+    var datas = {
+      "real_name": that.data.edit_name,
+      "sex": that.data.edit_sex,
+      "birth": that.data.edit_year+'-01',
+      "education": that.data.edit_education,
+      "job_years": that.data.edit_work,
+      "phone": that.data.edit_phone,
+      "email": that.data.edit_email,
+      "province": that.data.edit_province,
+      "city": that.data.edit_city,
+      "county": that.data.edit_county,
+      "job_status": satatwork,
+      "remark": that.data.edit_textarea
+    }
+   
+     common.request('usercenter/update_userinfo',
+      {
+        params: datas,
+        success: function (res) {
+          console.log("上传修改的数据并更新本地数据", res)
+          that.updatestrong(satatwork);
+        },
+        fail: function () {
+          //失败后的逻辑  
+        },
+      }, false)
+  }
+  ,//更新本地存储
+  updatestrong: function (satatwork){
+    let that = this
+    var infos = new Object();
+    infos.nickName = that.data.edit_name;
+    infos.gender = that.data.edit_sex;
+    infos.city = that.data.edit_city;
+    infos.province = that.data.edit_province;
+    infos.birth = that.data.edit_year;
+    infos.county = that.data.edit_county;
+    infos.education = that.data.edit_education;
+    infos.email = that.data.edit_email;
+    infos.job_status = satatwork;
+    infos.job_years = that.data.edit_work;
+    infos.phone = that.data.edit_phone;
+    infos.province = that.data.edit_province;
+    infos.remark = that.data.edit_textarea;
+    
+    wx.setStorage({
+      key: "user",
+      data: infos,
+      success:function(res){
+        console.log("更新本地存储", res)
+        setTimeout(function () {
+          //要延时执行的代码  
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 500) //延迟时间 这里是1秒
+      }
+    })
+  },
+  openConfirm: function () {
+    var that = this
+    wx.showModal({
+      title: '保存个人信息',
+      content: '是否确定保存您的个人信息？',
+      confirmText: "确定",
+      cancelText: "取消",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          console.log('用户点击主操作')
+          that.updateneslist()
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
+    });
+  },
 
 })
 

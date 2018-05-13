@@ -4,7 +4,7 @@
         <view class='sel_left'>{{name}}</view>
         <view class='sel_right'>
             <!-- <text wx:if="">{{}}</text>  -->
-            <input  style='padding-right:51rpx;' value='{{useName}}'></input> 
+            <input  style='padding-right:51rpx;' value='{{edit_name}}'></input> 
             <!-- <image  src='http://www.liujiarong.top/WX/wx_unfold.png'></image> -->
         </view>
      </view>
@@ -104,11 +104,11 @@
   一句话 介绍
 </view>
 <view class='see_textarea'>
-  <textarea placeholder='集众人之力，成细节之美！' maxlength="{{noteMaxLen}}" bindinput="bindWordLimit"  class='text_count'>
+  <textarea placeholder='集众人之力，成细节之美！' value='{{edit_textarea}}' maxlength="{{noteMaxLen}}" bindinput="bindWordLimit"  class='text_count'>
   </textarea>
   <view class='Alert'>{{currentNoteLen|0}}/{{noteMaxLen}}</view>
 </view>
 
 <view class='padding'>
-   <button class='save'>保存</button>
+   <button class='save' bindtap="openConfirm">保存</button>
 </view>
