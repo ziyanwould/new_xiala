@@ -108,7 +108,38 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
-        const src = res.tempFilePaths[0]
+        const src = res.tempFilePaths[0];
+        console.log("src值",src)
+        wx.getStorage({
+          key: 'login',
+          success: function (res) {
+            const  mysey = res.data
+            console.log("login成功进行传图片", res.data)
+
+            wx.uploadFile({
+              url: 'http://120.27.100.219:54231/usercenter/upload_header_img', //仅为示例，非真实的接口地址
+              filePath: src,
+              name: 'file',
+              header: {
+                'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
+                'login_token': mysey
+              },
+              success: function (res) {
+                var data = res
+
+                console.log("上传图片的结果",data)
+              }
+          
+           
+            })
+          }
+          , fail: function (res) {
+              mysey = null,
+              console.log("login失败", res.data)
+          }
+        })
+  
+
 
         wx.redirectTo({
           url: `/avatarUpload/upload/upload?src=${src}`
@@ -118,16 +149,16 @@ Page({
   },
    onLoad (option) {
 
-     console.log('onLoad')
+    // console.log('onLoad')
      var that = this
      /** */
     
 
      
-       console.log("列表", option)
+     //  console.log("列表", option)
        let { avatar } = option
        if (avatar) {
-         console.log("内容", avatar)
+        // console.log("内容", avatar)
          this.setData({
            src: avatar
          })
@@ -146,7 +177,7 @@ Page({
        }else{
          common.setStronguser({
            success: function (res) {
-             console.log("成功判断本地存储", res.data)
+            // console.log("成功判断本地存储", res.data)
              that.setData({
                userInfo: res.data
              })

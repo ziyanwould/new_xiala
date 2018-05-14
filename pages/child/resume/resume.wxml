@@ -7,7 +7,7 @@
      <view class='s1_left'>
         <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
         <view class='title_s2'>
-          <text class="">{{userInfo.gender}}/{{userInfo.city}}市/{{userInfo.job_years}}年</text> 
+          <text class="">{{userInfo.gender}}/{{userInfo.city}}市/{{userInfo.job_years}}</text> 
         </view>
         <view class='title_s3'>
           <text class="">{{userInfo.remark}}</text> 
