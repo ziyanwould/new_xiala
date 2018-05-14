@@ -165,7 +165,7 @@ function setintuse(datas){
     infos.reg_time = info.reg_time;
     infos.remark = info.remark;
     infos.verify_status = info.verify_status;
-    infos.avatarUrl = info.avatarUrl;
+    infos.avatarUrl = info.header_img;
     wx.setStorage({
       key: "user",
       data: infos
@@ -175,7 +175,7 @@ function setintuse(datas){
       key: 'user',
       success: function (res) {
         var datas = {
-          "header_img": res.data.avatarUrl,
+          "avatarUrl": res.data.avatarUrl,
           "real_name": res.data.nickName,
           "sex": res.data.gender,
           "birth": "",

@@ -260,8 +260,9 @@ Page({
           edit_state: satatwork,
           edit_textarea: res.data.remark,
           edit_province: res.data.province,
-          edit_county: res.data.county
-         
+          edit_county: res.data.county,
+          edit_avatarUrl: res.data.avatarUrl,
+          
         })
       }
 
@@ -300,7 +301,8 @@ Page({
       "city": that.data.edit_city,
       "county": that.data.edit_county,
       "job_status": satatwork,
-      "remark": that.data.edit_textarea
+      "remark": that.data.edit_textarea,
+      "header_img": that.data.edit_avatarUrl
     }
    
      common.request('usercenter/update_userinfo',
@@ -332,6 +334,7 @@ Page({
     infos.phone = that.data.edit_phone;
     infos.province = that.data.edit_province;
     infos.remark = that.data.edit_textarea;
+    infos.avatarUrl = that.data.edit_avatarUrl;
     
     wx.setStorage({
       key: "user",

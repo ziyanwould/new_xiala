@@ -275,11 +275,12 @@ Page({
                   wx.removeStorage({
                     key: 'login',
                     success: function (res) {
-                      console.log(res.data)
+                      console.log(res.data);
                       that.setData({
                         key: false
-
+                
                       })
+                      //wx.clearStorage()
 
                     }
                   })
