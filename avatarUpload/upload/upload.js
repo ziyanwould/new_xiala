@@ -32,9 +32,43 @@ Page({
   getCropperImage () {
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
-        //  获取到裁剪后的图片
-        wx.redirectTo({
-          url: `/pages/child/resume/resume?avatar=${avatar}`
+        //  获取到裁剪后的图片 下放上传成功后执行
+        // wx.redirectTo({
+        //   url: `/pages/child/resume/resume?avatar=${avatar}`
+        // })
+        const avatars = avatar
+        /**上传图片啦啦啦啦 */
+        wx.getStorage({
+          key: 'login',
+          success: function (res) {
+            const mysey = res.data
+            console.log("login成功进行传图片", res.data)
+
+            wx.uploadFile({
+              url: 'http://120.27.100.219:54231/usercenter/upload_header_img', //仅为示例，非真实的接口地址
+              filePath: avatars,
+              name: 'file',
+              header: {
+                'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
+                'login_token': mysey
+              },
+              success: function (res) {
+                var data = res
+
+                console.log("上传图片的结果", data)
+                //  获取到裁剪后的图片
+                wx.redirectTo({
+                  url: `/pages/child/resume/resume?avatar=${avatars}`
+                })
+              }
+
+
+            })
+          }
+          , fail: function (res) {
+            mysey = null,
+              console.log("login失败", res.data)
+          }
         })
       } else {
         console.log('获取图片失败，请稍后重试')

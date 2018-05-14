@@ -26,8 +26,26 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (option) {
+   
+    const that =  this
+    common.setStronguser({
+      success: function (res) {
+        // console.log("成功判断本地存储", res.data)
+        that.setData({
+          userInfo: res.data,
+        })
 
+        if (!that.data.nessrc) {
+          that.setData({
+            src: res.data.avatarUrl
+          })
+        }
+      }
+
+    })
+   
+   
   },
 
   /**
@@ -109,38 +127,6 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         const src = res.tempFilePaths[0];
-        console.log("src值",src)
-        wx.getStorage({
-          key: 'login',
-          success: function (res) {
-            const  mysey = res.data
-            console.log("login成功进行传图片", res.data)
-
-            wx.uploadFile({
-              url: 'http://120.27.100.219:54231/usercenter/upload_header_img', //仅为示例，非真实的接口地址
-              filePath: src,
-              name: 'file',
-              header: {
-                'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
-                'login_token': mysey
-              },
-              success: function (res) {
-                var data = res
-
-                console.log("上传图片的结果",data)
-              }
-          
-           
-            })
-          }
-          , fail: function (res) {
-              mysey = null,
-              console.log("login失败", res.data)
-          }
-        })
-  
-
-
         wx.redirectTo({
           url: `/avatarUpload/upload/upload?src=${src}`
         })
@@ -160,26 +146,17 @@ Page({
        if (avatar) {
         // console.log("内容", avatar)
          this.setData({
-           src: avatar
+           src: avatar,
+           nessrc:true
          })
-         wx.getStorage({
-           key: 'useName',
-           success: function (res) {
-            
-             that.setData({
-               useName: res.data
-             })
-           }
-         })
-    
-      
-    
+       
        }else{
          common.setStronguser({
            success: function (res) {
             // console.log("成功判断本地存储", res.data)
              that.setData({
-               userInfo: res.data
+               userInfo: res.data,
+               src: res.data.avatarUrl
              })
            }
 
