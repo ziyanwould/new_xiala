@@ -118,7 +118,7 @@ function getinst(token)  {
         if (res.data.message=="未登录"){
           return false;
         }
-        setintuse(res)
+        setintuse(res,token);
       },
       fail: function () {
         //失败后的逻辑  
@@ -127,7 +127,7 @@ function getinst(token)  {
 }
 
 //更新信息
-function setintuse(datas){
+function setintuse(datas, token){
   let info = datas.data.data.userinfo;
   console.log(info)
   if (info.real_name!=''){
@@ -152,6 +152,8 @@ function setintuse(datas){
       key: "user",
       data: infos
     })
+
+     
   }else{
     wx.getStorage({
       key: 'user',
@@ -182,7 +184,7 @@ function setintuse(datas){
             fail: function () {
               //失败后的逻辑  
             },
-          }, false)
+          }, token)
      
       }
       , fail: function () {

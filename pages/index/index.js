@@ -241,11 +241,12 @@ Page({
               //end 20180515 预修改
               
               //更新全局变量方式 20180515
-              app.globalData.userInfo = res.data.data.login_token
-              typeof cb == "function" && cb(app.globalData.userInfo)
+              app.globalData.login = res.data.data.login_token
+              typeof cb == "function" && cb(app.globalData.login)
               //更新全局变量结束 20180515
 
-              common.getinst(app.globalData.userInfo)
+              var cai = common.getinst(app.globalData.login)
+            console.log("换一种写法",cai)
             }
 
           })

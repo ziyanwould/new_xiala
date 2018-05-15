@@ -315,7 +315,7 @@ Page({
         fail: function () {
           //失败后的逻辑  
         },
-      }, false)
+       }, app.globalData.login)
   }
   ,//更新本地存储
   updatestrong: function (satatwork){
