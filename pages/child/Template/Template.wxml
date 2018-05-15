@@ -10,13 +10,13 @@
         <view class='Btn'>
             <button class="weui-btn" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >
             <image class='wxlogo'  src='http://www.liujiarong.top/WX/wxLogo.png'></image>
-             微信账号快速登录
+             微信帐号快速登录
             </button>
         </view>
           <view class='Btn'>
             <button class="weui-btn" type="default" bindtap="urlTo">
             <image class='wxPhone' src='http://www.liujiarong.top/WX/wxLogoPhone.png'></image>
-            手机号注册登录/登录
+            手机号注册/登录
             </button>
         </view>
         <view class='Btn' bindtap="urlTo2">

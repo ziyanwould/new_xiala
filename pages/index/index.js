@@ -211,11 +211,8 @@ Page({
 
          }
       })
-      //获取openId
-      wx.getStorage({
-        key: 'openId',
-        success: function (res) {
-          console.log(res.data)
+   
+ 
 
           //解析手机号
           wx.request({
@@ -227,7 +224,7 @@ Page({
             },
             method: 'POST',
             data: {
-              openid: res.data,
+              openid: app.globalData.oppenid,
               encryptedData: child_encryptedData,
               iv:child_iv
             },
@@ -235,16 +232,24 @@ Page({
 
             success: function (res) {
               console.log("登录凭证",res.data)
+
+              //20180515 预修改
               wx.setStorage({
                 key: "login",
                 data: res.data.data.login_token
               })
-              common.getinst()
+              //end 20180515 预修改
+              
+              //更新全局变量方式 20180515
+              app.globalData.userInfo = res.data.data.login_token
+              typeof cb == "function" && cb(app.globalData.userInfo)
+              //更新全局变量结束 20180515
+
+              common.getinst(app.globalData.userInfo)
             }
 
           })
-        }
-      })
+    
     }
   }
   , tapCompass: function () {

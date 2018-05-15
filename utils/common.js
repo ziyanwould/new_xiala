@@ -1,3 +1,4 @@
+var app = getApp();
 function sjc() {
   var timestamp = Date.parse(new Date());
   timestamp = timestamp / 1000;
@@ -58,17 +59,7 @@ function request(url, requestHandler,token) {
   //注意：可以对params加密等处理  
   var params = requestHandler.params;
   //获取登录钥匙
-  var mysey = '';
-
-
-  if(!token){
-    wx.getStorage({
-      key: 'login',
-      success: function (res) {
-        mysey = res.data
-        console.log("login成功",res.data)
-
-        wx.request({
+   wx.request({
           url: 'http://120.27.100.219:54231/' + url,
           data: params,
           method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
@@ -76,7 +67,7 @@ function request(url, requestHandler,token) {
           header: {
             'content-type': 'application/json',
             'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
-            'login_token': mysey
+            'login_token': token
           },
           success: function (res) {
             //注意：可以对参数解密等处理  
@@ -89,16 +80,7 @@ function request(url, requestHandler,token) {
             // complete  
           }
         })
-      }
-      , fail: function (res) {
-        mysey = null,
-        console.log("login失败", res.data)
-      }
-    })
-  }else{
-    mysey = token
-    console.log("使用原来的token")
-  }
+
 
 
   //无奈之举，应该用promise处理异步
@@ -128,7 +110,7 @@ function request(url, requestHandler,token) {
 };
 
 /**获取基本信息及更新初始化 */
-function getinst()  {
+function getinst(token)  {
   request('usercenter/get_userinfo',
     {
       success: function (res) {
@@ -141,7 +123,7 @@ function getinst()  {
       fail: function () {
         //失败后的逻辑  
       },
-    }, false)
+    }, token)
 }
 
 //更新信息

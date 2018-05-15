@@ -50,7 +50,12 @@ App({
                     key: "openId",
                     data: event.data.data.wx_openid
                   });
-                  
+
+                  //更新全局变量方式 20180515
+                  _this.globalData.oppenid = event.data.data.wx_openid
+                  typeof cb == "function" && cb(that.globalData.oppenid)
+                  //更新全局变量结束 20180515
+
                   //20180511重构2暂时 取消基本信息
                   // wx.getUserInfo({
                   //   success: function (resuser) {
@@ -109,6 +114,9 @@ App({
   //   }
   // },
   globalData:{
-    userInfo:null
+    userInfo:null,//用户共用的基本信息
+    oppenid:null,//用户的openID
+    login:null,//用户的登录凭证
+
   }
 })
