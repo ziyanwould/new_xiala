@@ -66,6 +66,7 @@
       //index.js
       //获取应用实例
       var city = __webpack_require__(67);
+      var app =getApp();
       Page({
         data: {
           searchLetter: [],
@@ -229,10 +230,15 @@
               data: cargo
             });
           }else{
-            wx.setStorage({
-              key: "cargo",
-              data: cargo
-            });
+            // wx.setStorage({
+            //   key: "cargo",
+            //   data: cargo
+            // });
+            //更新全局变量方式 20180515
+            app.globalData.city = city
+            typeof cb == "function" && cb(app.globalData.city)
+            //更新全局变量结束 20180515
+
           }
           wx.navigateBack({
             delta: 1

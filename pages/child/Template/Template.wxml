@@ -30,7 +30,8 @@
  <template name="tar_count" >
     <view class='tar_count'>
       <navigator   url="/pages/AboutCompany/AboutCompany">发现</navigator>  
-      <navigator  url="/pages/child/map/map">人脉</navigator> 
+      <!-- <navigator  url="/pages/child/map/map">人脉</navigator> pages/child/Resumelist/Resumelist -->
+       <navigator  url="/pages/child/Resumelist/Resumelist">人脉</navigator>
       <navigator  class="{{active}}" url="/pages/child/Message/Message" >消息</navigator> 
      
     </view>
@@ -56,8 +57,10 @@
 
  <template name="recommend">
       <view class='recommend' bindtouchmove="move">
-      <view class="line"></view>
-      <view class='tui'>为您推荐的好职位</view>
+        <view class="line"></view>
+        <view class='tui'>
+           <text style='padding:0 10rpx'  wx:for="{{used_list}}" wx:key="*this" class="{{activeIndex==index?'active':''}}" id="{{index}}" bindtap="active">{{item.name}}</text>
+        </view>
       <view class="line"></view>
     </view>
  </template>

@@ -44,7 +44,7 @@
 
 <!-- 引入登录注册和选择组件 -->
  <import src="../child/Template/Template.wxml"/>
-  <template is="notLogin" data="{{...items}}"/> 
+<template is="notLogin" data="{{...items}}"/> 
 
 
 

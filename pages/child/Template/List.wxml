@@ -6,7 +6,8 @@
 
        <template is="banner"  data="{{...mydata}}"  /> 
          
-       <template is="recommend"  /> 
+       <template is="recommend"  data="{{...workType}}"/> 
    
        <include src="/pages/child/Template/position.wxml"/>
+
   </scroll-view>

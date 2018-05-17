@@ -1,9 +1,13 @@
 //app.js
 App({
+  data: {
+    deviceInfo: {}
+  },
   onLaunch: function () {
-
+    this.data.deviceInfo = wx.getSystemInfoSync();
+    console.log(this.data.deviceInfo);
     //调用API从本地缓存中获取数据
-    // var that = this
+     var that = this
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
@@ -117,6 +121,7 @@ App({
     userInfo:null,//用户共用的基本信息
     oppenid:null,//用户的openID
     login:null,//用户的登录凭证
+    city:null,//编辑页的城市选择
 
   }
 })

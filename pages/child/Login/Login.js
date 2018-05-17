@@ -1,6 +1,7 @@
 // pages/child/Login/Login.js
 var common = require('../../../utils/common.js');
 var interval = null;
+var app = getApp();
 Page({
 
   /**
@@ -352,16 +353,20 @@ Page({
               key: "login",
               data: res.data.data.login_token
             })
-            that.setData({
-              uersKey: res.data.data.login_token
-            })
-            common.getinst()
+            //更新全局变量方式 20180515
+            app.globalData.login = res.data.data.login_token
+            typeof cb == "function" && cb(app.globalData.login)
+            //更新全局变量结束 20180515
+
+            var cai = common.getinst(app.globalData.login)
+            console.log("换一种写法", cai)
+          
             setTimeout(function () {
               //要延时执行的代码  
               wx.navigateBack({
                 delta: 1
               })
-            }, 2000) //延迟时间 这里是1秒
+            }, 1500) //延迟时间 这里是1秒
            
 
           }

@@ -80,33 +80,6 @@ function request(url, requestHandler,token) {
             // complete  
           }
         })
-
-
-
-  //无奈之举，应该用promise处理异步
-  // setTimeout(function(){
-  //   wx.request({
-  //     url: 'http://120.27.100.219:54231/' + url,
-  //     data: params,
-  //     method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
-  //     // header: {}, // 设置请求的 header 
-  //     header: {
-  //       'content-type': 'application/json',
-  //       'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
-  //       'login_token': mysey
-  //     },
-  //     success: function (res) {
-  //       //注意：可以对参数解密等处理  
-  //       requestHandler.success(res)
-  //     },
-  //     fail: function () {
-  //       requestHandler.fail()
-  //     },
-  //     complete: function () {
-  //       // complete  
-  //     }
-  //   })
-  // },50)
 };
 
 /**获取基本信息及更新初始化 */
@@ -164,13 +137,13 @@ function setintuse(datas, token){
           "sex": res.data.gender,
           "birth": "",
           "education": "",
-          "job_years": "",
+          "job_years": "应届毕业生",
           "phone": "",
           "email": "",
           "province": res.data.province,
           "city": res.data.city,
           "county": "",
-          "job_status":0,
+          "job_status":"我是应届毕业生",
           "remark": "寄君一曲，不论曲终人离散"
         }
 

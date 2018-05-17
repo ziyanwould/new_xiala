@@ -46,7 +46,10 @@ Page({
      date: arrc[1],
      date_end: arrc[0],
     })
-  
+     
+     this.setData({
+       loginG: getApp().globalData.login
+     })
   },
 
   /**
@@ -60,20 +63,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    
     var that = this;
-    wx.getStorage({
-      key: 'cargo',
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-
-          edit_city: res.data.select_city
-
-        })
-      }
-    })
-    this.getnewlist()
    
+   
+  
+    this.getnewlist()
+    if (app.globalData.city!=null){
+      that.setData({
+        edit_city: app.globalData.city
+      })
+    }   
   },
 
   /**
@@ -229,23 +229,7 @@ Page({
     common.setStronguser({
       success: function (res) {
         console.log("成功判断本地存储", res.data)
-        var satatwork=''
-        switch (res.data.job_status) {
-          case 0:
-             satatwork = '我目前已离职，可快速到岗'
-            break;
-          case 1:
-             satatwork = '我目前在职，正考虑换个新环境'
-            break;
-          case 2:
-             satatwork =  '我暂时不想找工作'
-            break;
-          case 3:
-             satatwork =  '我是应届毕业生'
-            break;
-          default:
-           
-        }
+  
         that.setData({
           //userInfo: res.data
          
@@ -257,7 +241,7 @@ Page({
           edit_phone: res.data.phone,
           edit_email: res.data.email,
           edit_city: res.data.city,
-          edit_state: satatwork,
+          edit_state: res.data.job_status,
           edit_textarea: res.data.remark,
           edit_province: res.data.province,
           edit_county: res.data.county,
@@ -271,24 +255,9 @@ Page({
   },
   //上传修改的数据并更新本地数据
   updateneslist:function(){
+    console.log("本地存储mysey", this.data.loginG)
+    var mysey =  this.data.loginG
     var that = this;
-    var satatwork = 0
-    switch (that.data.satatwork) {
-      case '我目前已离职，可快速到岗':
-         satatwork = 0
-        break;
-      case '我目前在职，正考虑换个新环境':
-         satatwork = 1
-        break;
-      case '我暂时不想找工作':
-         satatwork = 2
-        break;
-      case '我是应届毕业生':
-         satatwork = 3
-        break;
-      default:
-
-    }
     var datas = {
       "real_name": that.data.edit_name,
       "sex": that.data.edit_sex,
@@ -300,7 +269,7 @@ Page({
       "province": that.data.edit_province,
       "city": that.data.edit_city,
       "county": that.data.edit_county,
-      "job_status": satatwork,
+      "job_status": that.data.edit_state,
       "remark": that.data.edit_textarea,
       "header_img": that.data.edit_avatarUrl
     }
@@ -310,15 +279,16 @@ Page({
         params: datas,
         success: function (res) {
           console.log("上传修改的数据并更新本地数据", res)
-          that.updatestrong(satatwork);
+        
+          that.updatestrong();
         },
         fail: function () {
           //失败后的逻辑  
         },
-       }, app.globalData.login)
+       }, mysey)
   }
   ,//更新本地存储
-  updatestrong: function (satatwork){
+  updatestrong: function (){
     let that = this
     var infos = new Object();
     infos.nickName = that.data.edit_name;
@@ -329,7 +299,7 @@ Page({
     infos.county = that.data.edit_county;
     infos.education = that.data.edit_education;
     infos.email = that.data.edit_email;
-    infos.job_status = satatwork;
+    infos.job_status = that.data.edit_state;
     infos.job_years = that.data.edit_work;
     infos.phone = that.data.edit_phone;
     infos.province = that.data.edit_province;

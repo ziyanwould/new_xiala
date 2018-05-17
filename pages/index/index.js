@@ -53,6 +53,14 @@ Page({
     items: {},
     mydata:{
       seektype: "搜索职位"
+    },
+    workType:{
+      activeIndex: 0,
+      used_list: [
+        { title: "分类03", name: "兼职" },
+        { title: "分类02", name: "全职" },
+     
+      ]
     }
    
  
@@ -246,11 +254,11 @@ Page({
               //更新全局变量结束 20180515
 
               var cai = common.getinst(app.globalData.login)
-            console.log("换一种写法",cai)
+              console.log("换一种写法",cai)
             }
 
           })
-    
+        
     }
   }
   , tapCompass: function () {
@@ -286,4 +294,19 @@ Page({
 //     })
 //   }, 1000);
 // }
+,//切换按钮
+  active: function (e) {
+    this.setData({
+     'workType.activeIndex': e.currentTarget.id
+    })
+    if (e.currentTarget.id > 1) {
+      this.setData({
+        pageshow: false
+      })
+    } else {
+      this.setData({
+        pageshow: true
+      })
+    }
+  }
 })

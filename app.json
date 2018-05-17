@@ -24,7 +24,8 @@
     "pages/child/map/map",
     "pages/AboutCompany/AboutCompany",
     "avatarUpload/index/index",
-    "avatarUpload/upload/upload"
+    "avatarUpload/upload/upload",
+    "pages/child/Resumelist/Resumelist"
     
   ],
   "window": {
