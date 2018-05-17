@@ -33,8 +33,12 @@ Page({
      //var height = '100%';
     for (var i = 10; i < 35; i++) {
       var msg = {};
-      msg.userName = '' + '兼职' + i + 1;
-      msg.msgText = '一级建造师 - 建筑工程';
+      if(i%3==0){
+        msg.userName = '' + '全职';
+      }else{
+        msg.userName = '' + '兼职';
+      }
+      msg.msgText = '一级建造师 - 建筑工程' + i;
       msg.time = '更新时间：2018年5月17日 14:52:'+i;
       if(i%2==0){
         msg.state = '公开'
@@ -236,5 +240,11 @@ Page({
         pageshow: true
       })
     }
+  },
+  urlto:function(e){
+    console.log("简历",e)
+    wx.navigateTo({
+      url: '/pages/child/resume/resume',
+    })
   }
 })

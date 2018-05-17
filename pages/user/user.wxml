@@ -58,7 +58,7 @@
 <!-- end -->
 <!-- 跳转版块 -->
 <view class='wx_feature'>
-  <view class='sec1' bindtap="jumpToMyPage" data-url="../child/resume/resume">
+  <view class='sec1' bindtap="jumpToMyPage" data-url="/pages/child/Resumelist/Resumelist">
       <view class='fun_left'>
         <image src='http://www.liujiarong.top/WX/images/wx_resume.png'></image>
         <text class='xod'>简历</text>
