@@ -7,12 +7,16 @@
           登录或注册{{masTitle}}
         </view>
         <text class='masClose' bindtap="urlclose">×</text>
-        <view class='Btn'>
-            <button class="weui-btn" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >
-            <image class='wxlogo'  src='http://www.liujiarong.top/WX/wxLogo.png'></image>
-             微信帐号快速登录
-            </button>
-        </view>
+          <view class='Btn'>
+              <button class="weui-btn" wx:if="{{fages}}" type="primary" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >
+              <image class='wxlogo'  src='http://www.liujiarong.top/WX/wxLogo.png'></image>
+              微信帐号快速登录
+              </button>
+              <button class="weui-btn" wx:if="{{!fages}}" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >
+                  <image class='wxlogo'  src='http://www.liujiarong.top/WX/wxLogo.png'></image>
+                  <text style='padding-left:65rpx;'>下一步</text>
+              </button>
+          </view>
           <view class='Btn'>
             <button class="weui-btn" type="default" bindtap="urlTo">
             <image class='wxPhone' src='http://www.liujiarong.top/WX/wxLogoPhone.png'></image>

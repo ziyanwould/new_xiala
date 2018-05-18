@@ -122,6 +122,7 @@ App({
     oppenid:null,//用户的openID
     login:null,//用户的登录凭证
     city:null,//编辑页的城市选择
+    empower:null,//授权标识值
 
   }
 })

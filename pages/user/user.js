@@ -86,7 +86,12 @@ Page({
     })
     //应该用promise处理异步
     this.getuseinfomation();
-   
+   //授权与否 本地信息有否
+    if (app.globalData.empower){
+      _this.setData({
+        bingetinfo: true
+      })
+    }
   },
    onPullDownRefresh: function () {
     // do somthing
@@ -103,7 +108,8 @@ Page({
          items: {
            height: self,
            masTitle: "",
-           show: true
+           show: true,
+           fages:true
          }
        });
      }
@@ -131,7 +137,7 @@ Page({
   ,
   //获取手机号
   getPhoneNumber: function (e) {
-    var that = this;
+    let that = this;
     console.log("errMsg", e.detail.errMsg)
     console.log("vi", e.detail.iv)
     console.log("encryptedData", e.detail.encryptedData)
@@ -156,66 +162,59 @@ Page({
         success: function (res) {
           that.setData({
             items: {
+
               show: false
-            },
-            key:true
-          });
-        
-          //获取openId
-          wx.getStorage({
-            key: 'openId',
-            success: function (res) {
-              console.log(res.data)
-
-              //解析手机号
-              wx.request({
-                url: 'http://120.27.100.219:54231/common/wx_login_phone',
-                header: {
-                  'content-type': 'application/json',
-                  'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
-
-                },
-                method: 'POST',
-                data: {
-                  openid: res.data,
-                  encryptedData: child_encryptedData,
-                  iv: child_iv
-                },
-
-
-                success: function (res) {
-                  console.log("登录凭证", res.data)
-                  wx.setStorage({
-                    key: "login",
-                    data: res.data.data.login_token
-                  })
-                  // that.getuseinfomation();
-                  common.getinst()
-
-                  setTimeout(function(){
-                    common.setStronguser({
-                      success: function (res) {
-                        console.log("成功判断本地存储", res.data)
-                        that.setData({
-                          userInfo: res.data
-                        })
-                      }
-
-                    })
-                  }, 150)
-                    
-                 
-                  
-                 
-
-                }
-
-              })
             }
-          })
+          });
+
         }
       })
-     
+
+
+
+      //解析手机号
+      wx.request({
+        url: 'http://120.27.100.219:54231/common/wx_login_phone',
+        header: {
+          'content-type': 'application/json',
+          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+
+        },
+        method: 'POST',
+        data: {
+          openid: app.globalData.oppenid,
+          encryptedData: child_encryptedData,
+          iv: child_iv
+        },
+
+
+        success: function (res) {
+          console.log("登录凭证", res.data)
+
+          //20180515 预修改
+          wx.setStorage({
+            key: "login",
+            data: res.data.data.login_token
+          })
+          //end 20180515 预修改
+
+          //更新全局变量方式 20180515
+          app.globalData.login = res.data.data.login_token
+          typeof cb == "function" && cb(app.globalData.login)
+          //更新全局变量结束 20180515
+        
+          var cai = common.getinst(app.globalData.login)
+          console.log("换一种写法", cai)
+          that.setData({
+            key: true
+          })
+          setTimeout(function(){
+            that.getuseinfomation()
+          },250)
+        }
+
+      })
+
     }
   }
   ,
@@ -232,7 +231,8 @@ Page({
       items: {
         height: self,
         masTitle: "",
-        show: true
+        show: true,
+        fages:true
       }
     });
   },
@@ -299,14 +299,34 @@ Page({
   /**授权 */
   bindGetUserInfo: function (e) {
     console.log("授权",e.detail.userInfo)
-    wx.setStorage({
-      key: "user",
-      data: e.detail.userInfo
-    })
-    this.setData({
-      userInfo: { "nickName": e.detail.userInfo.nickName, "avatarUrl": e.detail.userInfo.avatarUrl },
-      bingetinfo:true
-    });
+    if (e.detail.userInfo){
+      wx.setStorage({
+        key: "user",
+        data: e.detail.userInfo
+      })
+      this.setData({
+        // userInfo: { "nickName": e.detail.userInfo.nickName, "avatarUrl": e.detail.userInfo.avatarUrl },
+        bingetinfo: true,
+        items: {
+          height: self,
+          masTitle: "",
+          show: true,
+          fages: false
+        }
+      });
+    }else{
+      this.setData({
+        items: {
+          height: self,
+          masTitle: "",
+          show: true,
+          fages: false
+        }
+      });
+    }
+
+  
+ 
   },
   //是否拥有本地存储判断
   getuseinfomation:function(){
@@ -317,13 +337,15 @@ Page({
           success: function (res) {
             console.log("成功判断本地存储", res.data)
             that.setData({
-              userInfo: res.data
+              userInfo: res.data,
+              bingetinfo:true
             })
           }
 
         })
 
       } else {
+
         return false;
 
       }

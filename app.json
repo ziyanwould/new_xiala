@@ -25,7 +25,8 @@
     "pages/AboutCompany/AboutCompany",
     "avatarUpload/index/index",
     "avatarUpload/upload/upload",
-    "pages/child/Resumelist/Resumelist"
+    "pages/child/Resumelist/Resumelist",
+    "pages/child/Certificate/Certificate"
     
   ],
   "window": {

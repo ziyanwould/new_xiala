@@ -77,7 +77,8 @@ Page({
         if (res.data) {
           _this.setData({
             items: {
-              show: false
+              show: false,
+              fages:false  
             }
           })
         }
@@ -95,7 +96,8 @@ Page({
         if (res.data){
           _this.setData({
             items: {
-              show: false
+              show: false,
+              fages:false
             }})
        }
       }
@@ -111,7 +113,8 @@ Page({
         items:{
           height: self,
           masTitle:"",
-          show:true
+          show:true,
+          fages: true
         }
      });
    
@@ -308,5 +311,27 @@ Page({
         pageshow: true
       })
     }
+  }
+  ,     /**授权 */
+  bindGetUserInfo: function (e) {
+    console.log("授权", e.detail.userInfo)
+    if (e.detail.userInfo) {
+      wx.setStorage({
+        key: "user",
+        data: e.detail.userInfo
+      })
+      app.globalData.empower = true
+      typeof cb == "function" && cb(app.globalData.empower)
+    }
+    this.setData({
+   
+        items: {
+          height: self,
+          masTitle: "",
+          show: true,
+          fages: false 
+        },
+
+    })
   }
 })
