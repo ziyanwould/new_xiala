@@ -26,7 +26,8 @@
     "avatarUpload/index/index",
     "avatarUpload/upload/upload",
     "pages/child/Resumelist/Resumelist",
-    "pages/child/Certificate/Certificate"
+    "pages/child/Certificate/Certificate",
+    "pages/child/parTime/parTime"
     
   ],
   "window": {

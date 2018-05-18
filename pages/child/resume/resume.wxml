@@ -103,6 +103,18 @@
    </view>
 </view>
 
+<view class='sec_other'>
+    <view class='other_title'><text>证书信息</text><navigator url="/pages/child/Certificate/Certificate">编辑</navigator></view>
+    <view class='sec_book'>
+      <view class='sec_book1'>全国建设工程造价员资格证书</view>
+      <view class='sec_book2'>广州建设职业培训学校</view>
+      <view class='sec_book3'>2011/2--2014/1</view>
+    </view>
+     <view class='add_child'>
+     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加证书信息</text>
+   </view>
+</view>
+
 <view class='section3'>
    <view class='s3_title'>项目经验</view>
    <view class='experience'> 
@@ -131,18 +143,6 @@
     <view class='sec_count'>
      集众人之力，成细节之美！
     </view>
-</view>
-
-<view class='sec_other'>
-    <view class='other_title'><text>证书信息</text><navigator url="/pages/child/Certificate/Certificate">编辑</navigator></view>
-    <view class='sec_book'>
-      <view class='sec_book1'>全国建设工程造价员资格证书</view>
-      <view class='sec_book2'>广州建设职业培训学校</view>
-      <view class='sec_book3'>2011/2--2014/1</view>
-    </view>
-     <view class='add_child'>
-     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加证书信息</text>
-   </view>
 </view>
 
 <view class='add_child' style='background:#FFFFFF;' bindtap="jumpToMyPage">

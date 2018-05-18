@@ -1,0 +1,101 @@
+<!--pages/child/parTime/parTime.wxml-->
+
+
+
+<view class='resume_title'>
+  <view class='title_s1'>
+
+     <view class='s1_left'>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
+        <view class='title_s2'>
+          <text class="">{{userInfo.gender}}/{{userInfo.city}}市/{{userInfo.job_years}}</text> 
+        </view>
+        <view class='title_s3'>
+          <text class="">{{userInfo.remark}}</text> 
+        </view>
+        <!-- 编辑触碰按钮 -->
+          <navigator class="Bj"  url="../../child/ProfileEditor/ProfileEditor">
+            <image class='bj' src='http://www.liujiarong.top/WX/wx_redact.png'></image>
+            编辑
+          </navigator>  
+        
+     </view>
+
+     <view   class="s1_right">
+      <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image>
+
+     </view>
+
+  </view>
+
+     <view class='phone'>
+       <em><image src='http://www.liujiarong.top/WX/wx_phone.png'></image></em><text>{{userInfo.phone}}</text>
+     </view>
+     <view class='email'>
+       <em><image src='http://www.liujiarong.top/WX/wx_post.png'></image></em><text>{{userInfo.email}}</text>
+     </view>
+
+      <view class='s2'>
+         <view class='s2_all'>
+          <view class='s2_left'>
+            目前状态
+          </view>
+
+          <view class='s2_right'>
+             <text>{{userInfo.job_status}}</text>
+             <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
+          </view>
+        </view>
+      </view>
+</view>
+
+<view class='section2'>
+ 
+    <view class='sec2_1'>
+      <text>期望工作</text>
+        <navigator url="../../child/ExpectWork/ExpectWork">
+            编辑
+        </navigator>  
+    </view>
+
+    <view class='sec2_2'>
+           设计师
+    </view>
+
+     <view class='sec2_3'>
+           广州/全职/10k-20k
+    </view>
+ 
+</view>
+
+
+<view class='sec_other'>
+    <view class='other_title'><text>证书信息</text><navigator url="/pages/child/Certificate/Certificate">编辑</navigator></view>
+    <view class='sec_book'>
+      <view class='sec_book1'>全国建设工程造价员资格证书</view>
+      <view class='sec_book2'>广州建设职业培训学校</view>
+      <view class='sec_book3'>2011/2--2014/1</view>
+    </view>
+     <view class='add_child'>
+     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加证书信息</text>
+   </view>
+</view>
+
+
+
+
+<view class='add_child' style='background:#FFFFFF;' bindtap="jumpToMyPage">
+     <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加自定义板块</text>
+   </view>
+ <!-- <view class='sec_other'>
+    <view class='other_title'><text>公司</text><navigator url="">编辑</navigator></view>
+    <view class='sec_count'>
+     广东中住七一网络科技有限公司
+    </view>
+</view>  -->
+
+<view class='notes'>
+   简历更新于2018-03-20 10:02
+</view>
+
+

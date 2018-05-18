@@ -7,7 +7,7 @@
       
       <block wx:if="{{activeIndex==0}}">
        <view wx:for="{{msgList}}"  wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
-            <view id='{{item.id}}' bindtap='urlto' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
+            <view id='{{item.id}}' bindtap='urlto' data-url='{{item.userName}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
                 <image class='header-img' src="{{item.headerImg}}" ></image>
                 <text class='user-name'>{{item.userName}}</text>
                 <text class='msg-text'>{{item.msgText}}</text>
@@ -27,7 +27,7 @@
 
        <block wx:if="{{activeIndex==1}}">
         <view wx:for="{{msgList}}"wx:if="{{item.userName=='全职'}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
-              <view id='{{item.id}}'  bindtap='urlto'  class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
+              <view id='{{item.id}}'  bindtap='urlto' data-url='{{item.userName}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
                   <image class='header-img' src="{{item.headerImg}}" ></image>
                   <text class='user-name'>{{item.userName}}</text>
                   <text class='msg-text'>{{item.msgText}}</text>
@@ -47,7 +47,7 @@
 
        <block wx:if="{{activeIndex==2}}">
         <view wx:for="{{msgList}}"  wx:if="{{item.userName=='兼职'}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
-              <view id='{{item.id}}' bindtap='urlto' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
+              <view id='{{item.id}}' bindtap='urlto' data-url='{{item.userName}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
                   <image class='header-img' src="{{item.headerImg}}" ></image>
                   <text class='user-name'>{{item.userName}}</text>
                   <text class='msg-text'>{{item.msgText}}</text>

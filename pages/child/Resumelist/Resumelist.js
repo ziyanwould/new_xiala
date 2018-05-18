@@ -242,9 +242,16 @@ Page({
     }
   },
   urlto:function(e){
-    console.log("简历",e)
-    wx.navigateTo({
-      url: '/pages/child/resume/resume',
-    })
+    console.log("简历", e.currentTarget.dataset.url)
+    if (e.currentTarget.dataset.url=='全职'){
+      wx.navigateTo({
+        url: '/pages/child/resume/resume',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/child/parTime/parTime',
+      })
+    }
+   
   }
 })

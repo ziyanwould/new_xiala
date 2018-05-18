@@ -12,18 +12,20 @@
 
 <view class='selsect'>
   <view class='sel_child'>
-     <view class='sel_left'>你的职责</view>
+     <view class='sel_left'>发证机构</view>
      <view class='sel_right'>
          <input  style='padding-right:51rpx;' value='{{work}}'></input> 
         
      </view>
   </view>
 </view> 
-
+ <view class='show'>
+  证书有效时间
+</view>
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>开始时间</view>
-    <picker class="weui-btn" mode="date" value="{{startTime}}" fields="month" data-type='endDate' bindchange="bindend">
+    <picker class="weui-btn" mode="date" value="{{startTime}}"  data-type='endDate' bindchange="bindend">
      <view class='sel_right'>
          <text>{{startTime}}</text>
          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
@@ -35,7 +37,7 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>结束时间</view>
-       <picker class="weui-btn" mode="date" value="{{endTime}}" fields="month" data-type='endDate' bindchange="bindendEnd">
+       <picker class="weui-btn" mode="date" value="{{endTime}}"  data-type='endDate' bindchange="bindendEnd">
      <view class='sel_right'>
          <text>{{endTime}}</text>
          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
@@ -44,13 +46,10 @@
   </view>
 </view> 
 
+
  <view class='show'>
-  工作内容
+  
 </view>
-<view class='text_count'>
-  <textarea placeholder='请输入公作内容...'>
-  </textarea>
-</view> 
 <button class='save'>保存</button>
 
 <view wx:if="true" class='remove_this' bindtap="openConfirm">删除此项目经历</view> 
