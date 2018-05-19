@@ -300,3 +300,7 @@ padding-top: 20rpx;
   font-size:26rpx;
   
 }
+.mybook{
+  display: flex;
+  justify-content:space-between;
+}

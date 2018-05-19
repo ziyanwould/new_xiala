@@ -4,8 +4,8 @@
   <view class='sel_child'>
      <view class='sel_left'>学校名称</view>
      <view class='sel_right'>
-         <text>{{school}}</text>
-         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+       
+          <input  style='padding-right:51rpx;' value='{{school}}'></input> 
      </view>
   </view>
 </view> 
@@ -14,8 +14,8 @@
   <view class='sel_child'>
      <view class='sel_left'>所学专业</view>
      <view class='sel_right'>
-         <text>{{specialty}}</text>
-         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+        
+         <input  style='padding-right:51rpx;' value='{{specialty}}'></input> 
      </view>
   </view>
 </view> 
@@ -52,5 +52,5 @@
   </textarea>
 </view> -->
 <button class='save'>保存</button>
- <view wx:if="" class='remove_this' bindtap="openConfirm">删除此教育经历</view> 
+ <view wx:if="true" class='remove_this' bindtap="openConfirm">删除此教育经历</view> 
 

@@ -1,4 +1,5 @@
 // pages/child/resume/resume.js
+var app = getApp();
 var common = require('../../../utils/common.js');
 Page({
 
@@ -44,8 +45,10 @@ Page({
       }
 
     })
-   
-   
+    this.setData({
+      resume: app.globalData.ResumeFull
+    })
+    console.log("resume",that.data.resume)
   },
 
   /**
@@ -91,6 +94,14 @@ Page({
     wx.navigateTo({
       url: '../customPlate/customPlate'
     })
+  },
+  addnew: function (event) {
+    
+    
+      wx.navigateTo({
+        url: event.currentTarget.dataset.url
+      })
+   
   },
   /*头像功能*/ 
   // changeAvatar: function () {

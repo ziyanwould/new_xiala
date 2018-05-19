@@ -1,5 +1,5 @@
 <!--pages/child/Certificate/Certificate.wxml-->
-<!--pages/child/projectExperience/projectExperience.wxml-->
+
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>证书</view>
@@ -52,7 +52,7 @@
 </view>
 <button class='save'>保存</button>
 
-<view wx:if="true" class='remove_this' bindtap="openConfirm">删除此项目经历</view> 
+<view wx:if="true" class='remove_this' bindtap="openConfirm">删除此证书信息</view> 
 
 
 

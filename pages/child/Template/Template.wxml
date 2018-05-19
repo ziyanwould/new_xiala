@@ -33,7 +33,7 @@
 <!-- 发现组件 -->
  <template name="tar_count" >
     <view class='tar_count'>
-      <navigator   url="/pages/AboutCompany/AboutCompany">发现</navigator>  
+      <navigator   url="/pages/child/resume/resume">发现</navigator>  
       <!-- <navigator  url="/pages/child/map/map">人脉</navigator> pages/child/Resumelist/Resumelist -->
        <navigator  url="/pages/child/Resumelist/Resumelist">人脉</navigator>
       <navigator  class="{{active}}" url="/pages/child/Message/Message" >消息</navigator> 

@@ -1,10 +1,36 @@
 <!--pages/child/ExpectWork/ExpectWork.wxml-->
 <view class='selsect'>
-  <view class='sel_child' wx:for="{{selectList}}" wx:key="item.id" bindtap="jumpToMyPage"   data-url="{{item.url}}">
-     <view class='sel_left'>{{item.name}}</view>
+  <view class='sel_child'  bindtap="jumpToMyPage"   >
+     <view class='sel_left'>{{ selectList.name1}}</view>
      <view class='sel_right'>
-         <text>{{item.count}}</text>
+         <text>
+         <block wx:if='{{!key}}'>{{ selectList.count1}}</block>
+         <block wx:if='{{key}}'>{{ info.expectWork.city}}</block>
+         </text>
          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+     </view>
+  </view>
+
+  <view class='sel_child' >
+     <view class='sel_left'>{{selectList.name2}}</view>
+     <view class='sel_right'>
+         <block wx:if='{{!key}}'> <input style='padding-right:51rpx;' bindinput='watchPassWord' data-self='selectList.count2' value='{{ selectList.count2}}'></input></block>
+         <block wx:if='{{key}}'> <input style='padding-right:51rpx;' bindinput='watchPassWord' data-self='info.expectWork.work' value='{{ info.expectWork.work}}'></input></block>
+     </view>
+  </view>
+
+  <view class='sel_child' >
+     <view class='sel_left'>{{ selectList.name3}}</view>
+     <view class='sel_right'>
+         <input style='padding-right:51rpx;' disabled='disable' value='{{ selectList.count3}}'></input>
+     </view>
+  </view>
+
+  <view class='sel_child'>
+     <view class='sel_left'>{{ selectList.name4}}</view>
+     <view class='sel_right'>
+        <block wx:if='{{!key}}'> <input style='padding-right:51rpx;' data-self='selectList.count4' bindinput='watchPassWord' value='{{ selectList.count4}}'></input></block>
+         <block wx:if='{{key}}'> <input style='padding-right:51rpx;' bindinput='watchPassWord' data-self='info.expectWork.monthlyPay' value='{{ info.expectWork.monthlyPay}}'></input></block>
      </view>
   </view>
 </view>
@@ -12,7 +38,7 @@
   补充说明
 </view>
 <view class='text_count'>
-  <textarea placeholder='请填写补充说明...'>
+  <textarea placeholder='请填写补充说明...' bindinput='watchPassWord' data-self='info.expectWork.moreInfo' value='{{ info.expectWork.moreInfo}}'>
   </textarea>
 </view>
-<button class='save'>保存</button>
+<button bindtap='save' class='save'>保存</button> 

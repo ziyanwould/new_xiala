@@ -14,3 +14,4 @@
 </view> 
 
 <button class='save'>保存</button>
+<view class='remove_this' bindtap="openConfirm">删除此自定义板块</view>
