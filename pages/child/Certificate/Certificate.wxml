@@ -4,21 +4,75 @@
   <view class='sel_child'>
      <view class='sel_left'>证书</view>
      <view class='sel_right'>
-         <input  style='padding-right:51rpx;' value='{{project}}'></input> 
+
+         <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.NameCertificate' style='padding-right:51rpx;' value='{{infoChild.NameCertificate}}'></input> 
+          <input wx:if="{{!key}}" bindinput='watchPassWord' data-self='project' style='padding-right:51rpx;' value='{{project}}'></input> 
          <!-- <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> -->
+     </view>
+  </view>
+</view> 
+
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>发证机构</view>
+     <view class='sel_right'>
+
+         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.organization' style='padding-right:51rpx;' value='{{infoChild.organization}}'></input> 
+          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='work' style='padding-right:51rpx;' value='{{work}}'></input> 
+        
      </view>
   </view>
 </view> 
 
 <view class='selsect'>
   <view class='sel_child'>
-     <view class='sel_left'>发证机构</view>
+     <view class='sel_left'>证书情况(可选)</view>
      <view class='sel_right'>
-         <input  style='padding-right:51rpx;' value='{{work}}'></input> 
+
+         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.registration' style='padding-right:51rpx;' value='{{infoChild.registration}}'></input> 
+          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='registration' style='padding-right:51rpx;' value='{{registration}}'></input> 
         
      </view>
   </view>
 </view> 
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>证书状态(可选)</view>
+     <view class='sel_right'>
+
+         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.state' style='padding-right:51rpx;' value='{{infoChild.state}}'></input> 
+          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='state' style='padding-right:51rpx;' value='{{state}}'></input> 
+        
+     </view>
+  </view>
+</view> 
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>证书用途(可选)</view>
+     <view class='sel_right'>
+
+         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.useRe' style='padding-right:51rpx;' value='{{infoChild.useRe}}'></input> 
+          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='useRe' style='padding-right:51rpx;' value='{{useRe}}'></input> 
+        
+     </view>
+  </view>
+</view> 
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>证书所在地(可选)</view>
+     <view class='sel_right'>
+
+         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.location' style='padding-right:51rpx;' value='{{infoChild.location}}'></input> 
+          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='location' style='padding-right:51rpx;' value='{{location}}'></input> 
+        
+     </view>
+  </view>
+</view> 
+
  <view class='show'>
   证书有效时间
 </view>
@@ -27,7 +81,8 @@
      <view class='sel_left'>开始时间</view>
     <picker class="weui-btn" mode="date" value="{{startTime}}"  data-type='endDate' bindchange="bindend">
      <view class='sel_right'>
-         <text>{{startTime}}</text>
+         <text wx:if="{{key}}">{{infoChild.startTime}}</text>
+          <text wx:if="{{!key}}">{{startTime}}</text>
          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
      </view>
     </picker>
@@ -39,7 +94,8 @@
      <view class='sel_left'>结束时间</view>
        <picker class="weui-btn" mode="date" value="{{endTime}}"  data-type='endDate' bindchange="bindendEnd">
      <view class='sel_right'>
-         <text>{{endTime}}</text>
+         <text wx:if="{{key}}">{{infoChild.endTime}}</text>
+          <text wx:if="{{!key}}">{{endTime}}</text>
          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
      </view>
      </picker>
@@ -50,9 +106,9 @@
  <view class='show'>
   
 </view>
-<button class='save'>保存</button>
+<button bindtap='save' class='save'>保存</button>
 
-<view wx:if="true" class='remove_this' bindtap="openConfirm">删除此证书信息</view> 
+<view wx:if="{{switchs}}" class='remove_this' bindtap="openConfirm">删除此证书信息</view> 
 
 
 

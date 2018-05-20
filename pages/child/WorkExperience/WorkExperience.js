@@ -98,6 +98,7 @@ Page({
         console.log(res);
         if (res.confirm) {
           console.log('用户点击确定')
+          //莫名是旧数据更新 赋值得到是错误
           const her = 'info.workExperience';
           var delInfo = (that.data.info.workExperience).splice(that.data.num, 1)
           that.setData({

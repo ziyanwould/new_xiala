@@ -171,6 +171,10 @@ App({
           "id": 0,
           "NameCertificate": "全国建设工程造价员资格证",
           "organization": "广州建设职业培训学校",
+          "registration":"初始",
+          "state":"代挂",
+          "useRe":"资质",
+          "location":"广州",
           "startTime": "2011-2",
           "endTime": "2014-2"
         },
@@ -178,6 +182,10 @@ App({
           "id": 1,
           "NameCertificate": "全国建设工程造价员资格证",
           "organization": "北京建设职业培训学校",
+          "registration": "初始",
+          "state": "代挂",
+          "useRe": "资质",
+          "location": "广州",
           "startTime": "2011-2",
           "endTime": "2014-2"
         }
@@ -216,6 +224,47 @@ App({
         }
       ],
       "updateTime": "2018-03-20 10:03"
-    }//一个简历信息
+    },//一个简历信息
+    resumePart: {
+      "name": "resume",
+      "isNonProfit": true,
+      "expectWork": {
+        "work": "一级建造师",
+        "city": "广州",
+        "positionType": "兼职",
+        "monthlyPay": "5K - 10K",
+        "moreInfo": "我希望迅速到岗"
+      },
+      "certificate": [
+        {
+          "id": 0,
+          "NameCertificate": "全国建设工程造价员资格证",
+          "organization": "广州建设职业培训学校",
+          "registration": "初始",
+          "state": "代挂",
+          "useRe": "资质",
+          "location": "广州",
+          "startTime": "2011-2",
+          "endTime": "2014-2"
+        },
+        {
+          "id": 1,
+          "NameCertificate": "全国建设工程造价员资格证",
+          "organization": "北京建设职业培训学校",
+          "registration": "初始",
+          "state": "代挂",
+          "useRe": "资质",
+          "location": "广州",
+          "startTime": "2011-2",
+          "endTime": "2014-2"
+        }
+      ],
+  
+      "selfDescription": {
+        "content": "建造师证15年考的，职称证去年在福建评的，有红头文件评审表"
+      },
+   
+      "updateTime": "2018-05-20 18:03"
+    },//一个简历信息
   }
 })

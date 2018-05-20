@@ -22,7 +22,7 @@
   <view class='sel_child' >
      <view class='sel_left'>{{ selectList.name3}}</view>
      <view class='sel_right'>
-         <input style='padding-right:51rpx;' disabled='disable' value='{{ selectList.count3}}'></input>
+         <input style='padding-right:51rpx;' disabled='disable' value='{{ info.expectWork.positionType}}'></input>
      </view>
   </view>
 

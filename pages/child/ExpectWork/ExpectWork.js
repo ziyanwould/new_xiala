@@ -24,12 +24,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  //console.log(options)
+  console.log(options)
   const types = options.type;
-   this.setData({
-     info: app.globalData.ResumeFull,
-     key: types
-   })
+
+  //兼职全职导入不同表
+  if (!options.parTime){
+    this.setData({
+      info: app.globalData.ResumeFull,
+      key: types
+    })
+  }else{
+    this.setData({
+      info: app.globalData.resumePart,
+      key: types,
+      parTime:true,
+    })
+  }
+ 
   },
 
   /**
@@ -114,10 +125,20 @@ Page({
     //console.log("替换后的值",this.data.info)
   }
   ,save:function(event){
-    //更新全局变量方式 20180519
-    app.globalData.ResumeFull = this.data.info
-    typeof cb == "function" && cb(app.globalData.ResumeFull)
+
+    if (this.data.parTime){
+      //更新全局变量方式 20180519
+      app.globalData.resumePart = this.data.info
+      typeof cb == "function" && cb(app.globalData.resumePart)
     //更新全局变量结束 20180519
+    }else{
+      //更新全局变量方式 20180519
+      app.globalData.ResumeFull = this.data.info
+      typeof cb == "function" && cb(app.globalData.ResumeFull)
+    //更新全局变量结束 20180519
+    }
+
+  
     wx.showToast({
       title: '保存成功',
       icon: 'success',

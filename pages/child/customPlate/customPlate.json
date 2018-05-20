@@ -1,7 +1,7 @@
 {
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "添加自定义板块",
+  "navigationBarTitleText": "自定义板块",
   "backgroundColor": "#eeeeee",
   "backgroundTextStyle": "dark",
   "enablePullDownRefresh": true

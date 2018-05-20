@@ -1,19 +1,35 @@
 // pages/child/selfDescription/selfDescription.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+   input:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options)
+    const types = options.type;
+    //兼职全职导入不同表
+    if (!options.parTime) {
+      this.setData({
+        info: app.globalData.ResumeFull,
+        key: types
+      })
+    } else {
+      this.setData({
+        info: app.globalData.resumePart,
+        key: types,
+        parTime: true,
+      })
+    }
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -62,5 +78,36 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  watchPassWord: function (event) {
+  
+    const inputs = event.currentTarget.dataset.self;
+    this.setData({
+      [inputs]: event.detail.value
+    })
+   
+  }
+  , save: function (event) {
+    if (this.data.parTime) {
+      //更新全局变量方式 20180519
+      app.globalData.resumePart = this.data.info
+      typeof cb == "function" && cb(app.globalData.resumePart)
+      //更新全局变量结束 20180519
+    } else {
+      //更新全局变量方式 20180519
+      app.globalData.ResumeFull = this.data.info
+      typeof cb == "function" && cb(app.globalData.ResumeFull)
+      //更新全局变量结束 20180519
+    }
+    wx.showToast({
+      title: '保存成功',
+      icon: 'success',
+      duration: 800
+    });
+    setTimeout(function () {
+      wx.navigateBack({
+        delta: 1
+      })
+    }, 1000)
   }
 })

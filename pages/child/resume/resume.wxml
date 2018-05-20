@@ -129,6 +129,8 @@
       <view class='sec_book'>
         <view class='sec_book1'>{{item.NameCertificate}}</view>
         <view class='sec_book2'>{{item.organization}}</view>
+        <view wx:if="{{tem.registration || item.state || item.useRe || item.location}}" class='sec_book2'> 
+        {{item.registration}}/{{item.state}}/{{item.useRe}}/{{item.location}}</view>
         <view class='sec_book3'>{{item.startTime}} -- {{item.endTime}}</view>
       </view>
 
