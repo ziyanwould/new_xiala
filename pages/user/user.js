@@ -389,7 +389,24 @@ Page({
     this.setData({
       hiddenmodalput: true
     })
-   
+    let nums = this.data.getResuName.length;
+    let urls = this.data.resumeName;
+    
+    if (nums > 0 && urls=='全职'){
+      wx.navigateTo({
+        url: '/pages/child/resume/resume?type=new'
+      })
+    } else if (nums > 0 && urls == '兼职'){
+      wx.navigateTo({
+        url: '/pages/child/parTime/parTime?type=new'
+      })
+    }else{
+      wx.showToast({
+        title: '请输入简历名',
+        icon:'loading',
+        duration:800
+      })
+    }
   }  
   //简历输入名字end
 
