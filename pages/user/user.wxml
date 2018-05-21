@@ -58,7 +58,7 @@
 <!-- end -->
 <!-- 跳转版块 -->
 <view class='wx_feature'>
-  <view class='sec1' bindtap="jumpToMyPage" data-url="/pages/child/Resumelist/Resumelist">
+  <!-- <view class='sec1' bindtap="jumpToMyPage" data-url="/pages/child/Resumelist/Resumelist">
       <view class='fun_left'>
         <image src='http://www.liujiarong.top/WX/images/wx_resume.png'></image>
         <text class='xod'>简历</text>
@@ -67,7 +67,7 @@
       <view class='fun_right'>
         <block wx:if="{{key}}"><text>完整程度：</text><em>75%</em></block><image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
-  </view>
+  </view> -->
    <view class='sec1' wx:for="{{jobList}}" wx:key="item.id"   bindtap="jumpToMyPage" data-url="{{item.url}}">
       <view class='fun_left'>
         <image src='http://www.liujiarong.top/WX/images/{{item.pic}}.png' ></image>
@@ -111,7 +111,7 @@
         <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
   </button>
-
+ 
 
 </view>
   <!-- end -->
@@ -127,4 +127,8 @@
 </view> 
 <!-- end -->
 
-
+<!-- 弹出简历输入名称 -->
+<modal hidden="{{hiddenmodalput}}" title="请输入{{resumeName}}简历名称" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">  
+    <input type='text'placeholder="请输入  (仅用于识别,不可修改)" value='{{resumeInput}}' bindinput='watchinput' auto-focus/>  
+</modal>  
+<!-- 输入名称结束 -->

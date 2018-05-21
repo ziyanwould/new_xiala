@@ -5,33 +5,46 @@ var app = getApp()
 Page({
   data: {
     motto: '欢迎',
+    hiddenmodalput: true,  
     userInfo: {},
     person:"集众人之力，成细节之美！",
     influence:"17",
     influence_per:"20.6%",
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     jobList:[
+        {
+        "name": "简历管理",
+        "id": 0,
+        "pic": "wx_resume",
+        "url":"/pages/child/Resumelist/Resumelist"
+      },
+       {
+          "name": "创建简历",
+          "id": 1,
+          "pic": "creation",
+          "url": "creation"
+        },
+        {
+          "name": "个人认证",
+          "id": 2,
+          "pic": "identifi2",
+          "url": null
+        },
       {
        "name":"投递记录",
-       "id":"0",
+       "id":3,
        "pic": "wx_record",
        "url":"../child/deliver/deliver",
       },
       {
         "name": "职位收藏",
-        "id": "1",
+        "id": 4,
         "pic": "wx_collect",
         "url":"../child/position/position"
       }
-      // {
-      //   "name": "反馈",
-      //   "id": "2",
-      //   "pic": "wx_retroaction",
-      //   "url":"../child/couple/couple"
-      // }
       , {
         "name": "访客",
-        "id": "3",
+        "id": 5,
         "pic": "wx_footprint",
         "url": "../child/visitor/visitor"
       }
@@ -98,10 +111,17 @@ Page({
     wx.stopPullDownRefresh();
   },
    jumpToMyPage: function (event) {
+     var that = this;
      if (this.data.key) {
-       wx.navigateTo({
-         url: event.currentTarget.dataset.url
-       })
+       //20180521 增加对创建简历动态指引兼职与非兼职引导
+       if (event.currentTarget.dataset.url =='creation'){
+         that.selectResu()
+       }else{
+         wx.navigateTo({
+           url: event.currentTarget.dataset.url
+         })
+       }
+      
      }else{
        var self = common.tanchu()
        this.setData({
@@ -351,5 +371,58 @@ Page({
       }
 
     },50)
-  }
+  },
+  //简历名字的输入
+  modalinput: function () {
+    this.setData({
+      hiddenmodalput: !this.data.hiddenmodalput
+    })
+  },
+  //取消按钮  
+  cancel: function () {
+    this.setData({
+      hiddenmodalput: true
+    });
+  },
+  //确认  
+  confirm: function () {
+    this.setData({
+      hiddenmodalput: true
+    })
+   
+  }  
+  //简历输入名字end
+
+  ,//兼职与全职的选择
+    selectResu: function () {
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['创建兼职简历', '创建全职简历'],
+      success: function (res) {
+        let nums = res.tapIndex; 
+        if (nums==0){
+          that.setData({
+            resumeName:"兼职"
+          })
+
+        }else{
+          that.setData({
+            resumeName: "全职"
+          })
+        }
+        that.modalinput()
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+  }  
+  ,
+  //监听兼职与全职名字
+watchinput:function(e){
+  console.log(e.detail.value)
+  this.setData({
+    getResuName: e.detail.value
+  }) 
+}
 })

@@ -19,7 +19,7 @@
            </view>
           <view class='se1Count'>
              <!-- <text wx:for="{{history}}" wx:key="item.id">{{item.count}}</text>   -->
-               <text wx:for="{{historys}}" bindtap='gitval' data-val='{{item.count}}' wx:key="item.id">{{item.count}}</text>  
+               <text wx:for="{{historys}}" bindtap='gitval' data-val='{{item}}' wx:key="item.id">{{item}}</text>  
           </view>
          </view>
 

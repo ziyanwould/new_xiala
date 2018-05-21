@@ -18,12 +18,12 @@ Page({
 
     ],
     historys: [
-      { count:"建造师"},
-      { count: "一级建造师" },
-      { count: "五大员" },
-      { count: "建筑师" },
-      { count: "设计师" },
-      { count: "中住七一网络科技有限公司" },
+      // { count:"建造师"},
+      // { count: "一级建造师" },
+      // { count: "五大员" },
+      // { count: "建筑师" },
+      // { count: "设计师" },
+      // { count: "中住七一网络科技有限公司" },
     ],
     enjoy: [
       { name: "建造师" },
@@ -440,7 +440,16 @@ Page({
     wx.showLoading({
       title: 'loading...',
     });
-   
+   //使用本地存储功能
+    wx.getStorage({
+      key: 'SeaHistory',
+      success: function (res) {
+       that.setData({
+         historys:res.data
+       })
+      }
+    });
+
     wx.request({
       url: url,
       data: {
@@ -510,7 +519,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    var that = this
+    wx.setStorage({
+      key: "SeaHistory",
+      data: that.data.historys
+    }) 
   },
 
   /**
@@ -621,7 +634,16 @@ Page({
         gps:false,
         selectD:true
       })
-    
+    //监测输入后得到值 并存入本地变量 历史搜索
+   console.log('搜索值',that.data.count);
+   var self = that.data.historys;
+   self.unshift(that.data.count); 
+   self = that.dedupe(self)
+   //console.log('更新后历史记录', self)
+   that.setData({
+     historys: self
+   })
+   // 历史搜索结束 
     }else{
       wx.navigateBack({ changed: true });//返回上一页  
     }
@@ -632,14 +654,20 @@ Page({
     })
   }
   , gitval:function(event){
-    console.log(event.currentTarget.dataset.val)
+    var that = this;
+    console.log(event.currentTarget.dataset.val);
+    //收索历史记录
+    var self = that.data.historys;
+    self.unshift(event.currentTarget.dataset.val); 
+    self = that.dedupe(self)
+    //收索历史记录end
     this.setData({
        count: event.currentTarget.dataset.val,
        Fbutton: '完成',
        pageShow: false,
        gps: false,
-       selectD:true
-    
+       selectD:true,
+       historys: self
     })
   }, 
   open: function () {
@@ -671,5 +699,9 @@ Page({
     wx.navigateTo({
       url: "/pages/AboutCompany/AboutCompany"
     }) 
+  }
+  ,dedupe:function(array){
+    var old = array.slice(0, 6);
+    return Array.from(new Set(old));
   }
 })  
