@@ -1,11 +1,13 @@
 //app.js
+var common = require('/utils/common.js');
 App({
   data: {
     deviceInfo: {}
   },
   onLaunch: function () {
     this.data.deviceInfo = wx.getSystemInfoSync();
-    console.log(this.data.deviceInfo);
+
+    // console.log(this.data.deviceInfo);
     //调用API从本地缓存中获取数据
      var that = this
     // var logs = wx.getStorageSync('logs') || []
@@ -34,7 +36,7 @@ App({
               console.log("发起网络请求", res.code)
               //that.globalData.openid = res.code
               wx.request({
-                url: 'http://120.27.100.219:54231/common/get_wx_openid',
+                url: 'http://120.27.100.219:54231/api/common/get_wx_openid',
                 header: {
                   'content-type': 'application/json',
                   'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -94,35 +96,71 @@ App({
         });
       }
     })
+   /**设置职位列表与证书列表 */
+ 
+  
+    try {
+      var value = wx.getStorageSync('Jobl')
+      if (value) {
+        //更新全局变量方式 20180515
+        _this.globalData.Jobl = value
+        typeof cb == "function" && cb(that.globalData.Jobl)
+            //更新全局变量结束 20180515
+      }else{
+        common.request('sort/get_job_type', {
+          params: {},
+          success: function (res) {
+           // console.log('获取列表', res.data.data.list);
+            wx.setStorageSync('Jobl', res.data.data.list)
 
-   
+            //更新全局变量方式 20180515
+            _this.globalData.Jobl = res.data.data.list
+            typeof cb == "function" && cb(that.globalData.Jobl)
+            //更新全局变量结束 20180515
+          }
+        })
+      }
+
+    } catch (e) {
+      //错误执行
+    }
+
+    try {
+      var value = wx.getStorageSync('CRL')
+      if (value) {
+        //更新全局变量方式 20180515
+        _this.globalData.CRL = value
+        typeof cb == "function" && cb(that.globalData.CRL)
+        //更新全局变量结束 20180515
+      } else {
+        common.request('sort/get_ger_type', {
+          params: {},
+          success: function (res) {
+            // console.log('获取列表', res.data.data.list);
+            wx.setStorageSync('CRL', res.data.data.list)
+
+            //更新全局变量方式 20180515
+            _this.globalData.CRL = res.data.data.list
+            typeof cb == "function" && cb(that.globalData.CRL)
+            //更新全局变量结束 20180515
+          }
+        })
+      }
+
+    } catch (e) {
+      //错误执行
+    }
+
   },
-  // getUserInfo:function(cb){
-  //   var that = this
-  //   if(this.globalData.userInfo){
-  //     typeof cb == "function" && cb(this.globalData.userInfo)
-  //   }else{
-  //     //调用登录接口
-  //     wx.login({
-  //       success: function () {
 
-  //         wx.getUserInfo({
-  //           success: function (res) {
-  //             that.globalData.userInfo = res.userInfo
-  //              typeof cb == "function" && cb(that.globalData.userInfo)
-  //           }
-  //         })
-          
-  //       }
-  //     })
-  //   }
-  // },
   globalData:{
     userInfo:null,//用户共用的基本信息
     oppenid:null,//用户的openID
     login:null,//用户的登录凭证
     city:null,//编辑页的城市选择
     empower:null,//授权标识值
+    Jobl:[],//职位列表
+    CRL:[],//证书列表
     ResumeFull: {
       "name": "resume",
       "isNonProfit": true,

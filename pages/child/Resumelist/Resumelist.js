@@ -35,8 +35,10 @@ Page({
       var msg = {};
       if(i%3==0){
         msg.userName = '' + '全职';
+        msg.color = "#17A8E2"
       }else{
         msg.userName = '' + '兼职';
+        msg.color = "#F8DC9C"
       }
       msg.msgText = '一级建造师 - 建筑工程' + i;
       msg.time = '更新时间：2018年5月17日 14:52:'+i;

@@ -76,10 +76,17 @@
           </block>
            <!-- 二级赛选内容  与搜索出来的公司板块，搜索出来的列表两者只显示一个-->
            <block wx:if="{{!selected}}">
-              <view class='preparation'>
-                  <view wx:for="{{changeJob=='兼职'?positions:Position}}"  wx:key="*this"  class="{{item.types?'preCount':'preTitle'}} {{activesIndex==index?'active':''}}"  id="{{index}}"  bindtap="actives" data-value="{{item.types?item.count:''}}" >
+             <view class='preparation'>
+                   <!--  <view wx:for="{{changeJob=='兼职'?positions:Position}}"  wx:key="*this"  class="{{item.types?'preCount':'preTitle'}} {{activesIndex==index?'active':''}}"  id="{{index}}"  bindtap="actives" data-value="{{item.types?item.count:''}}" >
                     {{item.count}} 
-                  </view>    
+                  </view>      -->
+               <block wx:for="{{changeJob=='兼职'?CRL:Jobl}}"  wx:key="*this" wx:for-index="indexs">
+                      <view class='preTitle'>{{item.name}}</view>
+                      <view wx:for="{{item.seclist}}"  wx:key="*this" class="preCount {{xuhao==item.id?'active':''}}" bindtap="actives" data-value="{{item.name}}" 
+                      id='{{item.id}}' data-parent_id='{{item.parent_id}}'>
+                       {{item.name}}
+                      </view>
+              </block> 
 
                   <button class="weui-btn surse" bindtap="selectClick">确定</button>
               </view>

@@ -3,11 +3,11 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>证书</view>
-     <view class='sel_right'>
+     <view bindtap='selectbook' class='sel_right' >
 
-         <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.NameCertificate' style='padding-right:51rpx;' value='{{infoChild.NameCertificate}}'></input> 
-          <input wx:if="{{!key}}" bindinput='watchPassWord' data-self='project' style='padding-right:51rpx;' value='{{project}}'></input> 
-         <!-- <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> -->
+          <text wx:if="{{key}}"> {{infoChild.NameCertificate}}</text> 
+          <text wx:if="{{!key}}" >{{project}}</text> 
+          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
      </view>
   </view>
 </view> 
@@ -28,11 +28,11 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>证书情况(可选)</view>
-     <view class='sel_right'>
+     <view class='sel_right'bindtap="opend" id='0'>
 
-         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.registration' style='padding-right:51rpx;' value='{{infoChild.registration}}'></input> 
-          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='registration' style='padding-right:51rpx;' value='{{registration}}'></input> 
-        
+          <text wx:if="{{key}}">{{infoChild.registration}}</text> 
+          <text wx:if="{{!key}}">{{registration}}</text> 
+            <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
      </view>
   </view>
 </view> 
@@ -40,11 +40,11 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>证书状态(可选)</view>
-     <view class='sel_right'>
+     <view class='sel_right' bindtap="opend" id='1'>
 
-         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.state' style='padding-right:51rpx;' value='{{infoChild.state}}'></input> 
-          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='state' style='padding-right:51rpx;' value='{{state}}'></input> 
-        
+         <text wx:if="{{key}}"> {{infoChild.state}}</text> 
+          <text wx:if="{{!key}}">{{state}}</text> 
+            <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
      </view>
   </view>
 </view> 
@@ -52,11 +52,11 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>证书用途(可选)</view>
-     <view class='sel_right'>
+     <view class='sel_right' bindtap="opend" id='2'>
 
-         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.useRe' style='padding-right:51rpx;' value='{{infoChild.useRe}}'></input> 
-          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='useRe' style='padding-right:51rpx;' value='{{useRe}}'></input> 
-        
+            <text wx:if="{{key}}" >{{infoChild.useRe}}</text> 
+            <text wx:if="{{!key}}" >{{useRe}}</text> 
+            <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
      </view>
   </view>
 </view> 
@@ -68,7 +68,7 @@
 
          <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.location' style='padding-right:51rpx;' value='{{infoChild.location}}'></input> 
           <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='location' style='padding-right:51rpx;' value='{{location}}'></input> 
-        
+           
      </view>
   </view>
 </view> 

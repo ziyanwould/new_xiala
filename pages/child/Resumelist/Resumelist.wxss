@@ -35,31 +35,39 @@
 
 .user-name {
   position: absolute;
-  left: 150rpx;
+  left: 30rpx;
   top: 20rpx;
   font-size: 28rpx
 }
 
 .msg-text {
   position: absolute;
-  left: 150rpx;
+  left: 30rpx;
   bottom: 50rpx;
   font-size: 27rpx;
   color: rgb(127, 127, 127);
 }
 .msg-time{
   position: absolute;
-  left: 150rpx;
+  left: 30rpx;
   bottom: 20rpx;
   font-size: 23rpx;
   color: rgb(127, 127, 127);
 }
 .msg-state{
   position: absolute;
-  right: 20rpx;
+  right: 30rpx;
   top: 20rpx;
   font-size: 26rpx;
   color: rgb(127, 127, 127);
+}
+.msg-name{
+  position: absolute;
+  right: 30rpx;
+  bottom: 20rpx;
+  font-size: 23rpx;
+  color: rgb(127, 127, 127);
+
 }
 .msg-menu {
   position: absolute;

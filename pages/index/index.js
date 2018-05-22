@@ -227,7 +227,7 @@ Page({
 
           //解析手机号
           wx.request({
-            url: 'http://120.27.100.219:54231/common/wx_login_phone',
+            url: 'http://120.27.100.219:54231/api/common/wx_login_phone',
             header: {
               'content-type': 'application/json',
               'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='

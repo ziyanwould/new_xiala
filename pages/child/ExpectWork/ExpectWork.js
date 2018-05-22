@@ -64,9 +64,17 @@ Page({
 
        })
     }
-        
-        
-    
+    /**跳转筛选 */
+     var value = wx.getStorageSync('worktype')     
+     //console.log("携带回来的信息", value)   
+     if (value){
+       this.setData({
+         'selectList.count2': value.value,
+         'info.expectWork.work': value.value
+       })
+     }
+     wx.removeStorageSync('worktype')
+     /** */
   },
 
   /**
@@ -149,5 +157,11 @@ Page({
         delta:1
       })
     },1000)
+  }
+  //对全局职位的筛选
+  ,selectWork:function(){
+    wx.navigateTo({
+      url: '/pages/child/selectProject/selectProject?id=0'//实际路径要写全
+    })
   }
 })

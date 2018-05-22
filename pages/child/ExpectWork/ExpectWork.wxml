@@ -4,8 +4,8 @@
      <view class='sel_left'>{{ selectList.name1}}</view>
      <view class='sel_right'>
          <text>
-         <block wx:if='{{!key}}'>{{ selectList.count1}}</block>
-         <block wx:if='{{key}}'>{{ info.expectWork.city}}</block>
+         <block wx:if='{{!key}}'>{{selectList.count1}}</block>
+         <block wx:if='{{key}}'>{{info.expectWork.city}}</block>
          </text>
          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
      </view>
@@ -13,9 +13,10 @@
 
   <view class='sel_child' >
      <view class='sel_left'>{{selectList.name2}}</view>
-     <view class='sel_right'>
-         <block wx:if='{{!key}}'> <input style='padding-right:51rpx;' bindinput='watchPassWord' data-self='selectList.count2' value='{{ selectList.count2}}'></input></block>
-         <block wx:if='{{key}}'> <input style='padding-right:51rpx;' bindinput='watchPassWord' data-self='info.expectWork.work' value='{{ info.expectWork.work}}'></input></block>
+     <view class='sel_right' bindtap='selectWork'>
+         <text wx:if='{{!key}}' >{{selectList.count2}}</text> 
+         <text wx:if='{{key}}' >{{info.expectWork.work}}</text>
+         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
      </view>
   </view>
 

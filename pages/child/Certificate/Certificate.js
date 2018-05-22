@@ -73,7 +73,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    /**跳转筛选 */
+    var value = wx.getStorageSync('worktype')
+    //console.log("携带回来的信息", value)   
+    if (value) {
+      this.setData({
+        'infoChild.NameCertificate': value.value,
+        'project': value.value
+      })
+    }
+    wx.removeStorageSync('worktype')
+     /** */
   },
 
   /**
@@ -236,4 +246,49 @@ Page({
   }
 //监听 修改 增加 删除三件套 end
 
+  //对全局证书的筛选
+  , selectbook: function () {
+    wx.navigateTo({
+      url: '/pages/child/selectProject/selectProject?id=1'//实际路径要写全
+    })
+  }
+  ,//下拉选择
+  opend: function (e) {
+    var that = this
+   console.log(e)
+   var typed = e.currentTarget.id
+   console.log(typed)
+   if (typed==0){
+     var lists =['专注','初始']
+   } else if (typed == 1){
+     var lists = ['闲置中', '未到期','快拿证']
+   } else if (typed == 2){
+     var lists = ['不限', '资质', '项目']
+   }
+    wx.showActionSheet({
+      itemList:lists,
+      success: function (res) {
+        if (!res.cancel) {
+         const number = res.tapIndex
+         if (typed==0){
+          that.setData({
+            'infoChild.registration': lists[number],
+            'registration': lists[number]
+          })
+         } else if (typed == 1){
+           that.setData({
+            'infoChild.state' :  lists[number],
+             'state' :  lists[number]
+           })
+         } else if (typed == 2){
+           that.setData({
+             'infoChild.useRe': lists[number],
+             'useRe': lists[number]
+           })
+         }
+
+        }
+      }
+    });
+  }
 })
