@@ -244,9 +244,17 @@ Page({
 
      //获取详情页信息   使用Promise进行异步流程处理
      if (jobs==0){
-       var urls ='http://120.27.100.219:54231/api/position/get_part_detail'
+       var urls ='http://120.27.100.219:54231/api/position/get_part_detail';
+       that.setData({
+         urlx : 'http://120.27.100.219:54231/api/position/get_part_list'
+       })
+      
      }else{
-       var urls = 'http://120.27.100.219:54231/api/position/get_full_detail'
+       var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';
+       that.setData({
+         urlx: 'http://120.27.100.219:54231/api/position/get_full_list'
+       })
+     
      }
     //  common.request(urls,
     //    {
@@ -263,7 +271,7 @@ Page({
     //    }, null)
      //获取相关推荐列表
 
-     var requestPromisified = common.wxPromisify(wx.request);
+     let requestPromisified = common.wxPromisify(wx.request);
      requestPromisified({
        data: { "position_id": id },
        url: urls,
@@ -275,12 +283,42 @@ Page({
      }).then(res =>{
           console.log(res)
           that.setData({
-
+            seachKey: res.data.data.detail.job_sec_type
           })
      }).then(res =>{
-       console.log(res)
-     })
+       console.log('seachKey:', that.data.seachKey);
+       that.second()
+       })
+
+
+
   
+  },
+  second:function(){
+    var that =this;
+    let requestPromisified = common.wxPromisify(wx.request);
+      requestPromisified({
+        data: {
+          "pageIndex": 1,
+          "pageSize": 3,
+          "key": that.data.seachKey,
+        },
+        url: that.data.urlx,
+        method: 'POST',
+        header: {
+          'content-type': 'application/json',
+          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+        },
+      }).then(res => {
+        console.log('999999', res)
+        that.setData({
+          // seachKey:''
+        })
+      }).then(res => {
+        console.log('00000003')
+      })
+   
+
   }     
   //路由跳转等end
   //搜索页路由跳转
