@@ -1,4 +1,4 @@
-var app = getApp();
+var Promise = require('./bluebird.min.js')
 function sjc() {
   var timestamp = Date.parse(new Date());
   timestamp = timestamp / 1000;
@@ -201,6 +201,24 @@ function setStronguser (myevent){
     }
   })
 }
+
+//异步处理方案 
+function wxPromisify(fn) {
+  return function (obj = {}) {
+    return new Promise((resolve, reject) => {
+      obj.success = function (res) {
+        //成功
+        resolve(res)
+      }
+      obj.fail = function (res) {
+        //失败
+        reject(res)
+      }
+      fn(obj)
+    })
+  }
+}
+
 module.exports = {
   //要引用的函数 xx:xx
   sjc: sjc,
@@ -208,7 +226,6 @@ module.exports = {
   SomeThing: SomeThing,
   request: request,
   getinst: getinst,
-  setStronguser: setStronguser
-  
- 
+  setStronguser: setStronguser,
+  wxPromisify: wxPromisify
 }

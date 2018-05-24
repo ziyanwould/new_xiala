@@ -83,7 +83,7 @@
           src: 'http://www.liujiarong.top/WX/dw.png'
         },
         onLoad: function onLoad(options) {
-          console.log(options)
+          console.log("options里的内容", options)
           //历史选择，应该在缓存中记录，或者在在app中全局记录
           //当前城市通过之前的页面穿过来或者调用定位
           var c = '北京';
@@ -93,6 +93,12 @@
             city: c,
             nesType: options.other
           });
+          /**给证书传入城市值 */
+          if(options.approveID){
+            this.setData({
+              approveID:true
+            });
+          }
           // 生命周期函数--监听页面加载
           var searchLetter = city.searchLetter;
           var cityList = city.cityList();
@@ -229,11 +235,11 @@
               key: "gabbleCity",
               data: cargo
             });
+          }else if(this.data.approveID){
+            console.log("approveID", this.data.approveID ,city)
+            wx.setStorageSync('bookCity', city )
+             
           }else{
-            // wx.setStorage({
-            //   key: "cargo",
-            //   data: cargo
-            // });
             //更新全局变量方式 20180515
             app.globalData.city = city
             typeof cb == "function" && cb(app.globalData.city)

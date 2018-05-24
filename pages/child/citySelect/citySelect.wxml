@@ -23,7 +23,7 @@
                 <view style="margin-left: 15px">
                     <text class="hor" >历史访问</text>
                     <view>
-                        <block  wx:for="{{cityArr}}" wx:for-item="cityName">
+                        <block  wx:for="{{cityArr}}" wx:for-item="cityName" wx:key='this'>
                             <view  class="kuai" data-text="{{cityName}}" bindtap = "wxSortPickerViewItemTap">{{cityName}}</view>
                         </block>
                     </view>

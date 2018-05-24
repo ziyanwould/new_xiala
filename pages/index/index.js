@@ -3,54 +3,18 @@
 var common = require('../../utils/common.js');
 var app = getApp();
 // 下拉刷新内容
-var url = "http://www.imooc.com/course/ajaxlist";
-var page = 0;
-var page_size = 5;
-var sort = "last";
-var is_easy = 0;
-var lange_id = 0;
-var pos_id = 0;
-var unlearn = 0;
+var Index = 1;
+var Size = 10;
 
-// 请求数据  
-var loadMore = function (that) {
- 
-  wx.request({
-    url: url,
-    data: {
-      page: page,
-      page_size: page_size,
-      sort: sort,
-      is_easy: is_easy,
-      lange_id: lange_id,
-      pos_id: pos_id,
-      unlearn: unlearn,
-  
-
-      
-    },
-    success: function (res) {
-      //console.info(that.data.list);  
-      var list = that.data.list;
-      for (var i = 0; i < res.data.list.length; i++) {
-        list.push(res.data.list[i]);
-      }
-      that.setData({
-        list: list
-      });
-      page++;
-    
-    }
-  });
-}  
 
 var register = require('../../utils/refreshLoadRegister.js');
 Page({
   data: {    
     currentSize:0,
-    words: [],
+    fullTimeurl:'http://120.27.100.219:54231/api/position/get_part_recommend',
     list: [],
     items: {},
+    jobType: 0,
     mydata:{
       seektype: "搜索职位"
     },
@@ -62,10 +26,6 @@ Page({
      
       ]
     }
-   
- 
-    
-   
   },
   onShow: function () {
     /*是否登录  更新状态*/
@@ -107,7 +67,7 @@ Page({
 
     register.register(this);   
     //获取words  
-    this.doLoadData(0,20);
+    this.doLoadData(this);
     var self = common.tanchu()
       _this.setData({
         items:{
@@ -121,48 +81,57 @@ Page({
     
 
   },
-  doLoadData(){
+  doLoadData(that){
       wx.showLoading({
         title: 'loading...',
       });
       var that = this;
       wx.request({
-        url: url,
+        url: that.data.fullTimeurl,
         data: {
-          page: page,
-          page_size: page_size,
-          sort: sort,
-          is_easy: is_easy,
-          lange_id: lange_id,
-          pos_id: pos_id,
-          unlearn: unlearn
+          'pageIndex': Index,
+          'pageSize': Size,
+       
+        },
+        method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+        // header: {}, // 设置请求的 header 
+        header: {
+          'content-type': 'application/json',
+          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
         },
         success: function (res) {
-          //console.info(that.data.list);  
+          console.info(res.data.data.positions);  
           var list = that.data.list;
-          for (var i = 0; i < res.data.list.length; i++) {
-            list.push(res.data.list[i]);
+          for (var i = 0; i < res.data.data.positions.length; i++) {
+            list.push(res.data.data.positions[i]);
           }
           that.setData({
             list: list
           });
-          page++;
+          Index++;
           wx.hideLoading();
           register.loadFinish(that, true);
+          if (res.data.data.positions.length == 0) {
+            wx.showToast({
+              title: '到底了...',
+              icon: 'loading',
+              duration: 2000
+            });
+          }
         }
       });
       
         
-    
+
   },
   //模拟刷新数据
   refresh:function(){
     
     this.setData({
-      words:[],
-      currentSize:0
+      list:[],
     });
-    this.doLoadData();
+    Index=1;
+    this.doLoadData(this);
   },
   //模拟加载更多数据
   loadMore: function () {
@@ -264,10 +233,54 @@ Page({
         
     }
   }
-  , tapCompass: function () {
-    wx.navigateTo({
-      url: '/pages/child/part-timeJob/part-timeJob'//实际路径要写全
-    })
+  ,
+   tapCompass: function (e) {
+     var that = this;
+     //console.log(e.currentTarget.dataset.counts);
+     //console.log(e.currentTarget.dataset.counts.ID);
+     var id = e.currentTarget.dataset.counts.ID ;
+     const jobs = that.data.jobType;
+    
+
+     //获取详情页信息   使用Promise进行异步流程处理
+     if (jobs==0){
+       var urls ='http://120.27.100.219:54231/api/position/get_part_detail'
+     }else{
+       var urls = 'http://120.27.100.219:54231/api/position/get_full_detail'
+     }
+    //  common.request(urls,
+    //    {
+    //      params: { "position_id": id},
+    //      success: function (res) {
+    //       console.log(res)
+    //       const  childMessage = res.data.data.detail;
+           
+    //       wx.navigateTo({
+    //         url: '/pages/child/part-timeJob/part-timeJob?count=' + childMessage//实际路径要写全
+    //       })
+    //      },
+       
+    //    }, null)
+     //获取相关推荐列表
+
+     var requestPromisified = common.wxPromisify(wx.request);
+     requestPromisified({
+       data: { "position_id": id },
+       url: urls,
+       method: 'POST', 
+       header: {
+         'content-type': 'application/json',
+         'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+       },
+     }).then(res =>{
+          console.log(res)
+          that.setData({
+
+          })
+     }).then(res =>{
+       console.log(res)
+     })
+  
   }     
   //路由跳转等end
   //搜索页路由跳转
@@ -275,41 +288,30 @@ Page({
     wx.navigateTo({
       url: '/pages/child/grabble/grabble?permanent=0'//实际路径要写全
     })
-  }
-/** 
- * 旋转上拉加载图标 
- */
-// function updateRefreshIcon() {
-//   var deg = 0;
-//   var _this = this;
-//   console.log('旋转开始了.....')
-//   var animation = wx.createAnimation({
-//     duration: 1000
-//   });
-
-//   var timer = setInterval(function () {
-//     if (!_this.data.refreshing)
-//       clearInterval(timer);
-//     animation.rotateZ(deg).step();//在Z轴旋转一个deg角度  
-//     deg += 360;
-//     _this.setData({
-//       refreshAnimation: animation.export()
-//     })
-//   }, 1000);
-// }
-,//切换按钮
+  },
+//切换按钮
   active: function (e) {
     this.setData({
      'workType.activeIndex': e.currentTarget.id
-    })
-    if (e.currentTarget.id > 1) {
+    });
+  
+    if (e.currentTarget.id==0) {
+     
       this.setData({
-        pageshow: false
+        fullTimeurl: 'http://120.27.100.219:54231/api/position/get_part_recommend',
+        list: [],
+        jobType:0
       })
+      Index = 1;
+      this.doLoadData(this);
     } else {
       this.setData({
-        pageshow: true
+        fullTimeurl: 'http://120.27.100.219:54231/api/position/get_full_recommend',
+        list: [],
+        jobType: 1
       })
+      Index = 1;
+      this.doLoadData(this);
     }
   }
   ,     /**授权 */

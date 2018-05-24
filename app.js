@@ -23,9 +23,10 @@ App({
       success: function (res) {
         console.log("login", res.data)
         if (res.data) {
-      
-        }else{
-       
+          //更新全局变量方式 20180515
+          _this.globalData.oppenid = res.data
+          typeof cb == "function" && cb(that.globalData.oppenid)
+                  //更新全局变量结束 20180515
         }
       },
       fail:function(){
@@ -56,7 +57,7 @@ App({
                     key: "openId",
                     data: event.data.data.wx_openid
                   });
-
+                  
                   //更新全局变量方式 20180515
                   _this.globalData.oppenid = event.data.data.wx_openid
                   typeof cb == "function" && cb(that.globalData.oppenid)

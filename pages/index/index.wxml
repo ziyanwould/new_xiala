@@ -1,68 +1,12 @@
 <!--index.wxml-->
-<!--<view class="container">
-<view class="section">
-  <input type="text" class="input" placeholder-class="input-place" placeholder="搜索职位/公司/商区"/>
-</view>
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>-->
-<!-- <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view> -->
-<!-- </view> -->
 
-<!-- <view class="list" wx:for="{{jobList}}" wx:key="item.id">
-  <view class="list-item list-item-left">
-    <image style="width:100rpx;height:100rpx;" src="{{item.jobUrl}}" />
-  </view>
-  <view class="list-item list-item-middle">
-    <view class="f-b f-black">{{item.jobName}}</view>
-    <view class="f-gray">{{item.companyName}}</view>
-    <view class="f-grays">{{item.requrie}}</view>
-  </view>
-  <view class="list-item list-item-right">
-    <view>{{item.jobSalary}}</view>
-    <view class="f-gray f30"> {{item.createTime}}</view>
-
-  </view>
-</view> -->
-
-<!-- 下拉刷新版块 -->
-<!--index.wxml-->
 <include src="../../utils/refreshHeaderView.wxml"/>
 <include src="../../utils/loadMoreFooterView.wxml"/>
-
-  <!--垂直滚动，这里必须设置高度-->
-<!-- <view>
-  <navigator class="bury-wrapper  wx-li" url="../detail/detail?id={{name.id}}">  
-    <view>评19</view>  
-  </navigator>  
-</view> -->
-<!-- 引入登录注册和选择组件 -->
- <!-- <import src="../child/Template/Template.wxml"/> -->
 
 <!-- 引入登录注册和选择组件 -->
  <import src="../child/Template/Template.wxml"/>
 <template is="notLogin" data="{{...items}}"/> 
 
-
-
  <!-- 引入列表样式 -->
  <include src="../child/Template/List.wxml"/>
 
-  <!-- <view class="body-view">
-    <loading hidden="{{hidden}}" bindchange="loadingChange">
-      加载中...
-    </loading>
-  </view> -->
-
-<!-- <button type="default" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}"
-        disabled="{{disabled}}" bindtap="default" hover-class="other-button-hover"> default </button>
-<button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
-        disabled="{{disabled}}" bindtap="primary"> primary </button>
-<button type="warn" size="{{warnSize}}" loading="{{loading}}" plain="{{plain}}"
-        disabled="{{disabled}}" bindtap="warn"> warn </button>
-<button bindtap="setDisabled">点击设置以上按钮disabled属性</button>
-<button bindtap="setPlain">点击设置以上按钮plain属性</button>
-<button bindtap="setLoading">点击设置以上按钮loading属性</button>-->

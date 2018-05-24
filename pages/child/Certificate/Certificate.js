@@ -11,10 +11,11 @@ Page({
     startTime: "请选择",
     endTime: "请选择",
     switchs:true,
-    registration:null,
-    state:null,
-    useRe:null,
-    location:null
+    registration: '请选择',
+    state: '请选择',
+    useRe: '请选择',
+    location:'请选择',
+    optional:" (可选)"
 
     // major: ['大专', '本科', '硕士', '博士', '其他']
   },
@@ -29,7 +30,7 @@ Page({
       endTime: arrc[1],
 
     })
-    //console.log(options)
+    console.log(options)
     //逻辑编辑功能
     
     if (options.parTime){
@@ -53,13 +54,18 @@ Page({
       })
     } else {
       this.setData({
-        switchs: false
+        switchs: false,
+        optional:""
       })
     }
 
     //console.log(this.data.key, this.data.num, this.data.infoChild)
     //end
-
+    if(options.approveID){
+      this.setData({
+       approveID:true
+      })
+    }
   },
 
   /**
@@ -83,6 +89,17 @@ Page({
       })
     }
     wx.removeStorageSync('worktype')
+     /** */
+     /**城市带回 */
+    var counCity = wx.getStorageSync('bookCity')
+    if (counCity) {
+      console.log("返回城市", counCity)
+      this.setData({
+        'infoChild.location': counCity,
+        'location': counCity
+      })
+    }
+    wx.removeStorageSync('bookCity')
      /** */
   },
 
@@ -290,5 +307,40 @@ Page({
         }
       }
     });
+  }
+  ,//城市选择跳转
+  slectBookCity:function(){
+    wx.navigateTo({
+      url: '/pages/child/citySelect/citySelect?approveID=true'//实际路径要写全
+    })
+  },
+  //进行认证操作
+  approve:function(){
+    var that = this;
+    let self1 = that.data.project == "请输入";
+    let self2 = that.data.registration == "请输入";
+    let self3 =  that.data.state == "请输入";
+    let self4 = that.data.useRe == "请输入";
+    let self5 = that.data.location == "请输入" ;
+    if (!(self1 || self2 || self3 || self4 || self5)){
+    
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 1200
+        })
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1500)
+    }else{
+      wx.showToast({
+        title: '请输入证书信息',
+        icon: 'loading',
+        duration: 1000
+      });
+    }
+
   }
 })

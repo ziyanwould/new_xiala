@@ -28,7 +28,7 @@ Page({
           "name": "个人认证",
           "id": 2,
           "pic": "identifi2",
-          "url": null
+          "url": '/pages/child/Certificate/Certificate?approveID=true'
         },
       {
        "name":"投递记录",
