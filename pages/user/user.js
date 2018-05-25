@@ -189,7 +189,11 @@ Page({
 
         }
       })
-
+      // that.setData({
+      //       items: {
+      //          show: false
+      //       }
+      //     });
 
 
       //解析手机号
@@ -273,6 +277,7 @@ Page({
             key: 'login',
             success: function (res) {
               var fage = res.data
+              console.log('login_token,', fage)
               wx.request({
                 url: 'http://120.27.100.219:54231/api/common/login_out',
                 header: {
@@ -282,7 +287,7 @@ Page({
 
                 },
                 data:{
-                  login_token: fage
+                  'login_token': fage
                 },
                 method: 'POST',
                 success: function (res) {

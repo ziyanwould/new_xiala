@@ -68,10 +68,9 @@
   font-size: 26rpx;
   padding: 10rpx 15rpx ;
   margin-left: 20rpx;
-  border-top: 1rpx solid  #333333;
-  border-bottom: 1rpx solid  #333333;
-  color: #333333;
-   border-radius: 64rpx; 
+  background:#41B7E6;
+  color:#FFFFFF;
+  border-radius: 64rpx; 
   margin-bottom: 20rpx;
 }
 /* .child_tag::before{

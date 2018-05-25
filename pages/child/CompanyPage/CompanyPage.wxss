@@ -1,6 +1,7 @@
 /* pages/child/CompanyPage/CompanyPage.wxss */
 page{
   background: #EEEFF3;
+  padding-bottom: 132rpx;
 }
 .section1{
   background: #FFFFFF;

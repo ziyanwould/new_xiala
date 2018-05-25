@@ -7,6 +7,8 @@ var Index = 1;
 var Size = 10;
 
 
+
+
 var register = require('../../utils/refreshLoadRegister.js');
 Page({
   data: {    
@@ -245,31 +247,17 @@ Page({
      //获取详情页信息   使用Promise进行异步流程处理
      if (jobs==0){
        var urls ='http://120.27.100.219:54231/api/position/get_part_detail';
-       that.setData({
-         urlx : 'http://120.27.100.219:54231/api/position/get_part_list'
-       })
+      //  that.setData({
+      //    urlx : 'http://120.27.100.219:54231/api/position/get_part_list'
+      //  })
       
      }else{
        var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';
-       that.setData({
-         urlx: 'http://120.27.100.219:54231/api/position/get_full_list'
-       })
+      //  that.setData({
+      //    urlx: 'http://120.27.100.219:54231/api/position/get_full_list'
+      //  })
      
      }
-    //  common.request(urls,
-    //    {
-    //      params: { "position_id": id},
-    //      success: function (res) {
-    //       console.log(res)
-    //       const  childMessage = res.data.data.detail;
-           
-    //       wx.navigateTo({
-    //         url: '/pages/child/part-timeJob/part-timeJob?count=' + childMessage//实际路径要写全
-    //       })
-    //      },
-       
-    //    }, null)
-     //获取相关推荐列表
 
      let requestPromisified = common.wxPromisify(wx.request);
      requestPromisified({
@@ -281,45 +269,63 @@ Page({
          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
        },
      }).then(res =>{
-          console.log(res)
-          that.setData({
-            seachKey: res.data.data.detail.job_sec_type
-          })
+          console.log('获取点击的详情的内容',res)
+          if (res.data.data.detail.job_sec_type){
+            //var mycode = (res.data.data.detail.job_sec_type).slice(0, 1);
+            var jobx = "全职"
+          }else{
+           // var mycode = (res.data.data.detail.certificate["0"].sec_type_name).slice(0, 1);
+            var jobx = "兼职"
+          }
+         
+          wx.setStorageSync('jobx', jobx );
+          wx.setStorageSync('childs', res.data.data.detail)
+          // that.setData({
+          //   seachKey: mycode
+          // })
      }).then(res =>{
-       console.log('seachKey:', that.data.seachKey);
-       that.second()
+       console.log('列表的关键字:', that.data.seachKey);
+      //  that.second()
+          wx.navigateTo({
+            url: '/pages/child/part-timeJob/part-timeJob'//实际路径要写全
+          })
        })
 
 
 
   
-  },
-  second:function(){
-    var that =this;
-    let requestPromisified = common.wxPromisify(wx.request);
-      requestPromisified({
-        data: {
-          "pageIndex": 1,
-          "pageSize": 3,
-          "key": that.data.seachKey,
-        },
-        url: that.data.urlx,
-        method: 'POST',
-        header: {
-          'content-type': 'application/json',
-          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
-        },
-      }).then(res => {
-        console.log('999999', res)
-        that.setData({
-          // seachKey:''
-        })
-      }).then(res => {
-        console.log('00000003')
-      })
+  }//,
+  //20180525 因接口更新，内带推荐 取消用关键字搜索
+  // second:function(){
+  //   var that =this;
+  //   let requestPromisified = common.wxPromisify(wx.request);
+  //     requestPromisified({
+  //       data: {
+  //         "pageIndex": 1,
+  //         "pageSize": 3,
+  //         "key": that.data.seachKey,
+  //       },
+  //       url: that.data.urlx,
+  //       method: 'POST',
+  //       header: {
+  //         'content-type': 'application/json',
+  //         'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+  //       },
+  //     }).then(res => {
+  //       console.log('获取到推荐列表', res)
+
+  //       wx.setStorageSync('cecom', res.data.data.positions)
+        
+       
+  //     }).then(res => {
+  //       console.log('00000003')
+  //         wx.navigateTo({
+  //           url: '/pages/child/part-timeJob/part-timeJob'//实际路径要写全
+  //         })
+  //     })
    
 
-  }     
+  // }     
   //路由跳转等end
   //搜索页路由跳转
   ,seek:function(){

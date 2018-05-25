@@ -1,13 +1,16 @@
 <!--pages/child/part-timeJob/part-timeJob.wxml-->
 <view class='section1'>
    <view class='JobDescription'>
-     <view class='Jtitle'>{{title}}</view>
-     <view class='job'><text class='salary'>{{salary}}</text>/年<text class='partition'>兼职</text></view>
-     <view class='soci'>社保所在地：{{socialSecurity}}</view>
+     <view class='Jtitle'>{{message.title}}</view>
+     <view class='job'>
+     <text class='salary'>{{message.year_wages}}{{message.month_wages}}</text>/{{jobType=='兼职'?'年':'月'}}
+     <text class='partition'>{{jobType}}</text></view>
+     <view class='soci' wx:if='{{message.job_fir_type}}'>{{message.job_fir_type}}：{{message.job_sec_type}}</view>
+      <view class='soci' wx:if='{{message.certificate["0"]}}'>{{message.certificate["0"].fir_type_name}} : {{message.certificate["0"].sec_type_name}}</view>
    </view>
    <view class='Cfirst'>
      <view class='fLeft'>
-       <view class='lOne'>{{company}}</view>
+       <view class='lOne'>{{message.company.name}}</view>
        <view class='lTwo'>{{label}}</view>
         <view class='lThird'>
          <image style='width:104rpx;height:35rpx' src='{{attestation}}'></image>
@@ -29,15 +32,18 @@
  
    <view class='Seaddress'>
      <view class='Setitle tianbai'>职位描述</view>
-     <view class='tag'>
-          <view class='child_tag'  wx:for="{{tag}}" wx:key="item.id">
-            {{item.count}}
-          </view>
+     <view class='tag' wx:if='{{message.certificate["0"]}}'>
+            <!-- <view class='child_tag' >{{message.certificate["0"].fir_type_name}} </view>
+            <view class='child_tag' >{{message.certificate["0"].sec_type_name}} </view> -->
+            <view class='child_tag' >{{message.certificate["0"].city}} </view>
+              <view class='child_tag' >{{message.certificate["0"].cert_use}} </view>
+            <view class='child_tag' >{{message.certificate["0"].reg_status}} </view>
+             <view class='child_tag' >{{message.certificate["0"].cert_status}} </view>
      </view>
      <view class='positionStatement'>
        <view>岗位职责：</view>
        <view class='psCount'>
-        {{zzCount}}
+        {{message.remark}}
        </view>
 
         <view style='margin-top:60rpx;'>任职资格：</view>
@@ -74,12 +80,14 @@
    </view>
 </view>
 
-<view class='SimilarPosition'>
+<view class='SimilarPosition' wx:if='{{!show}}'>
+<block wx:if='{{list["0"].Company_Name}}'>
 <view class='Setitle titlePaing'>相似职位</view>
 
 <include src="/pages/child/Template/position.wxml"/>
 
  <view class='watchjl'>查看更多简历</view>
+ </block>
 </view>
 
 

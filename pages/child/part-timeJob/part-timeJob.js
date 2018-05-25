@@ -1,15 +1,5 @@
 // pages/child/part-timeJob/part-timeJob.js
-var url = "http://www.imooc.com/course/ajaxlist";
-var page = 0;
-var page_size = 5;
-var sort = "last";
-var is_easy = 0;
-var lange_id = 0;
-var pos_id = 0;
-var unlearn = 0;
-
-
-
+var common = require('../../../utils/common.js');
 Page({
 
   /**
@@ -63,37 +53,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.count)
-    wx.showLoading({
-      title: 'loading...',
-    });
+    console.log('options', options)
     var that = this;
-    wx.request({
-      url: url,
-      data: {
-        page: page,
-        page_size: page_size,
-        sort: sort,
-        is_easy: is_easy,
-        lange_id: lange_id,
-        pos_id: pos_id,
-        unlearn: unlearn
-      },
-      success: function (res) {
-        //console.info(that.data.list);  
-        var list = that.data.list;
-        for (var i = 0; i < 3; i++) {
-          list.push(res.data.list[i]);
-        }
-        that.setData({
-          list: list
-        });
-        page++;
-        wx.hideLoading();
-  
-      }
-    });
+    if(options.show){
+      this.setData({
+      show:true
+      })
+    }
+    this.setData({
+      jobType: wx.getStorageSync('jobx'),
+      message: wx.getStorageSync('childs'),
+      list: wx.getStorageSync('childs').recommend
+    })
+   
 
+    
   },
 
 
@@ -108,7 +82,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log(this.data.jobType, this.data.message, this.data.recommend)
   },
 
   /**
@@ -166,5 +140,59 @@ Page({
       name: event.currentTarget.dataset.area,
       scale: 28
     })
+  },
+  tapCompass: function (e) {
+    var that = this;
+    console.log(e)
+    console.log(e.currentTarget.dataset.counts);
+    console.log(e.currentTarget.dataset.counts.ID);
+    var id = e.currentTarget.dataset.counts.ID;
+    const jobs = that.data.jobType;
+
+
+    //获取详情页信息   使用Promise进行异步流程处理
+    if (this.data.jobType=='兼职') {
+      var urls = 'http://120.27.100.219:54231/api/position/get_part_detail';
+    
+
+    } else {
+      var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';
+   
+
+    }
+
+    let requestPromisified = common.wxPromisify(wx.request);
+    requestPromisified({
+      data: { "position_id": id },
+      url: urls,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+      },
+    }).then(res => {
+      console.log('获取点击的详情的内容', res)
+      if (res.data.data.detail.job_sec_type) {
+       
+        var jobx = "兼职"
+      } else {
+     
+        var jobx = "全职" 
+      }
+
+      wx.setStorageSync('jobx', jobx);
+      wx.setStorageSync('childs', res.data.data.detail)
+
+    }).then(res => {
+    
+    
+      wx.navigateTo({
+        url: '/pages/child/part-timeJob/part-timeJob?show=true'//实际路径要写全
+      })
+    })
+
+
+
+
   }
 })
