@@ -186,13 +186,27 @@ page{
 }
 .surse{
   position: fixed;
-  width:90%;
-  background: #00b389;
-  color:#FFFFFF;
-  margin: 50rpx 0rpx;
+  width: 90%;
+  background: rgba(255,255,255,0);
   bottom: 0;
+  display: flex;
+  margin: 50rpx 0;
+  justify-content:space-between;
+  align-items:center; 
+}
+.usebtn{
+  width: 40%;
+  color: #FFFFFF;
+}
+.u1{
+  background: #4c98cf;
+}
+.u2{
+ background: #FCA;
 }
 .section1{
   padding: 20rpx 0;
   border-bottom: 1rpx solid #E1E1E1
 }
+/*css3剩余占位*/
+

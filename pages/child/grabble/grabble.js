@@ -1,13 +1,8 @@
 // pages/child/grabble/grabble.js
+var common = require('../../../utils/common.js');
 var app = getApp();
-var url = "http://www.imooc.com/course/ajaxlist";
-var page = 0;
-var page_size = 5;
-var sort = "last";
-var is_easy = 0;
-var lange_id = 0;
-var pos_id = 0;
-var unlearn = 0;
+var pageIndex = 0;
+
 
 Page({
 
@@ -36,11 +31,11 @@ Page({
 
     ],
     searchList:[
-      { name: "造价师" },
-      { name: "广东省独资公司" },
-      { name: "价格" },
-      { name: "其他" },
-      { name: "其他2" },
+      // { name: "造价师" },
+      // { name: "广东省独资公司" },
+      // { name: "价格" },
+      // { name: "其他" },
+      // { name: "其他2" },
     ], 
     companys: "中住71",
     label: "50-150人/移动互联网/建筑/设计/教育",
@@ -78,9 +73,7 @@ Page({
       Jobl: app.globalData.Jobl,
       CRL: app.globalData.CRL
     })
-    wx.showLoading({
-      title: 'loading...',
-    });
+   
    //使用本地存储功能
     wx.getStorage({
       key: 'SeaHistory',
@@ -91,31 +84,7 @@ Page({
       }
     });
 
-    wx.request({
-      url: url,
-      data: {
-        page: page,
-        page_size: page_size,
-        sort: sort,
-        is_easy: is_easy,
-        lange_id: lange_id,
-        pos_id: pos_id,
-        unlearn: unlearn
-      },
-      success: function (res) {
-        //console.info(that.data.list);  
-        var list = that.data.list;
-        for (var i = 0; i < res.data.list.length; i++) {
-          list.push(res.data.list[i]);
-        }
-        that.setData({
-          list: list
-        });
-        page++;
-        wx.hideLoading();
-
-      }
-    });
+ 
 
   },
 
@@ -137,8 +106,13 @@ Page({
         console.log(res.data)
         that.setData({
           'used_list[0].name': res.data.select_city,
-
+          list:[]
         })
+        let city ={
+          "city": res.data.select_city,
+        }
+        pageIndex=1;
+        that.getInfo(city)
         wx.removeStorage({
           key: 'gabbleCity',
           success: function (res) {
@@ -147,6 +121,13 @@ Page({
         })
       }
     })
+
+    //状态判断
+    if (this.data.selected!=true){
+      this.setData({
+        activeIndex: 1,
+      })
+    }
   },
 
   /**
@@ -171,14 +152,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var that = this
+     wx.showNavigationBarLoading();
+     pageIndex = 1;
+     that.setData({
+       list:[]
+     })
+     that.getInfo()
+     wx.hideNavigationBarLoading();
+     wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    this.getInfo();
+
   },
 
   /**
@@ -220,6 +210,7 @@ Page({
       xuhao: e.currentTarget.id,
       selectType: e.currentTarget.dataset.value
     })
+  
 
   },
   selectClick:function(){
@@ -236,13 +227,16 @@ Page({
     }
     this.setData({
       selected:true,
-      activeIndex:-1
+      activeIndex:-1,
+      xuhao: -1,
     })
   },
   watchPassWord: function (event) {
     var that = this;
-    var changdu =event.detail.value.length;
-    if(changdu>0){
+    var changdu = event.detail.value.length;
+    var changdu2 = that.data.count.length;
+    that.keywordAdvice(event.detail.value);
+    if (changdu > 0 && changdu2>0){
         that.setData({
         Fbutton: '完成',
          selectD: false,
@@ -262,20 +256,22 @@ Page({
     // })
     console.log(event.detail.value);
     this.setData({
-      count: event.detail.value
-     
-
+      count: event.detail.value.replace(/\s+/g, '') 
     })
   }, 
   urlTime:function(event){
     var that = this;
     var flage =that.data.Fbutton;
     if (flage=="完成"){
+     
       that.setData({
         pageShow: false,
         gps:false,
-        selectD:true
+        selectD:true,
+        list:[]
       })
+      pageIndex = 1;
+      that.getInfo()
     //监测输入后得到值 并存入本地变量 历史搜索
    console.log('搜索值',that.data.count);
    var self = that.data.historys;
@@ -309,8 +305,11 @@ Page({
        pageShow: false,
        gps: false,
        selectD:true,
-       historys: self
+       historys: self,
+       list:[]
     })
+    pageIndex = 1;
+    that.getInfo()
   }, 
   open: function () {
     var that = this;
@@ -345,5 +344,167 @@ Page({
   ,dedupe:function(array){
     var old = array.slice(0, 6);
     return Array.from(new Set(old));
+  }
+  ,
+  Noselect:function(){
+    this.setData({
+      selected:true,
+      activeIndex: -1,
+      xuhao:-1,
+    })
+  },
+  //关键字云浮动提示
+  keywordAdvice:function(value){
+    var that =this;
+    if (that.data.changeJob=='全职'){
+      var urlx = 'http://120.27.100.219:54231/sort/search_job_type'
+    }else{
+      var urlx = 'http://120.27.100.219:54231/sort/search_ger_type'
+    }
+    let requestPromisified = common.wxPromisify(wx.request);
+      requestPromisified({
+        data: {
+          "key": value,
+        },
+        url: urlx,
+        method: 'POST',
+        header: {
+          'content-type': 'application/json',
+          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+        },
+      }).then(res => {
+        console.log('获取到关联列表', res)
+        if (res.data.data.list){
+          that.setData({
+            searchList: res.data.data.list
+          });
+        }
+      })
+  },
+  //按下完成和地址，类别请求到的结果
+  getInfo:function(otherValue){
+
+    wx.showLoading({
+      title: 'loading...',
+    });
+
+    var that = this;
+    if (that.data.changeJob == '全职') {
+      var urlx = 'http://120.27.100.219:54231/api/position/get_full_list';
+      var datax ={
+        "pageIndex": pageIndex,
+        "pageSize": 10,
+        //"job_type_id": null,
+        // "province": "",
+        // "city": "",
+        // "county": "",
+        "key": that.data.count,
+        // "wages": "",
+        // "job_exp": "",
+        // "education": ""
+      }
+      if (otherValue) {
+        let dataxs = Object.assign(datax, otherValue)
+      }
+    } else {
+      var urlx = 'http://120.27.100.219:54231/api/position/get_part_list';
+      var datax = {
+        "pageIndex": pageIndex,
+        "pageSize": 10,
+        // "ger_type_id": null,
+        // "province": "",
+        // "city": "",
+        // "county": "",
+        "key": that.data.count
+      }
+      if (otherValue){
+        let dataxs = Object.assign(datax, otherValue)
+      }
+     
+    }
+    let requestPromisified = common.wxPromisify(wx.request);
+    requestPromisified({
+      data: datax,
+      url: urlx,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+      },
+    }).then(res => {
+      console.log('获取到职位列表', res)
+      var list = that.data.list;
+      for (var i = 0; i < res.data.data.positions.length; i++) {
+        list.push(res.data.data.positions[i]);
+      }
+      that.setData({
+        list: list
+      });
+      pageIndex++;
+      wx.hideLoading();
+      //register.loadFinish(that, true);
+      if (res.data.data.positions.length == 0) {
+        wx.showToast({
+          title: '没有相关职位',
+          icon: 'loading',
+          duration: 2000
+        });
+      }
+    })
+  },
+  tapCompass: function (e) {
+    var that = this;
+    //console.log(e.currentTarget.dataset.counts);
+    //console.log(e.currentTarget.dataset.counts.ID);
+    var id = e.currentTarget.dataset.counts.ID;
+    const jobs = that.data.changeJob;
+
+
+    //获取详情页信息   使用Promise进行异步流程处理
+    if (jobs == "兼职") {
+      var urls = 'http://120.27.100.219:54231/api/position/get_part_detail';
+     
+
+    } else {
+      var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';
+    
+
+    }
+
+    let requestPromisified = common.wxPromisify(wx.request);
+    requestPromisified({
+      data: { "position_id": id },
+      url: urls,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+      },
+    }).then(res => {
+      console.log('获取点击的详情的内容', res)
+      if (res.data.data.detail.job_sec_type) {
+        //var mycode = (res.data.data.detail.job_sec_type).slice(0, 1);
+        var jobx = "全职"
+      } else {
+        // var mycode = (res.data.data.detail.certificate["0"].sec_type_name).slice(0, 1);
+        var jobx = "兼职"
+      }
+
+      wx.setStorageSync('jobx', jobx);
+      wx.setStorageSync('childs', res.data.data.detail)
+      // that.setData({
+      //   seachKey: mycode
+      // })
+    }).then(res => {
+      console.log('列表的关键字:', that.data.seachKey);
+      //  that.second()
+      wx.navigateTo({
+        url: '/pages/child/part-timeJob/part-timeJob'//实际路径要写全
+      })
+    })
+
+
+
+
   }
 })  

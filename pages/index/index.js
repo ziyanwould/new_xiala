@@ -260,13 +260,15 @@ Page({
      }
 
      let requestPromisified = common.wxPromisify(wx.request);
+     console.log('loginId', app.globalData.login)
      requestPromisified({
        data: { "position_id": id },
        url: urls,
        method: 'POST', 
        header: {
          'content-type': 'application/json',
-         'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+         'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
+         'login_token': app.globalData.login
        },
      }).then(res =>{
           console.log('获取点击的详情的内容',res)

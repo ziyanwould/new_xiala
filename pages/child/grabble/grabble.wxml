@@ -77,9 +77,7 @@
            <!-- 二级赛选内容  与搜索出来的公司板块，搜索出来的列表两者只显示一个-->
            <block wx:if="{{!selected}}">
              <view class='preparation'>
-                   <!--  <view wx:for="{{changeJob=='兼职'?positions:Position}}"  wx:key="*this"  class="{{item.types?'preCount':'preTitle'}} {{activesIndex==index?'active':''}}"  id="{{index}}"  bindtap="actives" data-value="{{item.types?item.count:''}}" >
-                    {{item.count}} 
-                  </view>      -->
+              
                <block wx:for="{{changeJob=='兼职'?CRL:Jobl}}"  wx:key="*this" wx:for-index="indexs">
                       <view class='preTitle'>{{item.name}}</view>
                       <view wx:for="{{item.seclist}}"  wx:key="*this" class="preCount {{xuhao==item.id?'active':''}}" bindtap="actives" data-value="{{item.name}}" 
@@ -87,18 +85,28 @@
                        {{item.name}}
                       </view>
               </block> 
-
-                  <button class="weui-btn surse" bindtap="selectClick">确定</button>
+                  <!-- 确定和取消 -->
+                  <view class='surse'>
+                   <button class="usebtn u1" bindtap="selectClick">确定</button>
+                   <button class="usebtn u2" bindtap="Noselect">取消</button>
+                  </view>
+                  
               </view>
                 
            </block>
       </block>
       <!-- 搜索提示框 -->
       <view class='searchResult' wx:if="{{!selectD}}">
-        <view class='seacChild' bindtap='gitval' data-val='{{item.name}}{{count}}' wx:for="{{searchList}}" wx:key="0">
+
+       <block wx:for="{{searchList}}" wx:for-item="itemfactory" wx:key="0">
+
+        <view class='seacChild' bindtap='gitval' wx:for="{{itemfactory.seclist}}" wx:key="this" 
+         data-val='{{item.name}}' data-id='item.id' data-parentId='item.parent_id' >
           <image style='width:30rpx; height:33rpx;' src='http://www.liujiarong.top/WX/searchResult.png'></image>
-          {{item.name}}{{count}}
+          {{item.name}}
         </view>
+
+       </block> 
       </view>
   </view>
  

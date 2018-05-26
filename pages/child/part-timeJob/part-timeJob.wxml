@@ -99,7 +99,7 @@
   </view>
 
   <view class='jobCollect'>
-     <image src='http://www.liujiarong.top/WX/collect.png'></image>
+     <image src='http://www.liujiarong.top/WX/collectactive.png'></image>
     <view>收藏</view>
   </view>
 
