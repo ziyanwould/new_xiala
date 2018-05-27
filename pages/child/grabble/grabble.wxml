@@ -40,8 +40,7 @@
           <view wx:for="{{changeJob=='兼职'?used_list:used_lists}}"  wx:key="*this" class="{{activeIndex==index?'active':''}}" id="{{index}}" bindtap="active">{{item.name}} 
           <image style='width:18rpx; height:11rpx' src="{{activeIndex==index?'http://www.liujiarong.top/WX/Comup2.png':'http://www.liujiarong.top/WX/Comup.png'}}"></image>
           </view>
-          <!-- <view>职位 <image style='width:18rpx; height:11rpx' src='http://www.liujiarong.top/WX/Comup.png'></image></view>
-          <view>排序 <image style='width:18rpx; height:11rpx' src='http://www.liujiarong.top/WX/Comup.png'></image></view> -->
+        
         </view>
           <block wx:if="{{selected}}">
           <!-- 搜索出来的公司板块 -->

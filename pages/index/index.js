@@ -258,7 +258,7 @@ Page({
       //  })
      
      }
-
+    
      let requestPromisified = common.wxPromisify(wx.request);
      console.log('loginId', app.globalData.login)
      requestPromisified({

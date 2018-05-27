@@ -1,4 +1,5 @@
 // pages/child/part-timeJob/part-timeJob.js
+var app = getApp();
 var common = require('../../../utils/common.js');
 Page({
 
@@ -194,5 +195,40 @@ Page({
 
 
 
+  }
+  ,
+  //收藏职位
+  collectPosition:function(){
+    var that = this;
+    var urlc = '';
+    var self = that.data.message.has_collect
+    if (self){
+      urlc ='api/position/remove_collect_position'
+
+    }else{
+      urlc = 'api/position/collect_position'
+    }
+    that.setData({
+      'message.has_collect': !self
+
+        })
+   common.request(urlc,
+      {
+        params:{
+          "position_id": that.data.message.position_id
+        },
+        success: function (res) {
+        console.log("获取结果", res)
+        wx.showToast({
+          title: res.data.message,
+          icon: 'success',
+          duration: 2000
+        });
+        
+        },
+        fail: function () {
+          //失败后的逻辑  
+        },
+      }, app.globalData.login )
   }
 })

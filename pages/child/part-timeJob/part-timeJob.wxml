@@ -98,9 +98,10 @@
     <view>分享</view>
   </view>
 
-  <view class='jobCollect'>
-     <image src='http://www.liujiarong.top/WX/collectactive.png'></image>
-    <view>收藏</view>
+  <view class='jobCollect' bindtap='collectPosition'>
+      <image wx:if='{{message.has_collect}}' src='http://www.liujiarong.top/WX/collectactive.png'></image>
+      <image wx:if='{{!message.has_collect}}' src='http://www.liujiarong.top/WX/collect.png'></image>
+    <view>{{message.has_collect==true?"取消":"收藏"}}</view> 
   </view>
 
   <view><button class="weui-btn resume" type="primary">投递简历</button></view> 

@@ -106,7 +106,8 @@ Page({
         console.log(res.data)
         that.setData({
           'used_list[0].name': res.data.select_city,
-          list:[]
+          list:[],
+          selectCityle: res.data.select_city
         })
         let city ={
           "city": res.data.select_city,
@@ -211,7 +212,25 @@ Page({
       selectType: e.currentTarget.dataset.value
     })
   
-
+    if (this.data.selectCityle){
+      var useCity = this.data.selectCityle
+    }else{
+      var useCity = ''
+    }
+    if (this.data.changeJob=='兼职'){
+      var cityd = {
+        "city": useCity,
+        "ger_type_id": e.currentTarget.id
+      }
+    }else{
+      var cityd = {
+        "city": useCity,
+        "job_type_id": e.currentTarget.id
+      }
+    }
+    this.setData({
+      nextSelct: cityd
+    })
   },
   selectClick:function(){
     if(this.data.selectType==''){
@@ -224,6 +243,11 @@ Page({
           }
         }
       })
+    }else{
+      this.setData({
+        list:[]
+      })
+      this.getInfo(this.data.nextSelct)
     }
     this.setData({
       selected:true,
