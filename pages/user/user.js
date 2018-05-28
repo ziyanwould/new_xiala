@@ -410,7 +410,17 @@ Page({
     })
     let nums = this.data.getResuName.length;
     let urls = this.data.resumeName;
-    
+    var value = this.data.getResuName;
+    //创建简历操作
+    this.createResume({
+      redata: {
+        "title": value,
+        "type_id": urls
+      },
+      success: function (res) {
+        console.log("二重调用", res)
+      }
+    })
     if (nums > 0 && urls=='全职'){
       wx.navigateTo({
         url: '/pages/child/resume/resume?type=new'
@@ -460,5 +470,22 @@ watchinput:function(e){
   this.setData({
     getResuName: e.detail.value
   }) 
+}
+,
+//创建简历
+createResume:function(createpostion){
+  var redata = createpostion.redata;
+  common.request('api/resume/create',
+    {
+      params:redata,
+
+      success: function (res) {
+        createpostion.success(res)
+        
+      },
+      fail: function () {
+        //失败后的逻辑  
+      },
+    }, app.globalData.login)
 }
 })
