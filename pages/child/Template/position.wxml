@@ -9,7 +9,8 @@
       <view class="list-item list-item-middle">
         <view class="f-b f-black">{{item.Position_Title}}</view>
         <view class="f-gray">{{item.Company_Name}}</view>
-        <view class="f-grays">{{item.City}} {{item.County}}  {{item.Education}}</view>
+        <view class="f-grays" wx:if="{{!citysinfo}}">{{item.City}} {{item.County}}  {{item.Education}}</view>
+         <!-- <view class="f-grays" wx:if="{{item.}}">{{item.City}} {{item.County}}  {{item.Education}}</view> -->
       </view>
 
       <view class="list-item list-item-right">

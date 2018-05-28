@@ -195,50 +195,56 @@ Page({
       //       }
       //     });
 
+      common.geToppid({
+        success: function (event) {
+          console.log("测试初始化设置用户信息", event)
+           
+          //解析手机号
+          wx.request({
+            url: 'http://120.27.100.219:54231/api/common/wx_login_phone',
+            header: {
+              'content-type': 'application/json',
+              'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
 
-      //解析手机号
-      wx.request({
-        url: 'http://120.27.100.219:54231/api/common/wx_login_phone',
-        header: {
-          'content-type': 'application/json',
-          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
-
-        },
-        method: 'POST',
-        data: {
-          openid: app.globalData.oppenid,
-          encryptedData: child_encryptedData,
-          iv: child_iv
-        },
+            },
+            method: 'POST',
+            data: {
+              openid: event.data.data.wx_openid,
+              encryptedData: child_encryptedData,
+              iv: child_iv
+            },
 
 
-        success: function (res) {
-          console.log("登录凭证", res.data)
+            success: function (res) {
+              console.log("登录凭证", res.data)
 
-          //20180515 预修改
-          wx.setStorage({
-            key: "login",
-            data: res.data.data.login_token
+              //20180515 预修改
+              wx.setStorage({
+                key: "login",
+                data: res.data.data.login_token
+              })
+              //end 20180515 预修改
+
+              //更新全局变量方式 20180515
+              app.globalData.login = res.data.data.login_token
+              typeof cb == "function" && cb(app.globalData.login)
+              //更新全局变量结束 20180515
+
+              var cai = common.getinst(app.globalData.login)
+              console.log("换一种写法", cai)
+              that.setData({
+                key: true
+              })
+              setTimeout(function () {
+                that.getuseinfomation()
+              }, 250)
+            }
+
           })
-          //end 20180515 预修改
 
-          //更新全局变量方式 20180515
-          app.globalData.login = res.data.data.login_token
-          typeof cb == "function" && cb(app.globalData.login)
-          //更新全局变量结束 20180515
-        
-          var cai = common.getinst(app.globalData.login)
-          console.log("换一种写法", cai)
-          that.setData({
-            key: true
-          })
-          setTimeout(function(){
-            that.getuseinfomation()
-          },250)
         }
-
       })
-
+    
     }
   }
   ,
@@ -297,18 +303,26 @@ Page({
                     icon: 'success',
                     duration: 2000
                   });
-                  wx.removeStorage({
-                    key: 'login',
-                    success: function (res) {
-                      console.log(res.data);
-                      that.setData({
+                       that.setData({
                         key: false
-                
-                      })
-                      //wx.clearStorage()
 
-                    }
-                  })
+                      })
+                  // wx.removeStorage({
+                  //   key: 'login',
+                  //   success: function (res) {
+                  //     console.log(res.data);
+                  //     that.setData({
+                  //       key: false
+                
+                  //     })
+                  //     //wx.clearStorage()
+
+                  //   }
+                  // })
+
+                  setTimeout(function(){
+                    wx.clearStorage()
+                  },2050)
                 }
 
               })

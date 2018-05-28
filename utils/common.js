@@ -218,6 +218,47 @@ function wxPromisify(fn) {
     })
   }
 }
+//获取oppid 
+function geToppid(infoOppid){
+  wx.login({
+    success: function (res) {
+      if (res.code) {
+        //发起网络请求    
+        console.log("发起网络请求", res.code)
+        //that.globalData.openid = res.code
+        wx.request({
+          url: 'http://120.27.100.219:54231/api/common/get_wx_openid',
+          header: {
+            'content-type': 'application/json',
+            'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+          },
+          method: 'POST',
+          data: {
+            code: res.code
+          },
+          success: function (event) {
+           infoOppid.success(event)
+
+            // console.log(event.data.data.wx_openid)
+            // wx.setStorage({
+            //   key: "openId",
+            //   data: event.data.data.wx_openid
+            // });
+
+            // //更新全局变量方式 20180515
+            // _this.globalData.oppenid = event.data.data.wx_openid
+            // typeof cb == "function" && cb(that.globalData.oppenid)
+            // //更新全局变量结束 20180515
+          }
+
+        })
+
+      } else {
+        console.log('获取用户登录态失败！' + res.errMsg)
+      }
+    }
+  });
+}
 
 module.exports = {
   //要引用的函数 xx:xx
@@ -227,5 +268,6 @@ module.exports = {
   request: request,
   getinst: getinst,
   setStronguser: setStronguser,
-  wxPromisify: wxPromisify
+  wxPromisify: wxPromisify,
+  geToppid: geToppid
 }

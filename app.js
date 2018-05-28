@@ -51,8 +51,6 @@ App({
 
                 success: function (event) {
                   console.log(event.data.data.wx_openid)
-                 // let user = [event.data.nickName, event.data.avatarUrl]
-                 // console.log(user)
                   wx.setStorage({
                     key: "openId",
                     data: event.data.data.wx_openid
@@ -62,30 +60,6 @@ App({
                   _this.globalData.oppenid = event.data.data.wx_openid
                   typeof cb == "function" && cb(that.globalData.oppenid)
                   //更新全局变量结束 20180515
-
-                  //20180511重构2暂时 取消基本信息
-                  // wx.getUserInfo({
-                  //   success: function (resuser) {
-                  //     //let user = [resuser.data.nickName, resuser.data.avatarUrl]
-                  //     wx.setStorage({
-                  //       key: "user",
-                  //       data: resuser.userInfo
-                  //     })
-                  //     console.log(resuser.userInfo)
-                  //   },
-                  //   fail: function () {
-                  //     // 调用微信弹窗接口
-                  //     wx.showModal({
-                  //       title: '警告',
-                  //       content: '您点击了拒绝授权，将无法正常使用******的功能体验。请10分钟后再次点击授权，或者删除小程序重新进入。',
-                  //       success: function (res) {
-                  //         if (res.confirm) {
-                  //           console.log('用户点击确定')
-                  //         }
-                  //       }
-                  //     })
-                  //   }
-                  // })
                 }
 
               })
