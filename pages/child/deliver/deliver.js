@@ -1,4 +1,7 @@
 // pages/child/part-timeJob/part-timeJob.js
+var common = require('../../../utils/common.js');
+var app = getApp()
+
 var url = "http://www.imooc.com/course/ajaxlist";
 var page = 0;
 var page_size = 5;
@@ -131,5 +134,22 @@ Page({
         pageshow: true
       })
     }
+  },
+  
+  //20180529 投递记录
+  deleteResume:function () {
+    var setdata = {
+      "user_id": "00000000-0000-0000-0000-000000000000",
+      "type_id": 0,
+      "pageIndex": 0,
+      "pageSize": 0
+    }
+    common.request('api/resume/deliver_log', {
+      params: setdata,
+      success: function (res) {
+        console.log("投递记录", res)
+
+      }
+    }, app.globalData.login)
   }
 })

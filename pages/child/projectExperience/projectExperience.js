@@ -202,5 +202,24 @@ Page({
     });
   }
 //监听 修改 增加 删除三件套 end
+  ,
+  //20180529 保存/新增项目经历板块
+  getResume: function () {
+    var setdatas = {
+      "id": 0,
+      "resume_Id": 0,
+      "start_Time": "2018-05-29T14:21:34.558Z",
+      "end_Time": "2018-05-29T14:21:34.558Z",
+      "project_Name": "string",
+      "project_Detail": "string",
+      "ctime": "2018-05-29T14:21:34.558Z"
+    }
+    common.request('api/resume/save_projectexp', {
+      params: setdatas,
+      success: function (res) {
+        console.log("保存/新增项目经历板块", res)
 
+      }
+    }, app.globalData.login)
+  }
 })

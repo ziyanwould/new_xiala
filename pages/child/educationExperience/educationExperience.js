@@ -209,4 +209,25 @@ Page({
     });
   }
 //监听 修改 增加 删除三件套 end
+,
+  //20180529 保存/新增教育经历
+  getResume: function () {
+    var setdata = {
+      "id": 0,
+      "resume_Id": 0,
+      "start_Time": "2018-05-29T14:08:50.086Z",
+      "end_Time": "2018-05-29T14:08:50.086Z",
+      "school_Name": "string",
+      "major": "string",
+      "education": "string",
+      "ctime": "2018-05-29T14:08:50.086Z"
+    }
+    common.request('api/resume/save_education', {
+      params: setdata,
+      success: function (res) {
+        console.log("保存/新增教育经历", res)
+
+      }
+    }, app.globalData.login)
+  }
 })

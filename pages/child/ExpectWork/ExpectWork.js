@@ -1,5 +1,6 @@
 // pages/child/ExpectWork/ExpectWork.js
 var app =getApp()
+var common = require('../../../utils/common.js');
 Page({
 
   /**
@@ -163,5 +164,22 @@ Page({
     wx.navigateTo({
       url: '/pages/child/selectProject/selectProject?id=0'//实际路径要写全
     })
+  },
+  //20180529 保存期望工作
+  getResume: function () {
+    var setdata = {
+      "resume_id": 0,
+      "job_type_id": 0,
+      "expect_wages": 0,
+      "arrival_time": "string",
+      "remark": "string"
+    }
+    common.request('api/resume/save_expectwork', {
+      params: setdata,
+      success: function (res) {
+        console.log("保存期望工作", res)
+
+      }
+    }, app.globalData.login)
   }
 })

@@ -173,5 +173,18 @@ Page({
 
       })
     }
+  },
+   //20180529 获取兼职详情页
+   getResume: function () {
+    var setdata = {
+      "resume_id": 0
+    }
+    common.request('api/resume/part_detail', {
+      params: setdata,
+      success: function (res) {
+        console.log("获取兼职详情页", res)
+
+      }
+    }, app.globalData.login)
   }
 })

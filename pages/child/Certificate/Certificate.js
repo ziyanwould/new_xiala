@@ -378,5 +378,30 @@ Page({
         console.log("认证状态中 认证成功 认真失败",res)
       }
     }, app.globalData.login)
+  },
+  //20180529 保存/新增证书板块
+  getResume: function () {
+    var setdatas = {
+      "id": 0,
+      "resume_Id": 0,
+      "start_Time": "2018-05-29T14:17:27.682Z",
+      "end_Time": "2018-05-29T14:17:27.682Z",
+      "certificate_Name": "string",
+      "train_Org": "string",
+      "gertificate_Type_Id": 0,
+      "reg_Status": "string",
+      "gertificate_Status": "string",
+      "province": "string",
+      "city": "string",
+      "gertificate_Use": "string",
+      "ctime": "2018-05-29T14:17:27.682Z"
+    }
+    common.request('api/resume/save_certificate', {
+      params: setdatas,
+      success: function (res) {
+        console.log("保存/新增证书板块", res)
+
+      }
+    }, app.globalData.login)
   }
 })

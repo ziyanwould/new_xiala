@@ -173,5 +173,18 @@ Page({
 
          })
        }
-  }
+  },
+   //20180529 获取全职详情页
+   getResume: function () {
+     var setdata = {
+       "resume_id": 0
+     }
+     common.request('api/resume/full_detail', {
+       params: setdata,
+       success: function (res) {
+         console.log("获取全职详情页", res)
+
+       }
+     }, app.globalData.login)
+   }
 })

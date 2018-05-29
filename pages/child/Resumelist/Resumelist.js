@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-
+var common = require('../../../utils/common.js');
 var app = getApp()
 
 Page({
@@ -255,5 +255,47 @@ Page({
       })
     }
    
-  }
+  },
+  //20180529 获取简历列表
+  getRwsume:function(){
+    const usedata = {
+      "type_id": 0,
+      "audit_status": 0,
+      "pageIndex": 0,
+      "pageSize": 0
+    };
+    common.request('api/resume/get_list', {
+      params: usedata,
+      success: function (res) {
+        console.log("获取简历列表", res)
+
+      }
+    }, app.globalData.login)
+  },
+    //20180529 设置简历状态
+    setStates:function(){
+      var setdata = {
+        "resume_id": 0
+      }
+      common.request('api/resume/set_status', {
+        params: setdata,
+        success: function (res) {
+          console.log("设置简历信息", res)
+
+        }
+      }, app.globalData.login)
+    },
+    //20180529 设置简历状态
+    deleteResume:function(){
+      var deletedata = {
+        "resume_id": 0
+      }
+      common.request('api/resume/delete', {
+        params: deletedata,
+        success: function (res) {
+          console.log("删除简历信息", res)
+
+        }
+      }, app.globalData.login)
+    }
 })

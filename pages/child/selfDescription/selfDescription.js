@@ -1,5 +1,6 @@
 // pages/child/selfDescription/selfDescription.js
-var app = getApp();
+var common = require('../../../utils/common.js');
+var app = getApp()
 Page({
 
   /**
@@ -109,5 +110,20 @@ Page({
         delta: 1
       })
     }, 1000)
+  }
+  ,
+  //20180529 保存自我描述板块
+  getResume: function () {
+    var setdatas = {
+      "resume_id": 0,
+      "intro": "string"
+    }
+    common.request('api/resume/save_intro', {
+      params: setdatas,
+      success: function (res) {
+        console.log("保存自我描述板块", res)
+
+      }
+    }, app.globalData.login)
   }
 })

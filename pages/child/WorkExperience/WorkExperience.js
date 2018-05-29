@@ -1,5 +1,6 @@
 // pages/child/WorkExperience/WorkExperience.js
 var app = getApp();
+var common = require('../../../utils/common.js');
 Page({
 
   /**
@@ -185,5 +186,25 @@ Page({
         delta: 1
       })
     }, 1000)
+  },
+  //20180529 保存/新增工作经验
+  getResume: function () {
+    var setdata = {
+      "id": 0,
+      "resume_Id": 0,
+      "company_Name": "string",
+      "project_Detail": "string",
+      "job_Type_Id": 0,
+      "start_Time": "2018-05-29T14:03:30.599Z",
+      "end_Time": "2018-05-29T14:03:30.599Z",
+      "ctime": "2018-05-29T14:03:30.599Z"
+    }
+    common.request('api/resume/save_jobexp', {
+      params: setdata,
+      success: function (res) {
+        console.log("保存/新增工作经验", res)
+
+      }
+    }, app.globalData.login)
   }
 })

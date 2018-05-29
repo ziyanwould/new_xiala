@@ -1,4 +1,5 @@
 // pages/child/customPlate/customPlate.js
+var common = require('../../../utils/common.js');
 var app = getApp()
 Page({
 
@@ -170,4 +171,22 @@ Page({
     });
   }
 //监听 修改 增加 删除三件套 end
+  ,
+  //20180529 保存、新增自定义板块
+  getResume: function () {
+    var setdatas = {
+      "id": 0,
+      "resume_Id": 0,
+      "title": "string",
+      "detail": "string",
+      "ctime": "2018-05-29T14:25:59.041Z"
+    }
+    common.request('api/resume/save_define', {
+      params: setdatas,
+      success: function (res) {
+        console.log("保存、新增自定义板块", res)
+
+      }
+    }, app.globalData.login)
+  }
 })
