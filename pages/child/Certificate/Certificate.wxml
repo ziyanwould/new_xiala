@@ -27,7 +27,7 @@
 
 <view class='selsect'>
   <view class='sel_child'>
-     <view class='sel_left'>证书情况{{optional}}</view>
+     <view class='sel_left'>注册情况{{optional}}</view>
      <view class='sel_right'bindtap="opend" id='0'>
 
           <text wx:if="{{key}}">{{infoChild.registration}}</text> 

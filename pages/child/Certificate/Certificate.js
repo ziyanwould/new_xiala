@@ -101,6 +101,8 @@ Page({
     }
     wx.removeStorageSync('bookCity')
      /** */
+     //认证的结果
+    this.RZresult()
   },
 
   /**
@@ -276,7 +278,7 @@ Page({
    var typed = e.currentTarget.id
    console.log(typed)
    if (typed==0){
-     var lists =['专注','初始']
+     var lists =['转注','初始']
    } else if (typed == 1){
      var lists = ['闲置中', '未到期','快拿证']
    } else if (typed == 2){
@@ -329,6 +331,9 @@ Page({
           icon: 'success',
           duration: 1200
         })
+        //调用认证
+        that.identification();
+        //调用认证 end
         setTimeout(function () {
           wx.navigateBack({
             delta: 1
@@ -342,5 +347,36 @@ Page({
       });
     }
 
+  },
+  //个人认证版块
+  identification:function(){
+    
+    const usedata = {
+      "certificate_Name": this.data.forexample,
+      "certificate_Type_Id": this.data.forexample,
+      "reg_Status": this.data.forexample,
+      "certificate_Status": this.data.forexample,
+      "certificate_Use": this.data.forexample,
+      "start_Time": this.data.forexample,
+      "end_Time": this.data.forexample,
+      "province": this.data.forexample,
+      "city": this.data.forexample,
+    };
+    common.request('usercenter/apply_verify', {
+      params: usedata,
+      success: function (res) {
+      // 证书上传信息成功后操作
+      
+      }
+    }, app.globalData.login)
+  },
+  //认证状态中 认证成功 认真失败
+  RZresult:function(){
+    common.request('usercenter/query_verify_status', {
+      success: function (res) {
+        // 证书上传信息成功后操作
+        console.log("认证状态中 认证成功 认真失败",res)
+      }
+    }, app.globalData.login)
   }
 })
