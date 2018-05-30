@@ -27,32 +27,13 @@ Page({
   touchStartState: 0, // 开始触摸时的状态 0 未显示菜单 1 显示菜单
   swipeDirection: 0, //是否触发水平滑动 0:未触发 1:触发水平滑动 2:触发垂直滑动
   onLoad: function () {
+    var that = this;
     this.pixelRatio = app.data.deviceInfo.pixelRatio;
     var windowHeight = app.data.deviceInfo.windowHeight;
     var height = windowHeight;
      //var height = '100%';
-    for (var i = 10; i < 35; i++) {
-      var msg = {};
-      if(i%3==0){
-        msg.userName = '' + '全职';
-        msg.color = "#17A8E2"
-      }else{
-        msg.userName = '' + '兼职';
-        msg.color = "#F8DC9C"
-      }
-      msg.msgText = '一级建造师 - 建筑工程' + i;
-      msg.time = '更新时间：2018年5月17日 14:52:'+i;
-      if(i%2==0){
-        msg.state = '公开'
-      }else{
-        msg.state = '保密'
-      }
-     
-      msg.id = 'id-' + i + 1;
-      msg.headerImg = 'http://www.liujiarong.top/WX/head.png';
-      this.data.msgList.push(msg);
-    }
-    this.setData({ msgList: this.data.msgList, height: height });
+    this.getRwsume()
+    this.setData({height: height });
   },
 
   ontouchstart: function (e) {
@@ -161,6 +142,8 @@ Page({
     //this.translateXMsgItem(e.currentTarget.id, 0, 0);
   },
   onDeleteMsgTap: function (e) {
+    //console.log("删除操作", e.currentTarget.id);
+    this.deleteResume(e.currentTarget.id)
     this.deleteMsgItem(e);
   },
   onDeleteMsgLongtap: function (e) {
@@ -169,9 +152,9 @@ Page({
   onMarkMsgTap: function (e) {
     console.log(e);
     var index = this.getItemIndex(e.currentTarget.id);
-    console.log("序号你", this.data.msgList[index])
-    var up = "msgList[" + index + "].state";//先用一个变量，把(info[0].gMoney)用字符串拼接起来
-    if (this.data.msgList[index].state=='公开'){
+    console.log("序号你", this.data.msgList[index].resume_id)
+    var up = "msgList[" + index + "].status";//先用一个变量，把(info[0].gMoney)用字符串拼接起来
+    if (this.data.msgList[index].status=='公开'){
       this.setData({
         [up]: '保密'
       })
@@ -180,7 +163,7 @@ Page({
         [up]: '公开'
       })
     }
-   
+    this.setStates(this.data.msgList[index].resume_id)
     this.translateXMsgItem(e.currentTarget.id, 0, 600);
   },
   onMarkMsgLongtap: function (e) {
@@ -189,24 +172,25 @@ Page({
   getItemIndex: function (id) {
     var msgList = this.data.msgList;
     for (var i = 0; i < msgList.length; i++) {
-      if (msgList[i].id === id) {
+      if (msgList[i].resume_id == id) {
         return i;
       }
     }
     return -1;
   },
   deleteMsgItem: function (e) {
+    console.log(this.data.msgList)
     var animation = wx.createAnimation({ duration: 200 });
     animation.height(0).opacity(0).step();
     this.animationMsgWrapItem(e.currentTarget.id, animation);
-    var s = this;
-    setTimeout(function () {
-      var index = s.getItemIndex(e.currentTarget.id);
-      s.data.msgList.splice(index, 1);
-      s.setData({ msgList: s.data.msgList, });
-      //console.log("序号你", s.data.msgList[index])
+    // var s = this;
+    // setTimeout(function () {
+    //   var index = s.getItemIndex(e.currentTarget.id);
+    //   s.data.msgList.splice(index, 1);
+    //   s.setData({ msgList: s.data.msgList});
+    //   console.log("序号你", index)
     
-    }, 200);
+    // }, 200);
     this.showState = 0;
     this.setData({ scrollY: true });
   },
@@ -244,38 +228,46 @@ Page({
     }
   },
   urlto:function(e){
-    console.log("简历", e.currentTarget.dataset.url)
+    console.log("简历", e.currentTarget);
+    //return false;
     if (e.currentTarget.dataset.url=='全职'){
       wx.navigateTo({
-        url: '/pages/child/resume/resume',
+        url: '/pages/child/resume/resume?resume_id=' + e.currentTarget.id,
       })
     }else{
       wx.navigateTo({
-        url: '/pages/child/parTime/parTime',
+        url: '/pages/child/parTime/parTime?resume_id=' + e.currentTarget.id,
       })
     }
    
   },
   //20180529 获取简历列表
   getRwsume:function(){
+    var that = this;
     const usedata = {
-      "type_id": 0,
-      "audit_status": 0,
-      "pageIndex": 0,
-      "pageSize": 0
+      "pageIndex": 1,
+      "pageSize": 30
     };
+    var msgList = that.data.msgList
     common.request('api/resume/get_list', {
       params: usedata,
       success: function (res) {
-        console.log("获取简历列表", res)
-
+        console.log("获取简历列表", res.data.data.list);
+        for (var i = 0; i < res.data.data.list.length; i++){
+          msgList.push(res.data.data.list[i])
+        }
+      
+        that.setData({
+          msgList: msgList
+        })
       }
     }, app.globalData.login)
+  // console.log("获取简历列表1", that.data.msgList)
   },
     //20180529 设置简历状态
-    setStates:function(){
+    setStates:function(ids){
       var setdata = {
-        "resume_id": 0
+        "resume_id": ids
       }
       common.request('api/resume/set_status', {
         params: setdata,
@@ -286,9 +278,10 @@ Page({
       }, app.globalData.login)
     },
     //20180529 设置简历状态
-    deleteResume:function(){
+    deleteResume:function(cd){
+      console.log(cd)
       var deletedata = {
-        "resume_id": 0
+        "resume_id": cd
       }
       common.request('api/resume/delete', {
         params: deletedata,

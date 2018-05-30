@@ -1,2 +1,2 @@
 <!--pages/child/visitor/visitor.wxml-->
-<text>pages/child/visitor/visitor.wxml</text>
+<text>{{endMessage}}</text>

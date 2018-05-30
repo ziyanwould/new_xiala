@@ -104,6 +104,12 @@ Page({
       endtime: e.detail.value
     })
   },
+  bindendBefone: function (e) {
+    this.setData({
+      Beforetime: e.detail.value,
+      'infoChild.graduateBefore': e.detail.value
+    })
+  },
   bindend: function (e) {
     this.setData({
       entrytime: e.detail.value,

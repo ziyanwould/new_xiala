@@ -1,4 +1,6 @@
 // pages/child/Message/Message.js
+var app = getApp()
+var common = require('../../../utils/common.js');
 Page({
 
   /**

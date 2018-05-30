@@ -1,6 +1,6 @@
 <!--pages/child/ExpectWork/ExpectWork.wxml-->
 <view class='selsect'>
-  <view class='sel_child'  bindtap="jumpToMyPage"   >
+  <!-- <view class='sel_child'  bindtap="jumpToMyPage"   >
      <view class='sel_left'>{{ selectList.name1}}</view>
      <view class='sel_right'>
          <text>
@@ -9,7 +9,7 @@
          </text>
          <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
      </view>
-  </view>
+  </view> -->
 
   <view class='sel_child' >
      <view class='sel_left'>{{selectList.name2}}</view>
@@ -30,8 +30,8 @@
   <view class='sel_child'>
      <view class='sel_left'>{{ selectList.name4}}</view>
      <view class='sel_right'>
-        <block wx:if='{{!key}}'> <input style='padding-right:51rpx;' data-self='selectList.count4' bindinput='watchPassWord' value='{{ selectList.count4}}'></input></block>
-         <block wx:if='{{key}}'> <input style='padding-right:51rpx;' bindinput='watchPassWord' data-self='info.expectWork.monthlyPay' value='{{ info.expectWork.monthlyPay}}'></input></block>
+        <block wx:if='{{!key}}'> <input  type="number"  style='padding-right:51rpx;' data-self='selectList.count4' bindinput='watchPassWord' value='{{ selectList.count4}}'></input></block>
+         <block wx:if='{{key}}'> <input  type="number"  style='padding-right:51rpx;' bindinput='watchPassWord' data-self='info.expectWork.monthlyPay' value='{{ info.expectWork.monthlyPay}}'></input></block>
      </view>
   </view>
 </view>

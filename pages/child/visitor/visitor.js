@@ -1,4 +1,6 @@
 // pages/child/visitor/visitor.js
+var app = getApp()
+var common = require('../../../utils/common.js');
 Page({
 
   /**
@@ -12,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
@@ -26,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.vistor()
   },
 
   /**
@@ -62,5 +64,25 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  //简历访客
+  vistor:function(){
+    //20180529 获取浏览者
+      var that = this ;
+      var setdata = {
+        "resume_id": 0,
+        "pageIndex": 0,
+        "pageSize": 0
+      }
+      common.request('usercenter/get_resume_visitor', {
+        params: setdata,
+        success: function (res) {
+          console.log("获取浏览者", res)
+          that.setData({
+            endMessage:res.data.message
+          })
+        }
+      }, app.globalData.login)
+    
   }
 })

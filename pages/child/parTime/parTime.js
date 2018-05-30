@@ -145,8 +145,9 @@ Page({
     })
   },
   onLoad(option) {
-
+    console.log("页面传递的值", option)
     // console.log('onLoad')
+    this.getResume(option.resume_id)
     var that = this
     /** */
 
@@ -175,9 +176,9 @@ Page({
     }
   },
    //20180529 获取兼职详情页
-   getResume: function () {
+   getResume: function (ids) {
     var setdata = {
-      "resume_id": 0
+      "resume_id": ids
     }
     common.request('api/resume/part_detail', {
       params: setdata,

@@ -1,5 +1,5 @@
 import WeCropper from '../../we-cropper/we-cropper.js'
-
+var common = require('../../utils/common.js');
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
@@ -45,7 +45,7 @@ Page({
             console.log("login成功进行传图片", res.data)
 
             wx.uploadFile({
-              url: 'http://120.27.100.219:54231/usercenter/upload_header_img', //仅为示例，非真实的接口地址
+              url: 'http://120.27.100.219:54231/usercenter/upload_img', //仅为示例，非真实的接口地址
               filePath: avatars,
               name: 'file',
               header: {
@@ -53,9 +53,18 @@ Page({
                 'login_token': mysey
               },
               success: function (res) {
-                var data = res
+                var data = res.data.substring(4);
+                data = data.slice(0, -3);
+                common.request('usercenter/change_header_img', {
+                  params: {
+                    "header_img": data
+                  },
+                  success: function (res) {
+                    console.log("更新图片效果", res)
 
-                console.log("上传图片的结果", data)
+                  }
+                }, mysey)
+                console.log("上传图片的结果", data,res)
                 //  获取到裁剪后的图片
                 wx.redirectTo({
                   url: `/pages/child/resume/resume?avatar=${avatars}`

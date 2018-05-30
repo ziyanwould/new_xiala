@@ -24,8 +24,21 @@
 
 <view class='selsect'>
   <view class='sel_child'>
-     <view class='sel_left'>毕业年份</view>
-    <picker class="weui-btn" mode="date" value="{{entrytime}}" fields="year" data-type='endDate' bindchange="bindend">
+     <view class='sel_left'>入学年月</view>
+    <picker class="weui-btn" mode="date" value="{{entrytime}}" fields="month" data-type='endDate' bindchange="bindendBefone">
+     <view class='sel_right'>
+          <text wx:if="{{key}}">{{infoChild.graduateBefore}}</text>
+          <text wx:if="{{!key}}">{{Beforetime}}</text>
+         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+     </view>
+    </picker>
+  </view>
+</view> 
+
+<view class='selsect'>
+  <view class='sel_child'>
+     <view class='sel_left'>毕业年月</view>
+    <picker class="weui-btn" mode="date" value="{{entrytime}}" fields="month" data-type='endDate' bindchange="bindend">
      <view class='sel_right'>
           <text wx:if="{{key}}">{{infoChild.graduate}}</text>
           <text wx:if="{{!key}}">{{GraduationYear}}</text>

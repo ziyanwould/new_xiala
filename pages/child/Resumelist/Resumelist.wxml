@@ -7,62 +7,68 @@
       
       <block wx:if="{{activeIndex==0}}">
        <view wx:for="{{msgList}}"  wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
-            <view id='{{item.id}}' bindtap='urlto' data-url='{{item.userName}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
-                <!-- <image class='header-img' src="{{item.headerImg}}" ></image> -->
-                <text class='user-name' style='color:{{item.color}}'>{{item.userName}}</text>
+
+            <view id='{{item.resume_id}}' bindtap='urlto' data-url='{{item.type}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
+                <!-- <image class='header-img' src="{{item.img}}" ></image> -->
+                <text class='user-name' style='color:{{item.type=="全职"?"#17A8E2":"#F8DC9C"}}'>{{item.type}}</text>
                 <text class='msg-text'>{{item.msgText}}</text>
-                <text class='msg-time'>{{item.time}}</text>
-                <text class='msg-state'>{{item.state}}</text>
-                <text class='msg-name'>简历名字：ID{{index}}{{item.jlname}}</text>
+                <text class='msg-time'>{{item.utime}}</text>
+                <text class='msg-state'>{{item.status}}</text>
+                <text class='msg-name'>简历名字：{{item.title}}</text>
             </view>
             <view class='msg-menu'>
-                <view id='{{item.id}}' class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
+                <view id='{{item.resume_id}}' class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
                     删除
                 </view>
-                <view id='{{item.id}}' class='menu-mark' bindtap='onMarkMsgTap' bindlongtap='onMarkMsgLongtap'>
-                   {{ item.state=='公开' ? '设置保密' : '设置公开'}}
+                <view id='{{item.resume_id}}' class='menu-mark' bindtap='onMarkMsgTap' bindlongtap='onMarkMsgLongtap'>
+                   {{ item.status=='公开' ? '设置保密' : '设置公开'}}
                 </view>
+
             </view>
        </view>
       </block>
 
        <block wx:if="{{activeIndex==1}}">
-        <view wx:for="{{msgList}}"wx:if="{{item.userName=='全职'}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
-              <view id='{{item.id}}'  bindtap='urlto' data-url='{{item.userName}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
-                  <!-- <image class='header-img' src="{{item.headerImg}}" ></image> -->
-                  <text class='user-name' style='color:{{item.color}}'>{{item.userName}}</text>
-                  <text class='msg-text'>{{item.msgText}}</text>
-                  <text class='msg-time'>{{item.time}}</text>
-                  <text class='msg-state'>{{item.state}}</text>
-              </view>
-              <view class='msg-menu'>
-                  <view id='{{item.id}}' class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
-                      删除
-                  </view>
-                  <view id='{{item.id}}' class='menu-mark' bindtap='onMarkMsgTap' bindlongtap='onMarkMsgLongtap'>
-                    {{ item.state=='公开' ? '设置保密' : '设置公开'}}
-                  </view>
-              </view>
+        <view wx:for="{{msgList}}"wx:if="{{item.type=='全职'}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
+                 <view id='{{item.resume_id}}' bindtap='urlto' data-url='{{item.type}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
+                <!-- <image class='header-img' src="{{item.img}}" ></image> -->
+                <text class='user-name' style='color:{{item.type=="全职"?"#17A8E2":"#F8DC9C"}}'>{{item.type}}</text>
+                <text class='msg-text'>{{item.msgText}}</text>
+                <text class='msg-time'>{{item.utime}}</text>
+                <text class='msg-state'>{{item.status}}</text>
+                <text class='msg-name'>简历名字：{{item.title}}</text>
+            </view>
+            <view class='msg-menu'>
+                <view id='{{item.resume_id}}' class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
+                    删除
+                </view>
+                <view id='{{item.resume_id}}' class='menu-mark' bindtap='onMarkMsgTap' bindlongtap='onMarkMsgLongtap'>
+                   {{ item.status=='公开' ? '设置保密' : '设置公开'}}
+                </view>
+                
+            </view>
         </view>
        </block>
 
        <block wx:if="{{activeIndex==2}}">
-        <view wx:for="{{msgList}}"  wx:if="{{item.userName=='兼职'}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
-              <view id='{{item.id}}' bindtap='urlto' data-url='{{item.userName}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
-                  <!-- <image class='header-img' src="{{item.headerImg}}" ></image> -->
-                  <text class='user-name' style='color:{{item.color}}'>{{item.userName}}</text>
-                  <text class='msg-text'>{{item.msgText}}</text>
-                  <text class='msg-time'>{{item.time}}</text>
-                  <text class='msg-state'>{{item.state}}</text>
-              </view>
-              <view class='msg-menu'>
-                  <view id='{{item.id}}' class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
-                      删除
-                  </view>
-                  <view id='{{item.id}}' class='menu-mark' bindtap='onMarkMsgTap' bindlongtap='onMarkMsgLongtap'>
-                    {{ item.state=='公开' ? '设置保密' : '设置公开'}}
-                  </view>
-              </view>
+        <view wx:for="{{msgList}}"  wx:if="{{item.type=='兼职'}}" wx:key="id"  class='msg-item' animation='{{item.wrapAnimation}}'> 
+                <view id='{{item.resume_id}}' bindtap='urlto' data-url='{{item.type}}' class='msg' animation='{{item.animation}}' bindtouchstart='ontouchstart' bindtouchmove='ontouchmove' bindtouchend='ontouchend'>
+                <!-- <image class='header-img' src="{{item.img}}" ></image> -->
+                <text class='user-name' style='color:{{item.type=="全职"?"#17A8E2":"#F8DC9C"}}'>{{item.type}}</text>
+                <text class='msg-text'>{{item.msgText}}</text>
+                <text class='msg-time'>{{item.utime}}</text>
+                <text class='msg-state'>{{item.status}}</text>
+                <text class='msg-name'>简历名字：{{item.title}}</text>
+            </view>
+            <view class='msg-menu'>
+                <view id='{{item.resume_id}}' class='menu-delete' bindtap='onDeleteMsgTap' bindlongtap='onDeleteMsgLongtap'>
+                    删除
+                </view>
+                <view id='{{item.resume_id}}' class='menu-mark' bindtap='onMarkMsgTap' bindlongtap='onMarkMsgLongtap'>
+                   {{ item.status=='公开' ? '设置保密' : '设置公开'}}
+                </view>
+                
+            </view>
         </view>
        </block>
      

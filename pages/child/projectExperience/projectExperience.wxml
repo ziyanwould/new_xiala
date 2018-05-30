@@ -10,7 +10,7 @@
   </view>
 </view> 
 
-<view class='selsect'>
+<!-- <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>你的职责</view>
      <view class='sel_right'>
@@ -19,7 +19,7 @@
         
      </view>
   </view>
-</view> 
+</view>  -->
 
 <view class='selsect'>
   <view class='sel_child'>
