@@ -53,18 +53,22 @@ Page({
                 'login_token': mysey
               },
               success: function (res) {
-                var data = res.data.substring(4);
-                data = data.slice(0, -3);
+                //图片格式不对字符串切换
+                var obj = JSON.parse(res.data)
+                console.log("obj", obj.imgs[0])
+                // var data = res.data.substring(2);
+                // data = data.slice(0, -2);
                 common.request('usercenter/change_header_img', {
                   params: {
-                    "header_img": data
+                    "header_img": obj.imgs[0]
                   },
                   success: function (res) {
                     console.log("更新图片效果", res)
-
+                     //更新信息
+                    common.getinst(mysey);
                   }
                 }, mysey)
-                console.log("上传图片的结果", data,res)
+                //console.log("上传图片的结果", data,res)
                 //  获取到裁剪后的图片
                 wx.redirectTo({
                   url: `/pages/child/resume/resume?avatar=${avatars}`

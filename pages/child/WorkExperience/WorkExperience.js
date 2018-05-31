@@ -20,6 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('options', options)
     const self = app.globalData.ResumeFull;
     this.setData({
       info: app.globalData.ResumeFull,
@@ -28,15 +29,24 @@ Page({
       this.setData({
         key: options.type,
         num: options.id,
-        infoChild: self.workExperience[options.id]
+        infoChild: self.workExperience[options.id],
+        resumeId: self.resume_id,
+        moben: self.workExperience[options.id].id
       })
+    
+      
+   
     }else{
       this.setData({
-        switchs:false
+        switchs:false,
+        resumeId: self.resume_id,
+        moben:0
       })
-    }
-    
-    console.log(this.data.key,this.data.num,this.data.info)
+    } 
+      //20180531
+     //传递记录简历的ID和所在版块的ID
+     
+    //console.log(this.data.key,this.data.num,this.data.info)
     //console.log("testing", this.data.infoChild)
   },
 
@@ -51,7 +61,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    /**跳转筛选 */
+    var value = wx.getStorageSync('worktype')
+    //console.log("携带回来的信息", value)   
+    if (value) {
+      this.setData({
+        'position': value.value,
+        'infoChild.post': value.value,
+        'active': value.id//证书与职位才需要
+      })
+    }
+    wx.removeStorageSync('worktype')
+     /** */
   },
 
   /**
@@ -99,17 +120,20 @@ Page({
         console.log(res);
         if (res.confirm) {
           console.log('用户点击确定')
-          //莫名是旧数据更新 赋值得到是错误
-          const her = 'info.workExperience';
-          var delInfo = (that.data.info.workExperience).splice(that.data.num, 1)
-          that.setData({
-            [her]: that.data.info.workExperience
-          })
           
-          //更新全局变量方式 20180519
-          app.globalData.ResumeFull = that.data.info
-          typeof cb == "function" && cb(app.globalData.ResumeFull)
-          //更新全局变量结束 20180519
+          that.removex()
+          //取消全局联动删除
+          // //莫名是旧数据更新 赋值得到是错误
+          // const her = 'info.workExperience';
+          // var delInfo = (that.data.info.workExperience).splice(that.data.num, 1)
+          // that.setData({
+          //   [her]: that.data.info.workExperience
+          // })
+          
+          // //更新全局变量方式 20180519
+          // app.globalData.ResumeFull = that.data.info
+          // typeof cb == "function" && cb(app.globalData.ResumeFull)
+          // //更新全局变量结束 20180519
           wx.showToast({
             title: '删除成功',
             icon: 'success',
@@ -150,32 +174,38 @@ Page({
   },
   save:function(){
     var that = this;
+    this.getResume()
     if (that.data.switchs){
-      const you = "info.workExperience[" + this.data.num + "]";
-      this.setData({
-        [you]: that.data.infoChild
-      })
+
+      //2018.5.31取消原来的全局保存
+      // const you = "info.workExperience[" + this.data.num + "]";
+      // this.setData({
+      //   [you]: that.data.infoChild
+      // })
+     
     }else{
-      var newlist = {}
-      newlist.id = that.data.info.workExperience.length;
-      newlist.post = that.data.position;
-      newlist.company = that.data.company;
-      newlist.startTime = that.data.entrytime;
-      newlist.endTime = that.data.endtime;
-      newlist.jobContent = that.data.input;
+
+      //2018.5.31取消原来的全局新增
+      // var newlist = {}
+      // newlist.id = that.data.info.workExperience.length;
+      // newlist.post = that.data.position;
+      // newlist.company = that.data.company;
+      // newlist.startTime = that.data.entrytime;
+      // newlist.endTime = that.data.endtime;
+      // newlist.jobContent = that.data.input;
      
 
-      var infos = (that.data.info.workExperience).push(newlist);
-      console.log(that.data.info.workExperience)
-      that.setData({
-        'info.workExperience': that.data.info.workExperience
-      })
+      // var infos = (that.data.info.workExperience).push(newlist);
+      // console.log(that.data.info.workExperience)
+      // that.setData({
+      //   'info.workExperience': that.data.info.workExperience
+      // })
     }
 
-    //更新全局变量方式 20180519
-    app.globalData.ResumeFull = this.data.info
-    typeof cb == "function" && cb(app.globalData.ResumeFull)
-    //更新全局变量结束 20180519
+    // //更新全局变量方式 20180519
+    // app.globalData.ResumeFull = this.data.info
+    // typeof cb == "function" && cb(app.globalData.ResumeFull)
+    // //更新全局变量结束 20180519
     wx.showToast({
       title: '保存成功',
       icon: 'success',
@@ -187,22 +217,69 @@ Page({
       })
     }, 1000)
   },
+    //对全局职位的筛选
+  selectWork:function () {
+    wx.navigateTo({
+      url: '/pages/child/selectProject/selectProject?id=0'//实际路径要写全
+    })
+  },
   //20180529 保存/新增工作经验
   getResume: function () {
-    var setdata = {
-      "id": 0,
-      "resume_Id": 0,
-      "company_Name": "string",
-      "project_Detail": "string",
-      "job_Type_Id": 0,
-      "start_Time": "2018-05-29T14:03:30.599Z",
-      "end_Time": "2018-05-29T14:03:30.599Z",
-      "ctime": "2018-05-29T14:03:30.599Z"
+    var that = this;
+    console.log('infoChild', that.data.infoChild);
+    
+    if (that.data.moben!=0){
+      //修改板块
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "company_Name": that.data.infoChild.company,
+        "project_Detail": that.data.infoChild.jobContent,
+        "job_Type_Id": that.data.active,
+        "start_Time": that.data.infoChild.startTime + "-29T14:03:30.599Z",
+        "end_Time": that.data.infoChild.endTime + "-29T14:03:30.599Z"
+
+      }
+    }else{
+     //新增板块
+      console.log("id",that.data.moben,
+        "resume_Id", that.data.resumeId,
+        "company_Name", that.data.company,
+        "project_Detail",that.data.input,
+        "job_Type_Id", that.data.active,
+        "start_Time", that.data.entrytime + "-29T14:03:30.599Z",
+        "end_Time", that.data.endtime + "-29T14:03:30.599Z")
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "company_Name": that.data.company,
+        "project_Detail": that.data.input,
+        "job_Type_Id": that.data.active,
+        "start_Time": that.data.entrytime + "-29T14:03:30.599Z",
+        "end_Time": that.data.endtime + "-29T14:03:30.599Z"
+
+      }
     }
+   
     common.request('api/resume/save_jobexp', {
       params: setdata,
       success: function (res) {
         console.log("保存/新增工作经验", res)
+
+      }
+    }, app.globalData.login)
+  },
+  //删除此项目
+  removex:function(){
+    var that = this;
+    var setdata={
+      "id": that.data.moben,
+      "resume_Id": that.data.resumeId,
+    }
+    common.request('api/resume/delete_jobexp', {
+      params: setdata,
+      success: function (res) {
+        console.log("删除工作经验", res)
 
       }
     }, app.globalData.login)

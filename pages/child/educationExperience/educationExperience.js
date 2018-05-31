@@ -8,14 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    school: "中山大学",
-    specialty:"前端开发工程师",
+    school: "",
+    specialty:"",
     GraduationYear: "",
-    education: "本科",
-    major:['大专', '本科', '硕士', '博士', '其他'],
+    education: "请选择",
+    major:['大专', '本科', '硕士', '博士','MBA','其他'],
     endtime:2017,
     switchs:true
   },
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -37,11 +38,15 @@ Page({
       this.setData({
         key: options.type,
         num: options.id,
-        infoChild: self.education[options.id]
+        infoChild: self.education[options.id],
+        resumeId: self.resume_id,
+        moben: self.education[options.id].id
       })
     } else {
       this.setData({
-        switchs: false
+        switchs: false,
+        resumeId: self.resume_id,
+        moben: 0
       })
     }
 
@@ -107,19 +112,19 @@ Page({
   bindendBefone: function (e) {
     this.setData({
       Beforetime: e.detail.value,
-      'infoChild.graduateBefore': e.detail.value
+      'infoChild.startTime': e.detail.value
     })
   },
   bindend: function (e) {
     this.setData({
-      entrytime: e.detail.value,
-      'infoChild.graduate': e.detail.value
+      GraduationYear: e.detail.value,
+      'infoChild.endTime': e.detail.value
     })
   },
   open: function () {
     var that = this;
     wx.showActionSheet({
-      itemList: ['大专', '本科', '硕士', '博士', '其他'],
+      itemList: ['大专', '本科', '硕士', '博士','MBA', '其他'],
       success: function (res) {
         that.setData({
           education: that.data.major[res.tapIndex],
@@ -139,32 +144,35 @@ Page({
   },
   save: function () {
     var that = this;
-    if (that.data.switchs) {
-      const you = "info.education[" + this.data.num + "]";
-      this.setData({
-        [you]: that.data.infoChild
-      })
-    } else {
-      var newlist = {}
-      newlist.id = that.data.info.education.length;
-      newlist.school = that.data.school;
-      newlist.profession = that.data.specialty;
-      newlist.graduate = that.data.GraduationYear;
-      newlist.educationBack = that.data.education;
+    
+    this.getResume()
+    //20180531 取消全局架构
+    // if (that.data.switchs) {
+    //   const you = "info.education[" + this.data.num + "]";
+    //   this.setData({
+    //     [you]: that.data.infoChild
+    //   })
+    // } else {
+    //   var newlist = {}
+    //   newlist.id = that.data.info.education.length;
+    //   newlist.school = that.data.school;
+    //   newlist.profession = that.data.specialty;
+    //   newlist.graduate = that.data.GraduationYear;
+    //   newlist.educationBack = that.data.education;
      
 
 
-      var infos = (that.data.info.education).push(newlist);
-      //console.log(that.data.info.education)
-      that.setData({
-        'info.education': that.data.info.education
-      })
-    }
+    //   var infos = (that.data.info.education).push(newlist);
+    //   //console.log(that.data.info.education)
+    //   that.setData({
+    //     'info.education': that.data.info.education
+    //   })
+    // }
 
-    //更新全局变量方式 20180519
-    app.globalData.ResumeFull = this.data.info
-    typeof cb == "function" && cb(app.globalData.ResumeFull)
-    //更新全局变量结束 20180519
+    // //更新全局变量方式 20180519
+    // app.globalData.ResumeFull = this.data.info
+    // typeof cb == "function" && cb(app.globalData.ResumeFull)
+    // //更新全局变量结束 20180519
     wx.showToast({
       title: '保存成功',
       icon: 'success',
@@ -187,17 +195,19 @@ Page({
         console.log(res);
         if (res.confirm) {
           console.log('用户点击确定')
-          //莫名是旧数据更新 赋值得到是错误
-          const her = 'info.education';
-          var delInfo = (that.data.info.education).splice(that.data.num, 1)
-          that.setData({
-            [her]: that.data.info.education
-          })
+          that.removex()
+          //取消全局变量删除 20180531
+          // //莫名是旧数据更新 赋值得到是错误
+          // const her = 'info.education';
+          // var delInfo = (that.data.info.education).splice(that.data.num, 1)
+          // that.setData({
+          //   [her]: that.data.info.education
+          // })
 
-          //更新全局变量方式 20180519
-          app.globalData.ResumeFull = that.data.info
-          typeof cb == "function" && cb(app.globalData.ResumeFull)
-          //更新全局变量结束 20180519
+          // //更新全局变量方式 20180519
+          // app.globalData.ResumeFull = that.data.info
+          // typeof cb == "function" && cb(app.globalData.ResumeFull)
+          // //更新全局变量结束 20180519
           wx.showToast({
             title: '删除成功',
             icon: 'success',
@@ -218,20 +228,48 @@ Page({
 ,
   //20180529 保存/新增教育经历
   getResume: function () {
-    var setdata = {
-      "id": 0,
-      "resume_Id": 0,
-      "start_Time": "2018-05-29T14:08:50.086Z",
-      "end_Time": "2018-05-29T14:08:50.086Z",
-      "school_Name": "string",
-      "major": "string",
-      "education": "string",
-      "ctime": "2018-05-29T14:08:50.086Z"
+    var that = this;
+    if (that.data.moben!=0){
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.infoChild.startTime + "-29T14:08:50.086Z",
+        "end_Time": that.data.infoChild.endTime + "-29T14:08:50.086Z",
+        "school_Name": that.data.infoChild.school,
+        "major": that.data.infoChild.profession,
+        "education": that.data.infoChild.educationBack
+      }
+    }else{
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.Beforetime + "-29T14:08:50.086Z",
+        "end_Time": that.data.GraduationYear + "-29T14:08:50.086Z",
+        "school_Name": that.data.school,
+        "major": that.data.specialty,
+        "education": that.data.education
+      }
     }
+
     common.request('api/resume/save_education', {
       params: setdata,
       success: function (res) {
         console.log("保存/新增教育经历", res)
+
+      }
+    }, app.globalData.login)
+  },
+  //删除此项目
+  removex: function () {
+    var that = this;
+    var setdata = {
+      "id": that.data.moben,
+      "resume_Id": that.data.resumeId,
+    }
+    common.request('api/resume/delete_education', {
+      params: setdata,
+      success: function (res) {
+        console.log("删除工作经验", res)
 
       }
     }, app.globalData.login)

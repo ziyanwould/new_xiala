@@ -28,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (option) {
-   
+    this.getResume(this.data.resumeId);
     const that =  this
     common.setStronguser({
       success: function (res) {
@@ -45,10 +45,11 @@ Page({
       }
 
     })
-    this.setData({
-      resume: app.globalData.ResumeFull
-    })
-    console.log("resume",that.data.resume)
+    //20180531修改隐去
+    // this.setData({
+    //   resume: app.globalData.ResumeFull
+    // })
+    // console.log("resume",that.data.resume)
   },
 
   /**
@@ -103,32 +104,7 @@ Page({
       })
    
   },
-  /*头像功能*/ 
-  // changeAvatar: function () {
-  //   var that = this;
-  //   // var childId = wx.getStorageSync("child_id");
-  //   // var token = wx.getStorageSync('token');
-  //   wx.chooseImage({
-  //     count: 1, // 最多可以选择的图片张数，默认9
-  //     sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-  //     sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-  //     success: function (res) {
-  //       console.log(res.tempFilePaths + "修改页面")
-  //       var avatar = res.tempFilePaths;
-  //       that.setData({
-  //         avatar: avatar,
-  //         upAvatar: true
-  //       })
-
-  //     },
-  //     fail: function () {
-  //       // fail
-  //     },
-  //     complete: function () {
-  //       // complete
-  //     }
-  //   })
-  // },
+  
  // 这是是调用上传头像uploadFile方法
 // 上传头像
   upload() {
@@ -146,13 +122,13 @@ Page({
   },
    onLoad (option) {
      console.log("页面传递的值", option)
-     this.getResume(option.resume_id)
+    if(option.resume_id){
+      this.setData({
+        resumeId:option.resume_id
+      })
+    }
     // console.log('onLoad')
      var that = this
-     /** */
-    
-
-     
      //  console.log("列表", option)
        let { avatar } = option
        if (avatar) {
@@ -177,6 +153,7 @@ Page({
   },
    //20180529 获取全职详情页
    getResume: function (ids) {
+     var that = this;
      var setdata = {
        "resume_id": ids
      }
@@ -184,7 +161,11 @@ Page({
        params: setdata,
        success: function (res) {
          console.log("获取全职详情页", res)
-
+         that.setData({
+           resume: res.data.data.ResumeFull
+         })
+         app.globalData.ResumeFull = res.data.data.ResumeFull
+         typeof cb == "function" && cb(that.globalData.ResumeFull)
        }
      }, app.globalData.login)
    }

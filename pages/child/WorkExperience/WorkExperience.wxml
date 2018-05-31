@@ -13,10 +13,13 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>你的职位</view>
-     <view class='sel_right'>
-        
-          <input wx:if='{{key}}' style='padding-right:51rpx;' bindinput='watchPassWord' data-self='infoChild.post' value='{{infoChild.post}}'></input> 
-           <input wx:if='{{!key}}' style='padding-right:51rpx;' bindinput='watchPassWord' data-self='position' value='{{position}}'></input> 
+     <view class='sel_right' bindtap='selectWork'>
+          <text wx:if='{{!key}}' >{{position}}</text> 
+         <text wx:if='{{key}}' >{{infoChild.post}}</text>
+         <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image>
+          <!-- //20180531取消书写输入职位信息 -->
+          <!-- <input wx:if='{{key}}' style='padding-right:51rpx;' bindinput='watchPassWord' data-self='infoChild.post' value='{{infoChild.post}}'></input> 
+           <input wx:if='{{!key}}' style='padding-right:51rpx;' bindinput='watchPassWord' data-self='position' value='{{position}}'></input>  -->
 
      </view>
   </view>

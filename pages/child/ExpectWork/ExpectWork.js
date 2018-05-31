@@ -41,7 +41,10 @@ Page({
       parTime:true,
     })
   }
- 
+  //console.log("info", this.data.info.resume_id)
+  this.setData({
+    resumeId: this.data.info.resume_id
+  })
   },
 
   /**
@@ -71,7 +74,8 @@ Page({
      if (value){
        this.setData({
          'selectList.count2': value.value,
-         'info.expectWork.work': value.value
+         'info.expectWork.work': value.value,
+          active: value.id
        })
      }
      wx.removeStorageSync('worktype')
@@ -135,18 +139,19 @@ Page({
   }
   ,save:function(event){
 
-    if (this.data.parTime){
-      //更新全局变量方式 20180519
-      app.globalData.resumePart = this.data.info
-      typeof cb == "function" && cb(app.globalData.resumePart)
-    //更新全局变量结束 20180519
-    }else{
-      //更新全局变量方式 20180519
-      app.globalData.ResumeFull = this.data.info
-      typeof cb == "function" && cb(app.globalData.ResumeFull)
-    //更新全局变量结束 20180519
-    }
-
+    // 去掉原来模拟全局更新方式
+    // if (this.data.parTime){
+    //   //更新全局变量方式 20180519
+    //   app.globalData.resumePart = this.data.info
+    //   typeof cb == "function" && cb(app.globalData.resumePart)
+    // //更新全局变量结束 20180519
+    // }else{
+    //   //更新全局变量方式 20180519
+    //   app.globalData.ResumeFull = this.data.info
+    //   typeof cb == "function" && cb(app.globalData.ResumeFull)
+    // //更新全局变量结束 20180519
+    // }
+    this.getResume()
   
     wx.showToast({
       title: '保存成功',
@@ -167,17 +172,18 @@ Page({
   },
   //20180529 保存期望工作
   getResume: function () {
+    var that = this;
     var setdata = {
-      "resume_id": 0,
-      "job_type_id": 0,
-      "expect_wages": 0,
+      "resume_id": that.data.resumeId,
+      "job_type_id": that.data.active,
+      "expect_wages": that.data.info.expectWork.monthlyPay,
       "arrival_time": "string",
-      "remark": "string"
+      "remark": that.data.info.expectWork.moreInfo
     }
     common.request('api/resume/save_expectwork', {
       params: setdata,
       success: function (res) {
-        console.log("保存期望工作", res)
+        //console.log("保存期望工作", res)
 
       }
     }, app.globalData.login)
