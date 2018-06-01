@@ -242,13 +242,7 @@ Page({
       }
     }else{
      //新增板块
-      console.log("id",that.data.moben,
-        "resume_Id", that.data.resumeId,
-        "company_Name", that.data.company,
-        "project_Detail",that.data.input,
-        "job_Type_Id", that.data.active,
-        "start_Time", that.data.entrytime + "-29T14:03:30.599Z",
-        "end_Time", that.data.endtime + "-29T14:03:30.599Z")
+
       var setdata = {
         "id": that.data.moben,
         "resume_Id": that.data.resumeId,

@@ -261,7 +261,7 @@ Page({
     var datas = {
       "real_name": that.data.edit_name,
       "sex": that.data.edit_sex,
-      "birth": that.data.edit_year+'-01',
+      "birth": that.data.edit_year +'-29T14:03:30.599Z',
       "education": that.data.edit_education,
       "job_years": that.data.edit_work,
       "phone": that.data.edit_phone,

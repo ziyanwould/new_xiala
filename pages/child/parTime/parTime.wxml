@@ -60,7 +60,7 @@
     </view>
 
      <view class='sec2_3'>
-          {{resume.expectWork.city}}/{{resume.expectWork.positionType}}/{{resume.expectWork.monthlyPay}}
+          <!-- {{resume.expectWork.city}}/-->{{resume.expectWork.positionType}}/{{resume.expectWork.monthlyPay}} 
     </view>
     <view class='content' wx:if="{{resume.expectWork.moreInfo}}">
           <view class='content_title'>

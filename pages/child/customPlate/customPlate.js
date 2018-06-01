@@ -26,11 +26,15 @@ Page({
       this.setData({
         key: options.type,
         num: options.id,
-        infoChild: self.userDefine[options.id]
+        infoChild: self.userDefine[options.id],
+        resumeId: self.resume_id,
+        moben: self.userDefine[options.id].id
       })
     } else {
       this.setData({
-        switchs: false
+        switchs: false,
+        resumeId: self.resume_id,
+        moben: 0
       })
     }
 
@@ -98,29 +102,31 @@ Page({
   },
   save: function () {
     var that = this;
-    if (that.data.switchs) {
-      const you = "info.userDefine[" + this.data.num + "]";
-      this.setData({
-        [you]: that.data.infoChild
-      })
-    } else {
-      var newlist = {}
-      newlist.id = that.data.info.userDefine.length;
-      newlist.title = that.data.input1;
-      newlist.content = that.data.input2;
+    this.getResume()
+    //取消全局更改方式 20180601
+    // if (that.data.switchs) {
+    //   const you = "info.userDefine[" + this.data.num + "]";
+    //   this.setData({
+    //     [you]: that.data.infoChild
+    //   })
+    // } else {
+    //   var newlist = {}
+    //   newlist.id = that.data.info.userDefine.length;
+    //   newlist.title = that.data.input1;
+    //   newlist.content = that.data.input2;
    
 
-      var infos = (that.data.info.userDefine).push(newlist);
-      //console.log(that.data.info.userDefine)
-      that.setData({
-        'info.userDefine': that.data.info.userDefine
-      })
-    }
+    //   var infos = (that.data.info.userDefine).push(newlist);
+    //   //console.log(that.data.info.userDefine)
+    //   that.setData({
+    //     'info.userDefine': that.data.info.userDefine
+    //   })
+    // }
 
-    //更新全局变量方式 20180519
-    app.globalData.ResumeFull = this.data.info
-    typeof cb == "function" && cb(app.globalData.ResumeFull)
-    //更新全局变量结束 20180519
+    // //更新全局变量方式 20180519
+    // app.globalData.ResumeFull = this.data.info
+    // typeof cb == "function" && cb(app.globalData.ResumeFull)
+    // //更新全局变量结束 20180519
     wx.showToast({
       title: '保存成功',
       icon: 'success',
@@ -143,17 +149,19 @@ Page({
         console.log(res);
         if (res.confirm) {
           console.log('用户点击确定')
-          //莫名是旧数据更新 赋值得到是错误
-          const her = 'info.userDefine';
-          var delInfo = (that.data.info.userDefine).splice(that.data.num, 1)
-          that.setData({
-            [her]: that.data.info.userDefine
-          })
+          that.removex();
+          //20180601 取消页面统一构造
+          // //莫名是旧数据更新 赋值得到是错误
+          // const her = 'info.userDefine';
+          // var delInfo = (that.data.info.userDefine).splice(that.data.num, 1)
+          // that.setData({
+          //   [her]: that.data.info.userDefine
+          // })
 
-          //更新全局变量方式 20180519
-          app.globalData.ResumeFull = that.data.info
-          typeof cb == "function" && cb(app.globalData.ResumeFull)
-          //更新全局变量结束 20180519
+          // //更新全局变量方式 20180519
+          // app.globalData.ResumeFull = that.data.info
+          // typeof cb == "function" && cb(app.globalData.ResumeFull)
+          // //更新全局变量结束 20180519
           wx.showToast({
             title: '删除成功',
             icon: 'success',
@@ -174,17 +182,43 @@ Page({
   ,
   //20180529 保存、新增自定义板块
   getResume: function () {
-    var setdatas = {
-      "id": 0,
-      "resume_Id": 0,
-      "title": "string",
-      "detail": "string",
-      "ctime": "2018-05-29T14:25:59.041Z"
+    var that = this;
+    if (that.data.moben!=0){
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "title": that.data.infoChild.title,
+        "detail": that.data.infoChild.content
+
+      }
+    }else{
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "title": that.data.input1,
+        "detail": that.data.input2
+
+      }
     }
+    
     common.request('api/resume/save_define', {
       params: setdatas,
       success: function (res) {
         console.log("保存、新增自定义板块", res)
+
+      }
+    }, app.globalData.login)
+  },
+  removex: function () {
+    var that = this;
+    var setdata = {
+      "id": that.data.moben,
+      "resume_Id": that.data.resumeId,
+    }
+    common.request('api/resume/delete_define', {
+      params: setdata,
+      success: function (res) {
+        console.log("删除自定义板块", res)
 
       }
     }, app.globalData.login)

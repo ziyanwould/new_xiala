@@ -29,6 +29,10 @@ Page({
         parTime: true,
       })
     }
+
+    this.setData({
+      resumeId: this.data.info.resume_id
+    })
   },
 
 
@@ -89,17 +93,19 @@ Page({
    
   }
   , save: function (event) {
-    if (this.data.parTime) {
-      //更新全局变量方式 20180519
-      app.globalData.resumePart = this.data.info
-      typeof cb == "function" && cb(app.globalData.resumePart)
-      //更新全局变量结束 20180519
-    } else {
-      //更新全局变量方式 20180519
-      app.globalData.ResumeFull = this.data.info
-      typeof cb == "function" && cb(app.globalData.ResumeFull)
-      //更新全局变量结束 20180519
-    }
+    this.getResume()
+    //取消全局更新 
+    // if (this.data.parTime) {
+    //   //更新全局变量方式 20180519
+    //   app.globalData.resumePart = this.data.info
+    //   typeof cb == "function" && cb(app.globalData.resumePart)
+    //   //更新全局变量结束 20180519
+    // } else {
+    //   //更新全局变量方式 20180519
+    //   app.globalData.ResumeFull = this.data.info
+    //   typeof cb == "function" && cb(app.globalData.ResumeFull)
+    //   //更新全局变量结束 20180519
+    // }
     wx.showToast({
       title: '保存成功',
       icon: 'success',
@@ -111,17 +117,18 @@ Page({
       })
     }, 1000)
   }
-  ,
-  //20180529 保存自我描述板块
+
+  ,  //20180529 保存期望工作
   getResume: function () {
-    var setdatas = {
-      "resume_id": 0,
-      "intro": "string"
+    var that = this;
+    var setdata = {
+      "resume_id": that.data.resumeId,
+      "intro": that.data.info.selfDescription.content
     }
     common.request('api/resume/save_intro', {
-      params: setdatas,
+      params: setdata,
       success: function (res) {
-        console.log("保存自我描述板块", res)
+        console.log("保存自定义", res)
 
       }
     }, app.globalData.login)

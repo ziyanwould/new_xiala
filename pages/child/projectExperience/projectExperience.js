@@ -34,11 +34,15 @@ Page({
       this.setData({
         key: options.type,
         num: options.id,
-        infoChild: self.projectExperience[options.id]
+        infoChild: self.projectExperience[options.id],
+        resumeId: self.resume_id,
+        moben: self.projectExperience[options.id].id
       })
     } else {
       this.setData({
-        switchs: false
+        switchs: false,
+        resumeId: self.resume_id,
+        moben: 0
       })
     }
 
@@ -125,33 +129,35 @@ Page({
   },
   save: function () {
     var that = this;
-    if (that.data.switchs) {
-      const you = "info.projectExperience[" + this.data.num + "]";
-      this.setData({
-        [you]: that.data.infoChild
-      })
-    } else {
-      var newlist = {}
-      newlist.id = that.data.info.projectExperience.length;
-      newlist.projectName = that.data.project;
-      newlist.role = that.data.work;
-      newlist.startTime = that.data.startTime;
-      newlist.endTime = that.data.endTime;
-      newlist.projectContent = that.data.input;
+    this.getResume()
+    //20180601撤销全局修改
+    // if (that.data.switchs) {
+    //   const you = "info.projectExperience[" + this.data.num + "]";
+    //   this.setData({
+    //     [you]: that.data.infoChild
+    //   })
+    // } else {
+    //   var newlist = {}
+    //   newlist.id = that.data.info.projectExperience.length;
+    //   newlist.projectName = that.data.project;
+    //   newlist.role = that.data.work;
+    //   newlist.startTime = that.data.startTime;
+    //   newlist.endTime = that.data.endTime;
+    //   newlist.projectContent = that.data.input;
 
 
 
-      var infos = (that.data.info.projectExperience).push(newlist);
-      //console.log(that.data.info.projectExperience)
-      that.setData({
-        'info.projectExperience': that.data.info.projectExperience
-      })
-    }
+    //   var infos = (that.data.info.projectExperience).push(newlist);
+    //   //console.log(that.data.info.projectExperience)
+    //   that.setData({
+    //     'info.projectExperience': that.data.info.projectExperience
+    //   })
+    // }
 
-    //更新全局变量方式 20180519
-    app.globalData.ResumeFull = this.data.info
-    typeof cb == "function" && cb(app.globalData.ResumeFull)
-    //更新全局变量结束 20180519
+    // //更新全局变量方式 20180519
+    // app.globalData.ResumeFull = this.data.info
+    // typeof cb == "function" && cb(app.globalData.ResumeFull)
+    // //更新全局变量结束 20180519
     wx.showToast({
       title: '保存成功',
       icon: 'success',
@@ -174,16 +180,18 @@ Page({
         console.log(res);
         if (res.confirm) {
           console.log('用户点击确定')
-          //莫名是旧数据更新 赋值得到是错误
-          const her = 'info.projectExperience';
-          var delInfo = (that.data.info.projectExperience).splice(that.data.num, 1)
-          that.setData({
-            [her]: that.data.info.projectExperience
-          })
+          that.removex()
+          //2018061 取消全局删除按钮
+          // //莫名是旧数据更新 赋值得到是错误
+          // const her = 'info.projectExperience';
+          // var delInfo = (that.data.info.projectExperience).splice(that.data.num, 1)
+          // that.setData({
+          //   [her]: that.data.info.projectExperience
+          // })
 
-          //更新全局变量方式 20180519
-          app.globalData.ResumeFull = that.data.info
-          typeof cb == "function" && cb(app.globalData.ResumeFull)
+          // //更新全局变量方式 20180519
+          // app.globalData.ResumeFull = that.data.info
+          // typeof cb == "function" && cb(app.globalData.ResumeFull)
           //更新全局变量结束 20180519
           wx.showToast({
             title: '删除成功',
@@ -205,19 +213,48 @@ Page({
   ,
   //20180529 保存/新增项目经历板块
   getResume: function () {
-    var setdatas = {
-      "id": 0,
-      "resume_Id": 0,
-      "start_Time": "2018-05-29T14:21:34.558Z",
-      "end_Time": "2018-05-29T14:21:34.558Z",
-      "project_Name": "string",
-      "project_Detail": "string",
-      "ctime": "2018-05-29T14:21:34.558Z"
+    var that = this;
+    if (that.data.moben!=0){
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.infoChild.startTime + "-29T14:17:27.682Z",
+        "end_Time": that.data.infoChild.endTime + "-29T14:17:27.682Z",
+        "project_Name": that.data.infoChild.projectName,
+        "project_Detail": that.data.infoChild.projectContent
+
+      }
+    }else{
+     
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.startTime + "-29T14:17:27.682Z",
+        "end_Time": that.data.endTime + "-29T14:17:27.682Z",
+        "project_Name": that.data.project,
+        "project_Detail": that.data.input
+
+      }
     }
+   
     common.request('api/resume/save_projectexp', {
       params: setdatas,
       success: function (res) {
         console.log("保存/新增项目经历板块", res)
+
+      }
+    }, app.globalData.login)
+  },
+  removex: function () {
+    var that = this;
+    var setdata = {
+      "id": that.data.moben,
+      "resume_Id": that.data.resumeId,
+    }
+    common.request('api/resume/delete_projectexp', {
+      params: setdata,
+      success: function (res) {
+        console.log("删除证书", res)
 
       }
     }, app.globalData.login)

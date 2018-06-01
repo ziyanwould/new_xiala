@@ -45,6 +45,7 @@ Page({
   this.setData({
     resumeId: this.data.info.resume_id
   })
+  
   },
 
   /**

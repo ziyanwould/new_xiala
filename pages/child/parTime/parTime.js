@@ -1,4 +1,5 @@
 
+
 var app = getApp();
 var common = require('../../../utils/common.js');
 Page({
@@ -32,7 +33,7 @@ Page({
     const that = this
     common.setStronguser({
       success: function (res) {
-        // console.log("成功判断本地存储", res.data)
+       console.log("成功判断本地存储", res.data)
         that.setData({
           userInfo: res.data,
         })
@@ -45,10 +46,12 @@ Page({
       }
 
     })
-    this.setData({
-      resume: app.globalData.resumePart
-    })
-    console.log("resume", that.data.resume)
+
+    this.getResume();
+    // this.setData({
+    //   resume: app.globalData.resumePart
+    // })
+    // console.log("resume", that.data.resume)
   },
 
   /**
@@ -103,34 +106,7 @@ Page({
     })
 
   },
-  /*头像功能*/
-  // changeAvatar: function () {
-  //   var that = this;
-  //   // var childId = wx.getStorageSync("child_id");
-  //   // var token = wx.getStorageSync('token');
-  //   wx.chooseImage({
-  //     count: 1, // 最多可以选择的图片张数，默认9
-  //     sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-  //     sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-  //     success: function (res) {
-  //       console.log(res.tempFilePaths + "修改页面")
-  //       var avatar = res.tempFilePaths;
-  //       that.setData({
-  //         avatar: avatar,
-  //         upAvatar: true
-  //       })
 
-  //     },
-  //     fail: function () {
-  //       // fail
-  //     },
-  //     complete: function () {
-  //       // complete
-  //     }
-  //   })
-  // },
-  // 这是是调用上传头像uploadFile方法
-  // 上传头像
   upload() {
     wx.chooseImage({
       count: 1, // 默认9
@@ -145,10 +121,16 @@ Page({
     })
   },
   onLoad(option) {
+    var that = this
     console.log("页面传递的值", option)
     // console.log('onLoad')
-    this.getResume(option.resume_id)
-    var that = this
+    if (option.resume_id) {
+      this.setData({
+        resumeId: option.resume_id
+      })
+    }
+ 
+
     /** */
 
 
@@ -176,15 +158,22 @@ Page({
     }
   },
    //20180529 获取兼职详情页
-   getResume: function (ids) {
+   getResume: function () {
+     
+    var that =this;
+    console.log(' that.data.resumeId', that.data.resumeId)
     var setdata = {
-      "resume_id": ids
+      "resume_id": that.data.resumeId
     }
     common.request('api/resume/part_detail', {
       params: setdata,
       success: function (res) {
         console.log("获取兼职详情页", res)
-
+        that.setData({
+          resume: res.data.data.resumePart
+        })
+        app.globalData.resumePart = res.data.data.resumePart
+        typeof cb == "function" && cb(that.globalData.resumePart)
       }
     }, app.globalData.login)
   }

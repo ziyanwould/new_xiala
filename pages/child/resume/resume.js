@@ -1,4 +1,5 @@
 // pages/child/resume/resume.js
+
 var app = getApp();
 var common = require('../../../utils/common.js');
 Page({

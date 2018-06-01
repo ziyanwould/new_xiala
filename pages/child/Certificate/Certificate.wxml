@@ -80,7 +80,7 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>开始时间</view>
-    <picker class="weui-btn" mode="date" value="{{startTime}}"  data-type='endDate' bindchange="bindend">
+    <picker class="weui-btn" mode="date" value="{{startTime}}"  fields="month"  data-type='endDate' bindchange="bindend">
      <view class='sel_right'>
          <text wx:if="{{key}}">{{infoChild.startTime}}</text>
           <text wx:if="{{!key}}">{{startTime}}</text>
@@ -93,7 +93,7 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>结束时间</view>
-       <picker class="weui-btn" mode="date" value="{{endTime}}"  data-type='endDate' bindchange="bindendEnd">
+       <picker class="weui-btn" mode="date" value="{{endTime}}"  fields="month" data-type='endDate' bindchange="bindendEnd">
      <view class='sel_right'>
          <text wx:if="{{key}}">{{infoChild.endTime}}</text>
           <text wx:if="{{!key}}">{{endTime}}</text>

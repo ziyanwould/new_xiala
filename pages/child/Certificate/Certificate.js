@@ -50,12 +50,16 @@ Page({
       this.setData({
         key: options.type,
         num: options.id,
-        infoChild: self.certificate[options.id]
+        infoChild: self.certificate[options.id],
+        resumeId: self.resume_id,
+        moben: self.certificate[options.id].id
       })
     } else {
       this.setData({
         switchs: false,
-        optional:""
+        optional:"",
+        resumeId: self.resume_id,
+        moben: 0
       })
     }
 
@@ -81,11 +85,12 @@ Page({
   onShow: function () {
     /**跳转筛选 */
     var value = wx.getStorageSync('worktype')
-    //console.log("携带回来的信息", value)   
+    console.log("携带回来的信息", value)   
     if (value) {
       this.setData({
         'infoChild.NameCertificate': value.value,
-        'project': value.value
+        'project': value.value,
+         'active':value.id
       })
     }
     wx.removeStorageSync('worktype')
@@ -169,43 +174,44 @@ Page({
   },
   save: function () {
     var that = this;
-    if (that.data.switchs) {
-      const you = "info.certificate[" + this.data.num + "]";
-      this.setData({
-        [you]: that.data.infoChild
-      })
-    } else {
-      var newlist = {}
-      newlist.id = that.data.info.certificate.length;
-      newlist.NameCertificate = that.data.project;
-      newlist.organization = that.data.work;
-      newlist.startTime = that.data.startTime;
-      newlist.endTime = that.data.endTime;
+    this.getResume();
+    // if (that.data.switchs) {
+    //   const you = "info.certificate[" + this.data.num + "]";
+    //   this.setData({
+    //     [you]: that.data.infoChild
+    //   })
+    // } else {
+    //   var newlist = {}
+    //   newlist.id = that.data.info.certificate.length;
+    //   newlist.NameCertificate = that.data.project;
+    //   newlist.organization = that.data.work;
+    //   newlist.startTime = that.data.startTime;
+    //   newlist.endTime = that.data.endTime;
 
-      newlist.registration = that.data.registration;
-      newlist.state = that.data.state;
-      newlist.useRe = that.data.useRe;
-      newlist.location = that.data.location;
+    //   newlist.registration = that.data.registration;
+    //   newlist.state = that.data.state;
+    //   newlist.useRe = that.data.useRe;
+    //   newlist.location = that.data.location;
 
 
 
-      var infos = (that.data.info.certificate).push(newlist);
-      //console.log(that.data.info.certificate)
-      that.setData({
-        'info.certificate': that.data.info.certificate
-      })
-    }
-    if (this.data.parTime){
-      //更新全局变量方式 20180519
-      app.globalData.resumePart = this.data.info
-      typeof cb == "function" && cb(app.globalData.resumePart)
-    //更新全局变量结束 20180519
-    }else{
-      //更新全局变量方式 20180519
-      app.globalData.ResumeFull = this.data.info
-      typeof cb == "function" && cb(app.globalData.ResumeFull)
-    //更新全局变量结束 20180519
-    }
+    //   var infos = (that.data.info.certificate).push(newlist);
+    //   //console.log(that.data.info.certificate)
+    //   that.setData({
+    //     'info.certificate': that.data.info.certificate
+    //   })
+    // }
+    // if (this.data.parTime){
+    //   //更新全局变量方式 20180519
+    //   app.globalData.resumePart = this.data.info
+    //   typeof cb == "function" && cb(app.globalData.resumePart)
+    // //更新全局变量结束 20180519
+    // }else{
+    //   //更新全局变量方式 20180519
+    //   app.globalData.ResumeFull = this.data.info
+    //   typeof cb == "function" && cb(app.globalData.ResumeFull)
+    // //更新全局变量结束 20180519
+    // }
 
     wx.showToast({
       title: '保存成功',
@@ -229,24 +235,26 @@ Page({
         console.log(res);
         if (res.confirm) {
           console.log('用户点击确定')
-          //莫名是旧数据更新 赋值得到是错误
-          const her = 'info.certificate';
-          var delInfo = (that.data.info.certificate).splice(that.data.num, 1)
-          that.setData({
-            [her]: that.data.info.certificate
-          })
+          that.removex()
+          //取消全局修改模式 
+          // //莫名是旧数据更新 赋值得到是错误
+          // const her = 'info.certificate';
+          // var delInfo = (that.data.info.certificate).splice(that.data.num, 1)
+          // that.setData({
+          //   [her]: that.data.info.certificate
+          // })
 
-          if (that.data.parTime) {
-            //更新全局变量方式 20180519
-            app.globalData.resumePart = that.data.info
-            typeof cb == "function" && cb(app.globalData.resumePart)
-            //更新全局变量结束 20180519
-          } else {
-            //更新全局变量方式 20180519
-            app.globalData.ResumeFull = that.data.info
-            typeof cb == "function" && cb(app.globalData.ResumeFull)
-            //更新全局变量结束 20180519
-          }
+          // if (that.data.parTime) {
+          //   //更新全局变量方式 20180519
+          //   app.globalData.resumePart = that.data.info
+          //   typeof cb == "function" && cb(app.globalData.resumePart)
+          //   //更新全局变量结束 20180519
+          // } else {
+          //   //更新全局变量方式 20180519
+          //   app.globalData.ResumeFull = that.data.info
+          //   typeof cb == "function" && cb(app.globalData.ResumeFull)
+          //   //更新全局变量结束 20180519
+          // }
           wx.showToast({
             title: '删除成功',
             icon: 'success',
@@ -381,25 +389,60 @@ Page({
   },
   //20180529 保存/新增证书板块
   getResume: function () {
-    var setdatas = {
-      "id": 0,
-      "resume_Id": 0,
-      "start_Time": "2018-05-29T14:17:27.682Z",
-      "end_Time": "2018-05-29T14:17:27.682Z",
-      "certificate_Name": "string",
-      "train_Org": "string",
-      "gertificate_Type_Id": 0,
-      "reg_Status": "string",
-      "gertificate_Status": "string",
-      "province": "string",
-      "city": "string",
-      "gertificate_Use": "string",
-      "ctime": "2018-05-29T14:17:27.682Z"
+    var that = this;
+    if (that.data.moben!=0){
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.infoChild.startTime + "-29T14:17:27.682Z",
+        "end_Time": that.data.infoChild.endTime + "-29T14:17:27.682Z",
+        "certificate_Name": that.data.infoChild.NameCertificate,
+        "train_Org": that.data.infoChild.organization,
+        "gertificate_Type_Id": that.data.active,
+        "reg_Status": that.data.infoChild.registration,
+        "gertificate_Status": that.data.infoChild.state,
+        //"province": "",
+        "city": that.data.infoChild.location,
+        "gertificate_Use": that.data.infoChild.useRe
+
+      }
+    }else{
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.startTime + "-29T14:17:27.682Z",
+        "end_Time": that.data.endTime + "-29T14:17:27.682Z",
+        "certificate_Name": that.data.project,
+        "train_Org": that.data.work,
+        "gertificate_Type_Id": that.data.active,
+        "reg_Status": that.data.registration,
+        "gertificate_Status": that.data.state,
+        //"province": "",
+        "city": that.data.location,
+        "gertificate_Use": that.data.useRe
+
+      }
     }
+   
     common.request('api/resume/save_certificate', {
       params: setdatas,
       success: function (res) {
         console.log("保存/新增证书板块", res)
+
+      }
+    }, app.globalData.login)
+  },
+  //删除此项目
+  removex: function () {
+    var that = this;
+    var setdata = {
+      "id": that.data.moben,
+      "resume_Id": that.data.resumeId,
+    }
+    common.request('api/resume/delete_certificate', {
+      params: setdata,
+      success: function (res) {
+        console.log("删除证书", res)
 
       }
     }, app.globalData.login)

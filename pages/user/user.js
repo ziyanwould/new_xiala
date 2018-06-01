@@ -418,24 +418,29 @@ Page({
         "type_id": urls
       },
       success: function (res) {
-        console.log("二重调用", res)
+        console.log("二重调用", res.data.data.detail.ID);
+        if (nums > 0 && urls == '全职') {
+          
+          wx.navigateTo({
+            url: '/pages/child/resume/resume?resume_id=' + res.data.data.detail.ID
+
+          })
+        } else if (nums > 0 && urls == '兼职') {
+       
+          wx.navigateTo({
+            url: '/pages/child/parTime/parTime?resume_id=' + res.data.data.detail.ID
+
+          })
+        } else {
+          wx.showToast({
+            title: '请输入简历名',
+            icon: 'loading',
+            duration: 800
+          })
+        }
       }
     })
-    if (nums > 0 && urls=='全职'){
-      wx.navigateTo({
-        url: '/pages/child/resume/resume?type=new'
-      })
-    } else if (nums > 0 && urls == '兼职'){
-      wx.navigateTo({
-        url: '/pages/child/parTime/parTime?type=new'
-      })
-    }else{
-      wx.showToast({
-        title: '请输入简历名',
-        icon:'loading',
-        duration:800
-      })
-    }
+
   }  
   //简历输入名字end
 

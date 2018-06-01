@@ -154,7 +154,7 @@
           <view class='exp1_left'><text>{{item.projectName}}</text><image src='http://www.liujiarong.top/WX/wx_Link.png'></image> </view>
           <view class='exp1_right'><navigator url="../projectExperience/projectExperience?id={{index}}&type=projectExperience">编辑</navigator> </view>
       </view>
-      <view class='exp2'>{{item.role}}</view>
+      <!-- <view class='exp2'>{{item.role}}</view> -->
       <view class='exp3'>{{item.startTime}} -- {{item.endTime}}</view>
       <view class='content'>
           <view class='content_title'>
