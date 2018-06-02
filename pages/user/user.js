@@ -195,9 +195,7 @@ Page({
       //       }
       //     });
 
-      common.geToppid({
-        success: function (event) {
-          console.log("测试初始化设置用户信息", event)
+    
            
           //解析手机号
           wx.request({
@@ -209,7 +207,7 @@ Page({
             },
             method: 'POST',
             data: {
-              openid: event.data.data.wx_openid,
+              openid: app.globalData.oppenid,
               encryptedData: child_encryptedData,
               iv: child_iv
             },
@@ -242,8 +240,7 @@ Page({
 
           })
 
-        }
-      })
+      
     
     }
   }
@@ -284,6 +281,8 @@ Page({
             success: function (res) {
               var fage = res.data
               console.log('login_token,', fage)
+
+        
               wx.request({
                 url: 'http://120.27.100.219:54231/api/common/login_out',
                 header: {
@@ -293,11 +292,13 @@ Page({
 
                 },
                 data:{
-                  'login_token': fage
+                  'login_token': fage,
+                  "wx_open_id": app.globalData.oppenid
                 },
                 method: 'POST',
                 success: function (res) {
-
+                 
+                  console.log("退出返回数据", res)
                   wx.showToast({
                     title: res.data.message,
                     icon: 'success',
@@ -320,6 +321,24 @@ Page({
                   //   }
                   // })
 
+                  //
+                  //提前获取oppenID
+                  common.geToppid({
+                    success: function (event) {
+                      console.log("测试初始化设置用户信息", event)
+                      wx.setStorage({
+                        key: "openId",
+                        data: event.data.data.wx_openid
+                      });
+
+                      //更新全局变量方式 20180515
+                      app.globalData.oppenid = event.data.data.wx_openid
+                      typeof cb == "function" && cb(that.globalData.oppenid)
+                     //更新全局变量结束 20180515
+                      }
+                      
+                      
+                      })
                   setTimeout(function(){
                     wx.clearStorage()
                   },2050)

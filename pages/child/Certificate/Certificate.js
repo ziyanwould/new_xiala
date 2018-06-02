@@ -334,11 +334,7 @@ Page({
     let self5 = that.data.location == "请输入" ;
     if (!(self1 || self2 || self3 || self4 || self5)){
     
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 1200
-        })
+        
         //调用认证
         that.identification();
         //调用认证 end
@@ -358,23 +354,29 @@ Page({
   },
   //个人认证版块
   identification:function(){
-    
-    const usedata = {
-      "certificate_Name": this.data.forexample,
-      "certificate_Type_Id": this.data.forexample,
-      "reg_Status": this.data.forexample,
-      "certificate_Status": this.data.forexample,
-      "certificate_Use": this.data.forexample,
-      "start_Time": this.data.forexample,
-      "end_Time": this.data.forexample,
-      "province": this.data.forexample,
-      "city": this.data.forexample,
+    var that = this ;
+    const usedata = { 
+      "start_Time": that.data.startTime + "-29T14:17:27.682Z",
+      "end_Time": that.data.endTime + "-29T14:17:27.682Z",
+      "certificate_Name": that.data.project,
+      "Certificate_Type_Id": that.data.active,
+      "reg_Status": that.data.registration,
+      "gertificate_Status": that.data.state,
+      "province": "认证",
+      "city": that.data.location,
+      "gertificate_Use": that.data.useRe
     };
     common.request('usercenter/apply_verify', {
       params: usedata,
       success: function (res) {
       // 证书上传信息成功后操作
-      
+      console.log("证书上传情况",res)
+
+      wx.showToast({
+        title: res.data.message,
+        icon: 'success',
+        duration: 1200
+      })
       }
     }, app.globalData.login)
   },
@@ -384,6 +386,50 @@ Page({
       success: function (res) {
         // 证书上传信息成功后操作
         console.log("认证状态中 认证成功 认真失败",res)
+        if (res.data.data.status==3){
+          wx.showToast({
+            title: '你已经认证成功',
+            icon: 'success',
+            duration: 1500
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1800)
+        } else if (res.data.data.status == 1){
+          wx.showModal({
+            content: '您的账号还未认证，请您填一份证书作为认证信息，提交认证',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
+          })
+        }
+        else if (res.data.data.status == 2) {
+          wx.showToast({
+            title: '你申请认证还在审核中，请耐心等待',
+            icon: 'success',
+            duration: 1500
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1800)
+        }else{
+          wx.showModal({
+            content: '您的账号认证失败，请您重新填一份证书作为认证信息，提交认证',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
+          })
+        }
       }
     }, app.globalData.login)
   },
