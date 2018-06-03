@@ -53,7 +53,7 @@ Page({
     key:false
   },
   onLoad: function () {
-    console.log('我的onLoad')
+    
     var that = this
     /*是否登录*/
     wx.getStorage({
@@ -105,6 +105,11 @@ Page({
         bingetinfo: true
       })
     }
+    //
+   
+      this.identif()
+   
+    
   },
    onPullDownRefresh: function () {
     // do somthing
@@ -113,14 +118,33 @@ Page({
    jumpToMyPage: function (event) {
      var that = this;
      if (this.data.key) {
-       //20180521 增加对创建简历动态指引兼职与非兼职引导
-       if (event.currentTarget.dataset.url =='creation'){
-         that.selectResu()
+       //增加未认证下的操作指引
+       if (that.data.identif){
+            //20180521 增加对创建简历动态指引兼职与非兼职引导
+            if (event.currentTarget.dataset.url == 'creation') {
+              that.selectResu()
+            } else {
+              wx.navigateTo({
+                url: event.currentTarget.dataset.url
+              })
+            }
        }else{
-         wx.navigateTo({
-           url: event.currentTarget.dataset.url
-         })
+           
+           wx.showModal({
+             content: '您的账号还未认证，点击‘确定’前往认证，认证成功后可使用全部功能',
+             showCancel: false,
+             success: function (res) {
+               if (res.confirm) {
+                 console.log('用户点击确定')
+                 wx.navigateTo({
+                   url: '/pages/child/Certificate/Certificate?approveID=true',
+                 })
+               }
+             }
+           })
        }
+
+      
       
      }else{
        var self = common.tanchu()
@@ -236,6 +260,9 @@ Page({
               setTimeout(function () {
                 that.getuseinfomation()
               }, 250)
+
+              //更新认证状态
+              that.identif()
             }
 
           })
@@ -362,6 +389,7 @@ Page({
         key: "user",
         data: e.detail.userInfo
       })
+      var self = common.tanchu()
       this.setData({
         // userInfo: { "nickName": e.detail.userInfo.nickName, "avatarUrl": e.detail.userInfo.avatarUrl },
         bingetinfo: true,
@@ -511,5 +539,43 @@ createResume:function(createpostion){
         //失败后的逻辑  
       },
     }, app.globalData.login)
-}
+},
+//个人认证的情况
+  identif:function(){
+      var that = this;
+      console.log('value', value)
+      try {
+        var value = wx.getStorageSync('ident')
+        console.log('value', value)
+        if (value) {
+          
+         that.setData({
+           identif:true,
+           'jobList[2].pic':'identifi1'
+         })
+         return false;
+        }else{
+          if(!that.data.key){
+            return false;
+          }
+          common.request('usercenter/query_verify_status', {
+            success: function (res) {
+              // 证书上传信息成功后操作
+              console.log("认证状态中 认证成功 认真失败", res)
+              if (res.data.data.status == 3) {
+                try {
+                  wx.setStorageSync('ident', true)
+                } catch (e) {
+                }
+              }
+            }
+          }, app.globalData.login)
+        }
+      } catch (e) {
+        // Do something when catch error
+       
+      }
+   
+    
+  }
 })

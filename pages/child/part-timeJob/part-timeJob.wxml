@@ -1,3 +1,6 @@
+  <!-- 引入登录注册和选择组件 -->
+<import src="../Template/Template.wxml"/>
+<template is="notLogin" data="{{...items}}" /> 
 <!--pages/child/part-timeJob/part-timeJob.wxml-->
 <view class='section1'>
    <view class='JobDescription'>
@@ -104,5 +107,10 @@
     <view>{{message.has_collect==true?"取消":"收藏"}}</view> 
   </view>
 
-  <view><button class="weui-btn resume" type="primary">投递简历</button></view> 
+  <view>
+   
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{msgTitle}}">
+      <button class="weui-btn resume" bindtap='drop' type="primary">投递简历</button>
+   </picker>
+  </view> 
 </view>

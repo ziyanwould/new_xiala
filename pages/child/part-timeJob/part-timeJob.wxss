@@ -1,6 +1,9 @@
 /* pages/child/part-timeJob/part-timeJob.wxss */
+/*弹窗口*/
+@import "/pages/child/Template/Template.wxss";   
 @import '/pages/child/CompanyPage/CompanyPage.wxss';
 @import '/pages/child/Template/List.wxss';
+
 .SimilarPosition{
   background: #FFFFFF;
   padding: 30rpx 0;
@@ -141,6 +144,10 @@
 }
 .resume{
   width: 480rpx;
+  display:inline-block;
+align-items:center;
+font-size:33rpx;
+
 }
 .SubmitResume{
   position: fixed;

@@ -82,7 +82,7 @@
    <button class='sec1 buttonx'  open-type="contact" session-from="weapp">
       <view class='fun_left'>
         <image src='http://www.liujiarong.top/WX/images/wx_retroaction.png' ></image>
-        <text class='xod'>反馈</text>
+        <text class='xod'>客服</text>
       </view>
       
       <view class='fun_right'>

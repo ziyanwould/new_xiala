@@ -3,13 +3,9 @@ var common = require('../../../utils/common.js');
 var app = getApp()
 
 var url = "http://www.imooc.com/course/ajaxlist";
-var page = 0;
-var page_size = 5;
-var sort = "last";
-var is_easy = 0;
-var lange_id = 0;
-var pos_id = 0;
-var unlearn = 0;
+var page = 1;
+var pageSize = 10;
+
 
 
 
@@ -26,9 +22,10 @@ Page({
     pageshow:true,
     activeIndex: 0,
     used_list: [
-      { title: "分类01", name: "全部" },
-      { title: "分类02", name: "全职" },
+      // { title: "分类01", name: "全部" },
+    
       { title: "分类03", name: "兼职" },
+      { title: "分类02", name: "全职" },
     ]
   
    
@@ -40,36 +37,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: 'loading...',
-    });
-    var that = this;
-    wx.request({
-      url: url,
-      data: {
-        page: page,
-        page_size: page_size,
-        sort: sort,
-        is_easy: is_easy,
-        lange_id: lange_id,
-        pos_id: pos_id,
-        unlearn: unlearn
-      },
-      success: function (res) {
-        //console.info(that.data.list);  
-        var list = that.data.list;
-        for (var i = 0; i < 3; i++) {
-          list.push(res.data.list[i]);
-        }
-        that.setData({
-          list: list
-        });
-        page++;
-        wx.hideLoading();
-
-      }
-    });
-
+   
+    this.deleteResume()
   },
 
 
@@ -123,32 +92,50 @@ Page({
   },
   active: function (e) {
     this.setData({
-      activeIndex: e.currentTarget.id
+      activeIndex: e.currentTarget.id,
+      list:[]
     })
-    if (e.currentTarget.id>1){
-      this.setData({
-        pageshow: false
-      })
-    }else{
-      this.setData({
-        pageshow: true
-      })
-    }
+    this.deleteResume()
   },
   
   //20180529 投递记录
   deleteResume:function () {
+    wx.showLoading({
+      title: 'loading...',
+    });
+    var that = this;
+    console.log('全职兼职序号吧',that.data.activeIndex)
     var setdata = {
-      "user_id": "00000000-0000-0000-0000-000000000000",
-      "type_id": 0,
-      "pageIndex": 0,
-      "pageSize": 0
+     
+      "type_id": that.data.activeIndex,
+      "pageIndex": page,
+      "pageSize": pageSize
     }
-    common.request('api/resume/deliver_log', {
+    // common.request('api/resume/deliver_log', {
+    common.request('api/position/get_collect_position_list', {
       params: setdata,
       success: function (res) {
         console.log("投递记录", res)
-
+        //console.info(that.data.list);  
+        var list = that.data.list;
+        for (var i = 0; i < res.data.data.list.length; i++) {
+          list.push(res.data.data.list[i]);
+        }
+        //看是否有数据
+        if (res.data.data.list.length>0) {
+          that.setData({
+            pageshow: true
+          })
+        } else {
+          that.setData({
+            pageshow: false
+          })
+        }
+        that.setData({
+          list: list
+        });
+        page++;
+        wx.hideLoading();
       }
     }, app.globalData.login)
   }

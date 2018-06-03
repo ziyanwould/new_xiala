@@ -45,7 +45,8 @@ Page({
     counturl: "http://www.liujiarong.top/WX/Comup.png",
     title:"室内设计",
     salary:"8K-12K",
-    socialSecurity:"广州不可停"
+    socialSecurity:"广州不可停",
+    index: 0
 
 
   },
@@ -84,6 +85,34 @@ Page({
    */
   onShow: function () {
     console.log(this.data.jobType, this.data.message, this.data.recommend)
+    
+   
+    var _this = this;
+    wx.getStorage({
+      key: 'login',
+      success: function (res) {
+
+        if (res.data) {
+          _this.setData({
+            items: {
+              show: false
+            },
+            key: true
+
+          })
+        } else {
+          _this.setData({
+            items: {
+              show: false
+            },
+            key: false
+
+          })
+        }
+      }
+    })
+
+    this.getRwsume()
   },
 
   /**
@@ -199,36 +228,333 @@ Page({
   ,
   //收藏职位
   collectPosition:function(){
-    var that = this;
-    var urlc = '';
-    var self = that.data.message.has_collect
-    if (self){
-      urlc ='api/position/remove_collect_position'
+    var that = this
+    if(!this.data.key){
+      wx.showToast({
+        title: '您还未登录！',
+        icon: 'loading',
+        duration: 2000
+      }) 
+      setTimeout(function(){
+        that.loging();
+        return false;
 
+      },2000)
     }else{
-      urlc = 'api/position/collect_position'
+     
+      var urlc = '';
+      var self = that.data.message.has_collect
+      if (self) {
+        urlc = 'api/position/remove_collect_position'
+
+      } else {
+        urlc = 'api/position/collect_position'
+      }
+      that.setData({
+        'message.has_collect': !self
+
+      })
+      common.request(urlc,
+        {
+          params: {
+            "position_id": that.data.message.position_id
+          },
+          success: function (res) {
+            console.log("获取结果", res)
+            wx.showToast({
+              title: res.data.message,
+              icon: 'success',
+              duration: 2000
+            });
+
+          },
+          fail: function () {
+            //失败后的逻辑  
+          },
+        }, app.globalData.login)
     }
-    that.setData({
-      'message.has_collect': !self
+
+
+  }
+  ,
+  //20180603 增加登录判断 
+  //路由跳转等
+  urlTo: function () {
+    var url = '/pages/child/Login/Login?line_type=1';
+    common.SomeThing(url);
+
+  },
+  urlTo2: function () {
+    var url = '/pages/child/Login/Login?line_type=2';
+    common.SomeThing(url);
+
+  },
+  urlclose: function () {
+    this.setData({
+      items: {
+        show: false
+      }
+    });
+  }
+  , //获取手机号
+  getPhoneNumber: function (e) {
+    let that = this;
+    console.log("errMsg", e.detail.errMsg)
+    console.log("vi", e.detail.iv)
+    console.log("encryptedData", e.detail.encryptedData)
+    var child_iv = e.detail.iv
+    var child_encryptedData = e.detail.encryptedData
+    //
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '未授权',
+        success: function (res) {
+
+
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '同意授权',
+        success: function (res) {
+          that.setData({
+            items: {
+
+              show: false
+            }
+          });
+
+        }
+      })
+      // that.setData({
+      //       items: {
+      //          show: false
+      //       }
+      //     });
+
+
+
+      //解析手机号
+      wx.request({
+        url: 'http://120.27.100.219:54231/api/common/wx_login_phone',
+        header: {
+          'content-type': 'application/json',
+          'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
+
+        },
+        method: 'POST',
+        data: {
+          openid: app.globalData.oppenid,
+          encryptedData: child_encryptedData,
+          iv: child_iv
+        },
+
+
+        success: function (res) {
+          console.log("登录凭证", res.data)
+
+          //20180515 预修改
+          wx.setStorage({
+            key: "login",
+            data: res.data.data.login_token
+          })
+          //end 20180515 预修改
+
+          //更新全局变量方式 20180515
+          app.globalData.login = res.data.data.login_token
+          typeof cb == "function" && cb(app.globalData.login)
+          //更新全局变量结束 20180515
+
+          var cai = common.getinst(app.globalData.login)
+          console.log("换一种写法", cai)
+          that.setData({
+            key: true
+          })
+          that.getRwsume()
+          setTimeout(function () {
+            that.getuseinfomation()
+          }, 250)
+        }
+
+      })
+
+
+
+    }
+  }
+  ,  /**点击登录 */
+  loging: function () {
+    var self = common.tanchu()
+    this.setData({
+      items: {
+        height: self,
+        masTitle: "",
+        show: true,
+        fages: true
+      }
+    });
+  },
+  /**授权 */
+  bindGetUserInfo: function (e) {
+    console.log("授权", e.detail.userInfo)
+    if (e.detail.userInfo) {
+      wx.setStorage({
+        key: "user",
+        data: e.detail.userInfo
+      })
+      this.setData({
+        // userInfo: { "nickName": e.detail.userInfo.nickName, "avatarUrl": e.detail.userInfo.avatarUrl },
+        bingetinfo: true,
+        items: {
+          height: self,
+          masTitle: "",
+          show: true,
+          fages: false
+        }
+      });
+    } else {
+      this.setData({
+        items: {
+          height: self,
+          masTitle: "",
+          show: true,
+          fages: false
+        }
+      });
+    }
+
+
+
+  },
+  //是否拥有本地存储判断
+  getuseinfomation: function () {
+    var that = this;
+    setTimeout(function () {
+      if (that.data.key) {
+        common.setStronguser({
+          success: function (res) {
+            console.log("成功判断本地存储", res.data)
+            that.setData({
+              userInfo: res.data,
+              bingetinfo: true
+            })
+          }
 
         })
-   common.request(urlc,
-      {
-        params:{
-          "position_id": that.data.message.position_id
-        },
-        success: function (res) {
-        console.log("获取结果", res)
+
+      } else {
+
+        return false;
+
+      }
+
+    }, 50)
+  }
+  ,  //20180529 获取简历列表
+  getRwsume: function () {
+    var that = this;
+    const usedata = {
+      "pageIndex": 1,
+      "pageSize": 30
+    };
+    var msgList = []
+    var msgTitle = []
+    common.request('api/resume/get_list', {
+      params: usedata,
+      success: function (res) {
+        console.log("获取简历列表", res);
+
+        if (res.data.code==0){
+          if (res.data.data.list.length > 0) {
+            //进行选择
+
+            for (var i = 0; i < res.data.data.list.length; i++) {
+              msgList.push(res.data.data.list[i]);
+              msgTitle.push(res.data.data.list[i].title)
+            }
+            that.setData({
+              msgList: msgList,
+              msgTitle: msgTitle
+            })
+          } else {
+            //提示无简历
+            that.setData({
+              msgList: ['您未创建简历！'],
+              msgTitle: ['您未创建简历！']
+            })
+          }
+        }else{
+          //提示未登录
+          that.setData({
+            msgList: ['您未登录！'],
+            msgTitle: ['您未登录！']
+          })
+        }
+       
+      }
+    }, app.globalData.login)
+    // console.log("获取简历列表1", that.data.msgList)
+  },
+  //投递简历下拉功能
+  bindPickerChange: function (e) {
+    var that = this;
+    if (!this.data.key) {
+      wx.showToast({
+        title: '您还未登录！',
+        icon: 'loading',
+        duration: 2000
+      })
+      setTimeout(function () {
+        that.loging();
+        return false;
+
+      }, 2000)
+    } else if (that.data.msgTitle[0] =='您未创建简历'){
+      wx.showToast({
+        title: '您未创建简历',
+        icon: 'loading',
+        duration: 2000
+      })
+      //判断是否有简历
+      return false;
+    }else{
+      
+
+
+      console.log('picker发送选择改变，携带值为', e.detail.value)
+      this.setData({
+        index: e.detail.value
+      })
+      let xuhao = e.detail.value;
+      let count = that.data.msgList;
+      console.log(xuhao, count, count[xuhao].resume_id)
+      let numbers = count[xuhao].resume_id
+      that.pullResume(numbers)
+    }
+  
+  },
+  //20180529 投递简历
+  pullResume: function (cd) {
+    var that = this;
+    console.log('简历序号',cd)
+    var deletedata = {
+      "resume_id": cd,
+      "position_id": that.data.message.position_id
+    }
+    common.request('api/resume/deliver', {
+      params: deletedata,
+      success: function (res) {
+        console.log("投递建立后信息", res)
         wx.showToast({
           title: res.data.message,
           icon: 'success',
           duration: 2000
-        });
-        
-        },
-        fail: function () {
-          //失败后的逻辑  
-        },
-      }, app.globalData.login )
+        })
+      }
+    }, app.globalData.login)
   }
 })
