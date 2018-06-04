@@ -355,14 +355,21 @@ Page({
   //个人认证版块
   identification:function(){
     var that = this ;
+    console.log("certificate_Name",that.data.project,
+      "Certificate_Type_Id", that.data.active,
+      "reg_Status", that.data.registration,
+      "gertificate_Status", that.data.state,
+      "province","广东",
+      "city", that.data.location,
+      "gertificate_Use", that.data.useRe)
     const usedata = { 
-      "start_Time": that.data.startTime + "-29T14:17:27.682Z",
-      "end_Time": that.data.endTime + "-29T14:17:27.682Z",
+      //"start_Time": that.data.startTime + "-29T14:17:27.682Z",
+      //"end_Time": that.data.endTime + "-29T14:17:27.682Z",
       "certificate_Name": that.data.project,
       "Certificate_Type_Id": that.data.active,
       "reg_Status": that.data.registration,
       "gertificate_Status": that.data.state,
-      "province": "认证",
+      "province": "广东",
       "city": that.data.location,
       "gertificate_Use": that.data.useRe
     };

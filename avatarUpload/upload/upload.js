@@ -55,6 +55,7 @@ Page({
               success: function (res) {
                 //图片格式不对字符串切换
                 var obj = JSON.parse(res.data)
+                console.log("res", res)
                 console.log("obj", obj.imgs[0])
                 // var data = res.data.substring(2);
                 // data = data.slice(0, -2);

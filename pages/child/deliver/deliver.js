@@ -1,8 +1,6 @@
 // pages/child/part-timeJob/part-timeJob.js
 var common = require('../../../utils/common.js');
 var app = getApp()
-
-var url = "http://www.imooc.com/course/ajaxlist";
 var page = 1;
 var pageSize = 10;
 
@@ -95,6 +93,7 @@ Page({
       activeIndex: e.currentTarget.id,
       list:[]
     })
+    page=1
     this.deleteResume()
   },
   
@@ -112,7 +111,7 @@ Page({
       "pageSize": pageSize
     }
     // common.request('api/resume/deliver_log', {
-    common.request('api/position/get_collect_position_list', {
+    common.request('api/resume/deliver_log', {
       params: setdata,
       success: function (res) {
         console.log("投递记录", res)
