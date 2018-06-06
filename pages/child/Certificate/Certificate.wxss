@@ -1,4 +1,5 @@
 /* pages/child/Certificate/Certificate.wxss */
+@import '../../../model/model.wxss';
 @import '../ExpectWork/ExpectWork.wxss';  
 .rz{
   font-size: 26rpx;

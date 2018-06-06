@@ -1,7 +1,7 @@
 // pages/child/part-timeJob/part-timeJob.js
 var common = require('../../../utils/common.js');
 var app = getApp()
-var page = 1;
+var page = 0;
 var pageSize = 10;
 
 
@@ -115,6 +115,11 @@ Page({
       params: setdata,
       success: function (res) {
         console.log("投递记录", res)
+
+        common.deleteEmptyProperty(res);
+       // var res = JSON.stringify(res);
+        console.log(res);
+
         //console.info(that.data.list);  
         var list = that.data.list;
         for (var i = 0; i < res.data.data.list.length; i++) {

@@ -17,7 +17,7 @@ Page({
     words: [],
     list: [],
     items: {},
-    citysinfo:true
+    citysinfo:false
   },
   onLoad: function () {
     var _this = this;
@@ -58,6 +58,7 @@ Page({
         'login_token': app.globalData.login
       },
       success: function (res) {
+       common.deleteEmptyProperty(res);
         console.log("数据",res)
         //console.info(that.data.list);  
          var list = that.data.list;

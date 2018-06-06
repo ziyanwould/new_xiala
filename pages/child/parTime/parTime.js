@@ -168,6 +168,7 @@ Page({
     common.request('api/resume/part_detail', {
       params: setdata,
       success: function (res) {
+        common.deleteEmptyProperty(res);
         console.log("获取兼职详情页", res)
         that.setData({
           resume: res.data.data.resumePart

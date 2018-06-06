@@ -161,6 +161,7 @@ Page({
      common.request('api/resume/full_detail', {
        params: setdata,
        success: function (res) {
+         common.deleteEmptyProperty(res);
          console.log("获取全职详情页", res)
          that.setData({
            resume: res.data.data.ResumeFull
