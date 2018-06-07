@@ -25,7 +25,7 @@
    <view class='Seaddress'>
      <view class='Setitle'>工作地址</view>
 
-     <view class='myaddress'  wx:for="{{list2}}" wx:key="item.id">
+     <view class='myaddress'  wx:for="{{list2}}" wx:key="item.id" bindtap="map" data-lat='{{item.lat}}' data-lon='{{item.lon}}'  data-area='{{item.address2}}'>
        <view class='myLeft'>
          <image style='width:28rpx;height:38rpx' src='http://www.liujiarong.top/WX/location.png'></image>
        </view>
@@ -38,13 +38,19 @@
        </view>
      </view>
 
+
    </view>
 </view>
 
-<view class='seend'>
+
+  <view class='seend'>
   <text>Powered by human.com</text>
-  <image style='width:100rpx;height:100rpx' src='http://www.liujiarong.top/WX/CompanyShare.png'></image>
+ <button open-type='share' style='width:100rpx;height:100rpx' class='buttonx'>
+  <image style='width:100rpx;height:100rpx;position:relative;left:-28rpx;' src='http://www.liujiarong.top/WX/CompanyShare.png'></image>
+  </button>
 </view>
+
+
 
 </block>
 

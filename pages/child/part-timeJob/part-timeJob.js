@@ -26,8 +26,8 @@ Page({
       { id: 1, count: "很少回聊天信息" },
       { id: 2, count: "早上活跃" }
     ],
-    name:"Sunyklong",
-    Ntype:"设计师",
+    name:"庞丽亚",
+    Ntype:"猎聘专员",
     hour:9,
     zzCount: '1、在项目经理的领导下，制定落实项目安全防范措施；\n'+
     '2、做好项目部新进职工的登记注册工作，发放安全教育卡片、安全帽和其他劳保用品；\n'+
@@ -40,7 +40,7 @@ Page({
     label: "50-150人/移动互联网/建筑/设计/教育",
     attestation: "http://www.liujiarong.top/WX/certified.png",
     types: "http://www.liujiarong.top/WX/popCompass.png",
-    companyPerson: "http://www.liujiarong.top/WX/pending.png",
+    companyPerson: "http://www.liujiarong.top/WX/companyFx.jpg",
     history: "85664",
     counturl: "http://www.liujiarong.top/WX/Comup.png",
     title:"室内设计",

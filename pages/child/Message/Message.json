@@ -1,4 +1,8 @@
 {
-  "navigationBarTitleText": "",
-  "disableScroll": true
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "消息",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true
 }

@@ -1,5 +1,5 @@
 <!--pages/child/Message/Message.wxml-->
-<import src="/pages/child/Template/Template.wxml"/>
+<!-- <import src="/pages/child/Template/Template.wxml"/> -->
 <!-- 导航组件 -->
 <template is="tar_count" data="{{...itemz}}"/> 
 <!-- 搜索功能 -->

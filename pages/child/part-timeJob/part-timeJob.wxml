@@ -14,11 +14,12 @@
    <view class='Cfirst'>
      <view class='fLeft'>
        <view class='lOne'>{{message.company.name}}</view>
-       <view class='lTwo'>{{label}}</view>
-        <view class='lThird'>
+       
+       <!-- <view class='lTwo'>{{label}}</view> -->
+        <!-- <view class='lThird'>
          <image style='width:104rpx;height:35rpx' src='{{attestation}}'></image>
          <image style='width:202rpx;height:35rpx' src='{{types}}'></image>
-        </view>
+        </view> -->
      </view>
      <view class='fRight'>
       <image style='width:118rpx;height:118rpx' src='{{companyPerson}}'></image>
@@ -56,13 +57,14 @@
      </view>
      <view class='Setitle ' style='width:520rpx'>职位发布者</view>
      <view class='hrInformation'>
-           <image class='person' src='http://www.liujiarong.top/WX/pending.png'></image>
+           <image style='border-radius:85px;' class='person' src='http://www.liujiarong.top/WX/xcxHR.jpg'></image>
            <view class='useDegin'><text>{{name}}</text>{{Ntype}}</view>
            <view class='lastInfo'> <image src='http://www.liujiarong.top/WX/wx_lively.png'></image><text>最近活跃：{{hour}}小时前</text></view>
             <view class='tag'>
-             <view class='child_tag'  wx:for="{{tags}}" wx:key="item.id">
+            <!-- 暂时隐去标签 -->
+             <!-- <view class='child_tag'  wx:for="{{tags}}" wx:key="item.id">
              {{item.count}}
-           </view>
+           </view> -->
      </view>
      </view>
      <view class='Setitle'>工作地址</view>
@@ -96,10 +98,12 @@
 
 
 <view class='SubmitResume'>
-  <view class='jobShare'>
-    <image src='http://www.liujiarong.top/WX/share.png'></image>
+  <button open-type='share' class='jobShare buttonx'>
+      <image src='http://www.liujiarong.top/WX/share.png'></image>
     <view>分享</view>
-  </view>
+  </button> 
+   
+
 
   <view class='jobCollect' bindtap='collectPosition'>
       <image wx:if='{{message.has_collect}}' src='http://www.liujiarong.top/WX/collectactive.png'></image>

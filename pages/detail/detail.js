@@ -57,6 +57,13 @@ Page({
     //获取words  
     this.doLoadData(0, 20);
   },
+  /**
+ * 用户点击右上角分享
+ */
+  onShareAppMessage: function () {
+
+  }
+  ,
   doLoadData() {
     wx.showLoading({
       title: 'loading...',

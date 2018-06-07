@@ -23,8 +23,8 @@ Page({
     workType:{
       activeIndex: 0,
       used_list: [
-        { title: "分类03", name: "兼职" },
-        { title: "分类02", name: "全职" },
+        { title: "分类03", name: "兼职职位" },
+        { title: "分类02", name: "全职职位" },
      
       ]
     }
@@ -83,6 +83,13 @@ Page({
     
 
   },
+  /**
+ * 用户点击右上角分享
+ */
+  onShareAppMessage: function () {
+
+  }
+  ,
   doLoadData(that){
       wx.showLoading({
         title: 'loading...',

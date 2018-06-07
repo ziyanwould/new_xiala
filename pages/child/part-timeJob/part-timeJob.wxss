@@ -156,9 +156,25 @@ font-size:33rpx;
   align-items:center;
   
  background: rgba(255, 255, 255, 0.9);
- padding: 0 35rpx;
+/* padding: 0 35rpx;*/
   
 }
 .SubmitResume >view{
   margin: 0 25rpx;
+}
+/* 按钮的去除样式操作 */
+.buttonx{
+  background-color:#FFFFFF!important;
+  border-bottom: none;
+
+  font-size:18rpx;
+  line-height:normal;
+
+  outline:none;
+  list-style: none;
+  border-radius: none;
+
+}
+.buttonx::after{
+  border: 0px;
 }

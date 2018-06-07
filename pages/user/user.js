@@ -48,6 +48,12 @@ Page({
         "pic": "wx_footprint",
         "url": "../child/visitor/visitor"
       }
+      , {
+        "name": "消息",
+        "id": 6,
+        "pic": "wximages",
+        "url": "../child/Message/Message"
+      }
     ],
     userInfo:"",
     key:false
@@ -111,6 +117,13 @@ Page({
    
     
   },
+  /**
+ * 用户点击右上角分享
+ */
+  onShareAppMessage: function () {
+
+  }
+  ,
    onPullDownRefresh: function () {
     // do somthing
     wx.stopPullDownRefresh();

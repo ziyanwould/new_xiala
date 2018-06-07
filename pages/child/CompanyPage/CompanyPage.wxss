@@ -172,7 +172,7 @@ page{
   flex: 1;
   padding-left: 30rpx;
 }
-.seend image{
+.seend .buttonx{
 
   margin-right: 35rpx;
   position: absolute;
@@ -256,4 +256,15 @@ page{
   font-size: 24rpx;
   color: #999999;
   background: #FFFFFF;
+}
+/* 按钮的去除样式操作 */
+.buttonx{
+  background-color:#FFFFFF!important;
+  line-height:normal;
+  outline:none;
+  list-style: none;
+  border-radius: none;
+}
+.buttonx::after{
+  border: 0px;
 }
