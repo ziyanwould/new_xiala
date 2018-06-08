@@ -142,20 +142,32 @@ Page({
               })
             }
        }else{
-           
-           wx.showModal({
-             content: '您的账号还未认证，点击‘确定’前往认证，认证成功后可使用全部功能',
-             showCancel: false,
-             success: function (res) {
-               if (res.confirm) {
-                 console.log('用户点击确定')
-                 wx.navigateTo({
-                   url: '/pages/child/Certificate/Certificate?approveID=true',
+            //执行未认证和认证中的操作
+         common.request('usercenter/query_verify_status', {
+           success: function (res) {
+             // 证书上传信息成功后操作
+             console.log("认证状态中 认证成功 认真失败", res)
+             if (res.data.data.status == 3) {
+               try {
+                 wx.setStorageSync('ident', true);
+                 that.setData({
+                   identif: true,
+                   'jobList[2].pic': 'identifi1'
                  })
+                 that.loading('认证成功', true);
+                 wx.navigateTo({
+                   url: event.currentTarget.dataset.url
+                 })
+               } catch (e) {
                }
+             } else if (res.data.data.status == 1){
+               that.buttonsure('您的账号还未认证或认证失败，点击‘确定’前往认证，认证成功后可使用全部功能')
+             } else if (res.data.data.status == 2){
+               that.loading('账号认证中',true)
              }
-           })
-       }
+           }
+         }, app.globalData.login)
+          }
 
       
       
@@ -590,5 +602,43 @@ createResume:function(createpostion){
       }
    
     
+  }
+  ,
+  //弹出框(带确定按钮的)
+  buttonsure:function(count){
+    //您的账号还未认证或认证失败，点击‘确定’前往认证，认证成功后可使用全部功能
+    wx.showModal({
+      content: count,
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          wx.navigateTo({
+            url: '/pages/child/Certificate/Certificate?approveID=true',
+          })
+        }
+      }
+    })
+  },
+  //loading 试展示效果
+
+  loading: function (c,numbers){
+    if (numbers) {
+      
+      wx.showToast({
+        title: c,
+        icon: 'loading',
+        duration: 2500
+      });
+    } else {
+   
+      wx.showToast({
+        title: c,
+        icon: 'success',
+        duration: 2500
+      });
+      
+    }
+
   }
 })
