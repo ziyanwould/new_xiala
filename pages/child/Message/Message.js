@@ -45,6 +45,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    page=0;
     this.getMessage()
   },
 
@@ -91,6 +92,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    ++page;
     wx.showLoading({
       title: '玩命加载中',
     })  
@@ -130,8 +132,9 @@ Page({
             that.setData({
               list: list
             });
-            page++;
+           
           }
+        
         }else {
           wx.showToast({
             title: '没有更多消息',
@@ -151,5 +154,11 @@ Page({
         wx.stopPullDownRefresh();  
       }
     }, app.globalData.login)
+  }
+  ,
+  Ondetail:function(){
+    wx.navigateTo({
+      url: '/pages/child/Mesdetail/Mesdetail'//实际路径要写全
+    })
   }
 })

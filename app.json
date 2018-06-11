@@ -28,7 +28,8 @@
     "pages/child/Resumelist/Resumelist",
     "pages/child/Certificate/Certificate",
     "pages/child/parTime/parTime",
-    "pages/child/selectProject/selectProject"
+    "pages/child/selectProject/selectProject",
+    "pages/child/Mesdetail/Mesdetail"
     
   ],
   "window": {
