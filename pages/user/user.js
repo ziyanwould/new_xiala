@@ -248,7 +248,7 @@ Page({
            
           //解析手机号
           wx.request({
-            url: 'http://120.27.100.219:54231/api/common/wx_login_phone',
+            url: 'https://api.17liepin.com/api/common/wx_login_phone',
             header: {
               'content-type': 'application/json',
               'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -336,7 +336,7 @@ Page({
 
         
               wx.request({
-                url: 'http://120.27.100.219:54231/api/common/login_out',
+                url: 'https://api.17liepin.com/api/common/login_out',
                 header: {
                   'content-type': 'application/json',
                   'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
@@ -447,6 +447,7 @@ Page({
         common.setStronguser({
           success: function (res) {
             console.log("成功判断本地存储", res.data)
+            common.deleteEmptyProperty(res);
             that.setData({
               userInfo: res.data,
               bingetinfo:true

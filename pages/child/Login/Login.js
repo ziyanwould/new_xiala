@@ -248,7 +248,7 @@ Page({
      };
 
      wx.request({
-       url: 'http://120.27.100.219:54231/api/common/send_smscode',
+       url: 'https://api.17liepin.com/api/common/send_smscode',
        header: {
          'content-type': 'application/json',
           'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -322,7 +322,7 @@ Page({
 
      
       wx.request({
-        url: 'http://120.27.100.219:54231/api/common/'+url,
+        url: 'https://api.17liepin.com/api/common/'+url,
         header: {
           'content-type': 'application/json',
           'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='

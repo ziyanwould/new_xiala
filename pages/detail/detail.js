@@ -2,7 +2,7 @@
 var common = require('../../utils/common.js');
 //获取应用实例
 var app = getApp();
-var url = "http://www.imooc.com/course/ajaxlist";
+var url = "https://www.imooc.com/course/ajaxlist";
 var page = 1;
 var page_size = 5;
 var sort = "last";
@@ -69,6 +69,9 @@ Page({
   },
   onShow:function(){
     var that = this;
+    //v1.0版本没有数据
+   // this.V1_0();
+
     /*是否登录*/
     wx.getStorage({
       key: 'login',
@@ -214,5 +217,26 @@ Page({
     }
 
 
+  },
+  V1_0: function () {
+    var that = this;
+    wx.showModal({
+      title: '温馨提示',
+      content: '该功能暂未开放，敬请期待！',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+         
+          that.tourl()
+          
+        }
+      }
+    });
+  },
+  tourl:function(){
+    console.log('444456566')
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
   }
 })

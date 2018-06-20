@@ -182,11 +182,11 @@ Page({
 
     //获取详情页信息   使用Promise进行异步流程处理
     if (this.data.jobType=='兼职') {
-      var urls = 'http://120.27.100.219:54231/api/position/get_part_detail';
+      var urls = 'https://api.17liepin.com/api/position/get_part_detail';
     
 
     } else {
-      var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';
+      var urls = 'https://api.17liepin.com/api/position/get_full_detail';
    
 
     }
@@ -340,7 +340,7 @@ Page({
 
       //解析手机号
       wx.request({
-        url: 'http://120.27.100.219:54231/api/common/wx_login_phone',
+        url: 'https://api.17liepin.com/api/common/wx_login_phone',
         header: {
           'content-type': 'application/json',
           'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='

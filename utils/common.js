@@ -60,7 +60,7 @@ function request(url, requestHandler,token) {
   var params = requestHandler.params;
   //获取登录钥匙
    wx.request({
-          url: 'http://120.27.100.219:54231/' + url,
+          url: 'https://api.17liepin.com/' + url,
           data: params,
           method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
           // header: {}, // 设置请求的 header 
@@ -227,7 +227,7 @@ function geToppid(infoOppid){
         console.log("发起网络请求", res.code)
         //that.globalData.openid = res.code
         wx.request({
-          url: 'http://120.27.100.219:54231/api/common/get_wx_openid',
+          url: 'https://api.17liepin.com/api/common/get_wx_openid',
           header: {
             'content-type': 'application/json',
             'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='

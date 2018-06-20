@@ -381,9 +381,9 @@ Page({
   keywordAdvice:function(value){
     var that =this;
     if (that.data.changeJob=='全职'){
-      var urlx = 'http://120.27.100.219:54231/sort/search_job_type'
+      var urlx = 'https://api.17liepin.com/sort/search_job_type'
     }else{
-      var urlx = 'http://120.27.100.219:54231/sort/search_ger_type'
+      var urlx = 'https://api.17liepin.com/sort/search_ger_type'
     }
     let requestPromisified = common.wxPromisify(wx.request);
       requestPromisified({
@@ -414,7 +414,7 @@ Page({
 
     var that = this;
     if (that.data.changeJob == '全职') {
-      var urlx = 'http://120.27.100.219:54231/api/position/get_full_list';
+      var urlx = 'https://api.17liepin.com/api/position/get_full_list';
       var datax ={
         "pageIndex": pageIndex,
         "pageSize": 10,
@@ -431,7 +431,7 @@ Page({
         let dataxs = Object.assign(datax, otherValue)
       }
     } else {
-      var urlx = 'http://120.27.100.219:54231/api/position/get_part_list';
+      var urlx = 'https://api.17liepin.com/api/position/get_part_list';
       var datax = {
         "pageIndex": pageIndex,
         "pageSize": 10,
@@ -486,11 +486,11 @@ Page({
 
     //获取详情页信息   使用Promise进行异步流程处理
     if (jobs == "兼职") {
-      var urls = 'http://120.27.100.219:54231/api/position/get_part_detail';
+      var urls = 'https://api.17liepin.com/api/position/get_part_detail';
      
 
     } else {
-      var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';
+      var urls = 'https://api.17liepin.com/api/position/get_full_detail';
     
 
     }

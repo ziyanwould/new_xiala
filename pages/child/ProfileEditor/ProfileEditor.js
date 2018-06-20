@@ -14,9 +14,9 @@ Page({
    arrays: ['应届毕业生', '1年', '2年', '3年', '4年', '5年', '6年', '7年', '8年', '9年', '10年', '10年以上'],
    arrayd: ['我目前已离职，可快速到岗', '我目前在职，正考虑换个新环境', '我暂时不想找工作', '我是应届毕业生'],
    name:"真实姓名",
-   edit_name:"Sunyuklong",
+   edit_name:" ",
    sex:"性别",
-   edit_sex: "男",
+   edit_sex: "请选择",
    year:"出生年月",
    edit_year:"请选择",
    education: "最高学历",
@@ -24,11 +24,11 @@ Page({
    work: "工作年限",
    edit_work: "请选择",
    phone:"手机号码",
-   edit_phone:"15521000786",
+   edit_phone:"",
    email:"联系邮箱",
    edit_email:"请输入",
    city:"所在城市",
-   edit_city:"广东",
+   edit_city:"",
    state:"当前状态",
    edit_state:"我目前已离职，可快速到岗",
    edit_textarea:"集众人之力，成细节之美！"
@@ -229,7 +229,7 @@ Page({
     common.setStronguser({
       success: function (res) {
         console.log("成功判断本地存储", res.data)
-  
+        common.deleteEmptyProperty(res);
         that.setData({
           //userInfo: res.data
          

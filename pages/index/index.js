@@ -13,7 +13,7 @@ var register = require('../../utils/refreshLoadRegister.js');
 Page({
   data: {    
     currentSize:0,
-    fullTimeurl:'http://120.27.100.219:54231/api/position/get_part_recommend',
+    fullTimeurl:'https://api.17liepin.com/api/position/get_part_recommend',
     list: [],
     items: {},
     jobType: 0,
@@ -205,7 +205,7 @@ Page({
 
           //解析手机号
           wx.request({
-            url: 'http://120.27.100.219:54231/api/common/wx_login_phone',
+            url: 'https://api.17liepin.com/api/common/wx_login_phone',
             header: {
               'content-type': 'application/json',
               'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -253,15 +253,15 @@ Page({
 
      //获取详情页信息   使用Promise进行异步流程处理
      if (jobs==0){
-       var urls ='http://120.27.100.219:54231/api/position/get_part_detail';
+       var urls ='https://api.17liepin.com/api/position/get_part_detail';
       //  that.setData({
-      //    urlx : 'http://120.27.100.219:54231/api/position/get_part_list'
+      //    urlx : 'https://api.17liepin.com/api/position/get_part_list'
       //  })
       
      }else{
-       var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';
+       var urls = 'https://api.17liepin.com/api/position/get_full_detail';
       //  that.setData({
-      //    urlx: 'http://120.27.100.219:54231/api/position/get_full_list'
+      //    urlx: 'https://api.17liepin.com/api/position/get_full_list'
       //  })
      
      }
@@ -351,7 +351,7 @@ Page({
     if (e.currentTarget.id==0) {
      
       this.setData({
-        fullTimeurl: 'http://120.27.100.219:54231/api/position/get_part_recommend',
+        fullTimeurl: 'https://api.17liepin.com/api/position/get_part_recommend',
         list: [],
         jobType:0
       })
@@ -359,7 +359,7 @@ Page({
       this.doLoadData(this);
     } else {
       this.setData({
-        fullTimeurl: 'http://120.27.100.219:54231/api/position/get_full_recommend',
+        fullTimeurl: 'https://api.17liepin.com/api/position/get_full_recommend',
         list: [],
         jobType: 1
       })

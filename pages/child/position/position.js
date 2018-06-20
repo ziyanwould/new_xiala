@@ -3,7 +3,7 @@
 var common = require('../../../utils/common.js');
 var app = getApp();
 // 下拉刷新内容
-var url = "http://120.27.100.219:54231/api/position/get_collect_position_list";
+var url = "https://api.17liepin.com/api/position/get_collect_position_list";
 var pageIndex = 1;
 var pageSize = 10;
 
@@ -100,9 +100,9 @@ Page({
 
     //获取详情页信息   使用Promise进行异步流程处理
     if (typesd == 0) {
-      var urls = 'http://120.27.100.219:54231/api/position/get_part_detail';
+      var urls = 'https://api.17liepin.com/api/position/get_part_detail';
     } else {
-      var urls = 'http://120.27.100.219:54231/api/position/get_full_detail';  
+      var urls = 'https://api.17liepin.com/api/position/get_full_detail';  
     }
     let requestPromisified = common.wxPromisify(wx.request);
     console.log('loginId', app.globalData.login)
