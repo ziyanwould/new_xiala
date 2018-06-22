@@ -34,6 +34,7 @@ Page({
     common.setStronguser({
       success: function (res) {
         // console.log("成功判断本地存储", res.data)
+        common.deleteEmptyProperty(res);
         that.setData({
           userInfo: res.data,
         })

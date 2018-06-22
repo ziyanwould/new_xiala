@@ -8,3 +8,13 @@
 .active{
  color: #00b289;
 }
+/*刷新加载的样式*/
+.refresh-block{
+  background-color:#0544DA;
+}
+.refresh-block .refreshing_text{
+  color:#FFFFFF;
+}
+.loadMore-block{
+   background-color:#FFFFFF;
+}

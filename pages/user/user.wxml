@@ -20,13 +20,19 @@
   <view class="container">
     <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" wx:if="{{userInfo.avatarUrl}}"  src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <open-data wx:if="{{!userInfo.avatarUrl}}"  class="userinfo-avatar" type="userAvatarUrl"></open-data>
+    <open-data wx:if="{{!userInfo.avatarUrl}}" style="border-radius:128rpx;" class="userinfo-avatar" type="userAvatarUrl"></open-data>
   </view>
   <view class='title'>
         <text class="userinfo-nickname" wx:if="{{userInfo.nickName}}">{{userInfo.nickName}} </text> 
         <open-data wx:if="{{!userInfo.nickName}}" class="userinfo-nickname" class="userinfo-nickname" type="userNickName" open-gid="xxxxxx"></open-data>
-        <image src='http://www.liujiarong.top/WX/images/wx_men.png'class="gender" ></image>
-        <image src='http://www.liujiarong.top/WX/images/wx_approve.png'class="approve" ></image>
+        <!-- 男生 -->
+        <image  wx:if='{{userInfo.gender!="女"}}' src='http://www.liujiarong.top/WX/images/wx_men.png' class="gender" ></image>
+        <!-- 女生 -->
+          <image  wx:if='{{userInfo.gender=="女"}}' src='http://www.liujiarong.top/WX/wx_woman.png' class="gender" ></image>
+        <!-- 已经认证 -->
+        <image wx:if='{{userInfo.verify_status==3||identif}}' src='http://www.liujiarong.top/WX/images/wx_approve.png' class="approve" ></image>
+        <!-- 未认证 -->
+        <image wx:if='{{!(userInfo.verify_status==3||identif)}}' src='http://www.liujiarong.top/WX/unapprove.png' class="approve" ></image>
   </view>
      <text class="titie_h2">{{userInfo.remark}}</text> 
      <!-- <view class="titie_h3">影响力<text>{{influence}}</text>，高于<text>{{ influence_per}}</text>的同行</view>  -->

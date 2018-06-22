@@ -356,22 +356,22 @@ Page({
                     icon: 'success',
                     duration: 2000
                   });
-                       that.setData({
+                      //  that.setData({
+                      //   key: false
+
+                      // })
+                  wx.removeStorage({
+                    key: 'login',
+                    success: function (res) {
+                      console.log(res.data);
+                      that.setData({
                         key: false
-
-                      })
-                  // wx.removeStorage({
-                  //   key: 'login',
-                  //   success: function (res) {
-                  //     console.log(res.data);
-                  //     that.setData({
-                  //       key: false
                 
-                  //     })
-                  //     //wx.clearStorage()
+                      })
+                      wx.clearStorage()
 
-                  //   }
-                  // })
+                    }
+                  })
 
                   //
                   //提前获取oppenID
@@ -416,7 +416,7 @@ Page({
       })
       var self = common.tanchu()
       this.setData({
-        // userInfo: { "nickName": e.detail.userInfo.nickName, "avatarUrl": e.detail.userInfo.avatarUrl },
+         userInfo: { "nickName": e.detail.userInfo.nickName, "avatarUrl": e.detail.userInfo.avatarUrl },
         bingetinfo: true,
         items: {
           height: self,

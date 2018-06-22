@@ -228,26 +228,29 @@ Page({
     var that = this
     common.setStronguser({
       success: function (res) {
-        console.log("成功判断本地存储", res.data)
+       
         common.deleteEmptyProperty(res);
+        console.log("成功判断本地存储", res.data)
         that.setData({
           //userInfo: res.data
-         
           edit_name: res.data.nickName,
           edit_sex: res.data.gender,
-          edit_year: res.data.birth.slice(0,7),
+          edit_state: res.data.job_status,
+          edit_textarea: res.data.remark,
           edit_education: res.data.education,
           edit_work: res.data.job_years,
           edit_phone: res.data.phone,
           edit_email: res.data.email,
           edit_city: res.data.city,
-          edit_state: res.data.job_status,
-          edit_textarea: res.data.remark,
+         
           edit_province: res.data.province,
           edit_county: res.data.county,
           edit_avatarUrl: res.data.avatarUrl,
+          edit_year: res.data.birth.slice(0, 7),
           
         })
+
+
       }
 
     })
@@ -261,7 +264,6 @@ Page({
     var datas = {
       "real_name": that.data.edit_name,
       "sex": that.data.edit_sex,
-      "birth": that.data.edit_year +'-29T14:03:30.599Z',
       "education": that.data.edit_education,
       "job_years": that.data.edit_work,
       "phone": that.data.edit_phone,
@@ -271,7 +273,8 @@ Page({
       "county": that.data.edit_county,
       "job_status": that.data.edit_state,
       "remark": that.data.edit_textarea,
-      "header_img": that.data.edit_avatarUrl
+      "header_img": that.data.edit_avatarUrl,
+      "birth": that.data.edit_year + '-29T14:03:30.599Z',
     }
    
      common.request('usercenter/update_userinfo',
@@ -279,7 +282,19 @@ Page({
         params: datas,
         success: function (res) {
           console.log("上传修改的数据并更新本地数据", res)
-        
+          if (res.data.code==97){
+            wx.showModal({
+              content: '您的信息尚未填写完毕,或者您的信息填写错误，请重试！',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                }
+              }
+            });
+            return false ;
+          }
+          
           that.updatestrong();
         },
         fail: function () {
@@ -295,7 +310,7 @@ Page({
     infos.gender = that.data.edit_sex;
     infos.city = that.data.edit_city;
     infos.province = that.data.edit_province;
-    infos.birth = that.data.edit_year;
+    infos.birth = that.data.edit_year + '-29T14:03:30.599Z'; 
     infos.county = that.data.edit_county;
     infos.education = that.data.edit_education;
     infos.email = that.data.edit_email;

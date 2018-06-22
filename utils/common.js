@@ -87,7 +87,8 @@ function getinst(token)  {
   request('usercenter/get_userinfo',
     {
       success: function (res) {
-        console.log("获取基本信息及更新初始化", res)
+        //deleteEmptyProperty(res)
+        console.log("获取服务器关于账号的基本信息", res)
         if (res.data.message=="未登录"){
           return false;
         }
@@ -102,25 +103,26 @@ function getinst(token)  {
 //更新信息
 function setintuse(datas, token){
   let info = datas.data.data.userinfo;
-  console.log(info)
-  if (info.real_name!=''){
+  console.log("服务器信息",info)
+  if (info.real_name){
+    console.log("进入跟新服务器信息")
     var infos = new Object();
-    infos.nickName = info.real_name;
-    infos.gender = info.sex;
-    infos.city = info.city;
-    infos.province = info.province;
-    infos.birth = info.birth;
-    infos.county = info.county;
-    infos.education = info.education;
-    infos.email = info.email;
-    infos.job_status = info.job_status;
-    infos.job_years = info.job_years;
-    infos.phone = info.phone;
-    infos.province = info.province;
-    infos.reg_time = info.reg_time;
-    infos.remark = info.remark;
     infos.verify_status = info.verify_status;
+    infos.gender = info.sex;
+    infos.remark = info.remark;
+    infos.education = info.education;
+    infos.job_status = info.job_status;
+    infos.birth = info.birth;
+    infos.province = info.province;
+    infos.nickName = info.real_name;
+    infos.reg_time = info.reg_time;
+    infos.job_years = info.job_years;
+    infos.city = info.city;
+    infos.phone = info.phone;
     infos.avatarUrl = info.header_img;
+    infos.county = info.county;
+    infos.email = info.email;
+
     wx.setStorage({
       key: "user",
       data: infos
@@ -131,13 +133,15 @@ function setintuse(datas, token){
     wx.getStorage({
       key: 'user',
       success: function (res) {
+        console.log("获取本地user信息",res)
+        
         var datas = {
-          "avatarUrl": res.data.avatarUrl,
+          "header_img": res.data.avatarUrl,
           "real_name": res.data.nickName,
           "sex": res.data.gender,
-          "birth": "",
+          "birth": "2018-06-21T08:54:11.398Z",
           "education": "",
-          "job_years": "应届毕业生",
+          "job_years": "1年",
           "phone": "",
           "email": "",
           "province": res.data.province,
@@ -145,13 +149,36 @@ function setintuse(datas, token){
           "county": "",
           "job_status":"我是应届毕业生",
           "remark": "寄君一曲，不论曲终人离散"
+          
         }
+        //本地消息
+        var lost ={
+        avatarUrl: res.data.avatarUrl,
+        birth: "2018-06-21 00:00:00",
+        city: res.data.city,
+        gender: res.data.gende,
+        job_status: "我是应届毕业生",
+        job_years: "1年",
+        nickName: res.data.nickName,
+        province: res.data.province,
+        reg_time: "2018-06-22 17:23:19",
+        remark: "寄君一曲，不论曲终人离散",
+   
+        }
+       
+       
+        
+       
 
         request('usercenter/update_userinfo',
           {
               params: datas,
               success: function (res) {
-              console.log("测试初始化设置用户信息", res)
+              console.log("提交信息给服务器结果", res)
+                wx.setStorage({
+                key: "user",
+                data: lost
+              })
 
             },
             fail: function () {
@@ -161,12 +188,63 @@ function setintuse(datas, token){
      
       }
       , fail: function () {
+        var datas = {
+          "header_img": "http://www.liujiarong.top/WX/notLogin.png",
+          "real_name": "猎聘用户",
+          "sex": "男",
+          "birth": "2018-06-21T08:54:11.398Z",
+          "education": "",
+          "job_years": "1年",
+          "phone": "",
+          "email": "",
+          "province": "广东",
+          "city": "广州",
+          "county": "",
+          "job_status": "我是应届毕业生",
+          "remark": "寄君一曲，不论曲终人离散"
+
+        }
+
+         //本地消息
+        var lost ={
+        avatarUrl: "http://www.liujiarong.top/WX/notLogin.png",
+        birth: "2018-06-21T08:54:11.398Z",
+        city: "广州",
+        gender: "男",
+        job_status: "我是应届毕业生",
+        job_years: "1年",
+        nickName: "猎聘用户",
+        province: "广东",
+        reg_time: "2018-06-22 17:23:19",
+        remark: "寄君一曲，不论曲终人离散",
+   
+        }
+
+        request('usercenter/update_userinfo',
+          {
+            params: datas,
+            success: function (res) {
+              console.log("提交信息给服务器结果", res)
+              wx.setStorage({
+                key: "user",
+                data: lost
+              })
+
+            },
+            fail: function () {
+              //失败后的逻辑  
+            },
+          }, token)
+
+      
         wx.showModal({
           title: '警告',
           content: '您点击了拒绝授权，你可以在本页面授权按钮继续授权，否则将用默认信息代替你的个人信息,可编辑修改。',
           success: function (res) {
             if (res.confirm) {
               console.log('用户点击确定')
+
+
             }
           }
         })
@@ -306,5 +384,6 @@ module.exports = {
   setStronguser: setStronguser,
   wxPromisify: wxPromisify,
   geToppid: geToppid,
-  deleteEmptyProperty: deleteEmptyProperty
+  deleteEmptyProperty: deleteEmptyProperty,
+  setintuse: setintuse
 }

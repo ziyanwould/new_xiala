@@ -358,7 +358,7 @@ Page({
             typeof cb == "function" && cb(app.globalData.login)
             //更新全局变量结束 20180515
 
-            var cai = common.getinst(app.globalData.login)
+            var cai = common.getinst(res.data.data.login_token)
             console.log("换一种写法", cai)
           
             setTimeout(function () {
@@ -390,7 +390,7 @@ Page({
        })
       
      }
-
+     console.log("获取消息", e.detail.userInfo)
      this.oginRegistration()
 
     

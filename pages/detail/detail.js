@@ -56,9 +56,9 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    register.register(this);
+    //register.register(this);
     //获取words  
-    this.doLoadData(0, 10);
+   // this.doLoadData(0, 10);
    
   },
   /**
@@ -70,7 +70,7 @@ Page({
   onShow:function(){
     var that = this;
     //v1.0版本没有数据
-   // this.V1_0();
+    this.V1_0();
 
     /*是否登录*/
     wx.getStorage({
