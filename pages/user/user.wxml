@@ -37,7 +37,8 @@
      <text class="titie_h2">{{userInfo.remark}}</text> 
      <!-- <view class="titie_h3">影响力<text>{{influence}}</text>，高于<text>{{ influence_per}}</text>的同行</view>  -->
 </view>
-<view class='section'>
+  <!-- 隐去未开发完成的内容 -->
+ <!-- <view class='section'>
  <view class='se1'>
        <view bindtap="jumpToMyPage" data-url="/pages/child/ProfileEditor/ProfileEditor">
     <view class='se_f1'><image src='http://www.liujiarong.top/WX/images/pig.png'></image></view>
@@ -58,7 +59,7 @@
     </view>
   
  </view>
- </view>
+ </view> -->
 </block>
 
 <!-- end -->

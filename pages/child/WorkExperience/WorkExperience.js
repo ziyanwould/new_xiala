@@ -7,10 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-     company:"请输入",
+     company:"",
      position:"请输入",
      entrytime:"请选择",
-     endtime:"请选择",
+     endtime:"至今",
      switchs:true,
      input:null
 

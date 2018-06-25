@@ -6,7 +6,7 @@
      <view class='sel_right'>
        
           <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.school'  style='padding-right:51rpx;' value='{{infoChild.school}}'></input> 
-          <input wx:if="{{!key}}" bindinput='watchPassWord' data-self='school'  style='padding-right:51rpx;' value='{{school}}'></input> 
+          <input wx:if="{{!key}}" placeholder='请输入' placeholder-style='color:#dddddd' bindinput='watchPassWord' data-self='school'  style='padding-right:51rpx;' value='{{school}}'></input> 
      </view>
   </view>
 </view> 
@@ -17,7 +17,7 @@
      <view class='sel_right'>
         
          <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.profession' style='padding-right:51rpx;' value='{{infoChild.profession}}'></input> 
-         <input wx:if="{{!key}}" bindinput='watchPassWord' data-self='specialty' style='padding-right:51rpx;' value='{{specialty}}'></input> 
+         <input wx:if="{{!key}}" placeholder='请输入' placeholder-style='color:#dddddd' bindinput='watchPassWord' data-self='specialty' style='padding-right:51rpx;' value='{{specialty}}'></input> 
      </view>
   </view>
 </view> 

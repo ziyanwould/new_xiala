@@ -18,8 +18,8 @@
      <view class='sel_left'>发证机构</view>
      <view class='sel_right'>
 
-         <input wx:if="{{key}}"  bindinput='watchPassWord' data-self='infoChild.organization' style='padding-right:51rpx;' value='{{infoChild.organization}}'></input> 
-          <input wx:if="{{!key}}"  bindinput='watchPassWord' data-self='work' style='padding-right:51rpx;' value='{{work}}'></input> 
+         <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.organization' style='padding-right:51rpx;' value='{{infoChild.organization}}'></input> 
+          <input wx:if="{{!key}}" placeholder-style='color:#dddddd'  placeholder='请输入'  bindinput='watchPassWord' data-self='work' style='padding-right:51rpx;' value=''></input> 
         
      </view>
   </view>

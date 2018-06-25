@@ -10,8 +10,9 @@ Page({
   data: {
     school: "",
     specialty:"",
-    GraduationYear: "",
+    GraduationYear: "请选择",
     education: "请选择",
+    Beforetime:"请选择",
     major:['大专', '本科', '硕士', '博士','MBA','其他'],
     endtime:2017,
     switchs:true

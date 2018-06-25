@@ -4,7 +4,7 @@
      <view class='sel_left'>项目经验</view>
      <view class='sel_right'>
          <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.projectName' style='padding-right:51rpx;' value='{{infoChild.projectName}}'></input> 
-         <input wx:if="{{!key}}" bindinput='watchPassWord' data-self='project' style='padding-right:51rpx;' value='{{project}}'></input> 
+         <input wx:if="{{!key}}" placeholder='请输入' placeholder-style='color:#dddddd' bindinput='watchPassWord' data-self='project' style='padding-right:51rpx;' value='{{project}}'></input> 
          <!-- <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> -->
      </view>
   </view>

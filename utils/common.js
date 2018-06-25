@@ -359,7 +359,8 @@ function deleteEmptyProperty(object) {
         console.log('delete a empty object');
       }
     } else {
-      if (value === '' || value === null || value === undefined) {
+      if (value === '' || value === null || value === undefined) { 
+      // if (value === null) {20180625暂时取消
         delete object[i];
         console.log('delete ', i);
       } else {

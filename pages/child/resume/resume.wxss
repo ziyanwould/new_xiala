@@ -116,7 +116,7 @@ padding-top: 50rpx;
 }
 .sec2_1 text{
   color: #0e050b;
-  font-size: 29rpx;
+  font-size: 36rpx;
 }
 .sec2_1 navigator{
   color: #15ae8b;
@@ -142,7 +142,7 @@ padding-top: 50rpx;
 }
 .s3_title{
  color: #0e050b;
- font-size: 29rpx;
+ font-size: 36rpx;
  padding-top: 36rpx;
  padding-bottom: 36rpx;
 }
@@ -250,7 +250,7 @@ justify-content:space-between;
 padding-top: 20rpx;
 }
 .other_title text{
-  font-size: 29rpx;
+  font-size: 36rpx;
 }
 .other_title navigator{
   font-size: 26rpx;

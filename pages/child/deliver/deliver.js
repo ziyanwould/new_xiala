@@ -117,7 +117,9 @@ Page({
         console.log("投递记录", res)
 
         common.deleteEmptyProperty(res);
+        console.log(typeof res)
        // var res = JSON.stringify(res);
+        console.log("es6判断是否存在东西", 'data' in res.data.data)
         console.log(res);
 
         //console.info(that.data.list);  

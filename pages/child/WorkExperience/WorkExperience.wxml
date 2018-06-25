@@ -5,7 +5,7 @@
      <view class='sel_right'>
         
          <input wx:if='{{key}}' style='padding-right:51rpx;' bindinput='watchPassWord' data-self='infoChild.company' value='{{infoChild.company}}'></input> 
-         <input wx:if='{{!key}}' style='padding-right:51rpx;' bindinput='watchPassWord' data-self='company' value='{{company}}'></input> 
+         <input wx:if='{{!key}}'placeholder='请输入' placeholder-style='color:#dddddd' style='padding-right:51rpx;' bindinput='watchPassWord' data-self='company' value='{{company}}'></input> 
      </view>
   </view>
 </view> 

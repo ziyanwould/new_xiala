@@ -26,7 +26,7 @@ Page({
    phone:"手机号码",
    edit_phone:"",
    email:"联系邮箱",
-   edit_email:"请输入",
+   edit_email:"",
    city:"所在城市",
    edit_city:"",
    state:"当前状态",

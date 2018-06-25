@@ -58,9 +58,11 @@ Page({
         'login_token': app.globalData.login
       },
       success: function (res) {
+       
        common.deleteEmptyProperty(res);
         console.log("数据",res)
-        //console.info(that.data.list);  
+        //console.info(that.data.list); 
+        console.log("es6判断是否存在东西", 'list' in res.data.data)
          var list = that.data.list;
          for (var i = 0; i < res.data.data.list.length; i++) {
            list.push(res.data.data.list[i]);

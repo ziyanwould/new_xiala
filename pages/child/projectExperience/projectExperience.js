@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    project: "请输入",
+    project: "",
     work: "请输入",
     startTime: "请选择",
     endTime: "请选择",

@@ -42,12 +42,12 @@ Page({
         "pic": "wx_collect",
         "url":"../child/position/position"
       }
-      , {
-        "name": "访客",
-        "id": 5,
-        "pic": "wx_footprint",
-        "url": "../child/visitor/visitor"
-      }
+      // , {
+      //   "name": "访客",
+      //   "id": 5,
+      //   "pic": "wx_footprint",
+      //   "url": "../child/visitor/visitor"
+      // }
       , {
         "name": "消息",
         "id": 6,
