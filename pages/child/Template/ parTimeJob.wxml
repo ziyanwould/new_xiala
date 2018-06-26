@@ -1,0 +1,24 @@
+
+
+<view class='paTimejob' wx:for='{{list}}'>
+    <view class='sec'>
+      <view class='sec_left'>
+        <text class='titles'>建筑室内设计</text>
+        <text class='own'>自营</text>
+      </view> 
+      <view class='sec_right'>
+        <text class='pays'>面议</text>
+      </view> 
+    </view>
+
+    <view class='sec'>
+       <view class='sec_left'>
+         <text class='tag'>广州</text>
+         <text class='tag'>初始转注</text>
+       </view>
+
+       <view class='sec_right'>
+         <text class='time'>06月01日 09:24</text>
+       </view>
+    </view>
+</view>

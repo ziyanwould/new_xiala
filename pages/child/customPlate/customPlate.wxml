@@ -13,10 +13,10 @@
 </view>
 <view class='text_count'>
 
-  <textarea wx:if='{{key}}'bindinput='watchPassWord' data-self='infoChild.content' placeholder='请输入自定义内容' value='{{infoChild.content}}'>
+  <textarea wx:if='{{key}}' style='width:100%' bindinput='watchPassWord' data-self='infoChild.content' placeholder='请输入自定义内容' value='{{infoChild.content}}'>
   </textarea>
 
-  <textarea wx:if='{{!key}}'bindinput='watchPassWord' data-self='input2' placeholder='请输入自定义内容' value='{{input2}}'>
+  <textarea wx:if='{{!key}}' style='width:100%' bindinput='watchPassWord' data-self='input2' placeholder='请输入自定义内容' value='{{input2}}'>
   </textarea>
 
 </view> 

@@ -58,21 +58,39 @@ Page({
         'login_token': app.globalData.login
       },
       success: function (res) {
+        console.log("原来数据", res)
        
        common.deleteEmptyProperty(res);
-        console.log("数据",res)
-        //console.info(that.data.list); 
-        console.log("es6判断是否存在东西", 'list' in res.data.data)
+       let panduan = 'data' in res.data;
+       console.log("es6判断是否存在东西", panduan);
+      
+       if (!panduan){
+         wx.hideLoading();
+         register.loadFinish(that, true);
+         wx.showToast({
+           title: '没有更多数据',
+           icon: 'loading',
+           duration: 3000
+         });
+         setTimeout(function(){
+          return false;
+         },3000)
+       }else{
+         console.log("数据", res)
+         //console.info(that.data.list); 
+
          var list = that.data.list;
          for (var i = 0; i < res.data.data.list.length; i++) {
            list.push(res.data.data.list[i]);
-        }
-        that.setData({
-          list: list
-        });
-        pageIndex++;
-        wx.hideLoading();
-        register.loadFinish(that, true);
+         }
+         that.setData({
+           list: list
+         });
+         pageIndex++;
+         wx.hideLoading();
+         register.loadFinish(that, true);
+       }
+
       }
     });
 

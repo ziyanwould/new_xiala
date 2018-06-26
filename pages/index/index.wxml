@@ -1,12 +1,13 @@
 <!--index.wxml-->
 
-<include src="../../utils/refreshHeaderView.wxml"/>
-<include src="../../utils/loadMoreFooterView.wxml"/>
+<!-- <include src="../../utils/refreshHeaderView.wxml"/>
+<include src="../../utils/loadMoreFooterView.wxml"/> -->
 
 <!-- 引入登录注册和选择组件 -->
  <import src="../child/Template/Template.wxml"/>
 <template is="notLogin" data="{{...items}}"/> 
 
  <!-- 引入列表样式 -->
- <include src="../child/Template/List.wxml"/>
+ <!-- <include src="../child/Template/List.wxml"/> -->
+  <include src="../child/Template/newIndexLest.wxml"/>
 

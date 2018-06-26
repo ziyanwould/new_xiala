@@ -9,7 +9,7 @@ var Size = 10;
 
 
 
-var register = require('../../utils/refreshLoadRegister.js');
+//var register = require('../../utils/refreshLoadRegister.js');
 Page({
   data: {    
     currentSize:0,
@@ -67,7 +67,7 @@ Page({
 
 
 
-    register.register(this);   
+   // register.register(this);   
     //获取words  
     this.doLoadData(this);
     var self = common.tanchu()
@@ -91,9 +91,9 @@ Page({
   }
   ,
   doLoadData(that){
-      wx.showLoading({
-        title: 'loading...',
-      });
+      // wx.showLoading({
+      //   title: 'loading...',
+      // });
       var that = this;
       wx.request({
         url: that.data.fullTimeurl,
@@ -118,8 +118,8 @@ Page({
             list: list
           });
           Index++;
-          wx.hideLoading();
-          register.loadFinish(that, true);
+          // wx.hideLoading();
+          //register.loadFinish(that, true);
           if (res.data.data.positions.length == 0) {
             wx.showToast({
               title: '到底了...',
@@ -134,18 +134,18 @@ Page({
 
   },
   //模拟刷新数据
-  refresh:function(){
+  // refresh:function(){
     
-    this.setData({
-      list:[],
-    });
-    Index=1;
-    this.doLoadData(this);
-  },
+  //   this.setData({
+  //     list:[],
+  //   });
+  //   Index=1;
+  //   this.doLoadData(this);
+  // },
   //模拟加载更多数据
-  loadMore: function () {
-    this.doLoadData();
-  } ,
+  // loadMore: function () {
+  //   this.doLoadData();
+  // } ,
   //路由跳转等
   urlTo:function(){
     var url =  '../child/Login/Login?line_type=1';

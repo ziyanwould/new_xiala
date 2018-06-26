@@ -22,6 +22,9 @@
 .sel_left{
   color: #0e050b;
   font-size: 30rpx;
+  white-space:nowrap; 
+  overflow:visible; 
+  text-overflow:ellipsis;
 }
 .sel_right text{
   color: #999999;

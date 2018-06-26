@@ -23,6 +23,9 @@
 .sel_left{
   color: #0e050b;
   font-size: 30rpx;
+  white-space:nowrap; 
+  overflow:visible; 
+  text-overflow:ellipsis;
 }
 .sel_right text{
   color: #999999;
@@ -55,6 +58,7 @@
 text-align: right;
 font-size: 28rpx;
 color: #a3a3a3;
+display: inline-block;
 }
 .pull{
   margin-top: 20rpx;

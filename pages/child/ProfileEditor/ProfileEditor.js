@@ -10,7 +10,7 @@ Page({
    limitNoteLen:0, 
    date:"",
    date_end: "",
-   array: ['高中', '大专', '本科', '硕士','博士'],
+   array: ['小学', '初中' ,'中专' ,'高中' ,'职业高中' ,'技校' ,'大专' ,'本科' ,'硕士', '博士' ,'博士后'],
    arrays: ['应届毕业生', '1年', '2年', '3年', '4年', '5年', '6年', '7年', '8年', '9年', '10年', '10年以上'],
    arrayd: ['我目前已离职，可快速到岗', '我目前在职，正考虑换个新环境', '我暂时不想找工作', '我是应届毕业生'],
    name:"真实姓名",
@@ -70,9 +70,14 @@ Page({
   
     this.getnewlist()
     if (app.globalData.city!=null){
-      that.setData({
-        edit_city: app.globalData.city
-      })
+      console.log("全局城市", app.globalData.city)
+
+      setTimeout(function(){
+        that.setData({
+          edit_city: app.globalData.city
+        })
+      },500)
+     
     }   
   },
 

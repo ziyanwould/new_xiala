@@ -119,29 +119,48 @@ Page({
         common.deleteEmptyProperty(res);
         console.log(typeof res)
        // var res = JSON.stringify(res);
-        console.log("es6判断是否存在东西", 'data' in res.data.data)
+        let panduan = 'data' in res.data;
+        console.log("es6判断是否存在东西", panduan);
         console.log(res);
-
-        //console.info(that.data.list);  
-        var list = that.data.list;
-        for (var i = 0; i < res.data.data.list.length; i++) {
-          list.push(res.data.data.list[i]);
-        }
-        //看是否有数据
-        if (res.data.data.list.length>0) {
-          that.setData({
-            pageshow: true
-          })
+       
+        if (!panduan) {
+          wx.hideLoading();
+          // register.loadFinish(that, true);
+          wx.showToast({
+            title: '没有更多数据',
+            icon: 'loading',
+            duration: 3000
+          });
+          setTimeout(function () {
+            that.setData({
+              pageshow: false
+            })
+            return false;
+          }, 3000)
         } else {
+          //console.info(that.data.list);  
+          var list = that.data.list;
+          for (var i = 0; i < res.data.data.list.length; i++) {
+            list.push(res.data.data.list[i]);
+          }
+          //看是否有数据
+          if (res.data.data.list.length > 0) {
+            that.setData({
+              pageshow: true
+            })
+          } else {
+            that.setData({
+              pageshow: false
+            })
+          }
           that.setData({
-            pageshow: false
-          })
+            list: list
+          });
+          page++;
+          wx.hideLoading();
+
         }
-        that.setData({
-          list: list
-        });
-        page++;
-        wx.hideLoading();
+
       }
     }, app.globalData.login)
   }
