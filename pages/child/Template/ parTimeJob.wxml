@@ -1,24 +1,24 @@
 
 
-<view class='paTimejob' wx:for='{{list}}'>
+<view class='paTimejob' wx:for='{{list}}' wx:key="*this" bindtap="tapCompass" data-counts='{{item}}'>
     <view class='sec'>
       <view class='sec_left'>
-        <text class='titles'>建筑室内设计</text>
+        <text class='titles'>{{item.Position_Title}}</text>
         <text class='own'>自营</text>
       </view> 
       <view class='sec_right'>
-        <text class='pays'>面议</text>
+        <text class='pays'>{{item.Position_Year_Wage}}</text>
       </view> 
     </view>
 
     <view class='sec'>
        <view class='sec_left'>
-         <text class='tag'>广州</text>
-         <text class='tag'>初始转注</text>
+         <text class='tag'>{{item.sho_position_gertificate[0].City}}</text>
+         <text class='tag'>{{item.sho_position_gertificate[0].Gertificate_Use}}</text>
        </view>
 
        <view class='sec_right'>
-         <text class='time'>06月01日 09:24</text>
+         <text class='time'>{{item.Utime}}</text>
        </view>
     </view>
 </view>

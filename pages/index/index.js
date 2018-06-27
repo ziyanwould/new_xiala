@@ -68,7 +68,10 @@ Page({
 
 
    // register.register(this);   
-    //获取words  
+    //获取words
+    wx.showLoading({
+      title: '玩命加载中',
+    })  
     this.doLoadData(this);
     var self = common.tanchu()
       _this.setData({
@@ -90,10 +93,36 @@ Page({
 
   }
   ,
+  onPullDownRefresh: function () {
+    // 显示顶部刷新图标  
+    // wx.showNavigationBarLoading();
+    var that = this;
+     Index = 1;
+     this.setData({
+       list:[]
+     })
+     wx.showLoading({
+       title: '刷新数据中',
+     })  
+    this.doLoadData()
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    wx.showLoading({
+      title: '玩命加载中',
+    })  
+    this.doLoadData()
+  },
+
   doLoadData(that){
       // wx.showLoading({
       //   title: 'loading...',
       // });
+  
+
       var that = this;
       wx.request({
         url: that.data.fullTimeurl,
@@ -112,6 +141,9 @@ Page({
           console.info(res.data.data.positions);  
           var list = that.data.list;
           for (var i = 0; i < res.data.data.positions.length; i++) {
+            res.data.data.positions[i].Utime = that.timeFat(res.data.data.positions[i].Utime);
+            if ((res.data.data.positions[i].Position_Title).length>15)
+            res.data.data.positions[i].Position_Title = (res.data.data.positions[i].Position_Title).substring(0, 16)+'...';
             list.push(res.data.data.positions[i]);
           }
           that.setData({
@@ -120,6 +152,14 @@ Page({
           Index++;
           // wx.hideLoading();
           //register.loadFinish(that, true);
+          
+          setTimeout(function(){
+            wx.hideLoading();
+          },500);
+         setTimeout(function(){
+           wx.stopPullDownRefresh();  
+         },800)
+        
           if (res.data.data.positions.length == 0) {
             wx.showToast({
               title: '到底了...',
@@ -388,5 +428,15 @@ Page({
         },
 
     })
+  },
+  /**时间格栅化 */
+  timeFat:function(time){
+    
+    let month = time.substring(5,7);
+    let day =  time.substring(8, 10);
+    let comTime = time.substring(11, 16);
+    let endTime = month + '月' + day + '日 ' + comTime;
+    return endTime;
   }
+
 })

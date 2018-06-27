@@ -1,0 +1,38 @@
+<view class='paTimejob fullTimeJob' wx:for='{{list}}' wx:key='*this'>
+    <view class='fullLight'>
+        <image src='http://www.liujiarong.top/WX/company.png'></image>
+    </view>
+    <view class='fullRight'>
+      <view class='sec'>
+        <view class='sec_left'>
+          <text class='titles'>建筑室内设计</text>
+          <text class='own'>自营</text>
+        </view> 
+        <view class='sec_right'>
+          <text class='pays'>面议</text>
+        </view> 
+      </view>
+      <view class='sec'>
+        <view class='sec_left'>
+          <text class='tag'>广州</text>
+          <text class='tag'>初始转注</text>
+        </view>
+
+        <view class='sec_right'>
+          <text class='time'>06月01日 09:24</text>
+        </view>
+      </view>
+        <view class='sec'>
+        <view class='sec_left'>
+          <image class='tagcompany' src='http://www.liujiarong.top/WX/tagcompay.png'></image>
+          <text class='count'>广州猎聘人力资源服务有限责任公司</text>
+        </view>
+
+        <view class='sec_right'>
+          <text class='distance'>16km</text>
+        </view>
+      </view>
+    </view>
+    
+
+</view>
