@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/detail/detail",
+    "pages/logs/logs",
     "pages/user/user",
     "pages/child/resume/resume",
     "pages/child/deliver/deliver",
@@ -50,7 +51,7 @@
         "selectedIconPath": "images/icon_home_curr.png"
       },
       {
-        "pagePath": "pages/detail/detail",
+        "pagePath": "pages/logs/logs",
         "text": "公司",
         "iconPath": "images/icon_find.png",
         "selectedIconPath": "images/icon_find_curr.png"

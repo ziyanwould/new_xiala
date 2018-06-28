@@ -107,7 +107,7 @@
    <view class='s3_title'>教育经验</view>
 
    <view class='sec_child' wx:for="{{resume.education}}" wx:key="this">
-     <view class='Schild1'><image style=' width: 87rpx;height: 87rpx;' src='http://www.liujiarong.top/WX/wx_school.png'></image></view>
+     <view class='Schild1'><image style=' width: 87rpx;height: 87rpx;' src='https://api.17liepin.com/images/college/{{item.college_icon}}.jpg'></image></view>
      <view class='Schild2'>
         <view class='text1'>{{item.school}}</view>
         <view class='text2'>{{item.educationBack}}/{{item.profession}}</view>

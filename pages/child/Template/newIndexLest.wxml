@@ -7,7 +7,7 @@
          
        <!-- <template is="recommend"  data="{{...workType}}"/>  -->
    
-          <include src=" parTimeJob.wxml"/>   
+          <include src="parTimeJob.wxml"/>   
 
          <!-- <include src="fullTimeJob.wxml"/>   -->
 

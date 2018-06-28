@@ -70,7 +70,13 @@
             </view>
            <!-- 搜索出来的列表 -->
            <view class='Wxlist' wx:if='{{company}}'>
-           <include src="/pages/child/Template/position.wxml"/>
+           <!-- <include src="/pages/child/Template/position.wxml"/> -->
+            <block wx:if='{{changeJob == "兼职" ?true : false}}'>
+                <include src="../Template/parTimeJob.wxml"/>
+            </block>
+            <block wx:if='{{changeJob != "兼职" ?true : false}}'>
+                <include src="../Template/fullTimeJob.wxml"/>
+            </block>
            </view>
           </block>
            <!-- 二级赛选内容  与搜索出来的公司板块，搜索出来的列表两者只显示一个-->

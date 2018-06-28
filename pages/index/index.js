@@ -141,7 +141,7 @@ Page({
           console.info(res.data.data.positions);  
           var list = that.data.list;
           for (var i = 0; i < res.data.data.positions.length; i++) {
-            res.data.data.positions[i].Utime = that.timeFat(res.data.data.positions[i].Utime);
+            res.data.data.positions[i].Utime = common.timeFat(res.data.data.positions[i].Utime);
             if ((res.data.data.positions[i].Position_Title).length>15)
             res.data.data.positions[i].Position_Title = (res.data.data.positions[i].Position_Title).substring(0, 16)+'...';
             list.push(res.data.data.positions[i]);
@@ -326,7 +326,8 @@ Page({
            // var mycode = (res.data.data.detail.certificate["0"].sec_type_name).slice(0, 1);
             var jobx = "兼职"
           }
-         
+          console.log("提前获取信息", res, res.data.data.detail.recommend)
+          
           wx.setStorageSync('jobx', jobx );
           wx.setStorageSync('childs', res.data.data.detail)
           // that.setData({
@@ -428,15 +429,6 @@ Page({
         },
 
     })
-  },
-  /**时间格栅化 */
-  timeFat:function(time){
-    
-    let month = time.substring(5,7);
-    let day =  time.substring(8, 10);
-    let comTime = time.substring(11, 16);
-    let endTime = month + '月' + day + '日 ' + comTime;
-    return endTime;
   }
 
 })

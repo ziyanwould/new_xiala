@@ -3,6 +3,7 @@
 @import "/pages/child/Template/Template.wxss";   
 @import '/pages/child/CompanyPage/CompanyPage.wxss';
 @import '/pages/child/Template/List.wxss';
+@import '/pages/child/Template/NESLiss.wxss';
 
 .SimilarPosition{
   background: #FFFFFF;
@@ -177,4 +178,9 @@ font-size:33rpx;
 }
 .buttonx::after{
   border: 0px;
+}
+
+/*新版样式补丁*/
+.paTimejob:nth-of-type(1){
+ border-top: 20rpx solid #F7F8F8;
 }

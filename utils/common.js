@@ -375,6 +375,17 @@ function isEmpty(object) {
   }
   return true;
 }
+
+/**时间格栅化 */
+function timeFat(time) {
+
+  let month = time.substring(5, 7);
+  let day = time.substring(8, 10);
+  let comTime = time.substring(11, 16);
+  let endTime = month + '月' + day + '日 ' + comTime;
+  return endTime;
+}
+
 module.exports = {
   //要引用的函数 xx:xx
   sjc: sjc,
@@ -386,5 +397,6 @@ module.exports = {
   wxPromisify: wxPromisify,
   geToppid: geToppid,
   deleteEmptyProperty: deleteEmptyProperty,
-  setintuse: setintuse
+  setintuse: setintuse,
+  timeFat: timeFat
 }

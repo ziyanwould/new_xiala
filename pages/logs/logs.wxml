@@ -1,6 +1,13 @@
-<!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log" wx:key="item.id">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
-</view>
+<import src="/pages/child/Template/Template.wxml"/>
+
+     
+       <!-- <template is="tar_count" />  -->
+
+       <template is="banner"  data="{{...mydata}}"  /> 
+         
+       <!-- <template is="recommend"  data="{{...workType}}"/>  -->
+   
+          <!-- <include src=" parTimeJob.wxml"/>    -->
+
+          <include src="/pages/child/Template/fullTimeJob.wxml"/>   
+

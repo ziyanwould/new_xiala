@@ -88,10 +88,12 @@
 <view class='SimilarPosition' wx:if='{{!show}}'>
 <block wx:if='{{list["0"].Company_Name}}'>
 <view class='Setitle titlePaing'>相似职位</view>
-
-<include src="/pages/child/Template/position.wxml"/>
-
- <view class='watchjl'>查看更多简历</view>
+ <!-- 未改版时候的样式 -->
+  <!-- <include src="/pages/child/Template/position.wxml"/> 
+   <view class='watchjl'>查看更多简历</view>  -->
+ 
+   <include src="/pages/child/Template/parTimeJob.wxml"/>  
+  <!-- <include  src="/pages/child/Template/fullTimeJob.wxml"/>  -->
  </block>
 </view>
 

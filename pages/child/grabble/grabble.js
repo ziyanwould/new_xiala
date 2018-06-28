@@ -259,8 +259,13 @@ Page({
     var that = this;
     var changdu = event.detail.value.length;
     var changdu2 = that.data.count.length;
+    console.log("修改时候变动的信息", changdu, changdu2)
+    this.setData({
+      count: event.detail.value.replace(/\s+/g, '')
+    })
     that.keywordAdvice(event.detail.value);
-    if (changdu > 0 && changdu2>0){
+    // if (changdu > 0 && changdu2>0){//原来的连动规则改变
+    if (changdu > 0) {
         that.setData({
         Fbutton: '完成',
          selectD: false,
@@ -279,9 +284,7 @@ Page({
     //   city: res.data.select_city,
     // })
     console.log(event.detail.value);
-    this.setData({
-      count: event.detail.value.replace(/\s+/g, '') 
-    })
+   
   }, 
   urlTime:function(event){
     var that = this;
@@ -409,7 +412,7 @@ Page({
   getInfo:function(otherValue){
 
     wx.showLoading({
-      title: 'loading...',
+      title: '玩命加载中',
     });
 
     var that = this;
@@ -459,13 +462,19 @@ Page({
       console.log('获取到职位列表', res)
       var list = that.data.list;
       for (var i = 0; i < res.data.data.positions.length; i++) {
+        res.data.data.positions[i].Utime = common.timeFat(res.data.data.positions[i].Utime);
+        if ((res.data.data.positions[i].Position_Title).length > 15)
+          res.data.data.positions[i].Position_Title = (res.data.data.positions[i].Position_Title).substring(0, 16) + '...';
         list.push(res.data.data.positions[i]);
       }
       that.setData({
         list: list
       });
       pageIndex++;
-      wx.hideLoading();
+     
+      setTimeout(function(){
+        wx.hideLoading();
+      },500)
       //register.loadFinish(that, true);
       if (res.data.data.positions.length == 0) {
         wx.showToast({

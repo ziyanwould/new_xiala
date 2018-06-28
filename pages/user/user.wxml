@@ -130,7 +130,7 @@
 
   <!-- 登陆后出现的页面2 -->
  <view class='end_num' wx:if="{{key}}" bindtap='exit'>
-      <navigator class="active"  url="../detail/detail?id={{name.id}}">退出当前账号</navigator>  
+      <navigator class="active"  >退出当前账号</navigator>  
 </view> 
 <!-- end -->
 

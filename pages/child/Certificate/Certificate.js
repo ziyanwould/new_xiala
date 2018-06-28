@@ -367,20 +367,22 @@ Page({
     console.log("certificate_Name",that.data.project,
       "Certificate_Type_Id", that.data.active,
       "reg_Status", that.data.registration,
-      "gertificate_Status", that.data.state,
+      // "gertificate_Status", that.data.state,
+      "Certificate_Status", that.data.state,
       "province", that.data.province,
       "city", that.data.location,
-      "gertificate_Use", that.data.useRe)
+      "Certificate_Use", that.data.useRe)
     const usedata = { 
       //"start_Time": that.data.startTime + "-29T14:17:27.682Z",
       //"end_Time": that.data.endTime + "-29T14:17:27.682Z",
       "certificate_Name": that.data.project,
       "Certificate_Type_Id": that.data.active,
       "reg_Status": that.data.registration,
-      "gertificate_Status": that.data.state,
+      // "gertificate_Status": that.data.state,
+      "Certificate_Status": that.data.state,
       "province": that.data.province,
       "city": that.data.location,
-      "gertificate_Use": that.data.useRe
+      "Certificate_Use": that.data.useRe
     };
     common.request('usercenter/apply_verify', {
       params: usedata,
