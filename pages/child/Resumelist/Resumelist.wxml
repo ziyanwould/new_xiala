@@ -72,6 +72,10 @@
         </view>
        </block>
      
-
+      <view class='noDt' wx:if='{{!pageshows}}'>
+          <image style='width:352rpx;height:305rpx;' src='http://www.liujiarong.top/WX/bannerTd.png'></image>
+            <view class='Dtcount'>暂无简历</view>
+            <view class='Dtcount'>快去创建简历吧</view>
+        </view>
    </scroll-view>
 </view>

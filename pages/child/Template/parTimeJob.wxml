@@ -13,12 +13,20 @@
 
     <view class='sec'>
        <view class='sec_left'>
+       <block wx:if='{{item.sho_position_gertificate[0].City}}'>
          <text class='tag'>{{item.sho_position_gertificate[0].City}}</text>
          <text class='tag'>{{item.sho_position_gertificate[0].Gertificate_Use}}</text>
+       </block>
+
+       <block wx:if='{{item.sho_position_gertificate.City}}'>
+         <text class='tag'>{{item.sho_position_gertificate.City}}</text>
+         <text class='tag'>{{item.sho_position_gertificate.Gertificate_Use}}</text>
+        </block>
        </view>
 
        <view class='sec_right'>
          <text class='time'>{{item.Utime}}</text>
+         <text class='time' wx:if='{{item.Deliver_Time}}'>{{item.Deliver_Time}}</text>
        </view>
     </view>
 </view>

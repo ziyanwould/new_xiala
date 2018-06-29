@@ -380,7 +380,7 @@ Page({
   //搜索页路由跳转
   , seek: function () {
     wx.navigateTo({
-      url: '/pages/child/grabble/grabble?permanent=0'//实际路径要写全
+      url: '/pages/child/grabble/grabble?permanent=2'//实际路径要写全
     })
   },
   //切换按钮

@@ -9,6 +9,7 @@ Page({
     height: 0,
     scrollY: true,
     activeIndex: 0,
+    pageshows:true,
     used_list: [
       { title: "分类01", name: "全部" },
       { title: "分类02", name: "全职" },
@@ -214,18 +215,24 @@ Page({
     this.setData(param);
   },
   active: function (e) {
+    var that = this;
     this.setData({
       activeIndex: e.currentTarget.id
     })
-    if (e.currentTarget.id > 1) {
-      this.setData({
-        pageshow: false
-      })
-    } else {
-      this.setData({
-        pageshow: true
-      })
+    var numberv = e.currentTarget.id;
+    console.log("number", e.currentTarget.id);
+    for (let i in that.data.msgList){
+      if (numberv == 1 && that.data.msgList[i].type!="全职"){
+        that.setData({
+          pageshows:false
+        })
+      } else if (numberv == 2 && that.data.msgList[i].type != "兼职"){
+        that.setData({
+          pageshows: false
+        })
+      }
     }
+   
   },
   urlto:function(e){
     console.log("简历", e.currentTarget);
@@ -243,6 +250,9 @@ Page({
   },
   //20180529 获取简历列表
   getRwsume:function(){
+    wx.showLoading({
+      title: '拼命加载中',
+    });
     var that = this;
     const usedata = {
       "pageIndex": 1,
@@ -256,10 +266,28 @@ Page({
         for (var i = 0; i < res.data.data.list.length; i++){
           msgList.push(res.data.data.list[i])
         }
-      
+       
+        //register.loadFinish(that, true);
+        if (res.data.data.list.length == 0) {
+          wx.showToast({
+            title: '没有相关简历',
+            icon: 'loading',
+            duration: 2000
+          });
+          that.setData({
+            pageshows: false
+          })
+        }else{
+          that.setData({
+            pageshows: true
+          })
+        }
         that.setData({
           msgList: msgList
         })
+        setTimeout(function () {
+          wx.hideLoading();
+        }, 500)
       }
     }, app.globalData.login)
   // console.log("获取简历列表1", that.data.msgList)

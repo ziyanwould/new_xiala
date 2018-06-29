@@ -7,12 +7,21 @@
   </view>
 
 <view class='Wxlist' wx:if='{{pageshow}}'>
-   <include src="/pages/child/Template/position.wxml"/>
+    <!-- 未改版时候的样式 -->
+    <!-- <include src="/pages/child/Template/position.wxml"/> -->
+    <!-- <view class='nomore'>没有更多了</view> -->
+     <block wx:if="{{activeIndex==0}}">
+         <include src="../Template/parTimeJob.wxml"/>
+     </block>
 
-   <view class='nomore'>没有更多了</view>
+     <block wx:if="{{activeIndex==1}}">
+        <include src="../Template/fullTimeJob.wxml"/>
+     </block>
+
+      
 </view>
 
-<view class='noDt' wx:if='{{!pageshow}}'>
+<view class='noDt' wx:if='{{!pageshow && !otherNumber}}'>
    <image style='width:352rpx;height:305rpx;' src='http://www.liujiarong.top/WX/bannerTd.png'></image>
     <view class='Dtcount'>暂无记录</view>
     <view class='Dtcount'>快去寻找心仪的职位吧</view>

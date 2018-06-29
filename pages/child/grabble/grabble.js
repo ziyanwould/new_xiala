@@ -46,6 +46,7 @@ Page({
     counturl: "http://www.liujiarong.top/WX/Comup.png",
     city:"广州",
     pageShow:true,
+    pageshows:true,
     Fbutton:"取消",
     count:"",
     selectD:true ,
@@ -54,7 +55,8 @@ Page({
     selectType:'',
     changeJob:"兼职",
     company: true,
-    xuhao:-1
+    xuhao:-1,
+    otherNumber:false
   },
 
   /**
@@ -67,6 +69,10 @@ Page({
       company:false,
       changeJob:"公司"
       })
+    } else if (options.permanent == 2){
+       that.setData({
+         changeJob: "全职",
+       })
     }
     //console.log("254545", app.globalData.Jobl, app.globalData.CRL)
     this.setData({
@@ -466,6 +472,24 @@ Page({
         if ((res.data.data.positions[i].Position_Title).length > 15)
           res.data.data.positions[i].Position_Title = (res.data.data.positions[i].Position_Title).substring(0, 16) + '...';
         list.push(res.data.data.positions[i]);
+
+      
+      }
+    
+      if (res.data.data.positions.length==0){
+        that.setData({
+        pageshows:false 
+         });
+        if (that.data.list.length>0) {
+          that.setData({
+            otherNumber: true
+          })
+
+        }
+      }else{
+        that.setData({
+          pageshows: true
+        });
       }
       that.setData({
         list: list
@@ -522,7 +546,13 @@ Page({
         // var mycode = (res.data.data.detail.certificate["0"].sec_type_name).slice(0, 1);
         var jobx = "兼职"
       }
+      /**字符串时间格式化 for组 */
+      for (let i in res.data.data.detail.recommend) {
+        res.data.data.detail.recommend[i].Utime = common.timeFat(res.data.data.detail.recommend[i].Utime);
+        if ((res.data.data.detail.recommend[i].Position_Title).length > 15)
+          res.data.data.detail.recommend[i].Position_Title = (res.data.data.detail.recommend[i].Position_Title).substring(0, 16) + '...';
 
+      }
       wx.setStorageSync('jobx', jobx);
       wx.setStorageSync('childs', res.data.data.detail)
       // that.setData({

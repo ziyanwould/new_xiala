@@ -1,4 +1,4 @@
-// pages/child/part-timeJob/part-timeJob.js
+
 var common = require('../../../utils/common.js');
 var app = getApp()
 var page = 0;
@@ -17,16 +17,17 @@ Page({
     list: [
 
     ],
-    pageshow:true,
+    pageshow: true,
+    otherNumber: false,
     activeIndex: 0,
     used_list: [
       // { title: "分类01", name: "全部" },
-    
+
       { title: "分类03", name: "兼职" },
       { title: "分类02", name: "全职" },
     ]
-  
-   
+
+
 
 
   },
@@ -35,7 +36,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    page = 1;
     this.deleteResume()
   },
 
@@ -91,21 +92,40 @@ Page({
   active: function (e) {
     this.setData({
       activeIndex: e.currentTarget.id,
-      list:[]
+      list: []
     })
-    page=1
+    page = 1
     this.deleteResume()
   },
-  
-  //20180529 投递记录
-  deleteResume:function () {
-    wx.showLoading({
-      title: 'loading...',
-    });
+  onPullDownRefresh: function () {
+    // 显示顶部刷新图标  
+    // wx.showNavigationBarLoading();
     var that = this;
-    console.log('全职兼职序号吧',that.data.activeIndex)
+    page = 1;
+    this.setData({
+      list: []
+    })
+    wx.showLoading({
+      title: '刷新数据中',
+    })
+    this.deleteResume()
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    wx.showLoading({
+      title: '玩命加载中',
+    })
+    this.deleteResume()
+  },
+  //20180529 投递记录
+  deleteResume: function () {
+    var that = this;
+    console.log('全职兼职序号吧', that.data.activeIndex)
     var setdata = {
-     
+
       "type_id": that.data.activeIndex,
       "pageIndex": page,
       "pageSize": pageSize
@@ -114,15 +134,15 @@ Page({
     common.request('api/resume/deliver_log', {
       params: setdata,
       success: function (res) {
-        console.log("投递记录", res)
+        console.log("收藏记录", res)
 
         common.deleteEmptyProperty(res);
         console.log(typeof res)
-       // var res = JSON.stringify(res);
+        // var res = JSON.stringify(res);
         let panduan = 'data' in res.data;
         console.log("es6判断是否存在东西", panduan);
         console.log(res);
-       
+
         if (!panduan) {
           wx.hideLoading();
           // register.loadFinish(that, true);
@@ -131,16 +151,25 @@ Page({
             icon: 'loading',
             duration: 3000
           });
-          setTimeout(function () {
+          if (that.data.list.length == 0) {
             that.setData({
               pageshow: false
             })
+          }
+          setTimeout(function () {
+
+            wx.hideLoading();
+            wx.stopPullDownRefresh();
             return false;
           }, 3000)
         } else {
           //console.info(that.data.list);  
           var list = that.data.list;
           for (var i = 0; i < res.data.data.list.length; i++) {
+            res.data.data.list[i].Deliver_Time = common.timeFat(res.data.data.list[i].Deliver_Time);
+            if ((res.data.data.list[i].Position_Title).length > 15) {
+              res.data.data.list[i].Position_Title = (res.data.data.list[i].Position_Title).substring(0, 16) + '...';
+            }
             list.push(res.data.data.list[i]);
           }
           //看是否有数据
@@ -149,6 +178,12 @@ Page({
               pageshow: true
             })
           } else {
+            if (that.data.list.length > 0) {
+              that.setData({
+                otherNumber: true
+              })
+
+            }
             that.setData({
               pageshow: false
             })
@@ -157,11 +192,62 @@ Page({
             list: list
           });
           page++;
-          wx.hideLoading();
+          setTimeout(function () {
+            wx.hideLoading();
 
+          }, 500)
+          setTimeout(function () {
+            wx.stopPullDownRefresh();
+          }, 800)
         }
 
       }
     }, app.globalData.login)
+  }
+  , tapCompass: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.counts.ID;
+    var typesd = e.currentTarget.dataset.counts.Type_Id;
+
+
+
+    //获取详情页信息   使用Promise进行异步流程处理
+    if (typesd == 0) {
+      var urls = 'https://api.17liepin.com/api/position/get_part_detail';
+    } else {
+      var urls = 'https://api.17liepin.com/api/position/get_full_detail';
+    }
+    let requestPromisified = common.wxPromisify(wx.request);
+    console.log('loginId', app.globalData.login)
+    requestPromisified({
+      data: { "position_id": id },
+      url: urls,
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+        'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',
+        'login_token': app.globalData.login
+      },
+    }).then(res => {
+      console.log('获取点击的详情的内容', res)
+      if (res.data.data.detail.job_sec_type) {
+        var jobx = "全职"
+      } else {
+        var jobx = "兼职"
+      }
+      wx.setStorageSync('jobx', jobx);
+      wx.setStorageSync('childs', res.data.data.detail)
+
+    }).then(res => {
+      console.log('列表的关键字:', that.data.seachKey);
+
+      wx.navigateTo({
+        url: '/pages/child/part-timeJob/part-timeJob'//实际路径要写全
+      })
+    })
+
+
+
+
   }
 })

@@ -77,6 +77,11 @@
             <block wx:if='{{changeJob != "兼职" ?true : false}}'>
                 <include src="../Template/fullTimeJob.wxml"/>
             </block>
+              <view class='noDt' wx:if='{{(!pageshows) && !otherNumber}}'>
+                  <image style='width:352rpx;height:305rpx;' src='http://www.liujiarong.top/WX/bannerTd.png'></image>
+                    <view class='Dtcount'>暂无相关职位</view>
+                    <view class='Dtcount'>尝试换个关键字吧</view>
+                </view>
            </view>
           </block>
            <!-- 二级赛选内容  与搜索出来的公司板块，搜索出来的列表两者只显示一个-->

@@ -326,8 +326,14 @@ Page({
            // var mycode = (res.data.data.detail.certificate["0"].sec_type_name).slice(0, 1);
             var jobx = "兼职"
           }
-          console.log("提前获取信息", res, res.data.data.detail.recommend)
-          
+          //console.log("提前获取信息", res, res.data.data.detail.recommend)
+           /**字符串时间格式化 for组 */
+          for (let i in res.data.data.detail.recommend){
+            res.data.data.detail.recommend[i].Utime = common.timeFat(res.data.data.detail.recommend[i].Utime);
+            if ((res.data.data.detail.recommend[i].Position_Title).length > 15)
+            res.data.data.detail.recommend[i].Position_Title = (res.data.data.detail.recommend[i].Position_Title).substring(0, 16) + '...';
+            
+          }
           wx.setStorageSync('jobx', jobx );
           wx.setStorageSync('childs', res.data.data.detail)
           // that.setData({
