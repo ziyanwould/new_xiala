@@ -167,8 +167,8 @@ Page({
           var list = that.data.list;
           for (var i = 0; i < res.data.data.list.length; i++) {
             res.data.data.list[i].Deliver_Time = common.timeFat(res.data.data.list[i].Deliver_Time);
-            if ((res.data.data.list[i].Position_Title).length > 15) {
-              res.data.data.list[i].Position_Title = (res.data.data.list[i].Position_Title).substring(0, 16) + '...';
+            if ((res.data.data.list[i].Position_Title).length > (app.globalData.deleTitle - 1)) {
+              res.data.data.list[i].Position_Title = (res.data.data.list[i].Position_Title).substring(0, app.globalData.deleTitle ) + '...';
             }
             list.push(res.data.data.list[i]);
           }
@@ -234,6 +234,13 @@ Page({
         var jobx = "全职"
       } else {
         var jobx = "兼职"
+      }
+
+      for (let i in res.data.data.detail.recommend) {
+        res.data.data.detail.recommend[i].Utime = common.timeFat(res.data.data.detail.recommend[i].Utime);
+        if ((res.data.data.detail.recommend[i].Position_Title).length > (app.globalData.deleTitle - 1))
+          res.data.data.detail.recommend[i].Position_Title = (res.data.data.detail.recommend[i].Position_Title).substring(0, app.globalData.deleTitle) + '...';
+
       }
       wx.setStorageSync('jobx', jobx);
       wx.setStorageSync('childs', res.data.data.detail)

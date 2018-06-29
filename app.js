@@ -136,6 +136,7 @@ App({
     empower:null,//授权标识值
     Jobl:[],//职位列表
     CRL:[],//证书列表
+    deleTitle:14,//title值
     ResumeFull: {
      },
      resumePart: {

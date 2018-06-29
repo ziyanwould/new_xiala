@@ -217,18 +217,26 @@ Page({
   active: function (e) {
     var that = this;
     this.setData({
-      activeIndex: e.currentTarget.id
+      activeIndex: e.currentTarget.id,
+      pageshows: false
     })
     var numberv = e.currentTarget.id;
     console.log("number", e.currentTarget.id);
     for (let i in that.data.msgList){
-      if (numberv == 1 && that.data.msgList[i].type!="全职"){
+      console.log("数据结构", that.data.msgList[i].type)
+      if (numberv == 1 && that.data.msgList[i].type=="全职"){
+       
         that.setData({
-          pageshows:false
+          pageshows:true
         })
-      } else if (numberv == 2 && that.data.msgList[i].type != "兼职"){
+      } else if (numberv == 2 && that.data.msgList[i].type == "兼职"){
+      
         that.setData({
-          pageshows: false
+          pageshows: true
+        })
+      } else if (numberv == 0 && that.data.msgList.length>0){
+        that.setData({
+          pageshows: true
         })
       }
     }

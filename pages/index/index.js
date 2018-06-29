@@ -142,8 +142,8 @@ Page({
           var list = that.data.list;
           for (var i = 0; i < res.data.data.positions.length; i++) {
             res.data.data.positions[i].Utime = common.timeFat(res.data.data.positions[i].Utime);
-            if ((res.data.data.positions[i].Position_Title).length>15)
-            res.data.data.positions[i].Position_Title = (res.data.data.positions[i].Position_Title).substring(0, 16)+'...';
+            if ((res.data.data.positions[i].Position_Title).length > (app.globalData.deleTitle - 1))
+              res.data.data.positions[i].Position_Title = (res.data.data.positions[i].Position_Title).substring(0, app.globalData.deleTitle)+'...';
             list.push(res.data.data.positions[i]);
           }
           that.setData({
@@ -330,8 +330,8 @@ Page({
            /**字符串时间格式化 for组 */
           for (let i in res.data.data.detail.recommend){
             res.data.data.detail.recommend[i].Utime = common.timeFat(res.data.data.detail.recommend[i].Utime);
-            if ((res.data.data.detail.recommend[i].Position_Title).length > 15)
-            res.data.data.detail.recommend[i].Position_Title = (res.data.data.detail.recommend[i].Position_Title).substring(0, 16) + '...';
+            if ((res.data.data.detail.recommend[i].Position_Title).length > (app.globalData.deleTitle - 1))
+              res.data.data.detail.recommend[i].Position_Title = (res.data.data.detail.recommend[i].Position_Title).substring(0, app.globalData.deleTitle) + '...';
             
           }
           wx.setStorageSync('jobx', jobx );
