@@ -76,8 +76,8 @@ Page({
     }
     //console.log("254545", app.globalData.Jobl, app.globalData.CRL)
     this.setData({
-      Jobl: app.globalData.Jobl,
-      CRL: app.globalData.CRL
+      Jobl: app.globalData.Jobl,//工作列表
+      CRL: app.globalData.CRL//证书列表
     })
    
    //使用本地存储功能
@@ -115,9 +115,23 @@ Page({
           list:[],
           selectCityle: res.data.select_city
         })
-        let city ={
-          "city": res.data.select_city,
+        console.log("序号值",that.data.xuhao)//修复在选择地址不能同时进行职位类别，证书类别下的赛选
+        if (that.data.changeJob == '兼职' && that.data.xuhao>0) {
+          var city  = {
+            "city": res.data.select_city,
+            "ger_type_id": that.data.xuhao
+          }
+        } else if (that.data.changeJob == '全职' && that.data.xuhao > 0){
+          var city  = {
+            "city": res.data.select_city,
+            "job_type_id": that.data.xuhao
+          }
+        }else{
+          var city = {//let 连if的作用域都出不去
+            "city": res.data.select_city,
+          }
         }
+      
         pageIndex=1;
         that.getInfo(city)
         wx.removeStorage({
@@ -141,18 +155,25 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    this.setData({
+      selected: true,
+      activeIndex: -1,
+    
+    })
+    console.log("页面已经隐藏")
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    console.log("页面已经页面卸载")
     var that = this
     wx.setStorage({
       key: "SeaHistory",
       data: that.data.historys
     }) 
+   
   },
 
   /**
@@ -258,7 +279,7 @@ Page({
     this.setData({
       selected:true,
       activeIndex:-1,
-      xuhao: -1,
+      //xuhao: -1,隐藏后可以保持所选记录
     })
   },
   watchPassWord: function (event) {
@@ -346,6 +367,7 @@ Page({
   }, 
   open: function () {
     var that = this;
+    var oldword = that.data.changeJob//监听旧的关键字
     if (that.data.company){
       wx.showActionSheet({
         itemList: ['兼职', '全职'],
@@ -361,6 +383,15 @@ Page({
                 changeJob: "全职"
               })
             }
+
+            if (that.data.changeJob != oldword)//当职位发生变更时 进行二次菜单类别的清零
+              {
+              that.setData({
+                xuhao:-1,
+                list:[]
+              })
+              console.log("执行清零动作");
+              }
           }
         }
       });
@@ -416,7 +447,9 @@ Page({
   },
   //按下完成和地址，类别请求到的结果
   getInfo:function(otherValue){
-
+    if (otherValue) {
+      pageIndex = 0;
+    }
     wx.showLoading({
       title: '玩命加载中',
     });
@@ -437,8 +470,10 @@ Page({
         // "education": ""
       }
       if (otherValue) {
-        let dataxs = Object.assign(datax, otherValue)
+        
+         datax = Object.assign(datax, otherValue)
       }
+      console.log("data的内容：", datax)
     } else {
       var urlx = 'https://api.17liepin.com/api/position/get_part_list';
       var datax = {
@@ -451,9 +486,10 @@ Page({
         "key": that.data.count
       }
       if (otherValue){
-        let dataxs = Object.assign(datax, otherValue)
+        pageIndex = 0;
+         datax = Object.assign(datax, otherValue)
       }
-     
+      console.log("data的内容：", datax)
     }
     let requestPromisified = common.wxPromisify(wx.request);
     requestPromisified({

@@ -298,11 +298,11 @@ Page({
   }
   ,
   //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../detail/detail'
-    })
-  },
+  // bindViewTap: function () {
+  //   wx.navigateTo({
+  //     url: '../detail/detail'
+  //   })
+  // },
   /**点击登录 */
   loging:function(){
     var self = common.tanchu()
@@ -314,6 +314,20 @@ Page({
         fages:true
       }
     });
+  },
+  // 上传头像
+  upload() {
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success(res) {
+        const src = res.tempFilePaths[0];
+        wx.redirectTo({
+          url: `/avatarUpload/upload/upload?src=${src}`
+        })
+      }
+    })
   },
   /**退出 */
   exit:function(){
@@ -468,6 +482,12 @@ Page({
   modalinput: function () {
     this.setData({
       hiddenmodalput: !this.data.hiddenmodalput
+    })
+  },
+  //编辑个人资料
+  myself:function(){
+    wx.navigateTo({
+      url: "/pages/child/ProfileEditor/ProfileEditor",//实际路径要写全
     })
   },
   //取消按钮  

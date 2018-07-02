@@ -43,6 +43,8 @@
     "borderStyle":"white",
     "color":"#666666",
     "selectedColor":"#14AFFC",
+    "backgroundColor":"#F7F8F8",
+    "borderStyle":"black",
     "list": [
       {
         "pagePath": "pages/index/index",

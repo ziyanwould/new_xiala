@@ -189,3 +189,18 @@ page{
   font-size: 30rpx;
 
 }
+/**增加编辑*/
+.bj{
+  width: 23rpx;
+  height: 27rpx;
+
+}
+.Bj{
+  /* position: absolute; */
+  font-size: 26rpx;
+  /* right: 0;
+  top:24rpx; */
+  padding: 10rpx;
+  border-radius: 10rpx;
+  margin-left: 10rpx;
+}

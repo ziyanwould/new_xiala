@@ -21,8 +21,8 @@
      </view>
 
      <view   class="s1_right">
-      <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image>
-
+      <!-- <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image> 撤销掉更换头像功能-->
+       <image class="userinfo-avatar avatar"  src="{{src}}"    background-size="cover"></image>
      </view>
 
   </view>

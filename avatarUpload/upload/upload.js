@@ -67,13 +67,22 @@ Page({
                     console.log("更新图片效果", res)
                      //更新信息
                     common.getinst(mysey);
+                  
                   }
                 }, mysey)
                 //console.log("上传图片的结果", data,res)
                 //  获取到裁剪后的图片
-                wx.redirectTo({
-                  url: `/pages/child/resume/resume?avatar=${avatars}`
-                })
+
+                //取消原来的简历详情页跟换图片方式
+                // wx.redirectTo({
+                //   url: `/pages/user/user?avatar=${avatars}`
+                // })
+
+                 setTimeout(function(){
+                   wx.switchTab({//tab只能用这种跳转方式
+                     url: '/pages/user/user'
+                   })
+                 },100)
               }
 
 
