@@ -12,16 +12,16 @@
         <view class='title_s3'>
           <text class="">{{userInfo.remark}}</text> 
         </view>
-        <!-- 编辑触碰按钮 -->
-          <navigator class="Bj"  url="../../child/ProfileEditor/ProfileEditor">
+        <!-- 编辑触碰按钮 隐去20180703取消在简历页可以编辑的功能-->
+          <!-- <navigator class="Bj"  url="../../child/ProfileEditor/ProfileEditor">
             <image class='bj' src='http://www.liujiarong.top/WX/wx_redact.png'></image>
             编辑
-          </navigator>  
+          </navigator>   -->
         
      </view>
 
      <view   class="s1_right">
-      <!-- <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image> 撤销掉更换头像功能-->
+      <!-- <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image> 20180703撤销掉更换头像功能-->
        <image class="userinfo-avatar avatar"  src="{{src}}"    background-size="cover"></image>
      </view>
 

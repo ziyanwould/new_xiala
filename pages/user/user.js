@@ -28,7 +28,8 @@ Page({
           "name": "个人认证",
           "id": 2,
           "pic": "identifi2",
-          "url": '/pages/child/Certificate/Certificate?approveID=true'
+          "url": '/pages/child/Certificate/Certificate?approveID=true',
+          "text":"未认证"
         },
       {
        "name":"投递记录",
@@ -115,7 +116,7 @@ Page({
    
       this.identif()
    
-    
+      this.tubiao()
   },
   /**
  * 用户点击右上角分享
@@ -283,11 +284,13 @@ Page({
                 key: true
               })
               setTimeout(function () {
-                that.getuseinfomation()
+                that.getuseinfomation();
+                that.tubiao()//更新认证
               }, 250)
 
               //更新认证状态
               that.identif()
+
             }
 
           })
@@ -661,5 +664,39 @@ createResume:function(createpostion){
       
     }
 
+  },
+  tubiao:function(){
+    var that = this;
+    setTimeout(function(){
+      // console.log("that.data.userInfo", that.data.userInfo);
+      // console.log("that.data.identif", that.data.identif)
+      if (that.data.userInfo.verify_status == 3 || that.data.identif) {
+        //console.log("已经认证成功")
+        that.setData({
+          identif: true,
+          'jobList[2].pic': 'identifi1', 
+          'jobList[2].text':'已认证',
+          "jobList[2].url": ''
+
+        })
+      } else {
+        //console.log("未认证成功或没进来")
+        that.setData({
+          identif: false,
+          'jobList[2].pic': 'identifi2',
+          'jobList[2].text': '未认证',
+          "jobList[2].url": '/pages/child/Certificate/Certificate?approveID=true'
+
+        })
+        // wx.showToast({
+        //   title: '尊敬的用户认证成功！',
+        //   icon: 'success',
+        //   duration: 3000
+        // });
+      }
+
+    },80)
+   
+   
   }
 })

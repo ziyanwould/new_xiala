@@ -87,6 +87,7 @@
       </view>
       
       <view class='fun_right'>
+      <text>{{item.text}}</text>
         <image src='http://www.liujiarong.top/WX/images/wx_unfold.png' ></image>
       </view>
   </view>

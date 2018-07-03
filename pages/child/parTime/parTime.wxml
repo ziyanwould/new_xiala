@@ -10,16 +10,17 @@
         <view class='title_s3'>
           <text class="">{{userInfo.remark}}</text> 
         </view>
-        <!-- 编辑触碰按钮 -->
-          <navigator class="Bj"  url="../../child/ProfileEditor/ProfileEditor">
+        <!-- 编辑触碰按钮 20180703隐藏去个人基础数据 -->
+          <!-- <navigator class="Bj"  url="../../child/ProfileEditor/ProfileEditor">
             <image class='bj' src='http://www.liujiarong.top/WX/wx_redact.png'></image>
             编辑
-          </navigator>  
+          </navigator>   -->
         
      </view>
 
      <view   class="s1_right">
-      <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image>
+      <!-- <image class="userinfo-avatar avatar"  src="{{src}}"  bindtap="upload"   background-size="cover"></image> 20180703隐藏去个人基础数据-->
+       <image class="userinfo-avatar avatar"  src="{{src}}"  background-size="cover"></image>
 
      </view>
 
