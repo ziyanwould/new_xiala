@@ -32,7 +32,7 @@
         </view>
 
         <view class='sec_right'>
-          <text class='distance'>16km</text>
+          <text class='distance'>{{item.KM}}</text>
         </view>
       </view>
     </view>

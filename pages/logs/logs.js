@@ -84,8 +84,6 @@ Page({
       }
     });
 
-
-
   },
   /**
  * 用户点击右上角分享
@@ -145,6 +143,18 @@ Page({
           res.data.data.positions[i].Utime = common.timeFat(res.data.data.positions[i].Utime);
           if ((res.data.data.positions[i].Position_Title).length > (app.globalData.deleTitle - 1))
             res.data.data.positions[i].Position_Title = (res.data.data.positions[i].Position_Title).substring(0, app.globalData.deleTitle) + '...';
+          let dis =0;
+           //判断距离~~
+          if (res.data.data.positions[i].Lat == null || res.data.data.positions[i].Lat == ''){
+            dis = `${common.getDistance(app.globalData.latitude, app.globalData.longitude)} km`;
+            res.data.data.positions[i].KM = dis;
+          } else if (app.globalData.latitude == null || app.globalData.latitude==''){
+            dis = '未知距离';
+            res.data.data.positions[i].KM = dis;
+          }else{
+            dis = `${common.getDistance(app.globalData.latitude, app.globalData.longitude, parseFloat(res.data.data.positions[i].Lat), parseFloat(res.data.data.positions[i].Lng))} km`;
+            res.data.data.positions[i].KM = dis;
+          }
           list.push(res.data.data.positions[i]);
         }
         that.setData({

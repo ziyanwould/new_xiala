@@ -126,9 +126,26 @@ App({
       //错误执行
     }
 
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success: function (res) {
+
+        _this.globalData.latitude = res.latitude
+        typeof cb == "function" && cb(that.globalData.latitude)
+
+        _this.globalData.longitude = res.longitude
+        typeof cb == "function" && cb(that.globalData.longitude)
+        
+       
+      
+
+      }
+    })
   },
 
   globalData:{
+    latitude:null,
+    longitude:null,
     userInfo:null,//用户共用的基本信息
     oppenid:null,//用户的openID
     login:null,//用户的登录凭证
