@@ -2,7 +2,7 @@
 
 <view class='selsect'>
   <view class='sel_child'>
-     <view class='sel_left'>证书</view>
+     <view class='sel_left'>证书类别</view>
      <view bindtap='selectbook' class='sel_right' >
 
           <text wx:if="{{key}}"> {{infoChild.NameCertificate}}</text> 
@@ -12,7 +12,45 @@
   </view>
 </view> 
 
+<!-- 增加输入框为证书名称 -->
+<view class='selsect' wx:if='{{!approveID}}'>
+  <view class='sel_child'>
+     <view class='sel_left'>证书名称</view>
+     <view class='sel_right'>
 
+         <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.organization' style='padding-right:51rpx;' value='{{infoChild.organization}}'></input> 
+          <input wx:if="{{!key}}" placeholder-style='color:#dddddd'  placeholder='请输入'  bindinput='watchPassWord' data-self='work' style='padding-right:51rpx;' value=''></input> 
+        
+     </view>
+  </view>
+</view>
+<!-- end -->
+
+<!-- 增加有无B证 -->
+<view class='selsect' wx:if='{{wufo}}'>
+  <view class='sel_child'>
+     <view class='sel_left'>B证情况</view>
+     <view class='sel_right'bindtap="opend" id='3'>
+
+          <text wx:if="{{key}}">
+             <block wx:if="{{infoChild.B_Card==1}}">带B证</block>
+             <block wx:if="{{infoChild.B_Card==2}}">不带B证</block>
+             <block wx:if="{{infoChild.B_Card==3}}">考B证</block>
+             <block wx:if="{{infoChild.B_Card==4}}">情况不清</block>
+         
+          </text> 
+          <text wx:if="{{!key}}">
+             <block wx:if="{{B_Card==1}}">带B证</block>
+             <block wx:if="{{B_Card==2}}">不带B证</block>
+             <block wx:if="{{B_Card==3}}">考B证</block>
+             <block wx:if="{{B_Card==4}}">情况不清</block>
+          </text> 
+            <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
+     </view>
+  </view>
+</view> 
+
+<!-- end -->
 <view class='selsect' wx:if='{{!approveID}}'>
   <view class='sel_child'>
      <view class='sel_left'>发证机构</view>
@@ -24,6 +62,7 @@
      </view>
   </view>
 </view> 
+
 
 <view class='selsect'>
   <view class='sel_child'>

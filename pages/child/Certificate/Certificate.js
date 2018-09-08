@@ -94,22 +94,49 @@ Page({
    */
   onShow: function () {
     /**跳转筛选 */
+    let that = this;
+    console.log('infoChild', that.data.infoChild)
     var value = wx.getStorageSync('worktype')
     console.log("携带回来的信息", value)   
     if (value) {
-      this.setData({
+      that.setData({
         'infoChild.NameCertificate': value.value,
         'project': value.value,
-         'active':value.id
+         'active':value.id,
+        'infoChild.parent_id': value.parent_id
+      })
+    }else{
+      that.setData({
+     
+        'infoChild.parent_id': -1
       })
     }
     wx.removeStorageSync('worktype')
+
+    /**有B证列表判断 */
+    if (that.data.infoChild.parent_id==1){
+      that.setData({
+        wufo:true
+      })
+    } else if (that.data.infoChild.parent_id == 2){
+      that.setData({
+        wufo: true
+      })
+    } else if (that.data.infoChild.parent_id && (that.data.infoChild.parent_id !=0) ){
+      that.setData({
+        wufo: true
+      })
+    }else{
+      that.setData({
+        wufo: false
+      })
+    }
      /** */
      /**城市带回 */
     var counCity = wx.getStorageSync('bookCity')
     if (counCity) {
       console.log("返回城市", counCity)
-      this.setData({
+      that.setData({
         'infoChild.location': counCity,
         'location': counCity
       })
@@ -300,6 +327,8 @@ Page({
      var lists = ['闲置中', '未到期','快拿证']
    } else if (typed == 2){
      var lists = ['不限', '资质', '项目']
+   }else if(typed == 3){
+     var lists = ['带B证', '不带B证', '考B证','情况不清']
    }
     wx.showActionSheet({
       itemList:lists,
@@ -320,6 +349,11 @@ Page({
            that.setData({
              'infoChild.useRe': lists[number],
              'useRe': lists[number]
+           })
+         }else if(typed == 3){
+           that.setData({
+             'infoChild.B_Card': number+1,
+             'B_Card': number + 1
            })
          }
 

@@ -18,7 +18,7 @@ Page({
       CRL: app.globalData.CRL,
       changeJob:"兼职"
     })
-
+    // console.log(app.globalData.CRL)
     if(options.id==0){
       this.setData({
         changeJob: "全职"
