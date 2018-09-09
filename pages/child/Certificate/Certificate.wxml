@@ -18,8 +18,8 @@
      <view class='sel_left'>证书名称</view>
      <view class='sel_right'>
 
-         <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.organization' style='padding-right:51rpx;' value='{{infoChild.organization}}'></input> 
-          <input wx:if="{{!key}}" placeholder-style='color:#dddddd'  placeholder='请输入'  bindinput='watchPassWord' data-self='work' style='padding-right:51rpx;' value=''></input> 
+         <input wx:if="{{key}}" bindinput='watchPassWord' data-self='infoChild.title' style='padding-right:51rpx;' value='{{infoChild.title}}'></input> 
+          <input wx:if="{{!key}}" placeholder-style='color:#dddddd'  placeholder='请输入'  bindinput='watchPassWord' data-self='Certificate_Title' style='padding-right:51rpx;' value=''></input> 
         
      </view>
   </view>
@@ -33,17 +33,17 @@
      <view class='sel_right'bindtap="opend" id='3'>
 
           <text wx:if="{{key}}">
-             <block wx:if="{{infoChild.B_Card==1}}">带B证</block>
-             <block wx:if="{{infoChild.B_Card==2}}">不带B证</block>
-             <block wx:if="{{infoChild.B_Card==3}}">考B证</block>
-             <block wx:if="{{infoChild.B_Card==4}}">情况不清</block>
+             <block wx:if="{{infoChild.b_card==1}}">带B证</block>
+             <block wx:if="{{infoChild.b_card==2}}">不带B证</block>
+             <block wx:if="{{infoChild.b_card==3}}">考B证</block>
+             <block wx:if="{{infoChild.b_card==4}}">情况不清</block>
          
           </text> 
           <text wx:if="{{!key}}">
-             <block wx:if="{{B_Card==1}}">带B证</block>
-             <block wx:if="{{B_Card==2}}">不带B证</block>
-             <block wx:if="{{B_Card==3}}">考B证</block>
-             <block wx:if="{{B_Card==4}}">情况不清</block>
+             <block wx:if="{{b_card==1}}">带B证</block>
+             <block wx:if="{{b_card==2}}">不带B证</block>
+             <block wx:if="{{b_card==3}}">考B证</block>
+             <block wx:if="{{b_card==4}}">情况不清</block>
           </text> 
             <image src='http://www.liujiarong.top/WX/wx_unfold.png'></image> 
      </view>

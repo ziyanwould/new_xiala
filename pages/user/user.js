@@ -80,6 +80,7 @@ Page({
   },
   onShow: function () {
     /*是否登录  更新状态*/
+
     var _this = this;
     wx.getStorage({
       key: 'login',
@@ -215,37 +216,24 @@ Page({
     var child_encryptedData = e.detail.encryptedData
     //
     if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '未授权',
-        success: function (res) {
-
-
-        }
-      })
+      wx.showToast({
+        title: '授权失败',
+        icon: 'loading',
+        duration: 1500
+      });
     } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '同意授权',
-        success: function (res) {
-          that.setData({
-            items: {
+      
+      wx.showToast({
+        title: '授权中....',
+        icon: 'loading',
+        duration: 1500
+      });
 
-              show: false
-            }
-          });
-
+      that.setData({
+        items: {
+          show: false
         }
-      })
-      // that.setData({
-      //       items: {
-      //          show: false
-      //       }
-      //     });
-
-    
+      });
            
           //解析手机号
           wx.request({
@@ -369,7 +357,7 @@ Page({
                  
                   console.log("退出返回数据", res)
                   wx.showToast({
-                    title: res.data.message,
+                    title: "已退出账号",
                     icon: 'success',
                     duration: 2000
                   });
@@ -382,7 +370,8 @@ Page({
                     success: function (res) {
                       console.log(res.data);
                       that.setData({
-                        key: false
+                        key: false,
+                        'jobList[2].text':'未认证'
                 
                       })
                       wx.clearStorage()
@@ -447,7 +436,7 @@ Page({
         items: {
           height: self,
           masTitle: "",
-          show: true,
+          show: false,
           fages: false
         }
       });

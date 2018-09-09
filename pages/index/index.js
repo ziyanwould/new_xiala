@@ -216,30 +216,24 @@ Page({
     var child_encryptedData = e.detail.encryptedData
     //
     if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '未授权',
-        success: function (res) {
-         
-
-         }
-      })
+      wx.showToast({
+        title: '授权失败',
+        icon: 'loading',
+        duration: 1500
+      });
     } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '同意授权',
-        success: function (res) {
-          that.setData({
-            items: {
 
-              show: false
-            }
-          });
+      wx.showToast({
+        title: '授权中....',
+        icon: 'loading',
+        duration: 1500
+      });
 
-         }
-      })
+      that.setData({
+        items: {
+          show: false
+        }
+      });
    
  
 

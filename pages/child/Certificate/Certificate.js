@@ -122,14 +122,41 @@ Page({
       that.setData({
         wufo: true
       })
-    } else if (that.data.infoChild.parent_id && (that.data.infoChild.parent_id !=0) ){
-      that.setData({
-        wufo: true
-      })
-    }else{
+    } else{
       that.setData({
         wufo: false
       })
+    }
+    
+    // console.log("that.data.infoChild.b_card", that.data.infoChild.b_card)
+    switch (that.data.infoChild.b_card) {
+      case 0:
+        that.setData({
+          wufo: true
+        })
+        break;
+      case 1:
+        that.setData({
+          wufo: true
+        })
+        break;
+      case 2:
+        that.setData({
+          wufo: true
+        })
+        break;
+      case 3:
+        that.setData({
+          wufo: true
+        })
+        break;
+      case 4:
+        that.setData({
+          wufo: true
+        })
+        break;
+      default:
+       
     }
      /** */
      /**城市带回 */
@@ -352,8 +379,8 @@ Page({
            })
          }else if(typed == 3){
            that.setData({
-             'infoChild.B_Card': number+1,
-             'B_Card': number + 1
+             'infoChild.b_card': number+1,
+             'b_card': number + 1
            })
          }
 
@@ -498,6 +525,8 @@ Page({
         "start_Time": that.data.infoChild.startTime + "-29T14:17:27.682Z",
         "end_Time": that.data.infoChild.endTime + "-29T14:17:27.682Z",
         "certificate_Name": that.data.infoChild.NameCertificate,
+        "B_Card": that.data.infoChild.b_card,
+        "Certificate_Title": that.data.infoChild.title,
         "train_Org": that.data.infoChild.organization,
         "gertificate_Type_Id": that.data.active,
         "reg_Status": that.data.infoChild.registration,
@@ -514,6 +543,8 @@ Page({
         "start_Time": that.data.startTime + "-29T14:17:27.682Z",
         "end_Time": that.data.endTime + "-29T14:17:27.682Z",
         "certificate_Name": that.data.project,
+        "B_Card": that.data.b_card,
+        "Certificate_Title": that.data.Certificate_Title,
         "train_Org": that.data.work,
         "gertificate_Type_Id": that.data.active,
         "reg_Status": that.data.registration,
@@ -524,7 +555,7 @@ Page({
 
       }
     }
-   
+    console.log("datas", setdatas)
     common.request('api/resume/save_certificate', {
       params: setdatas,
       success: function (res) {

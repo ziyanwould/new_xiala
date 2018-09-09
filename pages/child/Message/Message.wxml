@@ -3,7 +3,7 @@
  <!-- 导航组件 
 <template is="tar_count" data="{{...itemz}}"/>  -->
 <!-- 搜索功能 -->
-<include src="/pages/child/Template/search.wxml"/>
+<!-- <include src="/pages/child/Template/search.wxml"/> -->
 
 
 <view class='Mlist'>
@@ -21,7 +21,7 @@
   </view>
 </view>
 
-<view class='Mlist' wx:for="{{list}}" wx:key="this" bindtap='Ondetail'>
+<view class='Mlist' wx:for="{{list}}" wx:key="this" bindtap='Ondetail'  data-value='{{item}}'>
   <view class='list_left'>
       <view class='Tone'>
         <image style='border-radius:85rpx'  src='http://www.liujiarong.top/WX/messageHr.jpg'></image>

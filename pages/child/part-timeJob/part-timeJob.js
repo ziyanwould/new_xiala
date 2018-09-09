@@ -86,8 +86,11 @@ Page({
   onShow: function () {
     console.log(this.data.jobType, this.data.message, this.data.recommend)
     
-   
+    
     var _this = this;
+    //有地址的更改默认地址
+    _this.address(this.data.message);
+
     wx.getStorage({
       key: 'login',
       success: function (res) {
@@ -306,35 +309,24 @@ Page({
     var child_encryptedData = e.detail.encryptedData
     //
     if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '未授权',
-        success: function (res) {
-
-
-        }
-      })
+      wx.showToast({
+        title: '授权失败',
+        icon: 'loading',
+        duration: 1500
+      });
     } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '同意授权',
-        success: function (res) {
-          that.setData({
-            items: {
 
-              show: false
-            }
-          });
+      wx.showToast({
+        title: '授权中....',
+        icon: 'loading',
+        duration: 1500
+      });
 
+      that.setData({
+        items: {
+          show: false
         }
-      })
-      // that.setData({
-      //       items: {
-      //          show: false
-      //       }
-      //     });
+      });
 
 
 
@@ -556,5 +548,25 @@ Page({
         })
       }
     }, app.globalData.login)
+  },
+  //地址更改信息
+  address(data){
+    let adds = data.company;
+    console.log(adds)
+    let that = this;
+    if (adds.lat!=null){
+      let message =[
+      { 
+        address1: `${adds.province != null ? adds.province : ''}${adds.city != null ? adds.city : ''}${adds.county != null ? adds.county : ''}`, 
+        address2: `${adds.address != null ? adds.address : ''}`,
+        lat: adds.lat,
+         lon: adds.lng
+         }]
+
+         that.setData({
+           list2: message
+         })
+    }
+
   }
 })

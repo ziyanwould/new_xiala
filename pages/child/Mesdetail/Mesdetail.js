@@ -15,7 +15,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let that = this;
+    try {
+      let value = wx.getStorageSync('message')
+      if (value) {
+        that.setData({
+          time: `${value.Ctime != null ? value.Ctime : '00:00'}`,
+          imgurl: 'http://www.liujiarong.top/WX/messageHr.jpg',
+          title: '我的客服',
+          count: value.Detail
+        })
+      }
+    } catch (e) {
+      // Do something when catch error
+      wx.showToast({
+        title: '获取数据失败',
+        icon: 'loading',
+        duration: 1500
+      });
+
+      setTimeout(function () {
+        wx.navigateBack({
+          delta: 2
+        })
+      }, 1500)
+    }
   },
 
   /**
