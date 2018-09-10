@@ -129,7 +129,41 @@ Page({
   },
   save: function () {
     var that = this;
-    this.getResume()
+   
+    if (that.data.moben != 0) {
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.infoChild.startTime + "-29T14:17:27.682Z",
+        "end_Time": that.data.infoChild.endTime + "-29T14:17:27.682Z",
+        "project_Name": that.data.infoChild.projectName,
+        "project_Detail": that.data.infoChild.projectContent
+
+      }
+    } else {
+
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.startTime + "-29T14:17:27.682Z",
+        "end_Time": that.data.endTime + "-29T14:17:27.682Z",
+        "project_Name": that.data.project,
+        "project_Detail": that.data.input
+
+      }
+    }
+    console.log(setdatas)
+    let result = common.IsEmpty(setdatas);
+    if (!result) {
+      return false;
+    }
+    common.request('api/resume/save_projectexp', {
+      params: setdatas,
+      success: function (res) {
+        console.log("保存/新增项目经历板块", res)
+
+      }
+    }, app.globalData.login)
     //20180601撤销全局修改
     // if (that.data.switchs) {
     //   const you = "info.projectExperience[" + this.data.num + "]";
@@ -213,37 +247,7 @@ Page({
   ,
   //20180529 保存/新增项目经历板块
   getResume: function () {
-    var that = this;
-    if (that.data.moben!=0){
-      var setdatas = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "start_Time": that.data.infoChild.startTime + "-29T14:17:27.682Z",
-        "end_Time": that.data.infoChild.endTime + "-29T14:17:27.682Z",
-        "project_Name": that.data.infoChild.projectName,
-        "project_Detail": that.data.infoChild.projectContent
 
-      }
-    }else{
-     
-      var setdatas = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "start_Time": that.data.startTime + "-29T14:17:27.682Z",
-        "end_Time": that.data.endTime + "-29T14:17:27.682Z",
-        "project_Name": that.data.project,
-        "project_Detail": that.data.input
-
-      }
-    }
-   
-    common.request('api/resume/save_projectexp', {
-      params: setdatas,
-      success: function (res) {
-        console.log("保存/新增项目经历板块", res)
-
-      }
-    }, app.globalData.login)
   },
   removex: function () {
     var that = this;

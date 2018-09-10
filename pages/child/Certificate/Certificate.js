@@ -1,4 +1,5 @@
 var common = require('../../../utils/common.js');
+var logonNum = 0;//是否是初始化进入
 var app = getApp();
 /**位置 */
 var model = require('../../../model/model.js')
@@ -32,6 +33,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    logonNum = 0;
+    let that = this;
     var arrc = common.sjc();
     this.setData({
       startTime: arrc[1],
@@ -80,59 +83,12 @@ Page({
     }
        //认证的结果
     this.RZresult()
-  },
-
-  //生命周期函数--监听页面初次渲染完成
-  onReady: function (e) {
-    var that = this;
-    //请求数据
-    model.updateAreaData(that, 0, e);
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    /**跳转筛选 */
-    let that = this;
-    console.log('infoChild', that.data.infoChild)
-    var value = wx.getStorageSync('worktype')
-    console.log("携带回来的信息", value)   
-    if (value) {
-      that.setData({
-        'infoChild.NameCertificate': value.value,
-        'project': value.value,
-         'active':value.id,
-        'infoChild.parent_id': value.parent_id
-      })
-    }else{
-      that.setData({
-     
-        'infoChild.parent_id': -1
-      })
-    }
-    wx.removeStorageSync('worktype')
-
-    /**有B证列表判断 */
-    if (that.data.infoChild.parent_id==1){
-      that.setData({
-        wufo:true
-      })
-    } else if (that.data.infoChild.parent_id == 2){
-      that.setData({
-        wufo: true
-      })
-    } else{
-      that.setData({
-        wufo: false
-      })
-    }
-    
-    // console.log("that.data.infoChild.b_card", that.data.infoChild.b_card)
+    //B证
+    console.log("Bzheng", that.data.infoChild.b_card)
     switch (that.data.infoChild.b_card) {
       case 0:
         that.setData({
-          wufo: true
+          wufo: false
         })
         break;
       case 1:
@@ -156,8 +112,64 @@ Page({
         })
         break;
       default:
-       
+        that.setData({
+          wufo: false
+        })
     }
+  },
+
+  //生命周期函数--监听页面初次渲染完成
+  onReady: function (e) {
+    var that = this;
+    //请求数据
+    model.updateAreaData(that, 0, e);
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    logonNum ++;
+    console.log("logonNum", logonNum)
+    /**跳转筛选 */
+    let that = this;
+    console.log('infoChild', that.data.infoChild)
+    var value = wx.getStorageSync('worktype')
+    console.log("携带回来的信息", value)   
+    if (value) {
+      that.setData({
+        'infoChild.NameCertificate': value.value,
+        'project': value.value,
+         'active':value.id,
+        'infoChild.parent_id': value.parent_id
+      })
+    }else{
+      that.setData({
+     
+        'infoChild.parent_id': -1
+      })
+    }
+    wx.removeStorageSync('worktype')
+
+    /**有B证列表判断 */
+
+    if (logonNum>1){
+      if (that.data.infoChild.parent_id==1){
+        that.setData({
+          wufo:true
+        })
+      } else if (that.data.infoChild.parent_id == 2){
+        that.setData({
+          wufo: true
+        })
+      } else{
+        that.setData({
+          wufo: false
+        })
+      }
+    }
+    // console.log("that.data.infoChild.b_card", that.data.infoChild.b_card)
+
      /** */
      /**城市带回 */
     var counCity = wx.getStorageSync('bookCity')

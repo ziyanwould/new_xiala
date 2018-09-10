@@ -415,6 +415,37 @@ function getDistance(lat1, lng1, lat2 = 23.099364, lng2 = 113.297425) {
   s = s.toFixed(2);//指定小数点后的位数。   
   return s;
 }
+//判断对象里是否有空值
+const IsEmpty = (obj, showT='您有未填项') => {
+
+  let pdf = false;
+  for (let i in obj) { // 如果不为空，则会执行到这一步，返回true
+    console.log("数据", obj[i])
+    if (obj[i] == undefined || obj[i] == '' || obj[i] == null || obj[i] == '请选择' || obj[i] =='string' ) {
+      if (obj[i]!=0){
+        pdf = false;
+        wx.showToast({
+          title: showT,
+          icon: 'loading',
+          duration: 1500
+        });
+        break;
+      }else{
+        pdf = true
+      }
+  
+    } else {
+      pdf = true
+    }
+
+  }
+  return pdf // 如果为空,返回false
+  //   if (Object.keys(obj).length === 0 || Object.keys(obj) == undefined || Object.keys(obj)==null) {
+  //     return false // 如果为空,返回false
+  //   }
+  //   console.log(Object.keys(obj))
+  //   return true // 如果不为空，则会执行到这一步，返回true
+}
 
 module.exports = {
   //要引用的函数 xx:xx
@@ -429,5 +460,6 @@ module.exports = {
   deleteEmptyProperty: deleteEmptyProperty,
   setintuse: setintuse,
   timeFat:timeFat,
-  getDistance:getDistance
+  getDistance:getDistance,
+  IsEmpty: IsEmpty
 }

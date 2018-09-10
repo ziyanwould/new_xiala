@@ -493,10 +493,19 @@ Page({
     this.setData({
       hiddenmodalput: true
     })
-    let nums = this.data.getResuName.length;
+    let nums = this.data.getResuName;
     let urls = this.data.resumeName;
     var value = this.data.getResuName;
+    console.log('nums', nums)
     //创建简历操作
+    if (nums == '' || nums == undefined){
+      wx.showToast({
+        title: '请输入简历名',
+        icon: 'loading',
+        duration: 800
+      })
+      return false ;
+    }
     this.createResume({
       redata: {
         "title": value,
@@ -504,25 +513,19 @@ Page({
       },
       success: function (res) {
         console.log("二重调用", res.data.data.detail.ID);
-        if (nums > 0 && urls == '全职') {
+        if (  urls == '全职') {
           
           wx.navigateTo({
             url: '/pages/child/resume/resume?resume_id=' + res.data.data.detail.ID
 
           })
-        } else if (nums > 0 && urls == '兼职') {
+        } else if ( urls == '兼职') {
        
           wx.navigateTo({
             url: '/pages/child/parTime/parTime?resume_id=' + res.data.data.detail.ID
 
           })
-        } else {
-          wx.showToast({
-            title: '请输入简历名',
-            icon: 'loading',
-            duration: 800
-          })
-        }
+        } 
       }
     })
 

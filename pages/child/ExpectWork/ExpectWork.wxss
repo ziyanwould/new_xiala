@@ -63,3 +63,7 @@ text-align: right;
 font-size: 28rpx;
 color: #a3a3a3;
 }
+.sel_right text{
+  display: inline-block;
+  min-width: 100rpx;
+}

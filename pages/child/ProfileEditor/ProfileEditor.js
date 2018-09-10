@@ -266,6 +266,7 @@ Page({
     console.log("本地存储mysey", this.data.loginG)
     var mysey =  this.data.loginG
     var that = this;
+    //20180910 取消对地址 省 区的接入
     var datas = {
       "real_name": that.data.edit_name,
       "sex": that.data.edit_sex,
@@ -273,15 +274,18 @@ Page({
       "job_years": that.data.edit_work,
       "phone": that.data.edit_phone,
       "email": that.data.edit_email,
-      "province": that.data.edit_province,
+      //"province": that.data.edit_province,
       "city": that.data.edit_city,
-      "county": that.data.edit_county,
+     // "county": that.data.edit_county,
       "job_status": that.data.edit_state,
       "remark": that.data.edit_textarea,
       "header_img": that.data.edit_avatarUrl,
       "birth": that.data.edit_year + '-29T14:03:30.599Z',
     }
-   
+    let result= common.IsEmpty(datas);
+    if (!result){
+      return false;
+    }
      common.request('usercenter/update_userinfo',
       {
         params: datas,

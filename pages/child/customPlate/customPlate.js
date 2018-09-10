@@ -102,7 +102,35 @@ Page({
   },
   save: function () {
     var that = this;
-    this.getResume()
+    if (that.data.moben != 0) {
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "title": that.data.infoChild.title,
+        "detail": that.data.infoChild.content
+
+      }
+    } else {
+      var setdatas = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "title": that.data.input1,
+        "detail": that.data.input2
+
+      }
+    }
+    let result = common.IsEmpty(setdatas);
+    if (!result) {
+      return false;
+    }
+    
+    common.request('api/resume/save_define', {
+      params: setdatas,
+      success: function (res) {
+        console.log("保存、新增自定义板块", res)
+
+      }
+    }, app.globalData.login)
     //取消全局更改方式 20180601
     // if (that.data.switchs) {
     //   const you = "info.userDefine[" + this.data.num + "]";
@@ -183,31 +211,7 @@ Page({
   //20180529 保存、新增自定义板块
   getResume: function () {
     var that = this;
-    if (that.data.moben!=0){
-      var setdatas = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "title": that.data.infoChild.title,
-        "detail": that.data.infoChild.content
 
-      }
-    }else{
-      var setdatas = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "title": that.data.input1,
-        "detail": that.data.input2
-
-      }
-    }
-    
-    common.request('api/resume/save_define', {
-      params: setdatas,
-      success: function (res) {
-        console.log("保存、新增自定义板块", res)
-
-      }
-    }, app.globalData.login)
   },
   removex: function () {
     var that = this;

@@ -31,7 +31,8 @@ Page({
         num: options.id,
         infoChild: self.workExperience[options.id],
         resumeId: self.resume_id,
-        moben: self.workExperience[options.id].id
+        moben: self.workExperience[options.id].id,
+        active: app.globalData.ResumeFull.expectWork.job_type_id
       })
     
       
@@ -174,7 +175,47 @@ Page({
   },
   save:function(){
     var that = this;
-    this.getResume()
+    var that = this;
+    console.log('infoChild', that.data.infoChild);
+
+    if (that.data.moben != 0) {
+      //修改板块
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "company_Name": that.data.infoChild.company,
+        "project_Detail": that.data.infoChild.jobContent,
+        "job_Type_Id": that.data.active,
+        "start_Time": that.data.infoChild.startTime + "-29T14:03:30.599Z",
+        "end_Time": that.data.infoChild.endTime + "-29T14:03:30.599Z"
+
+      }
+    } else {
+      //新增板块
+
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "company_Name": that.data.company,
+        "project_Detail": that.data.input,
+        "job_Type_Id": that.data.active,
+        "start_Time": that.data.entrytime + "-29T14:03:30.599Z",
+        "end_Time": that.data.endtime + "-29T14:03:30.599Z"
+
+      }
+    }
+    let result = common.IsEmpty(setdata);
+    if (!result) {
+      return false;
+    }
+
+    common.request('api/resume/save_jobexp', {
+      params: setdata,
+      success: function (res) {
+        console.log("保存/新增工作经验", res)
+
+      }
+    }, app.globalData.login)
     if (that.data.switchs){
 
       //2018.5.31取消原来的全局保存
@@ -225,43 +266,7 @@ Page({
   },
   //20180529 保存/新增工作经验
   getResume: function () {
-    var that = this;
-    console.log('infoChild', that.data.infoChild);
-    
-    if (that.data.moben!=0){
-      //修改板块
-      var setdata = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "company_Name": that.data.infoChild.company,
-        "project_Detail": that.data.infoChild.jobContent,
-        "job_Type_Id": that.data.active,
-        "start_Time": that.data.infoChild.startTime + "-29T14:03:30.599Z",
-        "end_Time": that.data.infoChild.endTime + "-29T14:03:30.599Z"
 
-      }
-    }else{
-     //新增板块
-
-      var setdata = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "company_Name": that.data.company,
-        "project_Detail": that.data.input,
-        "job_Type_Id": that.data.active,
-        "start_Time": that.data.entrytime + "-29T14:03:30.599Z",
-        "end_Time": that.data.endtime + "-29T14:03:30.599Z"
-
-      }
-    }
-   
-    common.request('api/resume/save_jobexp', {
-      params: setdata,
-      success: function (res) {
-        console.log("保存/新增工作经验", res)
-
-      }
-    }, app.globalData.login)
   },
   //删除此项目
   removex:function(){

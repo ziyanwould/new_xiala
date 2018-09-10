@@ -146,7 +146,39 @@ Page({
   save: function () {
     var that = this;
     
-    this.getResume()
+    var that = this;
+    if (that.data.moben != 0) {
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.infoChild.startTime + "-29T14:08:50.086Z",
+        "end_Time": that.data.infoChild.endTime + "-29T14:08:50.086Z",
+        "school_Name": that.data.infoChild.school,
+        "major": that.data.infoChild.profession,
+        "education": that.data.infoChild.educationBack
+      }
+    } else {
+      var setdata = {
+        "id": that.data.moben,
+        "resume_Id": that.data.resumeId,
+        "start_Time": that.data.Beforetime + "-29T14:08:50.086Z",
+        "end_Time": that.data.GraduationYear + "-29T14:08:50.086Z",
+        "school_Name": that.data.school,
+        "major": that.data.specialty,
+        "education": that.data.education
+      }
+    }
+    let result = common.IsEmpty(setdata);
+    if (!result) {
+      return false;
+    }
+    common.request('api/resume/save_education', {
+      params: setdata,
+      success: function (res) {
+        console.log("保存/新增教育经历", res)
+
+      }
+    }, app.globalData.login)
     //20180531 取消全局架构
     // if (that.data.switchs) {
     //   const you = "info.education[" + this.data.num + "]";
@@ -229,36 +261,7 @@ Page({
 ,
   //20180529 保存/新增教育经历
   getResume: function () {
-    var that = this;
-    if (that.data.moben!=0){
-      var setdata = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "start_Time": that.data.infoChild.startTime + "-29T14:08:50.086Z",
-        "end_Time": that.data.infoChild.endTime + "-29T14:08:50.086Z",
-        "school_Name": that.data.infoChild.school,
-        "major": that.data.infoChild.profession,
-        "education": that.data.infoChild.educationBack
-      }
-    }else{
-      var setdata = {
-        "id": that.data.moben,
-        "resume_Id": that.data.resumeId,
-        "start_Time": that.data.Beforetime + "-29T14:08:50.086Z",
-        "end_Time": that.data.GraduationYear + "-29T14:08:50.086Z",
-        "school_Name": that.data.school,
-        "major": that.data.specialty,
-        "education": that.data.education
-      }
-    }
 
-    common.request('api/resume/save_education', {
-      params: setdata,
-      success: function (res) {
-        console.log("保存/新增教育经历", res)
-
-      }
-    }, app.globalData.login)
   },
   //删除此项目
   removex: function () {

@@ -41,9 +41,10 @@ Page({
       parTime:true,
     })
   }
-  //console.log("info", this.data.info.resume_id)
+    console.log("info", this.data.info.expectWork.job_type_id)
   this.setData({
-    resumeId: this.data.info.resume_id
+    resumeId: this.data.info.resume_id,
+    active: this.data.info.expectWork.job_type_id
   })
   
   },
@@ -152,7 +153,26 @@ Page({
     //   typeof cb == "function" && cb(app.globalData.ResumeFull)
     // //更新全局变量结束 20180519
     // }
-    this.getResume()
+    var that = this;
+    var setdata = {
+      "resume_id": that.data.resumeId,
+      "job_type_id": that.data.active,
+      "expect_wages": that.data.info.expectWork.monthlyPay,
+      //"arrival_time": "string",
+      "remark": that.data.info.expectWork.moreInfo
+    }
+   // console.log("setdata", setdata)
+    let result = common.IsEmpty(setdata);
+    if (!result) {
+      return false;
+    }
+    common.request('api/resume/save_expectwork', {
+      params: setdata,
+      success: function (res) {
+        //console.log("保存期望工作", res)
+
+      }
+    }, app.globalData.login)
   
     wx.showToast({
       title: '保存成功',
@@ -170,23 +190,6 @@ Page({
     wx.navigateTo({
       url: '/pages/child/selectProject/selectProject?id=0'//实际路径要写全
     })
-  },
-  //20180529 保存期望工作
-  getResume: function () {
-    var that = this;
-    var setdata = {
-      "resume_id": that.data.resumeId,
-      "job_type_id": that.data.active,
-      "expect_wages": that.data.info.expectWork.monthlyPay,
-      "arrival_time": "string",
-      "remark": that.data.info.expectWork.moreInfo
-    }
-    common.request('api/resume/save_expectwork', {
-      params: setdata,
-      success: function (res) {
-        //console.log("保存期望工作", res)
-
-      }
-    }, app.globalData.login)
   }
+
 })
