@@ -1,4 +1,6 @@
 // pages/child/Mesdetail/Mesdetail.js
+var app = getApp()
+var common = require('../../../utils/common.js');
 Page({
 
   /**
@@ -23,7 +25,8 @@ Page({
           time: `${value.Ctime != null ? value.Ctime : '00:00'}`,
           imgurl: 'http://www.liujiarong.top/WX/messageHr.jpg',
           title: '我的客服',
-          count: value.Detail
+          count: value.Detail,
+          id: value.ID
         })
       }
     } catch (e) {
@@ -53,7 +56,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.reader()
   },
 
   /**
@@ -89,5 +92,18 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  reader(){
+    let that = this;
+    let datas = {
+      "message_id": that.data.id
+    }
+    console.log(datas, datas)
+    common.request('api/message/set_read', {
+      params: datas,
+      success: function (res) {
+        console.log("信息记录", res)
+      }
+    }, app.globalData.login)
   }
 })

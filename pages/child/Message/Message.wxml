@@ -28,7 +28,7 @@
       </view>
       <view class='Tnext'>
          <view class='Ttitle'>{{item.Title}}</view>
-          <view class='Tcount'><text>未读</text> {{item.Detail}}</view>
+          <view class='Tcount'><text>{{item.Status==0?'未读':'已读'}}</text> {{item.Detail}}</view>
       </view>
   </view>
   <view class='list_right'>
