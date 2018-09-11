@@ -22,6 +22,10 @@ Page({
     useRe: '请选择',
     location:'请选择',
     optional:" (可选)",
+    infoChild:{
+      b_card:0
+    },
+    b_card:0,
     item: {
       show: show
     }
@@ -84,8 +88,9 @@ Page({
        //认证的结果
     this.RZresult()
     //B证
-    console.log("Bzheng", that.data.infoChild.b_card)
-    switch (that.data.infoChild.b_card) {
+   // console.log("Bzheng", that.data.infoChild.b_card)
+    if (that.data.infoChild.b_card){
+     switch (that.data.infoChild.b_card) {
       case 0:
         that.setData({
           wufo: false
@@ -115,6 +120,7 @@ Page({
         that.setData({
           wufo: false
         })
+     }
     }
   },
 
@@ -133,7 +139,7 @@ Page({
     console.log("logonNum", logonNum)
     /**跳转筛选 */
     let that = this;
-    console.log('infoChild', that.data.infoChild)
+//    console.log('infoChild', that.data.infoChild)
     var value = wx.getStorageSync('worktype')
     console.log("携带回来的信息", value)   
     if (value) {
@@ -288,16 +294,7 @@ Page({
     // //更新全局变量结束 20180519
     // }
 
-    wx.showToast({
-      title: '保存成功',
-      icon: 'success',
-      duration: 800
-    });
-    setTimeout(function () {
-      wx.navigateBack({
-        delta: 1
-      })
-    }, 1000)
+
   },
   openConfirm: function () {
     var that = this;
@@ -530,8 +527,9 @@ Page({
   //20180529 保存/新增证书板块
   getResume: function () {
     var that = this;
+    let setdatas = {};
     if (that.data.moben!=0){
-      var setdatas = {
+      setdatas = {
         "id": that.data.moben,
         "resume_Id": that.data.resumeId,
         "start_Time": that.data.infoChild.startTime + "-29T14:17:27.682Z",
@@ -546,10 +544,9 @@ Page({
         "province": that.data.province,
         "city": that.data.infoChild.location,
         "gertificate_Use": that.data.infoChild.useRe
-
       }
     }else{
-      var setdatas = {
+      setdatas = {
         "id": that.data.moben,
         "resume_Id": that.data.resumeId,
         "start_Time": that.data.startTime + "-29T14:17:27.682Z",
@@ -567,7 +564,11 @@ Page({
 
       }
     }
-    console.log("datas", setdatas)
+    let result = common.IsEmpty(setdatas);
+    if (!result) {
+      return false;
+    }
+
     common.request('api/resume/save_certificate', {
       params: setdatas,
       success: function (res) {
@@ -575,6 +576,17 @@ Page({
 
       }
     }, app.globalData.login)
+
+    wx.showToast({
+        title: '保存成功',
+        icon: 'success',
+        duration: 800
+    });
+    setTimeout(function () {
+      wx.navigateBack({
+        delta: 1
+      })
+    }, 1000)
   },
   //删除此项目
   removex: function () {
