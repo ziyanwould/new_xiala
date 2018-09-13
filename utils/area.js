@@ -1,6 +1,30 @@
 
 function getAreaInfo(callBack){
 var str = [
+  {
+    "code": "999991",
+    "sheng": "99",
+    "di": "00",
+    "xian": "00",
+    "name": "不限",
+    "level": 1
+   },
+  {
+    "code": "999992",
+    "sheng": "99",
+    "di": "10",
+    "xian": "00",
+    "name": "不限",
+    "level": 2
+  },
+  {
+    "code": "999993",
+    "sheng": "99",
+    "di": "10",
+    "xian": "10",
+    "name": "不限",
+    "level": 3
+  },
     {
       "code": "110000",
       "sheng": "11",

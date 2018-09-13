@@ -1,5 +1,5 @@
 // pages/child/part-timeJob/part-timeJob.js
-var app = getApp();
+const app = getApp();
 var common = require('../../../utils/common.js');
 Page({
 
@@ -185,11 +185,11 @@ Page({
 
     //获取详情页信息   使用Promise进行异步流程处理
     if (this.data.jobType=='兼职') {
-      var urls = 'https://api.17liepin.com/api/position/get_part_detail';
+      var urls = app.globalData.url+'api/position/get_part_detail';
     
 
     } else {
-      var urls = 'https://api.17liepin.com/api/position/get_full_detail';
+      var urls = app.globalData.url+'api/position/get_full_detail';
    
 
     }
@@ -332,7 +332,7 @@ Page({
 
       //解析手机号
       wx.request({
-        url: 'https://api.17liepin.com/api/common/wx_login_phone',
+        url: app.globalData.url+'api/common/wx_login_phone',
         header: {
           'content-type': 'application/json',
           'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='

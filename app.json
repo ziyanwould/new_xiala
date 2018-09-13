@@ -40,7 +40,6 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "borderStyle":"white",
     "color":"#666666",
     "selectedColor":"#14AFFC",
     "backgroundColor":"#F7F8F8",
@@ -48,13 +47,13 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "兼职",
+        "text": "证书",
         "iconPath": "images/icon_home.png",
         "selectedIconPath": "images/icon_home_curr.png"
       },
       {
         "pagePath": "pages/logs/logs",
-        "text": "全职",
+        "text": "人才",
         "iconPath": "images/icon_find.png",
         "selectedIconPath": "images/icon_find_curr.png"
       },

@@ -3,12 +3,12 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
-		"postcss": false,
-		"minified": false,
+		"postcss": true,
+		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.1",
+	"libVersion": "2.3.0",
 	"appid": "wx97f2f153e1d86b56",
 	"projectname": "%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AA%E4%BA%BA%E7%89%88",
 	"isGameTourist": false,

@@ -69,7 +69,7 @@
 
 <!-- end -->
 <!-- 跳转版块 -->
-<view class='wx_feature'>
+<view class='wx_feature' wx:if='{{!net}}'>
   <!-- <view class='sec1' bindtap="jumpToMyPage" data-url="/pages/child/Resumelist/Resumelist">
       <view class='fun_left'>
         <image src='http://www.liujiarong.top/WX/images/wx_resume.png'></image>
@@ -128,6 +128,12 @@
 
 </view>
   <!-- end -->
+  <!-- 网络错误 -->
+    <view class='noDt' wx:if='{{net}}'>
+  <image style='width:352rpx;height:305rpx;' src='http://www.liujiarong.top/WX/bannerTd.png'></image>
+    <view class='Dtcount'>网络或服务器故障</view>
+    <view class='Dtcount'>请您稍后重试，给您带来不便，抱歉！</view>
+</view>
 <!--获取信息另一种方式-->
  <!-- <open-data type="userNickName" open-gid="xxxxxx"></open-data>
 <open-data type="userAvatarUrl"></open-data>

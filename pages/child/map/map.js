@@ -1,4 +1,4 @@
-var app = getApp()
+const app = getApp();
 Page({
   data: {
     latitude: 23.014030,
@@ -72,7 +72,7 @@ Page({
     var that = this
     console.log("code", app.globalData.thecode)
     wx.request({
-      url: 'https://api.17liepin.com/api/common/get_wx_openid',
+      url: app.globalData.url+'api/common/get_wx_openid',
       header: {
         'content-type': 'application/json',
         'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='

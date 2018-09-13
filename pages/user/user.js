@@ -1,7 +1,7 @@
 //index.js
 var common = require('../../utils/common.js');
 //获取应用实例
-var app = getApp()
+const app = getApp();
 Page({
   data: {
     motto: '欢迎',
@@ -60,7 +60,12 @@ Page({
     key:false
   },
   onLoad: function () {
-    
+    console.log('net',app.globalData.net)
+    if (app.globalData.net==false){
+      this.setData({
+        net:true
+      })
+    }
     var that = this
     /*是否登录*/
     wx.getStorage({
@@ -131,6 +136,14 @@ Page({
     wx.stopPullDownRefresh();
   },
    jumpToMyPage: function (event) {
+     if (app.globalData.net==false){
+       wx.showToast({
+         title: '网络故障',
+         icon: 'loading',
+         duration: 3000
+       });
+       return false;
+     }
      var that = this;
      if (this.data.key) {
        //增加未认证下的操作指引
@@ -237,7 +250,7 @@ Page({
            
           //解析手机号
           wx.request({
-            url: 'https://api.17liepin.com/api/common/wx_login_phone',
+            url: app.globalData.url+'api/common/wx_login_phone',
             header: {
               'content-type': 'application/json',
               'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -279,6 +292,13 @@ Page({
               //更新认证状态
               that.identif()
 
+            },
+             fail: function () {
+              wx.showToast({
+                title: '网络故障',
+                icon: 'loading',
+                duration: 3000
+              });
             }
 
           })
@@ -341,7 +361,7 @@ Page({
 
         
               wx.request({
-                url: 'https://api.17liepin.com/api/common/login_out',
+                url: app.globalData.url+'api/common/login_out',
                 header: {
                   'content-type': 'application/json',
                   'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY=',

@@ -1,19 +1,15 @@
 //index.js
 //获取应用实例
 var common = require('../../utils/common.js');
-var app = getApp();
+const app = getApp();
 // 下拉刷新内容
 var Index = 1;
 var Size = 10;
-
-
-
-
 //var register = require('../../utils/refreshLoadRegister.js');
 Page({
   data: {    
     currentSize:0,
-    fullTimeurl:'https://api.17liepin.com/api/position/get_part_recommend',
+    fullTimeurl:app.globalData.url+'api/position/get_part_recommend',
     list: [],
     items: {},
     jobType: 0,
@@ -167,6 +163,18 @@ Page({
               duration: 2000
             });
           }
+        },
+          fail: function () {
+          wx.showToast({
+            title: '网络故障',
+            icon: 'loading',
+            duration: 3000
+          });
+          that.setData({
+            net:true,
+            'items.show':true, 
+          
+          })
         }
       });
       
@@ -239,7 +247,7 @@ Page({
 
           //解析手机号
           wx.request({
-            url: 'https://api.17liepin.com/api/common/wx_login_phone',
+            url: app.globalData.url +'api/common/wx_login_phone',
             header: {
               'content-type': 'application/json',
               'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -270,7 +278,14 @@ Page({
 
               var cai = common.getinst(app.globalData.login)
               console.log("换一种写法",cai)
+            },fail(){
+              wx.showToast({
+                title: '网络故障',
+                icon: 'loading',
+                duration: 3000
+              });
             }
+
 
           })
         
@@ -287,15 +302,15 @@ Page({
 
      //获取详情页信息   使用Promise进行异步流程处理
      if (jobs==0){
-       var urls ='https://api.17liepin.com/api/position/get_part_detail';
+       var urls =app.globalData.url+'/api/position/get_part_detail';
       //  that.setData({
-      //    urlx : 'https://api.17liepin.com/api/position/get_part_list'
+      //    urlx : app.globalData.url+'/api/position/get_part_list'
       //  })
       
      }else{
-       var urls = 'https://api.17liepin.com/api/position/get_full_detail';
+       var urls = app.globalData.url+'/api/position/get_full_detail';
       //  that.setData({
-      //    urlx: 'https://api.17liepin.com/api/position/get_full_list'
+      //    urlx: app.globalData.url+'/api/position/get_full_list'
       //  })
      
      }
@@ -392,7 +407,7 @@ Page({
     if (e.currentTarget.id==0) {
      
       this.setData({
-        fullTimeurl: 'https://api.17liepin.com/api/position/get_part_recommend',
+        fullTimeurl: app.globalData.url+'/api/position/get_part_recommend',
         list: [],
         jobType:0
       })
@@ -400,7 +415,7 @@ Page({
       this.doLoadData(this);
     } else {
       this.setData({
-        fullTimeurl: 'https://api.17liepin.com/api/position/get_full_recommend',
+        fullTimeurl: app.globalData.url+'/api/position/get_full_recommend',
         list: [],
         jobType: 1
       })

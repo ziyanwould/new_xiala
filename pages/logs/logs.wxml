@@ -2,12 +2,18 @@
 
      
        <!-- <template is="tar_count" />  -->
-
+       <block wx:if='{{!net}}'>
        <template is="banner"  data="{{...mydata}}"  /> 
-         
+        </block>  
        <!-- <template is="recommend"  data="{{...workType}}"/>  -->
    
           <!-- <include src=" parTimeJob.wxml"/>    -->
-
+    
           <include src="/pages/child/Template/fullTimeJob.wxml"/>   
+     
+<view class='noDt' wx:if='{{net}}'>
+  <image style='width:352rpx;height:305rpx;' src='http://www.liujiarong.top/WX/bannerTd.png'></image>
+  <view class='Dtcount'>网络或服务器故障</view>
+  <view class='Dtcount'>请您稍后重试，给您带来不便，抱歉！</view>
+</view>
 

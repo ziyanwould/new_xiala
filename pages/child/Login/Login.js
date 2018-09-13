@@ -1,7 +1,7 @@
 // pages/child/Login/Login.js
 var common = require('../../../utils/common.js');
 var interval = null;
-var app = getApp();
+const app = getApp();
 Page({
 
   /**
@@ -248,7 +248,7 @@ Page({
      };
 
      wx.request({
-       url: 'https://api.17liepin.com/api/common/send_smscode',
+       url: app.globalData.url+'api/common/send_smscode',
        header: {
          'content-type': 'application/json',
           'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -322,7 +322,7 @@ Page({
 
      
       wx.request({
-        url: 'https://api.17liepin.com/api/common/'+url,
+        url: app.globalData.url+'api/common/'+url,
         header: {
           'content-type': 'application/json',
           'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='

@@ -1,6 +1,6 @@
 
 var common = require('../../../utils/common.js');
-var app = getApp()
+const app = getApp();
 var page = 0;
 var pageSize = 10;
 
@@ -213,9 +213,9 @@ Page({
 
     //获取详情页信息   使用Promise进行异步流程处理
     if (typesd == 0) {
-      var urls = 'https://api.17liepin.com/api/position/get_part_detail';
+      var urls =app.globalData.url+'api/position/get_part_detail';
     } else {
-      var urls = 'https://api.17liepin.com/api/position/get_full_detail';
+      var urls =app.globalData.url+'api/position/get_full_detail';
     }
     let requestPromisified = common.wxPromisify(wx.request);
     console.log('loginId', app.globalData.login)

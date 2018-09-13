@@ -1,5 +1,6 @@
 //app.js
 var common = require('/utils/common.js');
+const URL = 'https://api.17liepin.com/';
 App({
   data: {
     deviceInfo: {}
@@ -37,7 +38,7 @@ App({
               console.log("发起网络请求", res.code)
               //that.globalData.openid = res.code
               wx.request({
-                url: 'https://api.17liepin.com/api/common/get_wx_openid',
+                url: URL+'api/common/get_wx_openid',
                 header: {
                   'content-type': 'application/json',
                   'appid': 'bHA4MDYzNWM3OC0zYjYxLTQ1NDgtOTgyNS01ZjQxMWE4MzBkNDY='
@@ -60,7 +61,15 @@ App({
                   _this.globalData.oppenid = event.data.data.wx_openid
                   typeof cb == "function" && cb(that.globalData.oppenid)
                   //更新全局变量结束 20180515
+                },
+                fail:function(){
+                  //更新全局变量方式 20180515
+                  _this.globalData.net = false
+                  typeof cb == "function" && cb(that.globalData.net)
+                  //更新全局变量结束 20180515
                 }
+          
+                
 
               })
 
@@ -154,6 +163,8 @@ App({
     Jobl:[],//职位列表
     CRL:[],//证书列表
     deleTitle:14,//title值
+    url:URL,
+    net:true,
     ResumeFull: {
      },
      resumePart: {

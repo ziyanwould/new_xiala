@@ -3,6 +3,7 @@ var common = require('../../utils/common.js');
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
+var app = getApp()
 
 Page({
   data: {
@@ -45,7 +46,7 @@ Page({
             console.log("login成功进行传图片", res.data)
 
             wx.uploadFile({
-              url: 'https://api.17liepin.com/usercenter/upload_img', //仅为示例，非真实的接口地址
+              url: app.globalData.url+'usercenter/upload_img', //仅为示例，非真实的接口地址
               filePath: avatars,
               name: 'file',
               header: {
