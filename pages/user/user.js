@@ -197,7 +197,7 @@ Page({
          }
        });
      }
- 
+    
    },
    
   //路由跳转等
@@ -334,6 +334,7 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         const src = res.tempFilePaths[0];
+        console.log("src", src)
         wx.redirectTo({
           url: `/avatarUpload/upload/upload?src=${src}`
         })

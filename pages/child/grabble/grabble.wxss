@@ -42,6 +42,9 @@ page{
 .tcount2,.tcount1{
   line-height: 62rpx;
 }
+.tcount1{
+  line-height: 88rpx;
+}
 .Pinput input.active{
  width: 620rpx;
  transition: all .3s ease-in-out;

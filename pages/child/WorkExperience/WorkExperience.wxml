@@ -28,7 +28,7 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>入职时间</view>
-    <picker class="weui-btn" mode="date" value="{{entrytime}}" fields="month" data-type='endDate' bindchange="bindend">
+    <picker class="weui-btn" mode="date" start="1949-09-01"  value="{{entrytime}}" fields="month"  bindchange="bindend">
      <view class='sel_right'>
          <text wx:if='{{key}}'>{{infoChild.startTime}}</text>
          <text wx:if='{{!key}}'>{{entrytime}}</text>
@@ -41,7 +41,7 @@
 <view class='selsect'>
   <view class='sel_child'>
      <view class='sel_left'>离职时间</view>
-    <picker class="weui-btn" mode="date" value="{{entrytime}}" fields="month"  bindchange="bindDateChange">
+    <picker class="weui-btn" mode="date" start="1949-09-01"  value="{{entrytime}}" fields="month"  bindchange="bindDateChange">
      <view class='sel_right'>
          <text wx:if='{{key}}'>{{infoChild.endTime}}</text>
          <text wx:if='{{!key}}'>{{endtime}}</text>
