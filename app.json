@@ -47,13 +47,13 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "证书",
+        "text": "挂证",
         "iconPath": "images/icon_home.png",
         "selectedIconPath": "images/icon_home_curr.png"
       },
       {
         "pagePath": "pages/logs/logs",
-        "text": "人才",
+        "text": "找工作",
         "iconPath": "images/icon_find.png",
         "selectedIconPath": "images/icon_find_curr.png"
       },

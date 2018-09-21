@@ -95,8 +95,10 @@ text-align: left;
 .baInput{
    position: absolute;
    z-index: 10;
-   bottom: 35rpx;
+   bottom: 45rpx;
+   /* bottom: 35rpx; */
    width: 100%;
+  
 }
 .baInput input{
  width: 680rpx;
@@ -106,6 +108,7 @@ text-align: left;
  border-radius: 35px;
  font-size: 14px;
  text-align: center;
+  background: rgba(255, 255, 255, 0.5)
 }
 .baInput image{
   position: absolute;

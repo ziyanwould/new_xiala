@@ -155,6 +155,13 @@ Page({
             dis = `${common.getDistance(app.globalData.latitude, app.globalData.longitude, parseFloat(res.data.data.positions[i].Lat), parseFloat(res.data.data.positions[i].Lng))} km`;
             res.data.data.positions[i].KM = dis;
           }
+          //对后台图片链接的处理
+          if ((res.data.data.positions[i].Company_Logo).substr(0, 1)=='/'){
+            res.data.data.positions[i].Company_Logo = `https://api.17liepin.com/images/${(res.data.data.positions[i].Company_Logo).slice(-21)}`;
+            console.log("序号I", (res.data.data.positions[i].Company_Logo).slice(-21))
+            
+          }
+          //处理end
           list.push(res.data.data.positions[i]);
         }
         that.setData({
