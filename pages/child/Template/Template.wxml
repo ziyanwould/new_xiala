@@ -84,3 +84,23 @@
       <view class="line"></view>
     </view>
  </template>
+
+ <template name="recNew">
+ <view class='recommend' >
+        <view class="line"></view>
+        <view class='tui'>
+           <text style='padding:0 10rpx'  >为您推荐</text>
+        </view>
+      <view class="line"></view>
+    </view>
+ </template>
+
+  <template name="recNew2">
+   <view class='recommend' >
+        <view class="line"></view>
+        <view class='tui'>
+           <text style='padding:0 10rpx'  >您感兴趣</text>
+        </view>
+      <view class="line"></view>
+    </view>
+ </template>

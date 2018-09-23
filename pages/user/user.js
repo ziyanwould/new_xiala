@@ -534,6 +534,7 @@ Page({
       },
       success: function (res) {
         console.log("二重调用", res.data.data.detail.ID);
+ 
         if (  urls == '全职') {
           
           wx.navigateTo({
@@ -547,6 +548,13 @@ Page({
 
           })
         } 
+      },
+      fail:function(res){
+        wx.showToast({
+          title: '创建失败',
+          icon: 'loading',
+          duration: 3000
+        });
       }
     })
 
@@ -599,6 +607,15 @@ createResume:function(createpostion){
       },
       fail: function () {
         //失败后的逻辑  
+        wx.showModal({
+          content: '您创建简历失败，请检查是否账号已经认证和网络是否有故障，或者尝试退出账号重新登录',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            }
+          }
+        });
       },
     }, app.globalData.login)
 },

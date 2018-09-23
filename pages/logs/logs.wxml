@@ -8,6 +8,7 @@
        <!-- <template is="recommend"  data="{{...workType}}"/>  -->
    
           <!-- <include src=" parTimeJob.wxml"/>    -->
+               <template is="recNew2"  data="{{...mydata}}"/> 
     
           <include src="/pages/child/Template/fullTimeJob.wxml"/>   
      

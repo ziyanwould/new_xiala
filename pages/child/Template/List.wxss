@@ -133,6 +133,8 @@ margin: 0 auto;
   display: flex;
   justify-content:center;
   color: 555555;
+  border-bottom:20rpx solid #f7f8f8;
+
  
 }
 .tui{

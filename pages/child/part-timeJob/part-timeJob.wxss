@@ -41,7 +41,7 @@
   color: #fd5f39;
 }
 .job{
-  font-size: 27rpx;
+  font-size: 32rpx;
   color: #151515;
   margin-bottom: 30rpx;
 }
@@ -51,7 +51,7 @@
   padding-left: 10rpx;
 }
 .soci{
-  font-size: 27rpx;
+  font-size: 30rpx;
   color: #999999;
 }
 .tianbai{
@@ -183,4 +183,12 @@ font-size:33rpx;
 /*新版样式补丁*/
 .paTimejob:nth-of-type(1){
  border-top: 20rpx solid #F7F8F8;
+}
+.ze{
+  font-size: 32rpx;
+ font-weight: 500;
+ padding: 30rpx 0;
+}
+.psCount{
+  font-size: 30rpx;
 }
