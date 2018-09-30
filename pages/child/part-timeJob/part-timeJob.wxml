@@ -65,9 +65,9 @@
      </view>
      <view class='Setitle ' style='width:520rpx'>职位发布者</view>
      <view class='hrInformation'>
-           <image style='border-radius:85px;' class='person' src='http://www.liujiarong.top/WX/xcxHR.jpg'></image>
-           <view class='useDegin'><text>{{name}}</text>{{Ntype}}</view>
-           <view class='lastInfo'> <image src='http://www.liujiarong.top/WX/wx_lively.png'></image><text>最近活跃：{{hour}}小时前</text></view>
+           <image style='border-radius:85px;' class='person' src="{{message.company.img!=''?message.company.img:'http://www.liujiarong.top/WX/xcxHR.jpg'}}"></image>
+           <view class='useDegin'><text>{{message.company.Link_Man?message.company.Link_Man:name}}</text>{{Ntype}}</view>
+           <view class='lastInfo'> <image src='http://www.liujiarong.top/WX/wx_lively.png'></image><text>最近活跃：{{hour}}前</text></view>
             <view class='tag'>
             <!-- 暂时隐去标签 -->
              <!-- <view class='child_tag'  wx:for="{{tags}}" wx:key="item.id">

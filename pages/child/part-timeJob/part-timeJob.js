@@ -85,7 +85,7 @@ Page({
    */
   onShow: function () {
     console.log(this.data.jobType, this.data.message, this.data.recommend)
-    
+    this.setLastTime()
     
     var _this = this;
     //有地址的更改默认地址
@@ -568,5 +568,43 @@ Page({
          })
     }
 
+  },
+  //设置时间函数
+  setLastTime(){
+    let that = this;
+    let oldT = that.data.message.company.last;
+    console.log("time", oldT);
+    if (oldT){
+      var date = new Date(oldT);
+      var time1 = date.getTime();
+      console.log("oldtime", time1)
+      var time2 = (new Date()).valueOf();
+      console.log('stateT',time2)
+      var date3 = time2 - time1;
+ 
+   
+      //计算出相差天数
+      var days = Math.floor(date3 / (24 * 3600 * 1000))
+
+      //计算出小时数
+      var leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数
+      var hours = Math.floor(leave1 / (3600 * 1000))
+      //计算相差分钟数
+      var leave2 = leave1 % (3600 * 1000)        //计算小时数后剩余的毫秒数
+      var minutes = Math.floor(leave2 / (60 * 1000))
+      //计算相差秒数
+      var leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数
+      var seconds = Math.round(leave3 / 1000)
+      console.log(" 相差 " + days + "天 " + hours + "小时 " + minutes + " 分钟" + seconds + " 秒")
+
+      that.setData({
+        hour: `${days != 0 ? days + '天' : ''}${hours != 0 ? hours + '小时' : ''}${minutes != 0 ? minutes + '分钟' : ''}`
+      })
+
+    }else{
+      that.setData({
+        hour: `${Math.floor(Math.random() * 23 +1)}小时`
+      })
+    }   
   }
 })
