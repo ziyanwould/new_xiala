@@ -50,7 +50,7 @@
             <view class='child_tag' >工作地址：{{message.city}} </view>
               <view class='child_tag' >招聘人数：{{message.need_count}} </view>
             <view class='child_tag' >经验：{{message.job_exp}}年 </view>
-             <view class='child_tag' >学历；{{message.education}} </view>
+             <view class='child_tag' >学历：{{message.education}} </view>
      </view>
      <view class='positionStatement'>
        <view class='ze'>岗位职责：</view>

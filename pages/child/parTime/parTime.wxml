@@ -94,7 +94,7 @@
     </view>
    
     
-     <view class='add_child' bindtap='addnew' data-url='/pages/child/Certificate/Certificate?parTime=true'>
+     <view class='add_child' wx:if='{{!resume.certificate}}' bindtap='addnew' data-url='/pages/child/Certificate/Certificate?parTime=true'>
        <image src='http://www.liujiarong.top/WX/wx_add.png'></image><text>添加证书信息</text>
      </view>
 </view>

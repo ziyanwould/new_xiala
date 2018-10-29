@@ -28,7 +28,7 @@ Page({
     ],
     name:"庞丽亚",
     Ntype:"猎聘专员",
-    hour:9,
+    hour:'9小时',
     zzCount: '1、在项目经理的领导下，制定落实项目安全防范措施；\n'+
     '2、做好项目部新进职工的登记注册工作，发放安全教育卡片、安全帽和其他劳保用品；\n'+
     '3、每项工程必须按公司规定组织安全教育、安全技术交底及安全措施的培训等；\n'+
@@ -573,9 +573,12 @@ Page({
   setLastTime(){
     let that = this;
     let oldT = that.data.message.company.last;
-    console.log("time", oldT);
+
+
     if (oldT){
-      var date = new Date(oldT);
+      let oldT1 = oldT.replace(/-/g, '/');
+      console.log("time", oldT1);
+      var date = new Date(oldT1);
       var time1 = date.getTime();
       console.log("oldtime", time1)
       var time2 = (new Date()).valueOf();

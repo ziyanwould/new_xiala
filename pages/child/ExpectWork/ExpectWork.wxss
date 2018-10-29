@@ -47,6 +47,7 @@
   text-align: center;
   background: #46A388;
   color: #FFFFFF;
+  margin-bottom: 20px;
 
 }
 
