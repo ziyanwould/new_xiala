@@ -22,7 +22,7 @@
         </view> -->
      </view>
      <view class='fRight'>
-      <image style='width:118rpx;height:118rpx' src='{{message.company.logo?message.company.logo:"http://www.liujiarong.top/WX/companyFx.jpg"}}'></image>
+      <image style='width:118rpx;height:118rpx;border-radius:118rpx;' src='{{message.company.logo?message.company.logo:"http://www.liujiarong.top/WX/companyFx.jpg"}}'></image>
      </view>
    </view>
 
