@@ -50,22 +50,22 @@
 <view class='section2'>
  
     <view class='sec2_1'>
-      <text>期望工作</text>
+      <text>期望薪资</text>
         <navigator url="../../child/ExpectWork/ExpectWork?type=expectWork&parTime=true">
             编辑
         </navigator>  
     </view>
 
-    <view class='sec2_2'>
+    <!-- <view class='sec2_2'>
            {{resume.expectWork.work}}
-    </view>
+    </view> -->
 
      <view class='sec2_3'>
           <!-- {{resume.expectWork.city}}/-->{{resume.expectWork.positionType}}/{{resume.expectWork.monthlyPay}} 
     </view>
     <view class='content' wx:if="{{resume.expectWork.moreInfo}}">
           <view class='content_title'>
-            补充说明
+            标题
           </view>
           <view class='content_count'>
            {{resume.expectWork.moreInfo}}

@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+   
     selectList: {
         name1: "期望城市",
         count1: "请选择",
@@ -16,6 +17,7 @@ Page({
         count3: "全职",
         name4: "职位月薪",
         count4: "请输入",
+       
 
    }
   
@@ -27,25 +29,35 @@ Page({
   onLoad: function (options) {
   console.log(options)
   const types = options.type;
+  let that = this;
+    console.log("types", types)
+  
 
   //兼职全职导入不同表
   if (!options.parTime){
     this.setData({
       info: app.globalData.ResumeFull,
-      key: types
+      key: types,
+    
     })
   }else{
     this.setData({
       info: app.globalData.resumePart,
       key: types,
       parTime:true,
+      active:11
+    
+     
     })
   }
-    console.log("info", this.data.info.expectWork.job_type_id)
-  this.setData({
-    resumeId: this.data.info.resume_id,
-    active: this.data.info.expectWork.job_type_id
-  })
+    let info = this.data.info.expectWork.job_type_id;
+    that.setData({
+      resumeId: this.data.info.resume_id,
+    
+    })
+    if(info){
+      active: this.data.info.expectWork.job_type_id
+    }
   
   },
 
@@ -140,20 +152,9 @@ Page({
     //console.log("替换后的值",this.data.info)
   }
   ,save:function(event){
-
-    // 去掉原来模拟全局更新方式
-    // if (this.data.parTime){
-    //   //更新全局变量方式 20180519
-    //   app.globalData.resumePart = this.data.info
-    //   typeof cb == "function" && cb(app.globalData.resumePart)
-    // //更新全局变量结束 20180519
-    // }else{
-    //   //更新全局变量方式 20180519
-    //   app.globalData.ResumeFull = this.data.info
-    //   typeof cb == "function" && cb(app.globalData.ResumeFull)
-    // //更新全局变量结束 20180519
-    // }
     var that = this;
+    console.log('data',that.data)
+
     var setdata = {
       "resume_id": that.data.resumeId,
       "job_type_id": that.data.active,
@@ -161,7 +162,7 @@ Page({
       //"arrival_time": "string",
       "remark": that.data.info.expectWork.moreInfo
     }
-   // console.log("setdata", setdata)
+    console.log("setdata", setdata)
     let result = common.IsEmpty(setdata);
     if (!result) {
       return false;
