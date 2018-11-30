@@ -7,7 +7,7 @@ Page({
     motto: '欢迎',
     hiddenmodalput: true,  
     userInfo: {},
-    person:"集众人之力，成细节之美！",
+    person:"欢迎来到建筑猎聘！",
     influence:"17",
     influence_per:"20.6%",
     canIUse: wx.canIUse('button.open-type.getUserInfo'),

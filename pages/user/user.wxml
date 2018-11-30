@@ -148,6 +148,6 @@
 
 <!-- 弹出简历输入名称 -->
 <modal hidden="{{hiddenmodalput}}" title="请输入{{resumeName}}简历名称" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">  
-    <input type='text'placeholder="请输入  (仅用于识别,不可修改)" value='{{resumeInput}}' bindinput='watchinput' auto-focus/>  
+    <input type='text'placeholder="请输入  (仅用于识别,不可修改)" value='{{resumeInput}}' bindinput='watchinput' />  
 </modal>  
 <!-- 输入名称结束 -->
